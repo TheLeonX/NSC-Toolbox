@@ -1,0 +1,707 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NSC_Toolbox.View"
+        xmlns:converter="clr-namespace:NSC_Toolbox.Converter"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
+        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" xmlns:Controls="clr-namespace:NSC_Toolbox.Controls"
+        xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
+        xmlns:Globalization="clr-namespace:System.Globalization;assembly=System.Runtime" x:Class="NSC_Toolbox.View.CharacterSelectParamEditorView"
+        mc:Ignorable="d"
+        Height="750" Width="900"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="{DynamicResource m_CharacterSelectParamEditor}">
+    
+    <Window.Background>
+        <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+    </Window.Background>
+    <Window.Resources>
+
+        <converter:PageIndexConverter x:Key="PageIndexConverter" />
+    </Window.Resources>
+    <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}" >
+        <Grid Height="1000" Width="1230">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+                <Menu Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                    <MenuItem Header="{DynamicResource m_File}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                        <MenuItem Command="{Binding OpenFileCommand}" Header="{DynamicResource m_OpenFile}" FontFamily="{StaticResource NarutoFont}" Foreground="White"/>
+                        <MenuItem Command="{Binding SaveFileCommand}" Header="{DynamicResource m_SaveFile}" FontFamily="{StaticResource NarutoFont}" Foreground="White"/>
+                        <MenuItem Command="{Binding SaveFileAsCommand}" Header="{DynamicResource m_SaveAsFile}" FontFamily="{StaticResource NarutoFont}" Foreground="White"/>
+                    </MenuItem>
+                    <MenuItem Command="{Binding SortEntriesCommand}" Header="{DynamicResource m_CSP_SortEntries}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+
+                </Menu>
+                <Grid Grid.Row="1" Grid.Column="3"   Background="{DynamicResource Toolbox_button_background_color_1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.ColumnSpan="10" Grid.RowSpan="10"  BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                    <Image Grid.Row="0" Grid.Column="0" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="1">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="0" Grid.Column="1" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="2">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="0" Grid.Column="2" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="3">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="1" Grid.Column="0" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="4">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="1" Grid.Column="1" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="5">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="1" Grid.Column="2" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="6">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="2" Grid.Column="0" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="7">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="2" Grid.Column="1" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="8">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="2" Grid.Column="2" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="9">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="3" Grid.Column="0" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="10">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="3" Grid.Column="1" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="11">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="3" Grid.Column="2" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="12">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="4" Grid.Column="0" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="13">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="4" Grid.Column="1" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="14">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="4" Grid.Column="2" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="15">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="5" Grid.Column="0" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="16">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="5" Grid.Column="1" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="17">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="5" Grid.Column="2" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="18">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="6" Grid.Column="0" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="19">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="6" Grid.Column="1" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="20">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="6" Grid.Column="2" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="21">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="7" Grid.Column="0" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="22">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="7" Grid.Column="1" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="23">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Grid.Row="7" Grid.Column="2" Panel.ZIndex="0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="24">
+                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Label Grid.ColumnSpan="3" Grid.RowSpan="10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-30">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding PageIndex_field, Converter={StaticResource PageIndexConverter},StringFormat={}&lt;Page {0}>}"  FontFamily="{StaticResource NarutoFont}"  Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                        </StackPanel>
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" 
+                      Color="Orange"/>
+                        </Label.Effect>
+                    </Label>
+                </Grid>
+
+                <ListBox  Grid.RowSpan="2"  IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView" ItemsSource="{Binding CharacterSelectParamList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCSP}" SelectedIndex="{Binding SelectedCSPIndex}" Grid.Row="1" Grid.Column="1" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewMouseMove="LBoxSort_OnPreviewMouseMove" Drop="LBoxSort_OnDrop" AllowDrop="True" xmlns:WpfExtensions="clr-namespace:NSC_Toolbox" WpfExtensions:DragDropExtension.ScrollOnDragDrop="True">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="PSP Code: " FontFamily="{StaticResource NarutoFont}" Foreground="Aqua" FontSize="12"/>
+                                <TextBlock Text="{Binding CSP_code, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="White" FontSize="12"/>
+                                <TextBlock Text=" Page: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
+                                <TextBlock Text="{Binding PageIndex, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="White" FontSize="12"/>
+                                <TextBlock Text=" Slot: " FontFamily="{StaticResource NarutoFont}" Foreground="LightCoral" FontSize="12"/>
+                                <TextBlock Text="{Binding SlotIndex}" FontFamily="{StaticResource NarutoFont}" Foreground="White" FontSize="12"/>
+                                <TextBlock Text=" Costume: " FontFamily="{StaticResource NarutoFont}" Foreground="Green" FontSize="12"/>
+                                <TextBlock Text="{Binding CostumeIndex, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="White" FontSize="12"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Grid Grid.Row="1" Grid.Column="5"  Grid.RowSpan="4" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" x:Name="grid" >
+                        <ScrollViewer Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid Width="{Binding ElementName=grid, Path=Width}" Height="{Binding ElementName=grid, Path=Height}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="{DynamicResource m_csp_P1_NOT_SEL_X}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  FontSize="10" Foreground="Cyan"/>
+                                <Label Content="{DynamicResource m_csp_P1_NOT_SEL_Y}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_NOT_SEL_Z}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_NOT_SEL_X}" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_NOT_SEL_Y}" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_NOT_SEL_Z}" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_SEL_X}" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_SEL_Y}" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_SEL_Z}" Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_SEL_X}" Grid.Column="0" Grid.Row="9" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_SEL_Y}" Grid.Column="0" Grid.Row="10" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_SEL_Z}" Grid.Column="0" Grid.Row="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_VSLOAD_X}" Grid.Column="0" Grid.Row="12" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_VSLOAD_Y}" Grid.Column="0" Grid.Row="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_VSLOAD_Z}" Grid.Column="0" Grid.Row="14" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_VSLOAD_X}" Grid.Column="0" Grid.Row="15" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_VSLOAD_Y}" Grid.Column="0" Grid.Row="16" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_VSLOAD_Z}" Grid.Column="0" Grid.Row="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_NOT_SEL_ROT}" Grid.Column="0" Grid.Row="18" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_NOT_SEL_ROT}" Grid.Column="0" Grid.Row="19" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_SEL_ROT}" Grid.Column="0" Grid.Row="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_SEL_ROT}" Grid.Column="0" Grid.Row="21" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_VSLOAD_ROT}" Grid.Column="0" Grid.Row="22" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_VSLOAD_ROT}" Grid.Column="0" Grid.Row="23" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_NOT_SEL_X}" Grid.Column="0" Grid.Row="24" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_NOT_SEL_Y}" Grid.Column="0" Grid.Row="25" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_NOT_SEL_Z}" Grid.Column="0" Grid.Row="26" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_NOT_SEL_X}" Grid.Column="0" Grid.Row="27" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_NOT_SEL_Y}" Grid.Column="0" Grid.Row="28" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_NOT_SEL_Z}" Grid.Column="0" Grid.Row="29" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_SEL_X}" Grid.Column="0" Grid.Row="30" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_SEL_Y}" Grid.Column="0" Grid.Row="31" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_SEL_Z}" Grid.Column="0" Grid.Row="32" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_SEL_X}" Grid.Column="0" Grid.Row="33" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_SEL_Y}" Grid.Column="0" Grid.Row="34" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_SEL_Z}" Grid.Column="0" Grid.Row="35" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_VSLOAD_X}" Grid.Column="0" Grid.Row="36" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_VSLOAD_Y}" Grid.Column="0" Grid.Row="37" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_VSLOAD_Z}" Grid.Column="0" Grid.Row="38" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_VSLOAD_X}" Grid.Column="0" Grid.Row="39" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_VSLOAD_Y}" Grid.Column="0" Grid.Row="40" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_VSLOAD_Z}" Grid.Column="0" Grid.Row="41" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_CUSTOMIZATION_X}" Grid.Column="0" Grid.Row="42" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_CUSTOMIZATION_Y}" Grid.Column="0" Grid.Row="43" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_CUSTOMIZATION_Z}" Grid.Column="0" Grid.Row="44" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_CUSTOMIZATION_ROT}" Grid.Column="0" Grid.Row="45" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_CUSTOMIZATION_X}" Grid.Column="0" Grid.Row="46" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_CUSTOMIZATION_Y}" Grid.Column="0" Grid.Row="47" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P1_LIGHT_CUSTOMIZATION_Z}" Grid.Column="0" Grid.Row="48" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="Cyan" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_CUSTOMIZATION_X}" Grid.Column="0" Grid.Row="49" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_CUSTOMIZATION_Y}" Grid.Column="0" Grid.Row="50" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_CUSTOMIZATION_Z}" Grid.Column="0" Grid.Row="51" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_CUSTOMIZATION_ROT}" Grid.Column="0" Grid.Row="52" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_CUSTOMIZATION_X}" Grid.Column="0" Grid.Row="53" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_CUSTOMIZATION_Y}" Grid.Column="0" Grid.Row="54" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+                                <Label Content="{DynamicResource m_csp_P2_LIGHT_CUSTOMIZATION_Z}" Grid.Column="0" Grid.Row="55" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}"  Foreground="HotPink" FontSize="10"/>
+
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_NOT_SEL_X}" Value="{Binding P1_not_sel_pos_x_field}" Grid.Column="2" Grid.Row="0" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_NOT_SEL_Y}" Value="{Binding P1_not_sel_pos_y_field}" Grid.Column="2" Grid.Row="1" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_NOT_SEL_Z}" Value="{Binding P1_not_sel_pos_z_field}" Grid.Column="2" Grid.Row="2" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_NOT_SEL_X}" Value="{Binding P2_not_sel_pos_x_field}" Grid.Column="2" Grid.Row="3" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_NOT_SEL_Y}" Value="{Binding P2_not_sel_pos_y_field}" Grid.Column="2" Grid.Row="4" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_NOT_SEL_Z}" Value="{Binding P2_not_sel_pos_z_field}" Grid.Column="2" Grid.Row="5" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_SEL_X}" Value="{Binding P1_sel_pos_x_field}" Grid.Column="2" Grid.Row="6" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_SEL_Y}" Value="{Binding P1_sel_pos_y_field}" Grid.Column="2" Grid.Row="7" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_SEL_Z}" Value="{Binding P1_sel_pos_z_field}" Grid.Column="2" Grid.Row="8" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_SEL_X}" Value="{Binding P2_sel_pos_x_field}" Grid.Column="2" Grid.Row="9" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_SEL_Y}" Value="{Binding P2_sel_pos_y_field}" Grid.Column="2" Grid.Row="10" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_SEL_Z}" Value="{Binding P2_sel_pos_z_field}"  Grid.Column="2" Grid.Row="11" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_VSLOAD_X}" Value="{Binding P1_vsload_x_field}"  Grid.Column="2" Grid.Row="12" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_VSLOAD_Y}" Value="{Binding P1_vsload_y_field}"  Grid.Column="2" Grid.Row="13" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_VSLOAD_Z}" Value="{Binding P1_vsload_z_field}"  Grid.Column="2" Grid.Row="14" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_VSLOAD_X}" Value="{Binding P2_vsload_x_field}"  Grid.Column="2" Grid.Row="15" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_VSLOAD_Y}" Value="{Binding P2_vsload_y_field}"  Grid.Column="2" Grid.Row="16" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_VSLOAD_Z}" Value="{Binding P2_vsload_z_field}"  Grid.Column="2" Grid.Row="17" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_NOT_SEL_ROT}" Value="{Binding P1_not_sel_rot_field}"  Grid.Column="2" Grid.Row="18" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_NOT_SEL_ROT}" Value="{Binding P2_not_sel_rot_field}"  Grid.Column="2" Grid.Row="19" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_SEL_ROT}" Value="{Binding P1_sel_rot_field}"  Grid.Column="2" Grid.Row="20" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_SEL_ROT}" Value="{Binding P2_sel_rot_field}"  Grid.Column="2" Grid.Row="21" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_VSLOAD_ROT}" Value="{Binding P1_vsload_rot_field}"  Grid.Column="2" Grid.Row="22" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_VSLOAD_ROT}" Value="{Binding P2_vsload_rot_field}"  Grid.Column="2" Grid.Row="23" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_NOT_SEL_X}" Value="{Binding P1_not_sel_light_x_field}"  Grid.Column="2" Grid.Row="24" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_NOT_SEL_Y}" Value="{Binding P1_not_sel_light_y_field}"  Grid.Column="2" Grid.Row="25" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_NOT_SEL_Z}" Value="{Binding P1_not_sel_light_z_field}"  Grid.Column="2" Grid.Row="26" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_NOT_SEL_X}" Value="{Binding P2_not_sel_light_x_field}"  Grid.Column="2" Grid.Row="27" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_NOT_SEL_Y}" Value="{Binding P2_not_sel_light_y_field}"  Grid.Column="2" Grid.Row="28" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_NOT_SEL_Z}" Value="{Binding P2_not_sel_light_z_field}"  Grid.Column="2" Grid.Row="29" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_SEL_X}" Value="{Binding P1_sel_light_x_field}"  Grid.Column="2" Grid.Row="30" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_SEL_Y}" Value="{Binding P1_sel_light_y_field}"  Grid.Column="2" Grid.Row="31" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_SEL_Z}" Value="{Binding P1_sel_light_z_field}"  Grid.Column="2" Grid.Row="32" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_SEL_X}" Value="{Binding P2_sel_light_x_field}"  Grid.Column="2" Grid.Row="33" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_SEL_Y}" Value="{Binding P2_sel_light_y_field}"  Grid.Column="2" Grid.Row="34" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_SEL_Z}" Value="{Binding P2_sel_light_z_field}"  Grid.Column="2" Grid.Row="35" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_VSLOAD_X}" Value="{Binding P1_vsload_light_x_field}"  Grid.Column="2" Grid.Row="36" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_VSLOAD_Y}" Value="{Binding P1_vsload_light_y_field}"  Grid.Column="2" Grid.Row="37" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_VSLOAD_Z}" Value="{Binding P1_vsload_light_z_field}"  Grid.Column="2" Grid.Row="38" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_VSLOAD_X}" Value="{Binding P2_vsload_light_x_field}"  Grid.Column="2" Grid.Row="39" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_VSLOAD_Y}" Value="{Binding P2_vsload_light_y_field}"  Grid.Column="2" Grid.Row="40" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_VSLOAD_Z}" Value="{Binding P2_vsload_light_z_field}"  Grid.Column="2" Grid.Row="41" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_CUSTOMIZATION_X}" Value="{Binding P1_customization_pos_x_field}"  Grid.Column="2" Grid.Row="42" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_CUSTOMIZATION_Y}" Value="{Binding P1_customization_pos_y_field}"  Grid.Column="2" Grid.Row="43" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_CUSTOMIZATION_Z}" Value="{Binding P1_customization_pos_z_field}"  Grid.Column="2" Grid.Row="44" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_CUSTOMIZATION_ROT}" Value="{Binding P1_customization_rot_field}"  Grid.Column="2" Grid.Row="45" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_CUSTOMIZATION_X}" Value="{Binding P1_customization_light_x_field}"  Grid.Column="2" Grid.Row="46" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_CUSTOMIZATION_Y}" Value="{Binding P1_customization_light_y_field}"  Grid.Column="2" Grid.Row="47" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P1_LIGHT_CUSTOMIZATION_Z}" Value="{Binding P1_customization_light_z_field}"  Grid.Column="2" Grid.Row="48" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_CUSTOMIZATION_X}" Value="{Binding P2_customization_pos_x_field}"  Grid.Column="2" Grid.Row="49" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_CUSTOMIZATION_Y}" Value="{Binding P2_customization_pos_y_field}"  Grid.Column="2" Grid.Row="50" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_CUSTOMIZATION_Z}" Value="{Binding P2_customization_pos_z_field}"  Grid.Column="2" Grid.Row="51" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_CUSTOMIZATION_ROT}" Value="{Binding P2_customization_rot_field}"  Grid.Column="2" Grid.Row="52" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_CUSTOMIZATION_X}" Value="{Binding P2_customization_light_x_field}"  Grid.Column="2" Grid.Row="53" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_CUSTOMIZATION_Y}" Value="{Binding P2_customization_light_y_field}"  Grid.Column="2" Grid.Row="54" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+                                <xctk:DoubleUpDown Watermark="{DynamicResource m_csp_P2_LIGHT_CUSTOMIZATION_Z}" Value="{Binding P2_customization_light_z_field}"  Grid.Column="2" Grid.Row="55" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment=".001" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="8"/>
+
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="5"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_playerSettingParamID}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <TextBox Grid.Row="1" Foreground="{DynamicResource Toolbox_button_text_color_1}" Text="{Binding CSP_code_field}" FontFamily="{StaticResource NarutoFont}" MinWidth="200"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="CSPEntryCodeName" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <Label Grid.Row="3" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_pageIndex}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <xctk:IntegerUpDown Value="{Binding PageIndex_field}"  Grid.Row="4" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                        <Label Grid.Row="6" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_SlotIndex}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <xctk:IntegerUpDown Value="{Binding SlotIndex_field}"  Grid.Row="7" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                        <Label Grid.Row="9" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_CostumeIndex}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <xctk:IntegerUpDown Value="{Binding CostumeIndex_field}"  Grid.Row="10" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                        <Label Grid.Row="12" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_CostumeDescription}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <TextBox Grid.Row="13"  Foreground="{DynamicResource Toolbox_button_text_color_1}" Text="{Binding CostumeDescription_field}" FontFamily="{StaticResource NarutoFont}" MinWidth="200"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="CSPCostumeDescriptionName" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <Label Grid.Row="15" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_CostumeName}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <TextBox Grid.Row="16" Foreground="{DynamicResource Toolbox_button_text_color_1}" Text="{Binding CostumeName_field}" FontFamily="{StaticResource NarutoFont}" MinWidth="200"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="CSPCostumeNameName" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <Label Grid.Row="18" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_Accessory}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <TextBox Grid.Row="19"  Foreground="{DynamicResource Toolbox_button_text_color_1}" Text="{Binding Accessory_field}" FontFamily="{StaticResource NarutoFont}" MinWidth="200"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="CSPAccessoryName" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <Label Grid.Row="21" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_charselFile}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <TextBox Grid.Row="22"  Foreground="{DynamicResource Toolbox_button_text_color_1}" Text="{Binding CharselAnimation_field}" FontFamily="{StaticResource NarutoFont}" MinWidth="200"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="CSPCharselFileName" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <Label Grid.Row="24" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_dictionary}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <TextBox Grid.Row="25"  Foreground="{DynamicResource Toolbox_button_text_color_1}" Text="{Binding DictionaryCode_field}" FontFamily="{StaticResource NarutoFont}" MinWidth="200"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="CSPDictionaryName" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <Label Grid.Row="27" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_dictionaryIndex}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <xctk:IntegerUpDown Value="{Binding DictionaryIndex_field}"  Grid.Row="28" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                        <Label Grid.Row="30" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_unknown}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                        <xctk:IntegerUpDown Value="{Binding Unk_field}"  Grid.Row="31" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+
+
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1" Grid.Row="3" Grid.RowSpan="4" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Command="{Binding AddDupEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddDupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                    <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                    <Button Command="{Binding SearchEntryCommand}" Content="{DynamicResource m_SearchEntry}" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                    <TextBox Foreground="{DynamicResource Toolbox_button_text_color_1}" Text="{Binding SearchTextBox_field}" FontFamily="{StaticResource NarutoFont}" Grid.Row="2"  Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+
+                </Grid>
+                <Button Command="{Binding SaveEntryCommand}"  Grid.Row="5" Grid.Column="3"  Grid.RowSpan="2" Grid.ColumnSpan="3"  Content="{DynamicResource m_SaveEntry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <Controls:LoadingControl Grid.Row="2" Grid.Column="2" LoadingState="{Binding LoadingStatePlay}"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Window>

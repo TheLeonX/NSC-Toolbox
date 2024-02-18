@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Controls\KuramaControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\LoadingControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\AfterAttachObjectEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\AppearanceAnmEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\AwakeAuraEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CharacodeEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CharacterSelectParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\cmnparamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CostumeBreakColorParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CostumeBreakParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CostumeParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\DamageEffEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\DuelPlayerParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\EffectPrmEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ExportModView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\MessageInfoEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\PlayerDoubleEffectParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\PlayerIconEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\PlayerSettingParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\PrivateCameraEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\PRMEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\PRMLoadEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SkillCustomizeParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SkillIndexSettingParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SpSkillCustomizeParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SpTypeSupportParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\StageInfoEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SupportActionParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SupportSkillRecoverySpeedParamEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\KuramaControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\LoadingControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Localization\lang.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Styles\LightStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\AfterAttachObjectEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\AppearanceAnmEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\AwakeAuraEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CharacodeEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CharacterSelectParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\cmnparamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CostumeBreakColorParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CostumeBreakParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CostumeParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\DamageEffEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\DuelPlayerParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\EffectPrmEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ExportModView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\MessageInfoEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\PlayerDoubleEffectParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\PlayerIconEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\PlayerSettingParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\PrivateCameraEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\PRMEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\PRMLoadEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\SkillCustomizeParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\SkillIndexSettingParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\SpSkillCustomizeParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\SpTypeSupportParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\StageInfoEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\SupportActionParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\SupportSkillRecoverySpeedParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\TitleView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

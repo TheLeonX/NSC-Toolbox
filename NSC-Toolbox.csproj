@@ -1,0 +1,179 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>NSC_Toolbox</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>white_TB.ico</ApplicationIcon>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Authors>TheLeonX</Authors>
+    <Version>1.11</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Fonts\Storm4_rus.ttf" />
+    <None Remove="Resources\Styles\UI\background\bg_toolbox_main.png" />
+    <None Remove="Resources\Styles\UI\background\wizard_background_1.png" />
+    <None Remove="Resources\Styles\UI\charsel\pt_brank_emp.png" />
+    <None Remove="Resources\Styles\UI\charsel\s_brt5.png" />
+    <None Remove="Resources\Styles\UI\kurama\dialog_name_background.png" />
+    <None Remove="Resources\Styles\UI\kurama\kurama_body.png" />
+    <None Remove="Resources\Styles\UI\kurama\kurama_tail_1.png" />
+    <None Remove="Resources\Styles\UI\kurama\kurama_tail_2.png" />
+    <None Remove="Resources\Styles\UI\kurama\kurama_tail_3.png" />
+    <None Remove="Resources\Styles\UI\kurama\kurama_tail_4.png" />
+    <None Remove="Resources\Styles\UI\kurama\meouch_appear_effect.gif" />
+    <None Remove="Resources\Styles\UI\kurama\meouch_body.png" />
+    <None Remove="Resources\Styles\UI\loading\toolbox_load_1.png" />
+    <None Remove="Resources\Styles\UI\loading\toolbox_load_2.png" />
+    <None Remove="Resources\Styles\UI\logo\toolbox_logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="white_TB.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Fonts\Storm4_rus.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Styles\UI\background\bg_toolbox_main.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Styles\UI\background\wizard_background_1.png" />
+    <Resource Include="Resources\Styles\UI\charsel\pt_brank_emp.png" />
+    <Resource Include="Resources\Styles\UI\charsel\s_brt5.png" />
+    <Resource Include="Resources\Styles\UI\kurama\dialog_name_background.png" />
+    <Resource Include="Resources\Styles\UI\kurama\kurama_body.png" />
+    <Resource Include="Resources\Styles\UI\kurama\kurama_tail_1.png" />
+    <Resource Include="Resources\Styles\UI\kurama\kurama_tail_2.png" />
+    <Resource Include="Resources\Styles\UI\kurama\kurama_tail_3.png" />
+    <Resource Include="Resources\Styles\UI\kurama\kurama_tail_4.png" />
+    <Resource Include="Resources\Styles\UI\kurama\meouch_appear_effect.gif" />
+    <Resource Include="Resources\Styles\UI\kurama\meouch_body.png" />
+    <Resource Include="Resources\Styles\UI\loading\toolbox_load_1.png" />
+    <Resource Include="Resources\Styles\UI\loading\toolbox_load_2.png" />
+    <Resource Include="Resources\Styles\UI\logo\toolbox_logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.1" />
+    <PackageReference Include="ModernWpf.MessageBox" Version="0.5.2" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+    <PackageReference Include="NodeNetwork" Version="6.0.0" />
+    <PackageReference Include="NodeNetworkToolkit" Version="6.0.0" />
+    <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ModdingAPIFiles\moddingapi\config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\lang\EN.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\Conditions.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\CPKLoader.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\info.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\partnerSlotParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\specialCondParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\susanooCondParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\SusanooJumpFix.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\xinput9_1_0.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\xinput9_1_0_o.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\characode.bin.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\characterSelectParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\costumeBreakColorParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\costumeParam.bin.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\damageeff.bin.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\duelPlayerParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\effectprm.bin.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\playerSettingParam.bin.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\player_icon.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\StageInfo.bin.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Resources\TemplateImages\stage_icon.dds">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\TemplateImages\stage_tex.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\TemplateImages\template_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ModdingAPIFiles\" />
+  </ItemGroup>
+
+</Project>

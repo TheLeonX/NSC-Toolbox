@@ -1,0 +1,413 @@
+﻿<Window x:Class="NSC_Toolbox.View.ExportModView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NSC_Toolbox.View"
+        xmlns:converter="clr-namespace:NSC_Toolbox.Converter"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
+        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" xmlns:Controls="clr-namespace:NSC_Toolbox.Controls"
+        mc:Ignorable="d"
+        xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
+        
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="{DynamicResource m_exportMod_title}" Height="800" Width="900">
+    <Window.Background>
+        <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+    </Window.Background>
+    <Window.Resources>
+        <converter:GetNameFromPathConverter x:Key="GetNameFromPathConverter"/>
+        <converter:BitImageLoader x:Key="BitImageLoader"/>
+    </Window.Resources>
+    <Viewbox  Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
+        <Grid Height="800" Width="900">
+            <xctk:Wizard FinishButtonClosesWindow="True" HelpButtonVisibility="Hidden"  FontFamily="{StaticResource NarutoFont}" Height="800" Width="900" >
+            <xctk:WizardPage x:Name="IntroPage"
+                                    Title="{DynamicResource m_exportMod_title}"
+                                    Description="{DynamicResource m_exportMod_page0_desc}" 
+                                    Foreground="White"
+                                    BackButtonVisibility="Hidden"
+                                    NextPage="{Binding ElementName=Page1}"
+                                    Background="{DynamicResource Toolbox_button_background_color_1}">
+                <xctk:WizardPage.ExteriorPanelBackground>
+                    <ImageBrush ImageSource="/Resources/Styles/UI/background/wizard_background_1.png" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+                </xctk:WizardPage.ExteriorPanelBackground>
+                <TextBlock  xml:space="preserve" Grid.Row="3"  Grid.Column="0" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding PageModType_character_visibility}"  FontFamily="{StaticResource NarutoFont}" Foreground="White" Text="{DynamicResource m_exportMod_page0_warning}"  FontSize="14"/>
+
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page1"
+                                    Foreground="White"
+                                    Background="{DynamicResource Toolbox_button_background_color_1}"
+                                    Title="{DynamicResource m_exportMod_title}"
+                                    Description="{DynamicResource m_exportMod_page1_desc}"
+                                    NextPage="{Binding ElementName=Page2}"
+                                    PreviousPage="{Binding ElementName=IntroPage}"
+                                    CanSelectNextPage="{Binding IsDataWin32Exist}">
+                <xctk:WizardPage.ExteriorPanelBackground>
+                    <ImageBrush ImageSource="/Resources/Styles/UI/background/wizard_background_1.png" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+                </xctk:WizardPage.ExteriorPanelBackground>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="35"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="1" Grid.Column="3" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Button Command="{Binding DeleteCPKCommand}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page1_cpk_delete}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                        <Button Command="{Binding SelectCPKCommand}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page1_cpk_select}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                    </Grid>
+                    <Grid Grid.Row="4" Grid.Column="3" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"  HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontFamily="{StaticResource NarutoFont}" Text="{DynamicResource m_exportMod_page1_shaderInfo}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow"/>
+                        <Button Command="{Binding DeleteShaderCommand}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page1_shader_delete}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                        <Button Command="{Binding SelectShaderCommand}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page1_shader_select}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                    </Grid>
+                    <Grid Grid.Row="7" Grid.Column="3" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Command="{Binding SelectDataWin32Command}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page1_datawin32_select}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                        <Button Command="{Binding SaveDataWin32Command}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page1_datawin32_save}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                    </Grid>
+                    <Label Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_exportMod_page1_cpkList}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                    <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding CPKList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCPK}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="12">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Converter={StaticResource GetNameFromPathConverter}}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Label  Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_exportMod_page1_shaderList}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                    <ListBox Grid.Row="4" Grid.Column="0" ItemsSource="{Binding ShadersList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedShader}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="12">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Converter={StaticResource GetNameFromPathConverter}}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Label Grid.Row="6"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page1_datawin32}"  FontSize="12"/>
+                    <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding DataWin32Path_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page2"
+                                    Foreground="White"
+                                    Background="{DynamicResource Toolbox_button_background_color_1}"
+                                    Title="{DynamicResource m_exportMod_title}"
+                                    Description="{DynamicResource m_exportMod_page2_desc}"
+                                    NextPage="{Binding ElementName=Page3}"
+                                    PreviousPage="{Binding ElementName=Page1}"
+                                    CanSelectNextPage="True">
+                <xctk:WizardPage.ExteriorPanelBackground>
+                    <ImageBrush ImageSource="/Resources/Styles/UI/background/wizard_background_1.png" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+                </xctk:WizardPage.ExteriorPanelBackground>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page2_modType}"  FontSize="12"/>
+                    <ComboBox ItemsSource="{Binding ModType_List}" SelectedIndex="{Binding ModType_field}" Grid.Row="1" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                    <TextBlock Grid.Row="3"  Grid.Column="0" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="{Binding PageModType_character_visibility}"  FontFamily="{StaticResource NarutoFont}" Foreground="Red" Text="{DynamicResource m_exportMod_page3_exportCharacter_warning}"  FontSize="14"/>
+                    <TextBlock Grid.Row="3"  Grid.Column="0" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="{Binding PageModType_model_visibility}"  FontFamily="{StaticResource NarutoFont}" Foreground="Red" Text="{DynamicResource m_exportMod_page3_exportCharacter_warning}"  FontSize="14"/>
+
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page3"
+                                    Foreground="White"
+                                    Background="{DynamicResource Toolbox_button_background_color_1}"
+                                    Title="{DynamicResource m_exportMod_title}"
+                                    Description="{DynamicResource m_exportMod_page3_desc}"
+                                    NextPage="{Binding ElementName=Page4}"
+                                    PreviousPage="{Binding ElementName=Page2}"
+                                    CanSelectNextPage="{Binding IsExportModsExist}">
+                <xctk:WizardPage.ExteriorPanelBackground>
+                    <ImageBrush ImageSource="/Resources/Styles/UI/background/wizard_background_1.png" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+                </xctk:WizardPage.ExteriorPanelBackground>
+                <Grid>
+                    <Grid Visibility="{Binding PageModType_character_visibility}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_selectCharacter}"  FontSize="12"/>
+                        <Label Grid.Row="0"  Grid.Column="2"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_exportCharacter}"  FontSize="12"/>
+                        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ImportCharacterList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedImportCharacter}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="12">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding CharacodeName}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding ExportCharacterList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedExportCharacter}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="12">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding CharacodeName}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Button Command="{Binding SelectCharacterCommand}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_selectCharacode}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                        <Button Command="{Binding DeleteCharacterCommand}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_deleteCharacode}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+
+                    </Grid>
+                    <Grid Visibility="{Binding PageModType_stage_visibility}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_selectStage}"  FontSize="12"/>
+                        <Label Grid.Row="0"  Grid.Column="2"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_stageExport}"  FontSize="12"/>
+                        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ImportStageList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedImportStage}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="12">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding StageName}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding ExportStageList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedExportStage}" SelectedIndex="{Binding SelectedExportStageIndex}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="12">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding StageName}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Button Command="{Binding SelectStageCommand}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_selectStageID}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                        <Button Command="{Binding DeleteStageCommand}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_deleteStageID}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                        <Label Grid.Row="4"  Grid.Column="2"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_stagePreviewImageResolution}"  FontSize="12"/>
+                        <Image Grid.Row="5" Grid.Column="2" Grid.RowSpan="3" Source="{Binding StageImagePreview}" RenderOptions.BitmapScalingMode="HighQuality" MaxHeight="116" MaxWidth="284" Stretch="Fill" HorizontalAlignment="Left"/>
+                        <Button Grid.Row="6" Grid.Column="2" Command="{Binding SelectStageImagePreviewCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_SelectStagePreview}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+
+                        <Label Grid.Row="4"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_stageIconResolution}"  FontSize="12"/>
+                        <TextBox Grid.Row="5" MaxHeight="30" Grid.Column="0" Text="{Binding StageIconPath}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <Button Grid.Row="6" Grid.Column="0" Command="{Binding SelectStageIconCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_SelectStageIcon}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+
+                        <Label Grid.Row="8"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_stageBGM}"  FontSize="12"/>
+                        <xctk:IntegerUpDown Grid.Row="9"  MinHeight="30" Value="{Binding StageBGM_ID}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="-1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                        <Button Grid.Row="9" Grid.Column="2" Command="{Binding SaveBGMIDCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_saveBGM}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+
+                        <Label Grid.Row="11"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_StageMessageID}"  FontSize="12"/>
+                        <TextBox Grid.Row="12" MaxHeight="30" Grid.Column="0" Text="{Binding StageMessageID}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <Button Grid.Row="13" Grid.Column="2" Command="{Binding SaveStageMessageIDCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_saveStageMessageID}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+
+                    </Grid>
+                    <Grid Visibility="{Binding PageModType_model_visibility}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="Red" Content="{DynamicResource m_exportMod_page3_exportModelsWarning}"  FontSize="12"/>
+                        <Label Grid.Row="1"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_importModels}"  FontSize="12"/>
+                        <Label Grid.Row="1"  Grid.Column="2"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_exportModels}"  FontSize="12"/>
+                        <ListBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding ImportModelList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedImportModel}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="12">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding PSP_code}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding ExportModelList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedExportModel}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="12">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding PSP_code}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Button Command="{Binding SelectModelCommand}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_selectModel}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                        <Button Command="{Binding DeleteModelCommand}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_deleteModel}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                    </Grid>
+                    <!--<Grid Visibility="{Binding PageModType_accessory_visibility}">
+                    <Label Grid.Row="0"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_selectAccessory}"  FontSize="12"/>
+                </Grid>-->
+                </Grid>
+            </xctk:WizardPage>
+
+            <xctk:WizardPage x:Name="Page4"
+                                    Foreground="White"
+                                    Background="{DynamicResource Toolbox_button_background_color_1}"
+                                    Title="{DynamicResource m_exportMod_title}"
+                                    Description="{DynamicResource m_exportMod_page4_desc}"
+                                    NextPage="{Binding ElementName=PageFinish}"
+                                    PreviousPage="{Binding ElementName=Page3}"
+                                    CanSelectNextPage="{Binding IsModReady}">
+                <xctk:WizardPage.ExteriorPanelBackground>
+                    <ImageBrush ImageSource="/Resources/Styles/UI/background/wizard_background_1.png" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+                </xctk:WizardPage.ExteriorPanelBackground>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modName}"  FontSize="12"/>
+                    <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModName_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <Label Grid.Row="3"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modDesc}"  FontSize="12"/>
+                    <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModDesc_field}" TextWrapping="NoWrap" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <Label Grid.Row="6"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modAuthor}"  FontSize="12"/>
+                    <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModAuthor_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <Label Grid.Row="9"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_ModVersion}"  FontSize="12"/>
+                    <TextBox Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModVersion_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <Label Grid.Row="12"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modIcon}"  FontSize="12"/>
+                    <Label Grid.Row="12"  Grid.Column="2"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_ModIconWarning}"  FontSize="12"/>
+                    <Image Grid.Row="13" Grid.Column="2" Grid.RowSpan="3" Source="{Binding ImagePreview}" RenderOptions.BitmapScalingMode="HighQuality" MaxHeight="100" MaxWidth="100" Stretch="Fill" HorizontalAlignment="Left"/>
+                    <Grid Grid.Row="13" Grid.Column="0" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Row="0" MaxHeight="30" Grid.Column="0" Text="{Binding ModIconPath_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Top" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <Button Grid.Row="2" Grid.Column="0" Command="{Binding SelectModIconCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page4_selectModIcon}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+
+                    </Grid>
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="PageFinish"
+                                    Foreground="White"
+                                    Background="{DynamicResource Toolbox_button_background_color_1}"
+                                    Title="{DynamicResource m_exportMod_title}"
+                                    CanSelectPreviousPage="True"
+                                    CanSelectNextPage="False"
+                                    CanFinish="{Binding IsModCompiled}"
+                                    BackButtonVisibility="Visible"
+                                    NextButtonVisibility="Hidden"
+                                    CancelButtonVisibility="Hidden">
+                <xctk:WizardPage.ExteriorPanelBackground>
+                    <ImageBrush ImageSource="/Resources/Styles/UI/background/wizard_background_1.png" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+                </xctk:WizardPage.ExteriorPanelBackground>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"  Grid.Column="0" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="{StaticResource NarutoFont}" Foreground="White" Text="{DynamicResource m_exportMod_pageFinish_desc}"  FontSize="14"/>
+                    <Button Grid.Row="2" Grid.Column="0" Command="{Binding CompileModCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_pageFinish_compile}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+
+                </Grid>
+            </xctk:WizardPage>
+        </xctk:Wizard>
+        <Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}" Panel.ZIndex="10" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Controls:LoadingControl Grid.Row="2" Grid.Column="2" LoadingState="{Binding LoadingStatePlay}"/>
+        </Grid>
+        </Grid>
+    </Viewbox>
+</Window>

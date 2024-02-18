@@ -1,0 +1,608 @@
+﻿<Window x:Class="NSC_Toolbox.View.SkillCustomizeParamEditorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NSC_Toolbox.View"
+        xmlns:converter="clr-namespace:NSC_Toolbox.Converter"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
+        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" xmlns:Controls="clr-namespace:NSC_Toolbox.Controls"
+        mc:Ignorable="d" Width="1200" Height="580"
+        xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
+        
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="{DynamicResource m_skillCustomizeParamEditor}">
+    <Window.Background>
+        <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+    </Window.Background>
+    <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
+        <Grid Width="1850" Height="880">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="5"/>
+            </Grid.RowDefinitions>
+            <Menu Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                <MenuItem Header="{DynamicResource m_File}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                    <MenuItem Command="{Binding OpenFileCommand}" Header="{DynamicResource m_OpenFile}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <MenuItem Command="{Binding SaveFileCommand}" Header="{DynamicResource m_SaveFile}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <MenuItem Command="{Binding SaveFileAsCommand}" Header="{DynamicResource m_SaveAsFile}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                </MenuItem>
+            </Menu>
+            <ListBox IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView" x:Name="skillCustomizeParamPreviewList" ItemsSource="{Binding SkillCustomizeParamList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedSkill}" SelectedIndex="{Binding SelectedSkillIndex}" Grid.Row="1" Grid.Column="1" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewMouseMove="LBoxSort_OnPreviewMouseMove" Drop="LBoxSort_OnDrop" AllowDrop="True" xmlns:WpfExtensions="clr-namespace:NSC_Toolbox" WpfExtensions:DragDropExtension.ScrollOnDragDrop="True">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Characode ID: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
+                            <TextBlock Text="{Binding CharacodeID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Vertical" VerticalAlignment="Center">
+
+                    <Label HorizontalAlignment="Left" FontSize="12" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_Characode}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown MinHeight="30" Value="{Binding CharacodeID_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+
+                </StackPanel>
+                <Grid Grid.Row="1" Grid.Column="0"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsu1}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                        <Label.Style>
+                            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                      BlurRadius="5"
+                                      Color="Cyan"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Effect).BlurRadius" AutoReverse="True"
+                                                AccelerationRatio="0.3" 
+                                                DecelerationRatio="0.3"
+                                                RepeatBehavior="Forever" >
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="5"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="15"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuName}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuUsage}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuCancel}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_prior}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White" Grid.Row="0" Grid.ColumnSpan="5"/>
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_ninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_exninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_airninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Jutsu1_normal_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Jutsu1_ex_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding Jutsu1_air_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Value="{Binding Jutsu1Cost_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" Value="{Binding Jutsu1Cancel_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="4" Value="{Binding Jutsu1_normal_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu1_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu1_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                </Grid>
+                <Grid Grid.Row="3" Grid.Column="0"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsu2}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                        <Label.Style>
+                            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                      BlurRadius="5"
+                                      Color="Cyan"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Effect).BlurRadius" AutoReverse="True"
+                                                AccelerationRatio="0.3" 
+                                                DecelerationRatio="0.3"
+                                                RepeatBehavior="Forever" >
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="5"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="15"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuName}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuUsage}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuCancel}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_prior}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White" Grid.Row="0" Grid.ColumnSpan="5"/>
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_ninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_exninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_airninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Jutsu2_normal_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Jutsu2_ex_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding Jutsu2_air_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Value="{Binding Jutsu2Cost_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" Value="{Binding Jutsu2Cancel_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="4" Value="{Binding Jutsu2_normal_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu2_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu2_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                </Grid>
+                <Grid Grid.Row="5" Grid.Column="0"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsu3}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                        <Label.Style>
+                            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                      BlurRadius="5"
+                                      Color="Cyan"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Effect).BlurRadius" AutoReverse="True"
+                                                AccelerationRatio="0.3" 
+                                                DecelerationRatio="0.3"
+                                                RepeatBehavior="Forever" >
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="5"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="15"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuName}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuUsage}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuCancel}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_prior}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White" Grid.Row="0" Grid.ColumnSpan="5"/>
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_ninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_exninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_airninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Jutsu3_normal_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Jutsu3_ex_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding Jutsu3_air_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Value="{Binding Jutsu3Cost_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" Value="{Binding Jutsu3Cancel_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="4" Value="{Binding Jutsu3_normal_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu3_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu3_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="2"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsu4}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                        <Label.Style>
+                            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                      BlurRadius="5"
+                                      Color="Cyan"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Effect).BlurRadius" AutoReverse="True"
+                                                AccelerationRatio="0.3" 
+                                                DecelerationRatio="0.3"
+                                                RepeatBehavior="Forever" >
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="5"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="15"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuName}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuUsage}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuCancel}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_prior}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White" Grid.Row="0" Grid.ColumnSpan="5"/>
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_ninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_exninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_airninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Jutsu4_normal_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Jutsu4_ex_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding Jutsu4_air_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Value="{Binding Jutsu4Cost_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" Value="{Binding Jutsu4Cancel_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="4" Value="{Binding Jutsu4_normal_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu4_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu4_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                </Grid>
+                <Grid Grid.Row="3" Grid.Column="2"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsu5}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                        <Label.Style>
+                            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                      BlurRadius="5"
+                                      Color="Cyan"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Effect).BlurRadius" AutoReverse="True"
+                                                AccelerationRatio="0.3" 
+                                                DecelerationRatio="0.3"
+                                                RepeatBehavior="Forever" >
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="5"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="15"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuName}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuUsage}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuCancel}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_prior}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White" Grid.Row="0" Grid.ColumnSpan="5"/>
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_ninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_exninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_airninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Jutsu5_normal_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Jutsu5_ex_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding Jutsu5_air_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Value="{Binding Jutsu5Cost_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" Value="{Binding Jutsu5Cancel_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="4" Value="{Binding Jutsu5_normal_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu5_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu5_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                </Grid>
+                <Grid Grid.Row="5" Grid.Column="2"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsu6}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                        <Label.Style>
+                            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                      BlurRadius="5"
+                                      Color="Cyan"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Effect).BlurRadius" AutoReverse="True"
+                                                AccelerationRatio="0.3" 
+                                                DecelerationRatio="0.3"
+                                                RepeatBehavior="Forever" >
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="5"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="15"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuName}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuUsage}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuCancel}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_prior}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White" Grid.Row="0" Grid.ColumnSpan="5"/>
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_ninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_exninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_airninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Jutsu6_normal_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Jutsu6_ex_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding Jutsu6_air_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Value="{Binding Jutsu6Cost_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" Value="{Binding Jutsu6Cancel_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="4" Value="{Binding Jutsu6_normal_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu6_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu6_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                </Grid>
+                <Grid Grid.Row="7" Grid.Column="0"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_awajutsu1}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                        <Label.Style>
+                            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                      BlurRadius="5"
+                                      Color="Cyan"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Effect).BlurRadius" AutoReverse="True"
+                                                AccelerationRatio="0.3" 
+                                                DecelerationRatio="0.3"
+                                                RepeatBehavior="Forever" >
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="5"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="15"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuName}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuUsage}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuCancel}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_prior}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White" Grid.Row="0" Grid.ColumnSpan="5"/>
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_ninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_exninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_airninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Jutsu1_awa_normal_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Jutsu1_awa_ex_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding Jutsu1_awa_air_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Value="{Binding Jutsu1_awaCost_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" Value="{Binding Jutsu1_awaCancel_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="4" Value="{Binding Jutsu1_awa_normal_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu1_awa_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu1_awa_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                </Grid>
+                <Grid Grid.Row="7" Grid.Column="2"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_awajutsu2}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                        <Label.Style>
+                            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                      BlurRadius="5"
+                                      Color="Cyan"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Effect).BlurRadius" AutoReverse="True"
+                                                AccelerationRatio="0.3" 
+                                                DecelerationRatio="0.3"
+                                                RepeatBehavior="Forever" >
+                                                        <EasingDoubleKeyFrame KeyTime="0" Value="5"/>
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="15"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuName}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuUsage}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuCancel}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_prior}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White" Grid.Row="0" Grid.ColumnSpan="5"/>
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_ninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_exninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_airninjutsu}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Jutsu2_awa_normal_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Jutsu2_awa_ex_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding Jutsu2_awa_air_name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Value="{Binding Jutsu2_awaCost_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:DoubleUpDown Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" Value="{Binding Jutsu2_awaCancel_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}" AllowSpin="True"/>
+                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="4" Value="{Binding Jutsu2_awa_normal_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu2_awa_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu2_awa_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                </Grid>
+            </Grid>
+
+
+            <Grid Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Command="{Binding AddDupEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddDupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Button Command="{Binding SearchEntryCommand}" Content="{DynamicResource m_SearchEntry}" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <xctk:IntegerUpDown Grid.Row="1" Grid.Column="0" Value="{Binding SearchIndex_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+
+            </Grid>
+            <Button Command="{Binding SaveEntryCommand}"  Grid.Row="4" Grid.Column="3" Content="{DynamicResource m_SaveEntry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+            <Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Controls:LoadingControl Grid.Row="2" Grid.Column="2" LoadingState="{Binding LoadingStatePlay}"/>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Window>

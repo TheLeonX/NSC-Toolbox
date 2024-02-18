@@ -1,0 +1,855 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+
+    <v:String x:Key="m_AddDupEntry">Add/Duplicate Entry</v:String>
+    <v:String x:Key="m_DupEntry">Duplicate Entry</v:String>
+    <v:String x:Key="m_AddEntry">Add Entry</v:String>
+    <v:String x:Key="m_DeleteEntry">Delete Entry</v:String>
+    <v:String x:Key="m_SaveEntry">Save Entry</v:String>
+    <v:String x:Key="m_SearchEntry">Search Entry</v:String>
+    <v:String x:Key="m_File">File</v:String>
+    <v:String x:Key="m_OpenFile">Open</v:String>
+    <v:String x:Key="m_SaveFile">Save</v:String>
+    <v:String x:Key="m_SaveAsFile">Save As</v:String>
+
+    <!-- Title Window-->
+    <v:String x:Key="m_Title">Naruto Storm Connections - Toolbox</v:String>
+    <v:String x:Key="m_mainWindow_001">Character Management</v:String>
+    <v:String x:Key="m_mainWindow_002">Stage Management</v:String>
+    <v:String x:Key="m_mainWindow_003">Story Mode Management</v:String>
+    <v:String x:Key="m_mainWindow_004">Other Tools</v:String>
+    <v:String x:Key="m_mainWindow_005">Options</v:String>
+    <v:String x:Key="m_mainWindow_006">ModdingAPI</v:String>
+    <v:String x:Key="m_mainWindow_007">Discord Group</v:String>
+    <v:String x:Key="m_mainWindow_008">Credits</v:String>
+    <v:String x:Key="m_mainWindow_009">Export Mod</v:String>
+    <v:String x:Key="m_mainWindow_010">Install</v:String>
+    <v:String x:Key="m_mainWindow_011">Delete</v:String>
+    <v:String x:Key="m_mainWindow_012">Support Me</v:String>
+
+
+    <!--Export Mod-->
+    <v:String x:Key="m_exportMod_title">Naruto Storm Connection Mod Exporter</v:String>
+    <v:String x:Key="m_exportMod_page0_desc">This exporter will help you to prepare all stuff required for making mod, which can be compatible with NSC Mod Manager.</v:String>
+    <v:String  xml:space="preserve" x:Key="m_exportMod_page0_warning">
+    If your mod adding character, you need to add required files and entries for it:
+        characode.bin.xfbin
+        duelPlayerParam.xfbin
+        playerSettingParam.bin.xfbin
+        costumeParam.bin.xfbin
+        skillCustomizeParam.xfbin
+        skillIndexSettingParam.xfbin
+        privateCamera.bin.xfbin
+        spSkillCustomizeParam.xfbin
+        costumeBreakColorParam.xfbin
+        cmnparam.xfbin
+        supportActionparam.bin.xfbin
+        supportSkillRecoverySpeedParam.bin.xfbin
+    Character which doesn't replace anyone doesn't need to have any of this files for export.
+        
+    For stages:
+        StageInfo.bin.xfbin
+        
+    For models:
+        playerSettingParam.bin.xfbin
+        player_icon.xfbin
+        duelPlayerParam.xfbin
+        characterSelectParam.xfbin
+        costumeBreakColorParam.xfbin
+        costumeParam.xfbin
+    (appearanceAnm.xfbin isn't supported for models)
+    Models for added characters are supported, but will be skipped if character doesn't exist.
+    </v:String>
+    <v:String x:Key="m_exportMod_page1_desc">Select all required stuff for your mod.</v:String>
+    <v:String x:Key="m_exportMod_page1_cpkList">Cpk List (only for resources)</v:String>
+    <v:String x:Key="m_exportMod_page1_cpk_select">Select CPK</v:String>
+    <v:String x:Key="m_exportMod_page1_cpk_delete">Delete CPK</v:String>
+    <v:String x:Key="m_exportMod_page1_shaderList">Shaders (Vertex and Pixel shaders)</v:String>
+    <v:String x:Key="m_exportMod_page1_shaderInfo">Shaders must be merged like in game files. For more info visit modding help forum.</v:String>
+    <v:String x:Key="m_exportMod_page1_shader_select">Select Shader</v:String>
+    <v:String x:Key="m_exportMod_page1_shader_delete">Delete Shader</v:String>
+    <v:String x:Key="m_exportMod_page1_datawin32">Mod Folder (data__win32)</v:String>
+    <v:String x:Key="m_exportMod_page1_datawin32_select">Select Mod Folder</v:String>
+    <v:String x:Key="m_exportMod_page1_datawin32_save">Save Mod Folder</v:String>
+    <v:String x:Key="m_exportMod_page2_desc">For exporting mod you have to select type of it.</v:String>
+    <v:String x:Key="m_exportMod_page2_modType">Mod Type</v:String>
+    <v:String x:Key="m_exportMod_page3_desc">Change settings for your mod</v:String>
+    <v:String x:Key="m_exportMod_page3_selectCharacter">Select Characters</v:String>
+    <v:String x:Key="m_exportMod_page3_selectStage">Select Stages</v:String>
+    <v:String x:Key="m_exportMod_page3_stageExport">Stages for export</v:String>
+    <v:String x:Key="m_exportMod_page3_selectStageID">Select Stage</v:String>
+    <v:String x:Key="m_exportMod_page3_deleteStageID">Delete Stage</v:String>
+    <v:String x:Key="m_exportMod_page3_stagePreviewImageResolution">Stage Preview - Resolution 1428x588</v:String>
+    <v:String x:Key="m_exportMod_page3_SelectStagePreview">Select Stage Preview</v:String>
+    <v:String x:Key="m_exportMod_page3_stageIconResolution">Stage Icon - Resolution 184x104</v:String>
+    <v:String x:Key="m_exportMod_page3_SelectStageIcon">Select Stage Icon</v:String>
+    <v:String x:Key="m_exportMod_page3_stageBGM">BGM ID</v:String>
+    <v:String x:Key="m_exportMod_page3_saveBGM">Save BGM ID for Stage</v:String>
+    <v:String x:Key="m_exportMod_page3_StageMessageID">Stage Name</v:String>
+    <v:String x:Key="m_exportMod_page3_saveStageMessageID">Save Stage Name</v:String>
+    <v:String x:Key="m_exportMod_page3_importModels">Imported Models</v:String>
+    <v:String x:Key="m_exportMod_page3_exportModels">Models for export</v:String>
+    <v:String x:Key="m_exportMod_page3_exportModelsWarning">Recommended to use 6-7 letters in model name (for example, sasukebod1.xfbin)</v:String>
+    <v:String x:Key="m_exportMod_page3_selectModel">Select Model</v:String>
+    <v:String x:Key="m_exportMod_page3_deleteModel">Delete Model</v:String>
+    <v:String x:Key="m_exportMod_page3_selectAccessory">Select Accessories</v:String>
+    <v:String x:Key="m_exportMod_page3_selectCharacode">Select Character</v:String>
+    <v:String x:Key="m_exportMod_page3_deleteCharacode">Delete Character</v:String>
+    <v:String x:Key="m_exportMod_page3_exportCharacter">Characters for export</v:String>
+    <v:String x:Key="m_exportMod_page3_exportCharacter_warning">For icons in character select menu, add for every costume file with icon name, for example, if costume has base icon - "nrt16", it means you have to add icon "nrt16_charicon_s.xfbin" in "ui/flash/OTHER/charicon_s" folder. To pack icon, you can use "XFBIN texture" tool or XFBIN Parser. If you will not add that icon, mod manager will skip that icon and won't load it.</v:String>
+
+    <v:String x:Key="m_exportMod_page4_desc">Change icon and description for your mod</v:String>
+    <v:String x:Key="m_exportMod_page4_modName">Mod name</v:String>
+    <v:String x:Key="m_exportMod_page4_modDesc">Description</v:String>
+    <v:String x:Key="m_exportMod_page4_modAuthor">Authors</v:String>
+    <v:String x:Key="m_exportMod_page4_modIcon">Mod Icon</v:String>
+    <v:String x:Key="m_exportMod_page4_selectModIcon">Select Mod Icon</v:String>
+    <v:String x:Key="m_exportMod_page4_ModIconWarning">Max resolution 256x256</v:String>
+    <v:String x:Key="m_exportMod_page4_ModVersion">Mod Version</v:String>
+    <v:String x:Key="m_exportMod_pageFinish_desc">Now you have to compile your mod and then you can close this window!</v:String>
+    <v:String x:Key="m_exportMod_pageFinish_compile">Compile Mod</v:String>
+
+    <v:String x:Key="m_mainWindowTool_001">Character ID Manager (characode.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_002">Character Setting Editor (DuelPlayerParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_003">Costume Editor (playerSettingParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_004">Character Roster Manager (characterSelectParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_005">Ninjutsu Editor (skillCustomizeParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_006">Attach Object Editor (afterAttachObject.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_007">Character Moveset Editor (****prm.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_008">Character Costume Unlock Editor (costumeParam.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_009">Character Icon Editor (player_icon.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_010">Character Aura Editor (awakeAura.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_011">Ninjutsu List Editor (skillIndexSettingParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_012">Ultimate Jutsu Editor (spSkillCustomizeParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_013">Costume Chunk Enabler (appearanceAnm.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_014">Character File Loader Editor (****prm_load.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_015">Character Action Editor (spTypeSupportParam.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_016">Character Awakening Camera Editor (privateCamera.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_017">Player Sound Setting Editor (cmnparam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_018">Character Fade Effect Editor (playerDoubleEffectParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_019">Character Armor Break Costume Editor (costumeBreakParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_020">Character Armor Break Color Editor (costumeBreakColorParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_021">Common Effect Dictionary Editor (effectprm.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_022">Stage Setting Editor (StageInfo.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_023">Localization Editor (messageInfo.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_024">Hit Effect Dictionary Editor (damageEff.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_025">Support Action Editor (supportActionParam.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_026">Support Skill Recovery Speed Editor (supportSkillRecoverySpeedParam.bin.xfbin)</v:String>
+    <v:String x:Key="m_option001">Stretch Mode</v:String>
+    <v:String x:Key="m_option002">Fill</v:String>
+    <v:String x:Key="m_option003">Uniform</v:String>
+    <v:String x:Key="m_option004">Save Settings</v:String>
+    <v:String x:Key="m_option005">None</v:String>
+    <v:String x:Key="m_option006">Background Color</v:String>
+    <v:String x:Key="m_option007">Button Color</v:String>
+    <v:String x:Key="m_option008">Background Image</v:String>
+    <v:String x:Key="m_option009">Reset Settings</v:String>
+    <v:String x:Key="m_option010">Select Image</v:String>
+    <v:String x:Key="m_option011">Font Color</v:String>
+
+    <!--credits-->
+    <v:String x:Key="m_credits_001">Thank you all for support and help!</v:String>
+    <v:String x:Key="m_credits_002">Contributors</v:String>
+    <v:String x:Key="m_credits_003">Special thanks to this guys</v:String>
+    <v:String x:Key="m_credits_004">Come back to menu</v:String>
+
+    <!--SupportSkillRecoverySpeedParam Editor-->
+    <v:String x:Key="m_SupportSkillRecoverySpeedParamEditor">Support Skill Recovery Speed Editor</v:String>
+
+
+    <!--SupportActionParam Editor-->
+    <v:String x:Key="m_SupportActionParam">Support Action Editor</v:String>
+    <v:String x:Key="m_SupportActionParamType">Support Type</v:String>
+    
+    <!--DamageEff Editor-->
+    <v:String x:Key="m_damageEffEditor">Hit Effect Dictionary Editor</v:String>
+    <v:String x:Key="m_damageEffEditorID">DamageEff ID</v:String>
+    <v:String x:Key="m_damageEffEditorSoundID">Sound ID</v:String>
+    <v:String x:Key="m_damageEffEditorEffectPrmID">EffectPrm ID</v:String>
+    <v:String x:Key="m_damageEffEditorExtraID">Extra DamageEff ID</v:String>
+    <v:String x:Key="m_damageEffEditorExtraSoundID">Extra Sound ID</v:String>
+    <v:String x:Key="m_damageEffEditorExtraEffectPrmID">Extra EffectPrm ID</v:String>
+    
+    
+    <!--EffectPRM Editor-->
+    <v:String x:Key="m_effectPrmEditor">Common Effect Dictionary Editor</v:String>
+    <v:String x:Key="m_effectPrmEditorID">EffectPrm ID</v:String>
+    <v:String x:Key="m_effectPrmEditorType">Type</v:String>
+    <v:String x:Key="m_effectPrmEditorFilePath">File Path</v:String>
+    <v:String x:Key="m_effectPrmEditorChunkName">Animation Name</v:String>
+    
+    
+    <!--CostumeBreakColorParam Editor-->
+    <v:String x:Key="m_costumBreakColorParamEditor">Character Armor Break Color Editor</v:String>
+    <v:String x:Key="m_costumBreakColorParamAltColor1">Alt Color 1</v:String>
+    <v:String x:Key="m_costumBreakColorParamAltColor2">Alt Color 2</v:String>
+    <v:String x:Key="m_costumBreakColorParamAltColor3">Alt Color 3</v:String>
+    <v:String x:Key="m_costumBreakColorParamAltColor4">Alt Color 4</v:String>
+
+
+    <!--CostumeBreakParam Editor-->
+    <v:String x:Key="m_costumBreakParamEditor">Character Armor Break Costume Editor</v:String>
+    <v:String x:Key="m_costumBreakParamEditorModelPath">Model Path</v:String>
+    <v:String x:Key="m_costumBreakParamEditorModelEnableInAwakening">Enable for Awakening Model</v:String>
+    <v:String x:Key="m_costumBreakParamEditorModelEnableForClones">Enable for Clones</v:String>
+    <v:String x:Key="m_costumBreakParamEditorModelClonesCount">Clones Count</v:String>
+
+
+    <!--PlayerDoubleEffectParam Editor-->
+    <v:String x:Key="m_playerDoubleEffectParamEditor">Character Fade Effect Editor</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorAttachBone">Bone</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlayAtStart">Play At Start</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlayAtEnd">Play At End</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorEffectEntry">Effect Entry</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlAnm1">PL__ANM Entry 1</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlAnm2">PL__ANM Entry 2</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlAnm3">PL__ANM Entry 3</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlAnm4">PL__ANM Entry 4</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlAnm5">PL__ANM Entry 5</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorHeightSpawn">Height Spawn</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorSoundID">Sound ID</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorNearestGroundPosition">Spawn on Nearest Ground Position</v:String>
+    
+    
+    <!--CostumeParam Editor-->
+    <v:String x:Key="m_costumeParamEditor">Character Costume Unlock Editor</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryString">Costume String</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryIndex">Entry Index</v:String>
+    <v:String x:Key="m_costumeParamEditorPSP_ID">PlayerSettingParam ID</v:String>
+    <v:String x:Key="m_costumeParamEditorCharacterName">Character Name (message ID)</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType">Entry Type</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_1">Color 1</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_2">Color 2</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_3">Color 3</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_4">Color 4</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_5">Pose 1</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_6">Pose 2</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_7">Pose 3</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryUnlockCost">Unlock Cost</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryUnlockCondition">Unlock Condition</v:String>
+    
+    
+    <!--PrivateCamera Editor-->
+    <v:String x:Key="m_privateCameraEditor">Character Awakening Camera Editor</v:String>
+    <v:String x:Key="m_privateCameraDistance">Camera Distance</v:String>
+    <v:String x:Key="m_privateCameraSpeed">Camera Speed</v:String>
+    <v:String x:Key="m_privateCameraMovement">Camera Movement</v:String>
+    <v:String x:Key="m_privateCameraHeight">Camera Height</v:String>
+    <v:String x:Key="m_privateCameraAngle">Camera Angle</v:String>
+    <v:String x:Key="m_privateCameraFOV">FOV</v:String>
+    <v:String x:Key="m_privateCameraDistance2">Camera Distance 2 (unknown)</v:String>
+    <v:String x:Key="m_privateCameraHeight2">Camera Height 2 (unknown)</v:String>
+    <v:String x:Key="m_privateCameraFOV2">FOV 2 (unknown)</v:String>
+
+
+    <!--AppearanceAnm Editor-->
+    <v:String x:Key="m_appearanceAnmEditor">Costume Chunk Enabler</v:String>
+    <v:String x:Key="m_appearanceAnmEditorType_1">Mesh (nuccChunkModel)</v:String>
+    <v:String x:Key="m_appearanceAnmEditorType_2">Material (nuccChunkMaterial)</v:String>
+    <v:String x:Key="m_appearanceAnmEditorType_3">Bone (nuccChunkCoord)</v:String>
+    <v:String x:Key="m_appearanceAnmEditorBlend">Blend Value</v:String>
+    <v:String x:Key="m_appearanceAnmEditorToggleEntryOff">Disabled Chunk</v:String>
+    <v:String x:Key="m_appearanceAnmEditorToggleEntryOn">Enabled Chunk</v:String>
+    <v:String x:Key="m_appearanceAnmEditorCostumes">Costumes</v:String>
+    <v:String x:Key="m_appearanceAnmEditorEnableAll">Enable All</v:String>
+    <v:String x:Key="m_appearanceAnmEditorDisableAll">Disable All</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot1">Slot 1</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot2">Slot 2</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot3">Slot 3</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot4">Slot 4</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot5">Slot 5</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot6">Slot 6</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot7">Slot 7</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot8">Slot 8</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot9">Slot 9</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot10">Slot 10</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot11">Slot 11</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot12">Slot 12</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot13">Slot 13</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot14">Slot 14</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot15">Slot 15</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot16">Slot 16</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot17">Slot 17</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot18">Slot 18</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot19">Slot 19</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot20">Slot 20</v:String>
+    <v:String x:Key="m_appearanceAnmEditorNormalState">Normal State</v:String>
+    <v:String x:Key="m_appearanceAnmEditorAwakeningState">Awakening State</v:String>
+    <v:String x:Key="m_appearanceAnmEditorTiming">Timing in Awakening Cutscene</v:String>
+    <v:String x:Key="m_appearanceAnmEditorReverse">Reverse Settings After Awakening</v:String>
+    <v:String x:Key="m_appearanceAnmEditorEnabled">Enabled</v:String>
+    <v:String x:Key="m_appearanceAnmEditorDisabled">Disabled</v:String>
+    <v:String x:Key="m_appearanceAnmEditorCutNC">SplAtk Cut NC Animation</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSplAtk">Ultimate Jutsu</v:String>
+    <v:String x:Key="m_appearanceAnmEditorWin">Win Animation</v:String>
+    <v:String x:Key="m_appearanceAnmEditorArmorBreak">Armor Break</v:String>
+
+    <!--afterAttachObject Editor-->
+    <v:String x:Key="m_afterAttachObjectEditor">Attach Object Editor</v:String>
+    <v:String x:Key="m_afterAttachObjectCostume">Costume</v:String>
+    <v:String x:Key="m_afterAttachObjectAttachBone1">Attach Bone (player model)</v:String>
+    <v:String x:Key="m_afterAttachObjectAttachBone2">Attach Bone (weapon model)</v:String>
+    <v:String x:Key="m_afterAttachObjectType">Chunk Type</v:String>
+    <v:String x:Key="m_afterAttachObjectChunkName">Chunk Name</v:String>
+    <v:String x:Key="m_afterAttachObjectType_1">Clump (nuccChunkClump)</v:String>
+    <v:String x:Key="m_afterAttachObjectType_2">Animation (nuccChunkAnm)</v:String>
+    <v:String x:Key="m_afterAttachObjectCondition">Appear Condition</v:String>
+    <v:String x:Key="m_afterAttachObjectCondition_1">Unknown</v:String>
+    <v:String x:Key="m_afterAttachObjectCondition_2">After Hit</v:String>
+    <v:String x:Key="m_afterAttachObjectCondition_3">Appear Always</v:String>
+    <v:String x:Key="m_afterAttachObjectState">State</v:String>
+    <v:String x:Key="m_afterAttachObjectState_1">All States</v:String>
+    <v:String x:Key="m_afterAttachObjectState_2">Normal State</v:String>
+    <v:String x:Key="m_afterAttachObjectState_3">Awakening State</v:String>
+    <v:String x:Key="m_afterAttachObjectState_4">Upgrade01 State</v:String>
+    <v:String x:Key="m_afterAttachObjectState_5">Upgrade02 State</v:String>
+    <v:String x:Key="m_afterAttachObjectState_6">Upgrade03 State</v:String>
+    <v:String x:Key="m_afterAttachObjectState_7">Boss01 State</v:String>
+    <v:String x:Key="m_afterAttachObjectState_8">Boss02 State</v:String>
+    <v:String x:Key="m_afterAttachObjectState_9">Boss03 State</v:String>
+    <v:String x:Key="m_afterAttachObjectState_10">Boss04 State</v:String>
+    <v:String x:Key="m_afterAttachObjectPosition">Position</v:String>
+    <v:String x:Key="m_afterAttachObjectRotation">Rotation (Euler)</v:String>
+    <v:String x:Key="m_afterAttachObjectScale">Scale</v:String>
+
+
+    <!--SpTypeSupportParam Editor-->
+    <v:String x:Key="m_spTypeSupportParamEditor">Character Action Editor</v:String>
+    <v:String x:Key="m_spTypeSupportParamState">Character State</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_1">Normal Mode</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_2">Awakening Mode</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_3">All Modes</v:String>
+    <v:String x:Key="m_spTypeSupportParamMode">Action Mode</v:String>
+    <v:String x:Key="m_spTypeSupportParamMode_1">Left and Right Arrows</v:String>
+    <v:String x:Key="m_spTypeSupportParamMode_2">All Arrows</v:String>
+    <v:String x:Key="m_spTypeSupportParamEnableOnGround">Enable on ground</v:String>
+    <v:String x:Key="m_spTypeSupportParamEnableInAir">Enable in air</v:String>
+    <v:String x:Key="m_spTypeSupportParamEnableSpecialCondition">Enable special condition</v:String>
+    <v:String x:Key="m_spTypeSupportParamJutsuNameUp">Up Jutsu</v:String>
+    <v:String x:Key="m_spTypeSupportParamJutsuNameDown">Down Jutsu</v:String>
+    <v:String x:Key="m_spTypeSupportParamJutsuNameLeft">Left Jutsu</v:String>
+    <v:String x:Key="m_spTypeSupportParamJutsuNameRight">Right Jutsu</v:String>
+    <v:String x:Key="m_spTypeSupportParamJutsuName">Name</v:String>
+
+
+    <!--AwakeAura Editor-->
+    <v:String x:Key="m_awakeAuraEditor">Character Aura Editor</v:String>
+    <v:String x:Key="m_awakeAuraCharacode">Characode</v:String>
+    <v:String x:Key="m_awakeAuraSkillFile">Skill File</v:String>
+    <v:String x:Key="m_awakeAuraSkillEntry">Skill Entry</v:String>
+    <v:String x:Key="m_awakeAuraMainBone">Main Bone</v:String>
+    <v:String x:Key="m_awakeAuraSecondaryBone">Secondary Bone</v:String>
+    <v:String x:Key="m_awakeAuraEnablePlayerModel">Use Player Model</v:String>
+    <v:String x:Key="m_awakeAuraState">State</v:String>
+    <v:String x:Key="m_awakeAuraState_1">Disabled</v:String>
+    <v:String x:Key="m_awakeAuraState_2">Normal State</v:String>
+    <v:String x:Key="m_awakeAuraState_3">Awakening State</v:String>
+    <v:String x:Key="m_awakeAuraCondition">Aura Condition</v:String>
+    <v:String x:Key="m_awakeAuraCondition_1">No Condition</v:String>
+    <v:String x:Key="m_awakeAuraCondition_2">Nearest Ground Position</v:String>
+    <v:String x:Key="m_awakeAuraCondition_3">Unknown (used for old Susanoo)</v:String>
+
+    <!--playerIcon Editor-->
+    <v:String x:Key="m_PlayerIconEditor">Character Icon Editor</v:String>
+    <v:String x:Key="m_baseIcon">Base Icon</v:String>
+    <v:String x:Key="m_awakeIcon">Awakening Icon</v:String>
+    <v:String x:Key="m_nameIcon">Name Icon</v:String>
+    <v:String x:Key="m_subjutsuIcon">Subjutsu Icon</v:String>
+
+    <!--spSkillCustomizeParam Editor -->
+
+    <v:String x:Key="m_spSkillCustomizeParamEditor">Ultimate Jutsu Editor</v:String>
+    <v:String x:Key="m_spSkill_ult1">Ultimate 1</v:String>
+    <v:String x:Key="m_spSkill_ult2">Ultimate 2</v:String>
+    <v:String x:Key="m_spSkill_ult3">Ultimate 3</v:String>
+    <v:String x:Key="m_spSkill_ult4">Ultimate 4</v:String>
+    <v:String x:Key="m_spSkillCustomizeParamDamageMultiplier">Damage Multiplier</v:String>
+
+    <!--cmnparam Editor-->
+    <v:String x:Key="m_cmnparamEditor">Player Sound Setting Editor</v:String>
+    <v:String x:Key="m_cmnparamEditor_tab_1">Team UJ sound settings (pair_spl_snd)</v:String>
+    <v:String x:Key="m_cmnparamEditor_tab_2">Player sound settings (player_snd)</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairSplID">Team Ultimate Jutsu ID</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairSndEvFileName">File Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairCutInChunkName">Cut-In Chunk Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairAtkChunkName">Atk Chunk Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairName1">Name 1</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairName2">Name 2</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerCharacode">Characode</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerFileName">Sound File Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerFileNameAwakening1">Awakening 1 Sound File Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerFileNameAwakening2">Awakening 2 Sound File Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSndEvFileName">Sound Event File Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSplSndEvFileName">Ultimate Jutsu Sound Event File Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_1_CutIn_ChunkName">Ultimate Jutsu 1 Cut-In Chunk Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_1_Atk_ChunkName">Ultimate Jutsu 1 Atk Chunk Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_2_CutIn_ChunkName">Ultimate Jutsu 2 Cut-In Chunk Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_2_Atk_ChunkName">Ultimate Jutsu 2 Atk Chunk Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_3_CutIn_ChunkName">Ultimate Jutsu 3 Cut-In Chunk Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_3_Atk_ChunkName">Ultimate Jutsu 3 Atk Chunk Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_alt_CutIn_ChunkName">Ultimate Jutsu alt Cut-In Chunk Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_alt_Atk_ChunkName">Ultimate Jutsu alt Atk Chunk Name</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerPartner">Partner Characode</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerAwaPartner">Awakening Partner Characode</v:String>
+
+    <!--Spcload Editor-->
+    <v:String x:Key="m_PRMloadEditor">Character File Loader Editor</v:String>
+    <v:String x:Key="m_PRMloadFilePath">File Path</v:String>
+    <v:String x:Key="m_PRMloadFileName">File Name</v:String>
+    <v:String x:Key="m_PRMloadFileType">Type (required for post effects)</v:String>
+    <v:String x:Key="m_PRMloadFileType_1">0 - empty</v:String>
+    <v:String x:Key="m_PRMloadFileType_2">1 - common File</v:String>
+    <v:String x:Key="m_PRMloadFileType_3">2 - bod1c</v:String>
+    <v:String x:Key="m_PRMloadFileType_4">3 - bod1l</v:String>
+    <v:String x:Key="m_PRMloadFileType_5">4 - bod1s</v:String>
+    <v:String x:Key="m_PRMloadFileType_6">5 - skl</v:String>
+    <v:String x:Key="m_PRMloadFileType_7">6 - spl</v:String>
+    <v:String x:Key="m_PRMloadFileType_8">7 - awa/aws</v:String>
+    <v:String x:Key="m_PRMloadFileType_9">8 - ???</v:String>
+    <v:String x:Key="m_PRMloadFileType_10">9 - bod1</v:String>
+    <v:String x:Key="m_PRMloadFileType_11">10 - acc1</v:String>
+    <v:String x:Key="m_PRMloadFileType_12">11 - eff1</v:String>
+    <v:String x:Key="m_PRMloadFileType_13">12 - param file</v:String>
+    <v:String x:Key="m_PRMloadFileType_14">13 - param file</v:String>
+    <v:String x:Key="m_PRMloadFileType_15">14 - skill file</v:String>
+    <v:String x:Key="m_PRMloadFileType_16">15 - ???</v:String>
+    <v:String x:Key="m_PRMloadCostumeIndex">Costume Index (duelPlayerParam)</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition">Load Condition</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_1">Always Load</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_2">Load for supports</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_3">Load for leader (base)</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_4">Load for awakening</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_5">Jutsu 1</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_6">Jutsu 2</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_7">Jutsu 3</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_8">Jutsu 4</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_9">Jutsu 5</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_10">Jutsu 6</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_11">Ultimate Jutsu 1</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_12">Ultimate Jutsu 2</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_13">Ultimate Jutsu 3</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_14">Ultimate Jutsu 4</v:String>
+
+    <!--MessageInfoEditor Window-->
+    <v:String x:Key="m_messageInfoEditor">Localization Editor</v:String>
+    <v:String x:Key="m_lang">Language</v:String>
+    <v:String x:Key="m_lang_1">Arabic (arae)</v:String>
+    <v:String x:Key="m_lang_2">Traditional Chinese (chi)</v:String>
+    <v:String x:Key="m_lang_3">English (eng)</v:String>
+    <v:String x:Key="m_lang_4">Spanish Latin American (esmx)</v:String>
+    <v:String x:Key="m_lang_5">French (fre)</v:String>
+    <v:String x:Key="m_lang_6">German (ger)</v:String>
+    <v:String x:Key="m_lang_7">Indonesian (idid)</v:String>
+    <v:String x:Key="m_lang_8">Italian (ita)</v:String>
+    <v:String x:Key="m_lang_9">Korean (kokr)</v:String>
+    <v:String x:Key="m_lang_10">Polish (pol)</v:String>
+    <v:String x:Key="m_lang_11">Portuguese (por)</v:String>
+    <v:String x:Key="m_lang_12">Russian (rus)</v:String>
+    <v:String x:Key="m_lang_13">Spanish (spa)</v:String>
+    <v:String x:Key="m_lang_14">Thai (thth)</v:String>
+    <v:String x:Key="m_lang_15">Simplified Chinese (zhcn)</v:String>
+    <v:String x:Key="m_crc32_code">CRC32 Code</v:String>
+    <v:String x:Key="m_cue_ID">Cue ID</v:String>
+    <v:String x:Key="m_ACBFile">ACB File</v:String>
+    <v:String x:Key="m_MainText">Main text</v:String>
+    <v:String x:Key="m_additionalText">Secondary text</v:String>
+    <v:String x:Key="m_speaker">Speaker</v:String>
+    <v:String x:Key="m_searchCRC32">Search CRC32</v:String>
+    <v:String x:Key="m_searchText">Search Text</v:String>
+
+
+    <v:String x:Key="m_ACBFile_none">None</v:String>
+    <v:String x:Key="m_ACBFile_0">v_etc</v:String>
+    <v:String x:Key="m_ACBFile_1">v_win</v:String>
+    <v:String x:Key="m_ACBFile_2">v_spl</v:String>
+    <v:String x:Key="m_ACBFile_3">v_ougiFinish</v:String>
+    <v:String x:Key="m_ACBFile_4">v_mainscenario</v:String>
+    <v:String x:Key="m_ACBFile_5">v_experience_ab</v:String>
+    <v:String x:Key="m_ACBFile_6">v_experience_s</v:String>
+    <v:String x:Key="m_ACBFile_7">v_boruto_Recollection</v:String>
+    <v:String x:Key="m_ACBFile_8">v_TheTale</v:String>
+    <v:String x:Key="m_ACBFile_9">v_naruto_BattleTalk</v:String>
+    <v:String x:Key="m_ACBFile_10">v_naruto_Narration</v:String>
+    <v:String x:Key="m_ACBFile_11">v_matching</v:String>
+    <v:String x:Key="m_ACBFile_12">v_boss</v:String>
+    <v:String x:Key="m_ACBFile_13">common</v:String>
+    <v:String x:Key="m_ACBFile_14">btlcmn</v:String>
+    <v:String x:Key="m_ACBFile_15">player_se_spl</v:String>
+    <v:String x:Key="m_ACBFile_16">bossSE</v:String>
+    <v:String x:Key="m_ACBFile_17">demoSE</v:String>
+    <v:String x:Key="m_DisableText">Disable text view for message</v:String>
+    <v:String x:Key="m_MessageID">Message ID</v:String>
+    <v:String x:Key="m_Test">Text</v:String>
+    <v:String x:Key="m_saveTextAndCRC32">Save Text and CRC32 Code</v:String>
+
+
+    <!--CharacodeEditor Window-->
+    <v:String x:Key="m_CharacodeEditor">Character ID Manager</v:String>
+
+    <!--PlayerSettingParam Window-->
+    <v:String x:Key="m_PlayerSettingParamEditor">Costume Editor</v:String>
+    <v:String x:Key="m_PresetID">PlayerSettingParam ID</v:String>
+    <v:String x:Key="m_Characode">Characode ID</v:String>
+    <v:String x:Key="m_CostumeID">Costume ID</v:String>
+    <v:String x:Key="m_unknown">Unknown Value</v:String>
+    <v:String x:Key="m_playerSettingParamID">PlayerSettingParam Code</v:String>
+    <v:String x:Key="m_defaultJutsu">Default Jutsu</v:String>
+    <v:String x:Key="m_defaultUltJutsu">Default Ultimate Jutsu</v:String>
+    <v:String x:Key="m_chaCharacterName">Character Name (message ID)</v:String>
+    <v:String x:Key="m_chaDescription">Description (message ID)</v:String>
+    <v:String x:Key="m_dlcID">DLC ID</v:String>
+    <v:String x:Key="m_ReferencePSPID">Main PSP ID</v:String>
+    <v:String x:Key="m_ReferenceCharacodeID">Character Level Characode ID</v:String>
+    <v:String x:Key="m_PSP_IconCostume">Character Level Costume ID</v:String>
+
+    <!--SkillCustomizeParam Editor-->
+    <v:String x:Key="m_skillCustomizeParamEditor">Ninjutsu Editor</v:String>
+    <v:String x:Key="m_jutsu1">Jutsu 1</v:String>
+    <v:String x:Key="m_jutsu2">Jutsu 2</v:String>
+    <v:String x:Key="m_jutsu3">Jutsu 3</v:String>
+    <v:String x:Key="m_jutsu4">Jutsu 4</v:String>
+    <v:String x:Key="m_jutsu5">Jutsu 5</v:String>
+    <v:String x:Key="m_jutsu6">Jutsu 6</v:String>
+    <v:String x:Key="m_awajutsu1">Awa Jutsu 1</v:String>
+    <v:String x:Key="m_awajutsu2">Awa Jutsu 2</v:String>
+    <v:String x:Key="m_prior">Priority</v:String>
+    <v:String x:Key="m_ninjutsu">Ninjutsu</v:String>
+    <v:String x:Key="m_exninjutsu">Ex Ninjutsu</v:String>
+    <v:String x:Key="m_airninjutsu">Air Ninjutsu</v:String>
+    <v:String x:Key="m_jutsuName">Name</v:String>
+    <v:String x:Key="m_jutsuUsage">Usage</v:String>
+    <v:String x:Key="m_jutsuCancel">Cancel</v:String>
+
+    <!-- SkillIndexSettingParam Editor-->
+    <v:String x:Key="m_skillIndexSettingParamEditor">Ninjutsu List Editor</v:String>
+    
+
+
+    <!--DuelPlayerParamEditor Window-->
+    <v:String x:Key="m_DuelPlayerParamEditor">Character Setting Editor</v:String>
+    <v:String x:Key="m_baseCostumeList">Base Costume List</v:String>
+    <v:String x:Key="m_awakeningCostumeList">Awakening Costume List</v:String>
+    <v:String x:Key="m_itemleft">Item Left</v:String>
+    <v:String x:Key="m_itemup">Item Up</v:String>
+    <v:String x:Key="m_itemdown">Item Down</v:String>
+    <v:String x:Key="m_itemright">Item Right</v:String>
+    <v:String x:Key="m_dppCharacode">Characode</v:String>
+    <v:String x:Key="m_dppMotionCode">Motion Code</v:String>
+    <v:String x:Key="m_items">Items</v:String>
+    <v:String x:Key="m_itemsDuration">Item Buff Duration</v:String>
+    <v:String x:Key="m_awakeCond">Awakening Condition</v:String>
+    <v:String x:Key="m_awakeHP">Awakening HP Requirement</v:String>
+    <v:String x:Key="m_awakeDebuff">Enable Awakening Debuff</v:String>
+    <v:String x:Key="m_awakeActionSpeed">Awakening Action Charge Speed</v:String>
+    <v:String x:Key="m_awakeLimitSpeed">Chakra Limit Charge Speed</v:String>
+    <v:String x:Key="m_awakeChakraCost">Awake Chakra Cost (useless)</v:String>
+    <v:String x:Key="m_awakeCondSettings">Condition Settings</v:String>
+    <v:String x:Key="m_baseState">Base State</v:String>
+    <v:String x:Key="m_awakeningState">Awakening State</v:String>
+    <v:String x:Key="m_SpeedValue">Speed</v:String>
+    <v:String x:Key="m_ChakraDashSpeedValue">Chakra Dash Speed</v:String>
+    <v:String x:Key="m_GuardDamageMultiplier">Guard Damage Multiplier</v:String>
+    <v:String x:Key="m_AirChakraDashSpeed">Air Chakra Dash Speed</v:String>
+    <v:String x:Key="m_AttackValue">Attack</v:String>
+    <v:String x:Key="m_DefenseValue">Defense</v:String>
+    <v:String x:Key="m_AssistDamage">Assist Damage</v:String>
+    <v:String x:Key="m_AwakeActionRecoverySpeed">Awake Action Recovery Speed</v:String>
+    <v:String x:Key="m_ChakraChargeSpeed">Chakra Charge Speed</v:String>
+    <v:String x:Key="m_AirDashSpeed">Air Dash Speed</v:String>
+    <v:String x:Key="m_AirDashDuration">Air Dash Duration</v:String>
+    <v:String x:Key="m_ChakraDashDuration">Chakra Dash Duration</v:String>
+    <v:String x:Key="m_ChakraDashCondition">Chakra Dash Condition</v:String>
+    <v:String x:Key="m_AwakeningCondition1">Awakening Condition 1</v:String>
+    <v:String x:Key="m_AwakeningCondition2">Awakening Condition 2</v:String>
+    <v:String x:Key="m_AwakeningJutsuController">Awakening Jutsu Controller</v:String>
+    <v:String x:Key="m_CameraHeight">Camera height</v:String>
+    <v:String x:Key="m_AwaBodyPriority">Awakening Body Priority</v:String>
+    <v:String x:Key="m_defaultAwaSkillIndex">Default Awa Skill Index</v:String>
+    <v:String x:Key="m_victoryCameraAngle">Victory Camera Angle</v:String>
+    <v:String x:Key="m_victorySettings">Victory Settings</v:String>
+    <v:String x:Key="m_assistSettings">Assist Settings</v:String>
+    <v:String x:Key="m_sprt1">Support 1</v:String>
+    <v:String x:Key="m_sprt2">Support 2</v:String>
+    <v:String x:Key="m_partner">Partner</v:String>
+    <v:String x:Key="m_enableChakraDashPrior">Enable Awa Chakra Dash Priority</v:String>
+    <v:String x:Key="m_modelCode">Model Code</v:String>
+
+    <!--PRM Editor-->
+    <v:String x:Key="m_PRMEDitor">Character Moveset Editor</v:String>
+    <v:String x:Key="m_PRMEDitor_Moveset">Moveset Settings</v:String>
+    <v:String x:Key="m_PRMEDitor_Projectile">Projectile List</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision">Collision Settings</v:String>
+    <v:String x:Key="m_PRMEDitor_Etc">Ninja Movement Settings</v:String>
+    <v:String x:Key="m_PRMEDitor_PLANM">PL__ANM Section Name</v:String>
+    <v:String x:Key="m_PRMEDitor_PLANM_Next">Next PL__ANM (optional)</v:String>
+    <v:String x:Key="m_PRMEDitor_PLANM_Previous">Previous PL__ANM</v:String>
+    <v:String x:Key="m_PRMEDitor_PLANM_DMG">PL__ANM Damage (optional)</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction">Combo Direction</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction_Neutral">Neutral</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction_All">All Directions</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction_Up">Up</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction_Down">Down</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction_Side">Side</v:String>
+    <v:String x:Key="m_PRMEDitor_PressStart">Press Start</v:String>
+    <v:String x:Key="m_PRMEDitor_PressEnd">Press End</v:String>
+    <v:String x:Key="m_PRMEDitor_Interpolation">Interpolation</v:String>
+    <v:String x:Key="m_PRMEDitor_PLANM_Type">File Type (same as in prm__load)</v:String>
+    <v:String x:Key="m_PRMEDitor_Animation">Animation</v:String>
+    <v:String x:Key="m_PRMEDitor_LinkCondition">Link Condition</v:String>
+    <v:String x:Key="m_PRMEDitor_TriggerCondition1">Trigger Condition 1</v:String>
+    <v:String x:Key="m_PRMEDitor_TriggerCondition2">Trigger Condition 2</v:String>
+    <v:String x:Key="m_PRMEDitor_EnableFaceAnim">Enable Face Animations</v:String>
+    <v:String x:Key="m_PRMEDitor_EnableCubeMan">Enable Cube Man</v:String>
+    <v:String x:Key="m_PRMEDitor_FixBackwardFacing">Fix Backward Facing</v:String>
+    <v:String x:Key="m_PRMEDitor_FixAnimationPos">Fix Animation Position</v:String>
+    <v:String x:Key="m_PRMEDitor_DisableInterpolation">Disable Interpolation for next PL_ANM</v:String>
+    <v:String x:Key="m_PRMEDitor_Function">Function</v:String>
+    <v:String x:Key="m_PRMEDitor_StringParam">String Param</v:String>
+
+    <v:String x:Key="m_PRMEDitor_FuncTiming">Function Timing</v:String>
+    <v:String x:Key="m_PRMEDitor_Param1">Param 1</v:String>
+    <v:String x:Key="m_PRMEDitor_Param2">Param 2</v:String>
+    <v:String x:Key="m_PRMEDitor_Param3">Param 3</v:String>
+    <v:String x:Key="m_PRMEDitor_Param4">Param 4</v:String>
+
+    <v:String x:Key="m_PRMEDitor_DamageCode">Damage Code</v:String>
+    <v:String x:Key="m_PRMEDitor_DamageHitEffect">Hit Effect ID</v:String>
+    <v:String x:Key="m_PRMEDitor_DamageHitSound">Hit Sound ID (exe?)</v:String>
+    <v:String x:Key="m_PRMEDitor_DamageHitCondition">Hit Condition</v:String>
+    <v:String x:Key="m_PRMEDitor_DamageAmount">Damage Amount</v:String>
+    <v:String x:Key="m_PRMEDitor_HorizontalPush">Horizontal Push</v:String>
+    <v:String x:Key="m_PRMEDitor_VerticalPush">Vertical Push</v:String>
+    <v:String x:Key="m_PRMEDitor_GuardDamage">Guard Damage Amount</v:String>
+    <v:String x:Key="m_PRMEDitor_HitAmount">Hit Amount</v:String>
+    <v:String x:Key="m_PRMEDitor_HitFrequency">Hit Frequency</v:String>
+    <v:String x:Key="m_PRMEDitor_FreezeTime">Freeze Time</v:String>
+
+    <v:String x:Key="m_PRMEDitor_SavePL_ANM">Save PL__ANM Settings</v:String>
+    <v:String x:Key="m_PRMEDitor_FunctionList">Function List</v:String>
+
+    <v:String x:Key="m_PRMEDitor_Projectile_Name">Projectile Name</v:String>
+    <v:String x:Key="m_PRMEDitor_Projectile_SkillFileName">Skill File Name</v:String>
+    <v:String x:Key="m_PRMEDitor_Projectile_SkillEntryName">Skill Entry Name</v:String>
+    <v:String x:Key="m_PRMEDitor_FunctionCopy">Copy to clipboard</v:String>
+    <v:String x:Key="m_PRMEDitor_FunctionPaste">Paste from clipboard</v:String>
+
+
+    <v:String x:Key="m_PRMEDitor_Collision_Type">Entry Type</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_Type1">Collision</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_Type2">Hurtbox</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_Type3">Tracker</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_State">State (2 - Base Mode, 3 - Awakening Mode)</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_UseBone">Enable Bone</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_BoneName">Bone Name</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_HurtboxRadius">Hurtbox Radius</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_HurtboxYPos">Hurtbox Y Pos</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_HurtboxZPos">Hurtbox Z Pos</v:String>
+
+
+    <v:String x:Key="m_PRMEDitor_Movement_FrameActionUnlock">Frame Action Unlock</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_ActionDuration">Action Duration</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_CircleVelocity">Circle Velocity</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_CircleVelocityStrength">Circle Velocity Strength</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_MovementFrequency">Movement Frequency</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_ForwardVelocity">Forward Velocity</v:String>
+
+
+    <v:String x:Key="m_PRMEDitor_VER_prm_mot">Base</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_motcmn">Base Dmg</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_awa">Awakening</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_awa2">Awakening 2 (useless)</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_skl">Ninjutsu</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_spl">Ultimate Jutsu</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_upgrade01">Additional Moveset 1</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_upgrade02">Additional Moveset 2</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_upgrade03">Additional Moveset 3</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_boss">Boss Actions</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_boss01">Boss Actions 1</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_boss02">Boss Actions 2</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_boss03">Boss Actions 3</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_boss04">Boss Actions 4</v:String>
+    <v:String x:Key="m_PRMEDitor_saveCharacode">Save Characode</v:String>
+
+    <!--StageInfoEditor Window-->
+    <v:String x:Key="m_stageInfoEditor">Stage Setting Editor</v:String>
+    <v:String x:Key="m_stageCopyProperties">Copy Properties</v:String>
+    <v:String x:Key="m_stagePasteProperties">Paste Properties</v:String>
+    <v:String x:Key="m_stageName">Stage Name</v:String>
+    <v:String x:Key="m_stageMessageID">Stage Message ID</v:String>
+    <v:String x:Key="m_stageFilter">Stage Filter</v:String>
+    <v:String x:Key="m_stageWeather">Stage Weather</v:String>
+    <v:String x:Key="m_stageWeather_0">No Weather</v:String>
+    <v:String x:Key="m_stageWeather_1">Snow</v:String>
+    <v:String x:Key="m_stageWeather_2">Rain</v:String>
+    <v:String x:Key="m_stageList">Stage List</v:String>
+    <v:String x:Key="m_stagePathList">Stage Path List</v:String>
+    <v:String x:Key="m_stageObjectList">Stage Object List</v:String>
+    <v:String x:Key="m_stageFog">Fog</v:String>
+    <v:String x:Key="m_stageMonoFilter">Mono Filter</v:String>
+    <v:String x:Key="m_stageGlares">Glares</v:String>
+    <v:String x:Key="m_stageSoftFocus">Soft Focus</v:String>
+    <v:String x:Key="m_stageSunShaft">Sun Shaft</v:String>
+    <v:String x:Key="m_stageDOF">Depth of Field</v:String>
+    <v:String x:Key="m_stageLightPoint">Light Point</v:String>
+    <v:String x:Key="m_stageColors">Colors</v:String>
+    <v:String x:Key="m_stageLensFlare">LensFlare</v:String>
+    <v:String x:Key="m_stageEntryType">Entry Type</v:String>
+    <v:String x:Key="m_stageObjectSettings">Object Settings</v:String>
+    <v:String x:Key="m_stageBreakableObjectSettings">Breakable Object Settings</v:String>
+    <v:String x:Key="m_stageBreakableWallSettings">Breakable Wall Settings</v:String>
+    <v:String x:Key="m_stageBrightnessAndContrast">Brightness and Contrast</v:String>
+    <v:String x:Key="m_stageFogStartDistance">Fog Start Distance</v:String>
+    <v:String x:Key="m_stageFogEndDistance">Fog End Distance</v:String>
+    <v:String x:Key="m_stageFogStrength">Fog Strength</v:String>
+    <v:String x:Key="m_stageFogEnable">Enable Fog</v:String>
+    <v:String x:Key="m_stageMonoBlueTone">Blue Tone</v:String>
+    <v:String x:Key="m_stageMonoRedTone">Red Tone</v:String>
+    <v:String x:Key="m_stageMonoAlpha">Alpha</v:String>
+    <v:String x:Key="m_stageEnableMonoColorFilter">Enable Mono Color Filter</v:String>
+    <v:String x:Key="m_stageGlareLuminanceThreshold">Luminance Threshold</v:String>
+    <v:String x:Key="m_stageGlareSubtracted">Subtracted Value</v:String>
+    <v:String x:Key="m_stageGlareCompositionStrength">Composition Strength</v:String>
+    <v:String x:Key="m_stageEnableGlares">Enable Glares</v:String>
+    <v:String x:Key="m_stageSoftFocusStrength">Soft Focus Strength</v:String>
+    <v:String x:Key="m_stageEnableSoftFocus">Enable Soft Focus</v:String>
+    <v:String x:Key="m_stageSunShaftStartDistance">Start Distance</v:String>
+    <v:String x:Key="m_stageSunShaftEndDistance">End Distance</v:String>
+    <v:String x:Key="m_stageSunShaftAlpha">Alpha</v:String>
+    <v:String x:Key="m_stageSunShaftBlurWidth">Blur Width</v:String>
+    <v:String x:Key="m_stageSunShaftAttenuationCoefficient">Attentuation Coefficient</v:String>
+    <v:String x:Key="m_stageSunShaftDirectionX">Direction X</v:String>
+    <v:String x:Key="m_stageSunShaftDirectionY">Direction Y</v:String>
+    <v:String x:Key="m_stageSunShaftDirectionZ">Direction Z</v:String>
+    <v:String x:Key="m_stageEnableSunShaft">Enable Sun Shaft Effect</v:String>
+    <v:String x:Key="m_stageDOFFocalLength">Focal Length</v:String>
+    <v:String x:Key="m_stageDOFShortDistance">Short Distance</v:String>
+    <v:String x:Key="m_stageDOFLongDistance">Long Distance</v:String>
+    <v:String x:Key="m_stageDOFAlpha">Alpha</v:String>
+    <v:String x:Key="m_stageDOFEnableBlur">Enable Blur</v:String>
+    <v:String x:Key="m_stageDOFEnableEdgeBlur">Enable Edge Blur</v:String>
+    <v:String x:Key="m_stageLightPointDirectionX">Direction X</v:String>
+    <v:String x:Key="m_stageLightPointDirectionY">Direction Y</v:String>
+    <v:String x:Key="m_stageLightPointDirectionZ">Direction Z</v:String>
+    <v:String x:Key="m_stagePlayerAmbientColor">Player Ambient Color</v:String>
+    <v:String x:Key="m_stageEffectAmbientColor">Effect Ambient Color</v:String>
+    <v:String x:Key="m_stageParallelAmbientColor">Parallel Ambient Color</v:String>
+    <v:String x:Key="m_stageRayCutOffShadeColor">Ray Cut-off Shade Color</v:String>
+    <v:String x:Key="m_stageRayCutOffNormalColor">Ray Cut-off Normal Color</v:String>
+    <v:String x:Key="m_stageFogColor">Fog Color</v:String>
+    <v:String x:Key="m_stageRockColor">Rock Color</v:String>
+    <v:String x:Key="m_stageShadowColor">Shadow Color</v:String>
+    <v:String x:Key="m_stageUnknownColor">Unknown Color</v:String>
+    <v:String x:Key="m_stageSunShaftColor">Sun Shaft Color</v:String>
+    <v:String x:Key="m_stageEnableShadowColor">Enable Shadow Color</v:String>
+    <v:String x:Key="m_stageLensFlare_0">Enable LensFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_1">uviolet_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_2">oprism_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_3">phalo_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_4">gpurpose_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_5">mlight_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_6">sunset_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlarePositionX">Position X</v:String>
+    <v:String x:Key="m_stageLensFlarePositionY">Position Y</v:String>
+    <v:String x:Key="m_stageLensFlarePositionZ">Position Z</v:String>
+    <v:String x:Key="m_stageLensFlareAlpha">Alpha</v:String>
+    <v:String x:Key="m_stageEnableBrightnessAndContrast">Enable Brightness and Contrast Adjustment</v:String>
+    <v:String x:Key="m_stageBrightness">Brightness Correction</v:String>
+    <v:String x:Key="m_stageContrast">Contrast Correction</v:String>
+    <v:String x:Key="m_stageObjectPath">Object Path</v:String>
+    <v:String x:Key="m_stageObjectName">Object Name</v:String>
+    <v:String x:Key="m_stageObjectPosPath">Object Position Path</v:String>
+    <v:String x:Key="m_stageObjectPosBone">Object Position Bone</v:String>
+    <v:String x:Key="m_stageObjectAnimationSpeed">Animation Speed</v:String>
+    <v:String x:Key="m_stageObjectHideCameraMesh">Hide Mesh For Camera</v:String>
+    <v:String x:Key="m_stageObjectRigidBody">Rigid Body</v:String>
+    <v:String x:Key="m_stageBreakableObjectPath">Breakable Object Path</v:String>
+    <v:String x:Key="m_stageBreakableObjectEffect_1">Breakable Object Effect 1</v:String>
+    <v:String x:Key="m_stageBreakableObjectEffect_2">Breakable Object Effect 2</v:String>
+    <v:String x:Key="m_stageBreakableObjectEffect_3">Breakable Object Effect 3</v:String>
+    <v:String x:Key="m_stageBreakableObjectAnimationSpeed_1">Breakable Object Animation Speed 1</v:String>
+    <v:String x:Key="m_stageBreakableObjectAnimationSpeed_2">Breakable Object Animation Speed 2</v:String>
+    <v:String x:Key="m_stageBreakableObjectAnimationSpeed_3">Breakable Object Animation Speed 3</v:String>
+    <v:String x:Key="m_stageBreakableWallEffect_1">Breakable Wall Effect 1</v:String>
+    <v:String x:Key="m_stageBreakableWallEffect_2">Breakable Wall Effect 2</v:String>
+    <v:String x:Key="m_stageBreakableWallEffect_3">Breakable Wall Effect 3</v:String>
+    <v:String x:Key="m_stageBreakableWallSound">Breakable Wall Sound</v:String>
+    <v:String x:Key="m_stageBreakableWallVolume">Breakable Wall Volume</v:String>
+    <v:String x:Key="m_stageBreakableWallCondition_1">Breakable Wall Condition 1</v:String>
+    <v:String x:Key="m_stageBreakableWallCondition_2">Breakable Wall Condition 2</v:String>
+
+
+    <!--CharacterSelectParamEditor Window-->
+    <v:String x:Key="m_CharacterSelectParamEditor">Character Roster Manager</v:String>
+    <v:String x:Key="m_EntryCode">Entry Code</v:String>
+    <v:String x:Key="m_pageIndex">Page (starting from 0)</v:String>
+    <v:String x:Key="m_SlotIndex">Slot (starting from 1)</v:String>
+    <v:String x:Key="m_CostumeIndex">Costume (starting from 0)</v:String>
+    <v:String x:Key="m_CostumeDescription">Costume Description (message ID)</v:String>
+    <v:String x:Key="m_CostumeName">Costume Name (message ID)</v:String>
+    <v:String x:Key="m_Accessory">Accessory</v:String>
+    <v:String x:Key="m_charselFile">Charsel file (code)</v:String>
+    <v:String x:Key="m_dictionary">Dictionary (message ID)</v:String>
+    <v:String x:Key="m_dictionaryIndex">Dictionary Index</v:String>
+    <v:String x:Key="m_CSP_SortEntries">Sort Entries</v:String>
+    
+    <v:String x:Key="m_csp_P1_NOT_SEL_X">P1 NOT SELECTED - X</v:String>
+    <v:String x:Key="m_csp_P1_NOT_SEL_Y">P1 NOT SELECTED - Y</v:String>
+    <v:String x:Key="m_csp_P1_NOT_SEL_Z">P1 NOT SELECTED - Z</v:String>
+    <v:String x:Key="m_csp_P2_NOT_SEL_X">P2 NOT SELECTED - X</v:String>
+    <v:String x:Key="m_csp_P2_NOT_SEL_Y">P2 NOT SELECTED - Y</v:String>
+    <v:String x:Key="m_csp_P2_NOT_SEL_Z">P2 NOT SELECTED - Z</v:String>
+    <v:String x:Key="m_csp_P1_SEL_X">P1 SELECTED - X</v:String>
+    <v:String x:Key="m_csp_P1_SEL_Y">P1 SELECTED - Y</v:String>
+    <v:String x:Key="m_csp_P1_SEL_Z">P1 SELECTED - Z</v:String>
+    <v:String x:Key="m_csp_P2_SEL_X">P2 SELECTED - X</v:String>
+    <v:String x:Key="m_csp_P2_SEL_Y">P2 SELECTED - Y</v:String>
+    <v:String x:Key="m_csp_P2_SEL_Z">P2 SELECTED - Z</v:String>
+    <v:String x:Key="m_csp_P1_VSLOAD_X">P1 VS LOAD - X</v:String>
+    <v:String x:Key="m_csp_P1_VSLOAD_Y">P1 VS LOAD - Y</v:String>
+    <v:String x:Key="m_csp_P1_VSLOAD_Z">P1 VS LOAD - Z</v:String>
+    <v:String x:Key="m_csp_P2_VSLOAD_X">P2 VS LOAD - X</v:String>
+    <v:String x:Key="m_csp_P2_VSLOAD_Y">P2 VS LOAD - Y</v:String>
+    <v:String x:Key="m_csp_P2_VSLOAD_Z">P2 VS LOAD - Z</v:String>
+    <v:String x:Key="m_csp_P1_NOT_SEL_ROT">P1 ROTATION NOT SELECTED</v:String>
+    <v:String x:Key="m_csp_P2_NOT_SEL_ROT">P2 ROTATION NOT SELECTED</v:String>
+    <v:String x:Key="m_csp_P1_SEL_ROT">P1 ROTATION SELECTED</v:String>
+    <v:String x:Key="m_csp_P2_SEL_ROT">P2 ROTATION SELECTED</v:String>
+    <v:String x:Key="m_csp_P1_VSLOAD_ROT">P1 ROTATION VS LOAD</v:String>
+    <v:String x:Key="m_csp_P2_VSLOAD_ROT">P2 ROTATION VS LOAD</v:String>
+
+    <v:String x:Key="m_csp_P1_LIGHT_NOT_SEL_X">P1 LIGHT NOT SELECTED - X</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_NOT_SEL_Y">P1 LIGHT NOT SELECTED - Y</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_NOT_SEL_Z">P1 LIGHT NOT SELECTED - Z</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_NOT_SEL_X">P2 LIGHT NOT SELECTED - X</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_NOT_SEL_Y">P2 LIGHT NOT SELECTED - Y</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_NOT_SEL_Z">P2 LIGHT NOT SELECTED - Z</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_SEL_X">P1 LIGHT SELECTED - X</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_SEL_Y">P1 LIGHT SELECTED - Y</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_SEL_Z">P1 LIGHT SELECTED - Z</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_SEL_X">P2 LIGHT SELECTED - X</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_SEL_Y">P2 LIGHT SELECTED - Y</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_SEL_Z">P2 LIGHT SELECTED - Z</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_VSLOAD_X">P1 LIGHT VS LOAD - X</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_VSLOAD_Y">P1 LIGHT VS LOAD - Y</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_VSLOAD_Z">P1 LIGHT VS LOAD - Z</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_VSLOAD_X">P2 LIGHT VS LOAD - X</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_VSLOAD_Y">P2 LIGHT VS LOAD - Y</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_VSLOAD_Z">P2 LIGHT VS LOAD - Z</v:String>
+
+    <v:String x:Key="m_csp_P1_CUSTOMIZATION_X">P1 CUSTOMIZATION - X</v:String>
+    <v:String x:Key="m_csp_P1_CUSTOMIZATION_Y">P1 CUSTOMIZATION - Y</v:String>
+    <v:String x:Key="m_csp_P1_CUSTOMIZATION_Z">P1 CUSTOMIZATION - Z</v:String>
+    <v:String x:Key="m_csp_P1_CUSTOMIZATION_ROT">P1 CUSTOMIZATION ROTATION</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_CUSTOMIZATION_X">P1 LIGHT CUSTOMIZATION - X</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_CUSTOMIZATION_Y">P1 LIGHT CUSTOMIZATION - Y</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_CUSTOMIZATION_Z">P1 LIGHT CUSTOMIZATION - Z</v:String>
+    <v:String x:Key="m_csp_P2_CUSTOMIZATION_X">P2 CUSTOMIZATION - X</v:String>
+    <v:String x:Key="m_csp_P2_CUSTOMIZATION_Y">P2 CUSTOMIZATION - Y</v:String>
+    <v:String x:Key="m_csp_P2_CUSTOMIZATION_Z">P2 CUSTOMIZATION - Z</v:String>
+    <v:String x:Key="m_csp_P2_CUSTOMIZATION_ROT">P2 CUSTOMIZATION ROTATION</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_X">P2 LIGHT CUSTOMIZATION - X</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_Y">P2 LIGHT CUSTOMIZATION - Y</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_Z">P2 LIGHT CUSTOMIZATION - Z</v:String>
+</ResourceDictionary>

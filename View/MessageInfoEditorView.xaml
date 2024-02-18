@@ -1,0 +1,359 @@
+﻿<Window x:Class="NSC_Toolbox.View.MessageInfoEditorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NSC_Toolbox.View"
+        xmlns:converter="clr-namespace:NSC_Toolbox.Converter"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
+        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" xmlns:Controls="clr-namespace:NSC_Toolbox.Controls"
+        mc:Ignorable="d"
+        xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
+        Width="1200" Height="800"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="{DynamicResource m_messageInfoEditor}">
+    <Window.Background>
+        <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+    </Window.Background>
+    <Window.Resources>
+        <converter:ByteToStringConverter x:Key="ByteToStringConverter" />
+        <converter:ByteToStringUTF8Converter x:Key="ByteToStringUTF8Converter" />
+    </Window.Resources>
+    <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
+        <Grid Width="1200" Height="800">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="5"/>
+            </Grid.RowDefinitions>
+            <Menu Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                <MenuItem Header="{DynamicResource m_File}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
+                    <MenuItem Command="{Binding OpenFileCommand}" Header="{DynamicResource m_OpenFile}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <MenuItem Command="{Binding SaveFileAsCommand}" Header="{DynamicResource m_SaveAsFile}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                </MenuItem>
+            </Menu>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ComboBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" SelectedIndex="{Binding SelectedMessageInfoIndex}">
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_1}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_2}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_3}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_4}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_5}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_6}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_7}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_8}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_9}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_10}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_11}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_12}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_13}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_14}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_lang_15}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+
+                </ComboBox>
+                <ListBox Grid.Row="1"  IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView"  ItemsSource="{Binding MessageInfo_preview_List, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding SelectedMessageIndex}" SelectedItem="{Binding SelectedMessageInfo}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewMouseMove="LBoxSort_OnPreviewMouseMove" Drop="LBoxSort_OnDrop" AllowDrop="True" xmlns:WpfExtensions="clr-namespace:NSC_Toolbox"   WpfExtensions:DragDropExtension.ScrollOnDragDrop="True">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel  Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center"  Text="CRC32: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
+                                <TextBlock VerticalAlignment="Center"  Text="{Binding CRC32Code, Converter={StaticResource ByteToStringConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                                <TextBlock VerticalAlignment="Center"  Text=" Text: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
+                                <TextBox IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" Text="{Binding SecondaryText, Converter={StaticResource ByteToStringUTF8Converter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <ScrollViewer  Grid.Row="1" Grid.Column="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"  Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_1}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_2}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_3}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="10" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_4}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="13" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_5}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="16" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_6}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="19" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_7}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="22" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_8}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="25" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_9}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="28" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_10}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="31" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_11}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="34" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_12}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="37" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_13}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="40" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_14}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="0"  Grid.Row="43" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_lang_15}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="2"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_MainText}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="4"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_additionalText}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <Label Grid.Column="6"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_speaker}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding MainText_lang_1_field}"  TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="1" Text="{Binding SecondaryText_lang_1_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="1" Text="{Binding Speaker_lang_1_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="4" Text="{Binding MainText_lang_2_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="4" Text="{Binding SecondaryText_lang_2_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="4" Text="{Binding Speaker_lang_2_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="7" Text="{Binding MainText_lang_3_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="7" Text="{Binding SecondaryText_lang_3_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="7" Text="{Binding Speaker_lang_3_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="10" Text="{Binding MainText_lang_4_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="10" Text="{Binding SecondaryText_lang_4_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="10" Text="{Binding Speaker_lang_4_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="13" Text="{Binding MainText_lang_5_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="13" Text="{Binding SecondaryText_lang_5_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="13" Text="{Binding Speaker_lang_5_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="16" Text="{Binding MainText_lang_6_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="16" Text="{Binding SecondaryText_lang_6_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="16" Text="{Binding Speaker_lang_6_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="19" Text="{Binding MainText_lang_7_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="19" Text="{Binding SecondaryText_lang_7_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="19" Text="{Binding Speaker_lang_7_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="22" Text="{Binding MainText_lang_8_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="22" Text="{Binding SecondaryText_lang_8_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="22" Text="{Binding Speaker_lang_8_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="25" Text="{Binding MainText_lang_9_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="25" Text="{Binding SecondaryText_lang_9_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="25" Text="{Binding Speaker_lang_9_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="28" Text="{Binding MainText_lang_10_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="28" Text="{Binding SecondaryText_lang_10_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="28" Text="{Binding Speaker_lang_10_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="31" Text="{Binding MainText_lang_11_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="31" Text="{Binding SecondaryText_lang_11_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="31" Text="{Binding Speaker_lang_11_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="34" Text="{Binding MainText_lang_12_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="34" Text="{Binding SecondaryText_lang_12_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="34" Text="{Binding Speaker_lang_12_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="37" Text="{Binding MainText_lang_13_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="37" Text="{Binding SecondaryText_lang_13_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="37" Text="{Binding Speaker_lang_13_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="40" Text="{Binding MainText_lang_14_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="40" Text="{Binding SecondaryText_lang_14_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="40" Text="{Binding Speaker_lang_14_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="2" Grid.Row="43" Text="{Binding MainText_lang_15_field}" TextWrapping="NoWrap" MaxLines="3" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="4" Grid.Row="43" Text="{Binding SecondaryText_lang_15_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <TextBox Grid.Column="6" Grid.Row="43" Text="{Binding Speaker_lang_15_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+
+                </Grid>
+            </ScrollViewer>
+            
+            <Grid Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Command="{Binding AddEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Button Command="{Binding DupEntryCommand}" Grid.Column="1" Content="{DynamicResource m_DupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Button Command="{Binding SearchCRC32EntryCommand}" Content="{DynamicResource m_searchCRC32}" Grid.Row="1"  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Button Command="{Binding SearchTextEntryCommand}" Content="{DynamicResource m_searchText}" Grid.Row="2"  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <TextBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" MaxHeight="35" Text="{Binding SearchEntry_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+
+
+            </Grid>
+            <Button Command="{Binding SaveEntryCommand}"  Grid.Row="4" Grid.Column="3" Content="{DynamicResource m_saveTextAndCRC32}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+            <Grid Grid.Row="3" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0"  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_ACBFile}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <ComboBox Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" SelectedIndex="{Binding ACBFileID_field}">
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_none}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_0}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_1}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_2}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_3}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_4}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_5}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_6}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_7}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_8}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_9}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_10}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_11}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_12}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_13}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_14}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_15}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_16}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="{StaticResource m_ACBFile_17}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                    </ComboBoxItem>
+                </ComboBox>
+                <Label Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_cue_ID}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <xctk:ShortUpDown Grid.Column="2"  Grid.Row="2" Value="{Binding CueID_field}" Increment="1" Minimum="-1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <CheckBox VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding DisableText_field}" Grid.Column="4"  Grid.Row="2" >
+                    <TextBlock Text="{StaticResource m_DisableText}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                </CheckBox>
+
+            </Grid>
+            <Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Controls:LoadingControl Grid.Row="2" Grid.Column="2" LoadingState="{Binding LoadingStatePlay}"/>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Window>
