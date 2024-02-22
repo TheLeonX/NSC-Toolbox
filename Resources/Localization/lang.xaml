@@ -45,8 +45,8 @@
         spSkillCustomizeParam.xfbin
         costumeBreakColorParam.xfbin
         cmnparam.xfbin
-        supportActionparam.bin.xfbin
-        supportSkillRecoverySpeedParam.bin.xfbin
+        supportActionparam.xfbin
+        supportSkillRecoverySpeedParam.xfbin
     Character which doesn't replace anyone doesn't need to have any of this files for export.
         
     For stages:
@@ -58,7 +58,7 @@
         duelPlayerParam.xfbin
         characterSelectParam.xfbin
         costumeBreakColorParam.xfbin
-        costumeParam.xfbin
+        costumeParam.bin.xfbin
     (appearanceAnm.xfbin isn't supported for models)
     Models for added characters are supported, but will be skipped if character doesn't exist.
     </v:String>
@@ -112,8 +112,8 @@
     <v:String x:Key="m_exportMod_pageFinish_compile">Compile Mod</v:String>
 
     <v:String x:Key="m_mainWindowTool_001">Character ID Manager (characode.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_002">Character Setting Editor (DuelPlayerParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_003">Costume Editor (playerSettingParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_002">Character Setting Editor (duelPlayerParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_003">Costume Editor (playerSettingParam.bin.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_004">Character Roster Manager (characterSelectParam.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_005">Ninjutsu Editor (skillCustomizeParam.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_006">Attach Object Editor (afterAttachObject.xfbin)</v:String>
@@ -123,9 +123,9 @@
     <v:String x:Key="m_mainWindowTool_010">Character Aura Editor (awakeAura.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_011">Ninjutsu List Editor (skillIndexSettingParam.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_012">Ultimate Jutsu Editor (spSkillCustomizeParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_013">Costume Chunk Enabler (appearanceAnm.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_013">Costume Chunk Enabler (appearanceAnm.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_014">Character File Loader Editor (****prm_load.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_015">Character Action Editor (spTypeSupportParam.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_015">Character Action Editor (spTypeSupportParam.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_016">Character Awakening Camera Editor (privateCamera.bin.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_017">Player Sound Setting Editor (cmnparam.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_018">Character Fade Effect Editor (playerDoubleEffectParam.xfbin)</v:String>
@@ -135,8 +135,8 @@
     <v:String x:Key="m_mainWindowTool_022">Stage Setting Editor (StageInfo.bin.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_023">Localization Editor (messageInfo.bin.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_024">Hit Effect Dictionary Editor (damageEff.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_025">Support Action Editor (supportActionParam.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_026">Support Skill Recovery Speed Editor (supportSkillRecoverySpeedParam.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_025">Support Action Editor (supportActionParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_026">Support Skill Recovery Speed Editor (supportSkillRecoverySpeedParam.xfbin)</v:String>
     <v:String x:Key="m_option001">Stretch Mode</v:String>
     <v:String x:Key="m_option002">Fill</v:String>
     <v:String x:Key="m_option003">Uniform</v:String>

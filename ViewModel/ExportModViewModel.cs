@@ -937,7 +937,11 @@ namespace NSC_Toolbox.ViewModel {
                             Directory.CreateDirectory(character_path + "\\ui\\max\\select");
                             Directory.CreateDirectory(character_path + "\\sound");
 
-                            var MyCharacterIni = new IniFile(@mod_path + "\\Characters\\" + character.CharacodeName + "\\character_config.ini");
+                            var MyCharacterIni = new IniFile(mod_path + "\\Characters\\" + character.CharacodeName + "\\character_config.ini");
+                            //Save Character Config
+                            MyCharacterIni.Write("Partner", "false", "ModManager");
+                            MyCharacterIni.Write("Page", "-1", "ModManager");
+                            MyCharacterIni.Write("Slot", "-1", "ModManager");
                             DuelPlayerParamEditorViewModel ExportDuelPlayerParam = new DuelPlayerParamEditorViewModel();
                             PlayerSettingParamViewModel ExportPlayerSettingParam = new PlayerSettingParamViewModel();
                             SkillCustomizeParamViewModel ExportSkillCustomizeParam = new SkillCustomizeParamViewModel();
@@ -1010,13 +1014,6 @@ namespace NSC_Toolbox.ViewModel {
                                             partner = true;
                                             break;
                                         }
-                                    }
-                                    if (!partner) {
-
-                                        //Save Character Config
-                                        MyCharacterIni.Write("Partner", "false", "ModManager");
-                                        MyCharacterIni.Write("Page", "-1", "ModManager");
-                                        MyCharacterIni.Write("Slot", "-1", "ModManager");
                                     }
                                 }
                                 //Susanoo Fix
