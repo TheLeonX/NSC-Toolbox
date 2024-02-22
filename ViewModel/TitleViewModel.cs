@@ -2,7 +2,9 @@
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NSC_Toolbox.Properties;
 using NSC_Toolbox.View;
+using Octokit;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -10,6 +12,8 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
+using Octokit;
+using System.Media;
 
 namespace NSC_Toolbox.ViewModel {
     public class TitleViewModel : INotifyPropertyChanged {
@@ -246,9 +250,30 @@ namespace NSC_Toolbox.ViewModel {
                 Properties.Settings.Default.Save();
                 BackgroundImagePath_field = Properties.Settings.Default.BackgroundImagePath;
             }
-
+            CheckGitHubNewerVersion();
         }
 
+        private async System.Threading.Tasks.Task CheckGitHubNewerVersion() {
+            //Get all releases from GitHub
+            //Source: https://octokitnet.readthedocs.io/en/latest/getting-started/
+            GitHubClient client = new GitHubClient(new ProductHeaderValue("NSC-Toolbox"));
+            IReadOnlyList<Release> releases = await client.Repository.Release.GetAll("TheLeonX", "NSC-Toolbox");
+
+            //Setup the versions
+            //Source: https://learn.microsoft.com/en-us/archive/msdn-technet-forums/7fe34424-0a53-46cb-b4b3-ab63b0823d01
+            Version latestGitHubVersion = new Version(releases[0].TagName);
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            Version localVersion = assembly.GetName().Version;
+
+            //Compare the Versions
+            //Source: https://stackoverflow.com/questions/7568147/compare-version-numbers-without-using-split-function
+            int versionComparison = localVersion.CompareTo(latestGitHubVersion);
+            if (versionComparison < 0) {
+                SystemSounds.Beep.Play();
+                ModernWpf.MessageBox.Show("There is new version of Toolbox on GitHub page.");
+            }
+
+        }
         public void SaveSettings() {
             bool restart = false;
             switch (StretchMode_field) {
@@ -314,6 +339,13 @@ namespace NSC_Toolbox.ViewModel {
         public void VisitBoosty() {
             System.Diagnostics.Process.Start(new ProcessStartInfo {
                 FileName = "https://boosty.to/theleonx/single-payment/donation/383406?share=target_link",
+                UseShellExecute = true
+            });
+
+        }
+        public void VisitGitHubPage() {
+            System.Diagnostics.Process.Start(new ProcessStartInfo {
+                FileName = "https://github.com/TheLeonX/NSC-Toolbox/releases",
                 UseShellExecute = true
             });
 
@@ -789,6 +821,16 @@ namespace NSC_Toolbox.ViewModel {
                 return _boostyCommand ??
                   (_boostyCommand = new RelayCommand(obj => {
                       VisitBoosty();
+
+                  }));
+            }
+        }
+        private RelayCommand _visitGitHubPage;
+        public RelayCommand VisitGitHubPageCommand {
+            get {
+                return _visitGitHubPage ??
+                  (_visitGitHubPage = new RelayCommand(obj => {
+                      VisitGitHubPage();
 
                   }));
             }

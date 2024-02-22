@@ -270,3 +270,4 @@ E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\refint\NSC-Toolbox.d
 E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.pdb
 E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.genruntimeconfig.cache
 E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\ref\NSC-Toolbox.dll
+E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\Octokit.dll
