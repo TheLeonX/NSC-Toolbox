@@ -12,6 +12,8 @@ namespace NSC_Toolbox {
 
         public static int HeaderSize = 0x44;
 
+
+
         public static byte[] GetHeader(byte[] fileBytes)
         {
             return BinaryReader.b_ReadByteArray(fileBytes, 0, HeaderSize);
@@ -144,6 +146,15 @@ namespace NSC_Toolbox {
         public static int GetBin2SectionSize(byte[] fileBytes)
         {
             return GetPathCount(fileBytes) * 0x10;
+        }
+        public static int GetBin2SectionSize2(byte[] fileBytes) {
+            return BinaryReader.b_byteArrayToIntRev(BinaryReader.b_ReadByteArray(fileBytes, 0x3C, 0x4)) * 0x4;
+        }
+        public static int GetFirstChunkIndex(byte[] fileBytes) {
+            int size = GetNuccSectionSize(fileBytes) + GetPathSectionSize(fileBytes) + GetNameSectionSize(fileBytes);
+            while (size % 4 != 0) size++;
+            size = size + 0x44 + GetBin1SectionSize(fileBytes) + GetBin2SectionSize2(fileBytes);
+            return size;
         }
 
         // Anim weird thing

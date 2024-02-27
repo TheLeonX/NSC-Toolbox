@@ -129,7 +129,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.1.4;component/view/exportmodview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.2.0;component/view/exportmodview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\ExportModView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

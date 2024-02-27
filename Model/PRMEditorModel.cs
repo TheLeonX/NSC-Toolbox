@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
-
 namespace NSC_Toolbox.Model {
     public class PRMEditorModel : INotifyPropertyChanged {
 
@@ -42,6 +41,57 @@ namespace NSC_Toolbox.Model {
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
+
+    public class PRMFuncSearchModel : INotifyPropertyChanged {
+
+        private int _functionID;
+        public int FunctionID {
+            get { return _functionID; }
+            set {
+                _functionID = value;
+                OnPropertyChanged("FunctionID");
+            }
+        }
+        private string _prmName;
+        public string PrmName {
+            get { return _prmName; }
+            set {
+                _prmName = value;
+                OnPropertyChanged("PrmName");
+            }
+        }
+        private string _plAnmName;
+        public string PlAnmName {
+            get { return _plAnmName; }
+            set {
+                _plAnmName = value;
+                OnPropertyChanged("PlAnmName");
+            }
+        }
+        private int _funcIndex;
+        public int FuncIndex {
+            get { return _funcIndex; }
+            set {
+                _funcIndex = value;
+                OnPropertyChanged("FuncIndex");
+            }
+        }
+        private byte[] _binaryData;
+        public byte[] BinaryData {
+            get { return _binaryData; }
+            set {
+                _binaryData = value;
+                OnPropertyChanged("BinaryData");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "") {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+    }
+
     public class PRMProjectile_Model : ICloneable, INotifyPropertyChanged {
 
         private string _projectileName;

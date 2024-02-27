@@ -578,6 +578,7 @@
     <v:String x:Key="m_modelCode">Model Code</v:String>
 
     <!--PRM Editor-->
+    <v:String x:Key="m_PRMEDitorFormat">Import File Format</v:String>
     <v:String x:Key="m_PRMEDitor">Character Moveset Editor</v:String>
     <v:String x:Key="m_PRMEDitor_Moveset">Moveset Settings</v:String>
     <v:String x:Key="m_PRMEDitor_Projectile">Projectile List</v:String>
