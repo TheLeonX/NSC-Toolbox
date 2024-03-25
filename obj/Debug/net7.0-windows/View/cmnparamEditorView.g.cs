@@ -82,7 +82,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.2.1;component/view/cmnparameditorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.2.3;component/view/cmnparameditorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\cmnparamEditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

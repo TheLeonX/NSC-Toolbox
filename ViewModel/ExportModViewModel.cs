@@ -1514,7 +1514,8 @@ namespace NSC_Toolbox.ViewModel {
                                 for (int i = 1; i < 20; i++) {
                                     ExportMessageNameList.Add(character.CharacodeName + "_bd_" + i.ToString("D2"));
                                 }
-                                ExportMessageNameList.RemoveAt(ExportMessageNameList.IndexOf(""));
+                                if (ExportMessageNameList.IndexOf("") != -1)
+                                    ExportMessageNameList.RemoveAt(ExportMessageNameList.IndexOf(""));
                                 for (int i = 0; i < ExportMessageNameList.Count; i++) {
                                     ImportMessageInfo.MessageInfo_preview_List = ImportMessageInfo.MessageInfo_List[0];
                                     for (int message = 0; message < ImportMessageInfo.MessageInfo_preview_List.Count; message++) {
