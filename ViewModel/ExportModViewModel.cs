@@ -1407,7 +1407,7 @@ namespace NSC_Toolbox.ViewModel {
                             //damageprm
                             if (damageprmExist) {
                                 if (ImportDamagePrm.DamagePrmList.Count > 1759) {
-                                    for (int i = 1759; i < ImportDamagePrm.DamagePrmList.Count; i++) {
+                                    for (int i = 1782; i < ImportDamagePrm.DamagePrmList.Count; i++) {
                                         if (ImportDamagePrm.DamagePrmList[i].Data[0] != 0) {
                                             ExportDamagePrm.DamagePrmList.Add((DamagePrmModel)ImportDamagePrm.DamagePrmList[i].Clone());
                                         }

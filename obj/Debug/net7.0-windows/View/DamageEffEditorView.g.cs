@@ -82,7 +82,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.3.1;component/view/damageeffeditorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.3.2;component/view/damageeffeditorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\DamageEffEditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
