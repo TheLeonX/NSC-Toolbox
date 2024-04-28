@@ -1592,10 +1592,8 @@ namespace NSC_Toolbox.ViewModel {
                     case 1:
 
                         MessageInfoViewModel ImportStageMessageInfo = new MessageInfoViewModel();
-                        string StageMessageInfoPath = DataWin32Path_field + "\\message";
-                        bool StageMessageInfoExist = Directory.Exists(StageMessageInfoPath);
-                        if (StageMessageInfoExist)
-                            ImportStageMessageInfo.OpenFiles(StageMessageInfoPath);
+                        if (messageInfoExist)
+                            ImportStageMessageInfo.OpenFiles(messageInfoPath);
 
                         int StageIndex = 0;
                         foreach (StageInfoModel stage in ExportStageList) {
@@ -1605,7 +1603,7 @@ namespace NSC_Toolbox.ViewModel {
 
                             ExportStage.StageInfoList.Add((StageInfoModel)stage.Clone());
                             //MessageInfo
-                            if (StageMessageInfoExist) {
+                            if (messageInfoExist) {
                                 ImportStageMessageInfo.MessageInfo_preview_List = ImportStageMessageInfo.MessageInfo_List[0];
                                 for (int message = 0; message < ImportStageMessageInfo.MessageInfo_preview_List.Count; message++) {
                                     if (BitConverter.ToString(ImportStageMessageInfo.MessageInfo_preview_List[message].CRC32Code) == BitConverter.ToString(BinaryReader.crc32(StageMessageIDList[StageIndex]))) {
@@ -1685,6 +1683,8 @@ namespace NSC_Toolbox.ViewModel {
                             ImportModelCharacode.OpenFile(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\characode.bin.xfbin");
                         if (costumeBreakParamExist)
                             ImportModelCostumeBreakParam.OpenFile(costumeBreakParamPath);
+                        if (messageInfoExist)
+                            ImportModelMessageInfo.OpenFiles(messageInfoPath);
 
                         foreach (PlayerSettingParamModel model in ExportModelList) {
 
@@ -1791,8 +1791,8 @@ namespace NSC_Toolbox.ViewModel {
                             }
                             //messageInfo
                             if (messageInfoExist) {
-                                ExportModelMessageNameList.RemoveAt(ExportModelMessageNameList.IndexOf("practice_normal"));
-                                ExportModelMessageNameList.RemoveAt(ExportModelMessageNameList.IndexOf("")); 
+                                if (ExportModelMessageNameList.Contains("practice_normal"))
+                                    ExportModelMessageNameList.RemoveAt(ExportModelMessageNameList.IndexOf("practice_normal"));
                                 for (int i = 0; i < ExportModelMessageNameList.Count; i++) {
                                     ImportModelMessageInfo.MessageInfo_preview_List = ImportModelMessageInfo.MessageInfo_List[0];
                                     for (int message = 0; message < ImportModelMessageInfo.MessageInfo_preview_List.Count; message++) {
@@ -1821,6 +1821,7 @@ namespace NSC_Toolbox.ViewModel {
                                 ExportModelCostumeBreakParam.SaveFileAs(model_path + "\\spc\\costumeBreakParam.xfbin");
                             ExportModelCostumeBreakColorParam.SaveFileAs(model_path + "\\spc\\costumeBreakColorParam.xfbin");
                             ExportModelCostumeParam.SaveFileAs(model_path + "\\rpg\\param\\costumeParam.bin.xfbin");
+                            MessageBox.Show(ExportModelMessageInfo.MessageInfo_List[0].Count.ToString());
                             if (ExportModelMessageInfo.MessageInfo_List[0].Count > 0)
                                 ExportModelMessageInfo.SaveFileAs(model_path);
 

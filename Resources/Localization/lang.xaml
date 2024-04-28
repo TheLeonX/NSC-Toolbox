@@ -138,6 +138,7 @@
     <v:String x:Key="m_mainWindowTool_024">Hit Effect Dictionary Editor (damageEff.bin.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_025">Support Action Editor (supportActionParam.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_026">Support Skill Recovery Speed Editor (supportSkillRecoverySpeedParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_027">Skill Editor</v:String>
     <v:String x:Key="m_option001">Stretch Mode</v:String>
     <v:String x:Key="m_option002">Fill</v:String>
     <v:String x:Key="m_option003">Uniform</v:String>

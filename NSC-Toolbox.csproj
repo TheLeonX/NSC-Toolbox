@@ -9,8 +9,8 @@
     <PlatformTarget>x86</PlatformTarget>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>white_TB.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.3.3</AssemblyVersion>
-    <FileVersion>1.0.3.3</FileVersion>
+    <AssemblyVersion>1.0.3.5</AssemblyVersion>
+    <FileVersion>1.0.3.5</FileVersion>
     <Authors>TheLeonX</Authors>
     <Version>1.21</Version>
   </PropertyGroup>
@@ -175,6 +175,10 @@
 
   <ItemGroup>
     <Folder Include="ModdingAPIFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XFBIN_LIB\XFBIN_LIB.csproj" />
   </ItemGroup>
 
 </Project>

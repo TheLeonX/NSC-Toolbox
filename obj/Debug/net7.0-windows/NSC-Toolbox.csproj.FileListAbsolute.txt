@@ -271,3 +271,9 @@ E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.pdb
 E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.genruntimeconfig.cache
 E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\ref\NSC-Toolbox.dll
 E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\Octokit.dll
+E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\View\SkillEditorView.g.cs
+E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\MiscUtil.dll
+E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\Newtonsoft.Json.dll
+E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\XFBIN_LIB.dll
+E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\XFBIN_LIB.pdb
+E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\View\SkillEditorView.baml

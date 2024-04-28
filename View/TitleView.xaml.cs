@@ -166,5 +166,10 @@ namespace NSC_Toolbox {
             VM.KyurutoDialogTextLoader("This tool was used for loading effects, which can be used in damageeff.bin.xfbin file.",
                 20);
         }
+        private void SkillFileEditor_MouseEnter(object sender, MouseEventArgs e) {
+            TitleViewModel VM = ((TitleViewModel)this.DataContext);
+            VM.KyurutoDialogTextLoader("This tool will help you to edit skill files for projectiles in game.",
+                20);
+        }
     }
 }

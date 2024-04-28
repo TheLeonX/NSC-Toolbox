@@ -82,7 +82,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.3.3;component/view/prmloadeditorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.3.5;component/view/prmloadeditorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\PRMLoadEditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

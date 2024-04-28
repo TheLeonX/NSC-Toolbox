@@ -73,6 +73,19 @@
           }
         }
       },
+      "JonSkeet.MiscUtil/0.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/MiscUtil.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net35/MiscUtil.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "log4net/2.0.12": {
         "type": "package",
         "dependencies": {
@@ -530,6 +543,19 @@
           },
           "lib/net5.0-windows7.0/vi-VN/ModernWpf.resources.dll": {
             "locale": "vi-VN"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -1111,6 +1137,20 @@
         "frameworkReferences": [
           "Microsoft.WindowsDesktop.App.WPF"
         ]
+      },
+      "XFBIN_LIB/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "JonSkeet.MiscUtil": "0.2.0",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "bin/placeholder/XFBIN_LIB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/XFBIN_LIB.dll": {}
+        }
       }
     }
   },
@@ -1184,6 +1224,19 @@
         "lib/net5.0/sv/Xceed.Wpf.AvalonDock.NET5.resources.dll",
         "lib/net5.0/zh-Hans/Xceed.Wpf.AvalonDock.NET5.resources.dll",
         "tools/install.ps1"
+      ]
+    },
+    "JonSkeet.MiscUtil/0.2.0": {
+      "sha512": "eKBBJzfVay4k1sQel05N1NyzmglO3TEhQ1K9nSqXxiVcpAXFF4y5sNFJQTxhQ4ZoM5+O0x0EasitbGKDL63yNA==",
+      "type": "package",
+      "path": "jonskeet.miscutil/0.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "jonskeet.miscutil.0.2.0.nupkg.sha512",
+        "jonskeet.miscutil.nuspec",
+        "lib/net35/MiscUtil.dll",
+        "lib/net35/MiscUtil.xml"
       ]
     },
     "log4net/2.0.12": {
@@ -1868,6 +1921,36 @@
         "modernwpfui.0.9.6.nupkg.sha512",
         "modernwpfui.nuspec",
         "readme.txt"
+      ]
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "NodeNetwork/6.0.0": {
@@ -3385,6 +3468,11 @@
         "wpfanimatedgif.2.0.2.nupkg.sha512",
         "wpfanimatedgif.nuspec"
       ]
+    },
+    "XFBIN_LIB/1.0.0": {
+      "type": "project",
+      "path": "../XFBIN_LIB/XFBIN_LIB.csproj",
+      "msbuildProject": "../XFBIN_LIB/XFBIN_LIB.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3396,7 +3484,8 @@
       "NodeNetworkToolkit >= 6.0.0",
       "Octokit >= 9.1.2",
       "WindowsAPICodePack-Shell >= 1.1.1",
-      "WpfAnimatedGif >= 2.0.2"
+      "WpfAnimatedGif >= 2.0.2",
+      "XFBIN_LIB >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3432,7 +3521,11 @@
       "frameworks": {
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\Desktop\\C# Projects\\XFBIN_LIB\\XFBIN_LIB.csproj": {
+              "projectPath": "E:\\Desktop\\C# Projects\\XFBIN_LIB\\XFBIN_LIB.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -3502,6 +3595,16 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"JonSkeet.MiscUtil 0.2.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net7.0-windows7.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "JonSkeet.MiscUtil",
+      "targetGraphs": [
+        "net7.0-windows7.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",
