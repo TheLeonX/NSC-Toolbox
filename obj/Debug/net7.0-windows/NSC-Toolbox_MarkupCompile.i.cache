@@ -1,5 +1,5 @@
 ﻿NSC-Toolbox
-1.0.3.5
+1.0.4.0
 
 winexe
 C#
@@ -13,7 +13,7 @@ E:\Desktop\C# Projects\NSC-Toolbox\App.xaml
 331729459388
 1-854401585
 113891856231
-233368159290
+233-569121957
 Controls\KuramaControl.xaml;Controls\LoadingControl.xaml;Resources\Localization\lang.xaml;Resources\Styles\LightStyle.xaml;View\AfterAttachObjectEditorView.xaml;View\AppearanceAnmEditorView.xaml;View\AwakeAuraEditorView.xaml;View\CharacodeEditorView.xaml;View\CharacterSelectParamEditorView.xaml;View\cmnparamEditorView.xaml;View\CostumeBreakColorParamEditorView.xaml;View\CostumeBreakParamEditorView.xaml;View\CostumeParamEditorView.xaml;View\DamageEffEditorView.xaml;View\DuelPlayerParamEditorView.xaml;View\EffectPrmEditorView.xaml;View\ExportModView.xaml;View\MessageInfoEditorView.xaml;View\PlayerDoubleEffectParamEditorView.xaml;View\PlayerIconEditorView.xaml;View\PlayerSettingParamEditorView.xaml;View\PrivateCameraEditorView.xaml;View\PRMEditorView.xaml;View\PRMLoadEditorView.xaml;View\SkillCustomizeParamEditorView.xaml;View\SkillEditorView.xaml;View\SkillIndexSettingParamEditorView.xaml;View\SpSkillCustomizeParamEditorView.xaml;View\SpTypeSupportParamEditorView.xaml;View\StageInfoEditorView.xaml;View\SupportActionParamEditorView.xaml;View\SupportSkillRecoverySpeedParamEditorView.xaml;View\TitleView.xaml;
 
 True

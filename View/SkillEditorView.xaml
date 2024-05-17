@@ -12,27 +12,46 @@
         mc:Ignorable="d"
         xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
         
-        ui:WindowHelper.UseModernWindowStyle="True"  Width="850" Height="720"
-        Title="{DynamicResource m_mainWindowTool_027}">
+        ui:WindowHelper.UseModernWindowStyle="True"  Width="1450" Height="920"
+        Title="{DynamicResource m_skillEditor_title}">
     <Window.Background>
         <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
     </Window.Background>
+    <Window.Resources>
+        <Style x:Key="TabItemText" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=TabItem}}" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=TabItem}}" Value="False">
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <converter:ColorToStringConverter x:Key="ColorToStringConverter" />
+    </Window.Resources>
     <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
-        <Grid Width="850" Height="720">
+        <Grid Width="1670" Height="1070">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="5"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="5"/>
-                <RowDefinition Height="75"/>
-                <RowDefinition Height="10"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="5"/>
             </Grid.RowDefinitions>
             <Menu Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
                 <MenuItem Header="{DynamicResource m_File}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}">
@@ -41,22 +60,743 @@
                     <MenuItem Command="{Binding SaveFileAsCommand}" Header="{DynamicResource m_SaveAsFile}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 </MenuItem>
             </Menu>
-            <Grid Grid.Row="2" Grid.Column="1">
-                <!--<ListBox IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView"  ItemsSource="{Binding playerIconList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPlayerIcon}" Grid.Row="1" Grid.Column="1" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="{Binding SelectedPlayerIconIndex}" PreviewMouseMove="LBoxSort_OnPreviewMouseMove" Drop="LBoxSort_OnDrop" AllowDrop="True" xmlns:WpfExtensions="clr-namespace:NSC_Toolbox" WpfExtensions:DragDropExtension.ScrollOnDragDrop="True">
+            <!--SkillEntries-->
+            <Grid Grid.Row="2" Grid.Column="1" Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_001}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <ListBox Grid.Row="1" IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView"  ItemsSource="{Binding SkillList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedSkill}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="{Binding SelectedSkillIndex}" PreviewMouseMove="LBoxSort_OnPreviewMouseMove" Drop="LBoxSort_OnDrop" AllowDrop="True" xmlns:WpfExtensions="clr-namespace:NSC_Toolbox" WpfExtensions:DragDropExtension.ScrollOnDragDrop="True">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="CharID: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                                <TextBlock Text="{Binding CharacodeID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                                <TextBlock Text=" CostID: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                                <TextBlock Text="{Binding CostumeID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                                <TextBlock Text=" Base Icon: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                                <TextBlock Text="{Binding BaseIcon, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                                <TextBlock Text="{Binding ChunkName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-                </ListBox>-->
+                </ListBox>
             </Grid>
+            <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.4*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <!--File Path entries-->
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Content="{DynamicResource m_skillEditor_003}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"   FontSize="10"/>
+                    <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Text="{Binding ChunkName_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <Label Grid.Row="3" Grid.ColumnSpan="3" Content="{DynamicResource m_skillEditor_002}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <ListBox Grid.Row="4" Grid.ColumnSpan="5"   IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView"  ItemsSource="{Binding FilePathList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedFilePath}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="{Binding SelectedFilePathIndex}"/>
+
+                    <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Text="{Binding FilePathTextBox_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                    <Button Command="{Binding AddFilePathCommand}" Grid.Row="6" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                        <TextBlock Text="{DynamicResource m_AddEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    </Button>
+                    <Button Command="{Binding DeleteFilePathCommand}" Grid.Row="6" Grid.Column="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                        <TextBlock Text="{DynamicResource m_DeleteEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    </Button>
+
+                </Grid>
+                <!--Action List-->
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" Content="{DynamicResource m_skillEditor_004}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                    <ListBox Grid.Row="1" Grid.ColumnSpan="2" IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView"  ItemsSource="{Binding ActionList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAction}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="{Binding SelectedActionIndex}"  PreviewMouseMove="LBoxSort_action_OnPreviewMouseMove" Drop="LBoxSort_action_OnDrop" AllowDrop="True" xmlns:WpfExtensions="clr-namespace:NSC_Toolbox" WpfExtensions:DragDropExtension.ScrollOnDragDrop="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Grid.Row="0"  Orientation="Horizontal">
+                                    <TextBlock Text="Action " FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                                    <TextBlock Text="{Binding ActionID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                                    <TextBlock Text=" - "  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                                    <TextBlock Text="{Binding ActionType, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Command="{Binding AddActionCommand}" Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                        <TextBlock Text="{DynamicResource m_AddEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    </Button>
+                    <Button Command="{Binding DeleteActionCommand}" Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                        <TextBlock Text="{DynamicResource m_DeleteEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Grid>
+            
+            
+            <!--Skill Entry Params-->
+            <Grid Grid.Row="2" Grid.Column="5" Grid.RowSpan="1" Background="{DynamicResource Toolbox_button_background_color_1}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="0.7*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_006}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <ComboBox Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="1" ItemsSource="{Binding SkillType_List}"  SelectedIndex="{Binding SkillTypeIndex_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_005}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Text="{Binding ClassName_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                <CheckBox Grid.Row="6" Grid.RowSpan="2"  Grid.Column="0"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding SkillEnableHit_field}">
+                    <TextBlock Text="{StaticResource m_skillEditor_007}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                </CheckBox>
+                <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_008}" Visibility="{Binding ProjectileHitVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <xctk:DoubleUpDown Grid.Column="2" Grid.Row="1" Value="{Binding SkillHitRadius_field}" Visibility="{Binding ProjectileHitVisibility}" Increment="1" Minimum="-1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_009}" Visibility="{Binding ProjectileHitVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <xctk:DoubleUpDown Grid.Column="2" Grid.Row="4" Value="{Binding SkillHitVerticalLimit_field}" Visibility="{Binding ProjectileHitVisibility}" Increment="1" Minimum="-1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <Label Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_010}" Visibility="{Binding ProjectileHitVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <xctk:DoubleUpDown Grid.Column="2" Grid.Row="7" Value="{Binding SkillHitHorizontalLimit_field}" Visibility="{Binding ProjectileHitVisibility}" Increment="1" Minimum="-1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <Label Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_011}" Visibility="{Binding ProjectileHitVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <xctk:DoubleUpDown Grid.Column="2" Grid.Row="10" Value="{Binding SkillHitWorldRadius_field}" Visibility="{Binding ProjectileHitVisibility}" Increment="1" Minimum="-1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_012}" Visibility="{Binding ProjectileHitVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <ComboBox Grid.Row="1" Grid.Column="4"  Grid.ColumnSpan="1" ItemsSource="{Binding PriorityCategory_List}" Visibility="{Binding ProjectileHitVisibility}" SelectedIndex="{Binding SkillHitPriorityCategoryIndex_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <Label Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_013}" Visibility="{Binding ProjectileHitVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <xctk:IntegerUpDown Grid.Column="4" Grid.Row="4" Value="{Binding SkillHitPriorityOffset_field}" Visibility="{Binding ProjectileHitVisibility}" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <Label Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_014}" Visibility="{Binding ProjectileHitVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <TextBox Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="1" Text="{Binding SkillHitDamageID_field}" Visibility="{Binding ProjectileHitVisibility}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                <Label Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_015}" Visibility="{Binding ProjectileHitVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <ComboBox Grid.Row="10" Grid.Column="4"  Grid.ColumnSpan="1" ItemsSource="{Binding Attribute_List}" Visibility="{Binding ProjectileHitVisibility}" SelectedIndex="{Binding SkillHitAttributeTypeIndex_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <Label Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_016}" Visibility="{Binding ProjectileHitVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <xctk:IntegerUpDown Grid.Column="6" Grid.Row="1" Value="{Binding SkillHitPoint_field}" Visibility="{Binding ProjectileHitVisibility}" Increment="1" Minimum="-1"  VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <Label Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_017}" Visibility="{Binding ProjectileHitVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <xctk:IntegerUpDown Grid.Column="6" Grid.Row="4" Value="{Binding SkillHitIntervalFrame_field}" Visibility="{Binding ProjectileHitVisibility}" Increment="1" Minimum="0"  VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <CheckBox Grid.Row="6" Grid.RowSpan="2"  Grid.Column="6"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding SkillRigidBody_field}" Visibility="{Binding ProjectileHitVisibility}">
+                    <TextBlock Text="{StaticResource m_skillEditor_087}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                </CheckBox>
+            </Grid>
+
+            <!--Action Params-->
+            <Grid Grid.Row="4" Grid.Column="5" Grid.RowSpan="3" Background="{DynamicResource Toolbox_button_background_color_1}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.ColumnSpan="5" Content="{DynamicResource m_skillEditor_024}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_026}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <xctk:IntegerUpDown Grid.Column="0" Grid.Row="2" Value="{Binding ActionID_field}" Increment="1" Minimum="-1"  VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                <Label Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_058}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <ComboBox Grid.Row="2" Grid.Column="2"  Grid.ColumnSpan="1" ItemsSource="{Binding ActionType_List}" SelectedIndex="{Binding ActionTypeIndex_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+
+                <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_096}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding AnimationChunkName_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                <CheckBox Grid.Row="2" Grid.RowSpan="2"  Grid.Column="5"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding KeepPreviousAnimation_field}">
+                    <TextBlock Text="{StaticResource m_skillEditor_097}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                </CheckBox>
+
+                <TabControl BorderThickness="0,2,0,0" BorderBrush="Black" Margin="5" Grid.Row="7" Grid.ColumnSpan="5" >
+                    <TabControl.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Transparent" Offset="0"/>
+                            <GradientStop Color="Transparent" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TabControl.Background>
+                    <!--Action Parameters-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Style="{StaticResource TabItemText}" VerticalAlignment="Center"  Text="{StaticResource m_skillEditor_018}" FontFamily="{StaticResource NarutoFont}"/>
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label             Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_027}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="1" Grid.Column="0" Value="{Binding Gravity_field}" MinHeight="35"  Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_028}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="4" Grid.Column="0" Value="{Binding Restitution_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_029}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="7" Grid.Column="0" Value="{Binding RandomDirection_field}" MinHeight="35" Increment="1" Maximum="360" Minimum="-360" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_030}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="10" Grid.Column="0" Value="{Binding RandomRoll_field}" MinHeight="35" Increment="1" Maximum="360" Minimum="-360" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_031}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="13" Grid.Column="0" Value="{Binding ViewingAngle_field}" MinHeight="35" Increment="1" Maximum="360" Minimum="-360" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_032}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="16" Grid.Column="0" Value="{Binding Friction_field}" MinHeight="35" Increment="1" Minimum="0" Maximum="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_036}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="19" Grid.Column="0" Value="{Binding BankStrong_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="21" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_042}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="22" Grid.Column="0" Value="{Binding Velocity_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+
+                                <Label             Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_049}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <TextBox           Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Text="{Binding HitAttach_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                <Label             Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_050}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <TextBox           Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Text="{Binding HitAttach2_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                <Label             Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_051}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <TextBox           Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="1" Text="{Binding HitAttach3_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                <Label             Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_052}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <TextBox           Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="1" Text="{Binding HitAttach4_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                <Label             Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_053}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <TextBox           Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="1" Text="{Binding HitAttach5_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                <Label             Grid.Row="15" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_047}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="16" Grid.Column="2" Value="{Binding NumLimitNum_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="18" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_037}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="19" Grid.Column="2" Value="{Binding BankRollMax_field}" MinHeight="35" Increment="1" Maximum="360" Minimum="-360" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="21" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_043}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="22" Grid.Column="2" Value="{Binding VelocityRandomize_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+
+                                <Label             Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_039}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="1" Grid.Column="4" Value="{Binding AmplitudeX_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_040}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="4" Grid.Column="4" Value="{Binding AmplitudeY_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_041}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="7" Grid.Column="4" Value="{Binding AmplitudeZ_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_033}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="10" Grid.Column="4" Value="{Binding FrequencyX_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="12" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_034}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="13" Grid.Column="4" Value="{Binding FrequencyY_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="15" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_035}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="16" Grid.Column="4" Value="{Binding FrequencyZ_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="18" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_038}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="19" Grid.Column="4" Value="{Binding BankSpring_field}" MinHeight="35" Increment="1" Minimum="0" Maximum="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label             Grid.Row="21" Grid.Column="4" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_044}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Row="22" Grid.Column="4" Value="{Binding Inductivity_field}" MinHeight="35" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+
+
+
+
+
+                                <CheckBox Grid.Row="0" Grid.RowSpan="2"  Grid.Column="6"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding CharacterHitDisable_field}">
+                                    <TextBlock Text="{StaticResource m_skillEditor_045}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                                </CheckBox>
+                                <CheckBox Grid.Row="3" Grid.RowSpan="2"  Grid.Column="6"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding WorldHitDisable_field}">
+                                    <TextBlock Text="{StaticResource m_skillEditor_046}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                                </CheckBox>
+                                <CheckBox Grid.Row="6" Grid.RowSpan="2"  Grid.Column="6"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding NumLimitEnable_field}">
+                                    <TextBlock Text="{StaticResource m_skillEditor_048}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                                </CheckBox>
+                                <CheckBox Grid.Row="9" Grid.RowSpan="2"  Grid.Column="6"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding FixedUp_field}">
+                                    <TextBlock Text="{StaticResource m_skillEditor_054}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                                </CheckBox>
+                                <CheckBox Grid.Row="12" Grid.RowSpan="2"  Grid.Column="6"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding SkillHitMine_field}">
+                                    <TextBlock Text="{StaticResource m_skillEditor_055}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                                </CheckBox>
+                                <CheckBox Grid.Row="15" Grid.RowSpan="2"  Grid.Column="6"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding AtkHitMine_field}">
+                                    <TextBlock Text="{StaticResource m_skillEditor_056}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                                </CheckBox>
+                                <Label             Grid.Row="18" Grid.Column="6" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_057}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <TextBox           Grid.Row="19" Grid.Column="6" Grid.ColumnSpan="1" Text="{Binding State_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+
+                            </Grid>
+                        </TabItem.Content>
+                    </TabItem>
+                    <!-- Action Hit Parameters-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <CheckBox VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding ActionEnableHit_field}">
+                                <TextBlock Style="{StaticResource TabItemText}" Text="{StaticResource m_skillEditor_019}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                            </CheckBox>
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_008}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Column="0" Grid.Row="1" Value="{Binding ActionHitRadius_field}" MinHeight="35"  Increment="1" Minimum="-1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_009}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Column="0" Grid.Row="4" Value="{Binding ActionHitVerticalLimit_field}" MinHeight="35" Increment="1" Minimum="-1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_010}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Column="0" Grid.Row="7" Value="{Binding ActionHitHorizontalLimit_field}" MinHeight="35"  Increment="1" Minimum="-1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_011}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:DoubleUpDown Grid.Column="0" Grid.Row="10" Value="{Binding ActionHitWorldRadius_field}" MinHeight="35" Increment="1" Minimum="-1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_014}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <TextBox Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="1" Text="{Binding ActionHitDamageID_field}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_016}" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:IntegerUpDown Grid.Column="2" Grid.Row="1" Value="{Binding ActionHitPoint_field}" MinHeight="35"  Increment="1" Minimum="-1"  VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_017}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                <xctk:IntegerUpDown Grid.Column="2" Grid.Row="4" Value="{Binding ActionHitIntervalFrame_field}" MinHeight="35"  Increment="1" Minimum="0"  VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+
+                            </Grid>
+                        </TabItem.Content>
+                    </TabItem>
+                    <!-- Action Sound Parameters-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Style="{StaticResource TabItemText}" VerticalAlignment="Center"  Text="{StaticResource m_skillEditor_020}" FontFamily="{StaticResource NarutoFont}"/>
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <ListBox Grid.Row="0" Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView" ItemsSource="{Binding SoundList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedSound}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="{Binding SelectedSoundIndex}" PreviewMouseMove="LBoxSort_sound_OnPreviewMouseMove" Drop="LBoxSort_sound_OnDrop" AllowDrop="True" xmlns:WpfExtensions="clr-namespace:NSC_Toolbox" WpfExtensions:DragDropExtension.ScrollOnDragDrop="True" >
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Sound: " Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                                                <TextBlock Text="{Binding Code, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Grid Grid.Row="0" Grid.Column="4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_059}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <TextBox Grid.Row="1" Grid.ColumnSpan="1" Text="{Binding Code_field}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                    <Label Grid.Row="3" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_060}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <xctk:IntegerUpDown Grid.Row="4" Value="{Binding Delay_field}" MinHeight="35"  Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                    <Label Grid.Row="6" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_061}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <xctk:IntegerUpDown Grid.Row="7" Value="{Binding Repeat_field}" MinHeight="35" Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                    <Label Grid.Row="9" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_062}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <xctk:IntegerUpDown Grid.Row="10" Value="{Binding Interval_field}" MinHeight="35" Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+
+                                </Grid>
+                                <Button Command="{Binding AddSoundCommand}" Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                                    <TextBlock Text="{DynamicResource m_AddEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                                </Button>
+                                <Button Command="{Binding DeleteSoundCommand}" Grid.Row="2" Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                                    <TextBlock Text="{DynamicResource m_DeleteEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                                </Button>
+                                <Button Command="{Binding SaveSoundCommand}" Grid.Row="2" Grid.Column="4"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                                    <TextBlock Text="{DynamicResource m_SaveEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                                </Button>
+                            </Grid>
+                        </TabItem.Content>
+                    </TabItem>
+                    <!-- Action Decal Parameters-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <CheckBox VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding UseDecalCheckBox_field}">
+                                <TextBlock Style="{StaticResource TabItemText}" Text="{StaticResource m_skillEditor_021}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                            </CheckBox>
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Grid.Column="4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_064}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="2"  Grid.ColumnSpan="1" ItemsSource="{Binding Decal_List}"  SelectedIndex="{Binding SkillDecalTypeIndex_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                    <Label Grid.Row="3" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_065}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Text="{Binding DecalTextureName_field}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                    <Label Grid.Row="6" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_066}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <xctk:DoubleUpDown Grid.Row="7" Value="{Binding DecalHeightScale_field}" MinHeight="35" Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                    <Label Grid.Row="9" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_067}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <xctk:DoubleUpDown Grid.Row="10" Value="{Binding DecalWidthScale_field}" MinHeight="35" Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+
+                                </Grid>
+                            </Grid>
+                        </TabItem.Content>
+                    </TabItem>
+                    <!-- Action Homing Parameters-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <CheckBox VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding UseSkillHoming_field}">
+                                <TextBlock Style="{StaticResource TabItemText}" Text="{StaticResource m_skillEditor_088}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                            </CheckBox>
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Grid.Column="4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_089}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Text="{Binding SkillHomingSkillName_field}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                    <Label Grid.Row="3" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_090}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Text="{Binding SkillHomingDummy_field}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                    <Label Grid.Row="6" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_091}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <xctk:IntegerUpDown Grid.Row="7" Value="{Binding SkillHomingActionNum_field}" MinHeight="35" Increment="1" Minimum="-1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                    <Label Grid.Row="9" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_092}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <TextBox Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="1" Text="{Binding PlayerHomingDummy_field}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                    <CheckBox Grid.Row="12" Grid.RowSpan="2"  Grid.Column="0"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding UseEnemyHoming_field}">
+                                        <TextBlock Text="{StaticResource m_skillEditor_093}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                                    </CheckBox>
+                                </Grid>
+                            </Grid>
+                        </TabItem.Content>
+                    </TabItem>
+                    <!-- Action Camera Quake Parameters-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <CheckBox VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding UseCameraQuake_field}">
+                                <TextBlock Style="{StaticResource TabItemText}" Text="{StaticResource m_skillEditor_022}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                            </CheckBox>
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Grid.Column="4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_069}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <xctk:DoubleUpDown Grid.Row="1" Value="{Binding HeightStrength_field}" MinHeight="35" Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                    <Label Grid.Row="3" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_070}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <xctk:DoubleUpDown Grid.Row="4" Value="{Binding WidthStrength_field}" MinHeight="35" Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                    <Label Grid.Row="6" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_071}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <xctk:DoubleUpDown Grid.Row="7" Value="{Binding QuakeTime_field}" MinHeight="35" Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                    <Label Grid.Row="9" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_072}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <xctk:DoubleUpDown Grid.Row="10" Value="{Binding PerReduction_field}" MinHeight="35" Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                </Grid>
+                            </Grid>
+                        </TabItem.Content>
+                    </TabItem>
+                    <!-- Action Event Parameters-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Style="{StaticResource TabItemText}" VerticalAlignment="Center"  Text="{StaticResource m_skillEditor_023}" FontFamily="{StaticResource NarutoFont}"/>
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <ListBox Grid.Row="0" Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView" ItemsSource="{Binding EventList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedEvent}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="{Binding SelectedEventIndex}" PreviewMouseMove="LBoxSort_event_OnPreviewMouseMove" Drop="LBoxSort_event_OnDrop" AllowDrop="True" xmlns:WpfExtensions="clr-namespace:NSC_Toolbox" WpfExtensions:DragDropExtension.ScrollOnDragDrop="True" >
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding EventType, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Grid Grid.Row="0" Grid.Column="4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="1.4*"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="3.5*"/>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <Grid Grid.Row="0" Grid.ColumnSpan="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2.5*"/>
+                                            <ColumnDefinition Width="5"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_081}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                        <ComboBox Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="1" ItemsSource="{Binding Event_List}" SelectedIndex="{Binding EventTypeIndex_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                        <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_082}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                        <xctk:IntegerUpDown Grid.Row="1" Grid.Column="2" Value="{Binding EventArgument_field}" MinHeight="35"  Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                        <Label Grid.Row="3" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_083}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                        <ComboBox Grid.Row="4" Grid.Column="0"  Grid.ColumnSpan="1" ItemsSource="{Binding Command_List}" SelectedIndex="{Binding EventCommandIndex_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                        <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_084}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                        <xctk:IntegerUpDown Grid.Row="4" Grid.Column="2" Value="{Binding EventCommandParameter_field}" MinHeight="35"  Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                        <CheckBox Grid.Row="6" Grid.RowSpan="2"  Grid.Column="0"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding EnableLoopCount_field}">
+                                            <TextBlock Text="{StaticResource m_skillEditor_085}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                                        </CheckBox>
+                                        <Label Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_086}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                        <xctk:IntegerUpDown Grid.Row="7" Grid.Column="2" Value="{Binding LoopCount_field}" MinHeight="35"  Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+
+                                    </Grid>
+                                    
+                                    <Label Grid.Row="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_074}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                    <ListBox Grid.Row="3" Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView" ItemsSource="{Binding EffectList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedEffect}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="{Binding SelectedEffectIndex}" >
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding EffectName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                    <Grid Grid.Row="3" Grid.Column="4">
+                                        <Grid.RowDefinitions>
+
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="5"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Row="0" Grid.ColumnSpan="3" Content="{DynamicResource m_skillEditor_075}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                        <TextBox Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding EffectName_field}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                        <Label Grid.Row="3" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_076}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                        <ComboBox Grid.Row="4" Grid.Column="0"  Grid.ColumnSpan="3" ItemsSource="{Binding ShotType_List}" SelectedIndex="{Binding ShotTypeIndex_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                        <Label Grid.Row="6" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_077}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                        <xctk:IntegerUpDown Grid.Row="7" Value="{Binding ShotParam1_field}" MinHeight="35"  Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                        <Label Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_078}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                        <xctk:IntegerUpDown Grid.Column="2" Grid.Row="7" Value="{Binding ShotParam2_field}" MinHeight="35"  Increment="1" Minimum="0" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                                        <Label Grid.Row="9" Grid.ColumnSpan="1" Content="{DynamicResource m_skillEditor_079}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                                        <TextBox Grid.Row="10" Grid.ColumnSpan="1" Text="{Binding Coord_field}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                                        <StackPanel Grid.Row="9" Grid.RowSpan="2"  Grid.Column="2"  >
+                                            <CheckBox VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding TargetDir_field}">
+                                                <TextBlock Text="{StaticResource m_skillEditor_080}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                                            </CheckBox>
+                                            <CheckBox VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding PlaneDir_field}">
+                                                <TextBlock Text="{StaticResource m_skillEditor_095}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                                            </CheckBox>
+                                        </StackPanel>
+                                        
+                                    </Grid>
+
+                                    <Button Command="{Binding AddEffectCommand}" Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                                        <TextBlock Text="{DynamicResource m_AddEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                                    </Button>
+                                    <Button Command="{Binding DeleteEffectCommand}" Grid.Row="5" Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                                        <TextBlock Text="{DynamicResource m_DeleteEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                                    </Button>
+                                    <Button Command="{Binding SaveEffectCommand}" Grid.Row="5" Grid.Column="4"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                                        <TextBlock Text="{DynamicResource m_skillEditor_100}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                                    </Button>
+                                </Grid>
+                                <Button Command="{Binding AddEventCommand}" Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                                    <TextBlock Text="{DynamicResource m_AddEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                                </Button>
+                                <Button Command="{Binding DeleteEventCommand}" Grid.Row="2" Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                                    <TextBlock Text="{DynamicResource m_DeleteEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                                </Button>
+                                <Button Command="{Binding SaveEventCommand}" Grid.Row="2" Grid.Column="4"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                                    <TextBlock Text="{DynamicResource m_skillEditor_099}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                                </Button>
+                            </Grid>
+                        </TabItem.Content>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+            
+            <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{Binding AddSkillCommand}" Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                        <TextBlock Text="{DynamicResource m_AddEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    </Button>
+                    <Button Command="{Binding SaveSkillCommand}" Grid.Row="2" Grid.Column="4"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                        <TextBlock Text="{DynamicResource m_skillEditor_101}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    </Button>
+                    <Button Command="{Binding DeleteSkillCommand}" Grid.Row="2" Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                        <TextBlock Text="{DynamicResource m_DeleteEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    </Button>
+                </Grid>
+                <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding SkillTextBox_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                <Button Command="{Binding SearchSkillCommand}" Grid.Row="0" Grid.Column="5"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                    <TextBlock Text="{DynamicResource m_SearchEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                </Button>
+                
+            </Grid>
+            <Button Command="{Binding SaveActionCommand}" Grid.Row="8" Grid.Column="5"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                <TextBlock Text="{DynamicResource m_skillEditor_103}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+            </Button>
             <!--<Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}" Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10"/>

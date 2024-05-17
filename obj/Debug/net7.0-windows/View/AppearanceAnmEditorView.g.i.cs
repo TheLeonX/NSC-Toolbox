@@ -82,7 +82,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.3.5;component/view/appearanceanmeditorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.4.0;component/view/appearanceanmeditorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\AppearanceAnmEditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

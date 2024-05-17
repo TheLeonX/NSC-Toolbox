@@ -1814,14 +1814,13 @@ namespace NSC_Toolbox.ViewModel {
                             Directory.CreateDirectory(model_path + "\\spc");
                             Directory.CreateDirectory(model_path + "\\rpg\\param");
                             Directory.CreateDirectory(model_path + "\\ui\\max\\select");
-                            ExportModelPlayerSettingParam.SaveFileAs(model_path + "\\spc\\playerSettingParam.xfbin");
+                            ExportModelPlayerSettingParam.SaveFileAs(model_path + "\\spc\\playerSettingParam.bin.xfbin");
                             ExportModelPlayerIcon.SaveFileAs(model_path + "\\spc\\player_icon.xfbin");
                             ExportModelCharacterSelectParam.SaveFileAs(model_path + "\\ui\\max\\select\\characterSelectParam.xfbin");
                             if (ExportModelCostumeBreakParam.CostumeBreakParamList.Count > 0)
                                 ExportModelCostumeBreakParam.SaveFileAs(model_path + "\\spc\\costumeBreakParam.xfbin");
                             ExportModelCostumeBreakColorParam.SaveFileAs(model_path + "\\spc\\costumeBreakColorParam.xfbin");
                             ExportModelCostumeParam.SaveFileAs(model_path + "\\rpg\\param\\costumeParam.bin.xfbin");
-                            MessageBox.Show(ExportModelMessageInfo.MessageInfo_List[0].Count.ToString());
                             if (ExportModelMessageInfo.MessageInfo_List[0].Count > 0)
                                 ExportModelMessageInfo.SaveFileAs(model_path);
 

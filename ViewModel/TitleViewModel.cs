@@ -784,7 +784,17 @@ namespace NSC_Toolbox.ViewModel {
                   }));
             }
         }
+        private RelayCommand _skillEditorRunButtonCommand;
+        public RelayCommand SkillEditorRunButtonCommand {
+            get {
+                return _skillEditorRunButtonCommand ??
+                  (_skillEditorRunButtonCommand = new RelayCommand(obj => {
+                      SkillEditorView SkillEditor = new SkillEditorView();
+                      SkillEditor.Show();
 
+                  }));
+            }
+        }
         private RelayCommand _installModdingAPICommand;
         public RelayCommand InstallModdingAPICommand {
             get {

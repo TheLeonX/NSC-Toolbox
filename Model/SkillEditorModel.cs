@@ -200,6 +200,14 @@ namespace NSC_Toolbox.Model {
                 OnPropertyChanged("HitIntervalFrame");
             }
         }
+        private bool _rigidBody;
+        public bool RigidBody {
+            get { return _rigidBody; }
+            set {
+                _rigidBody = value;
+                OnPropertyChanged("RigidBody");
+            }
+        }
         public object Clone() {
             return new SkillHitModel {
                 EnableHit = this.EnableHit,
@@ -213,6 +221,7 @@ namespace NSC_Toolbox.Model {
                 HitPoint = this.HitPoint,
                 HitIntervalFrame = this.HitIntervalFrame,
                 SkillAttributeType = this.SkillAttributeType,
+                RigidBody = this.RigidBody,
             };
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -246,12 +255,12 @@ namespace NSC_Toolbox.Model {
                 OnPropertyChanged("EventCommandParameter");
             }
         }
-        private int _playFrame;
-        public int PlayFrame {
-            get { return _playFrame; }
+        private int _eventArgument;
+        public int EventArgument {
+            get { return _eventArgument; }
             set {
-                _playFrame = value;
-                OnPropertyChanged("PlayFrame");
+                _eventArgument = value;
+                OnPropertyChanged("EventArgument");
             }
         }
         private bool _enableLoopCount;
@@ -287,7 +296,7 @@ namespace NSC_Toolbox.Model {
                 EventType = this.EventType,
                 EventCommand = this.EventCommand,
                 EventCommandParameter = this.EventCommandParameter,
-                PlayFrame = this.PlayFrame,
+                EventArgument = this.EventArgument,
                 EnableLoopCount = this.EnableLoopCount,
                 LoopCount = this.LoopCount,
                 EffectList = newEffectList
@@ -348,6 +357,14 @@ namespace NSC_Toolbox.Model {
                 OnPropertyChanged("TargetDir");
             }
         }
+        private bool _planeDir;
+        public bool PlaneDir {
+            get { return _planeDir; }
+            set {
+                _planeDir = value;
+                OnPropertyChanged("PlaneDir");
+            }
+        }
         public object Clone() {
             return new SkillEffectModel {
                 EffectName = this.EffectName,
@@ -355,7 +372,8 @@ namespace NSC_Toolbox.Model {
                 ShotParam1 = this.ShotParam1,
                 ShotParam2 = this.ShotParam2,
                 Coord = this.Coord,
-                TargetDir = this.TargetDir
+                TargetDir = this.TargetDir,
+                PlaneDir = this.PlaneDir
             };
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -565,8 +583,8 @@ namespace NSC_Toolbox.Model {
                 OnPropertyChanged("QuakeTime");
             }
         }
-        private int _perReduction;
-        public int PerReduction {
+        private float _perReduction;
+        public float PerReduction {
             get { return _perReduction; }
             set {
                 _perReduction = value;
@@ -603,14 +621,6 @@ namespace NSC_Toolbox.Model {
             set {
                 _actionType = value;
                 OnPropertyChanged("ActionType");
-            }
-        }
-        private string _comment;
-        public string Comment {
-            get { return _comment; }
-            set {
-                _comment = value;
-                OnPropertyChanged("Comment");
             }
         }
         //values
@@ -862,6 +872,14 @@ namespace NSC_Toolbox.Model {
                 OnPropertyChanged("State");
             }
         }
+        private SkillAnimationModel _animationEntry;
+        public SkillAnimationModel AnimationEntry {
+            get { return _animationEntry; }
+            set {
+                _animationEntry = value;
+                OnPropertyChanged("AnimationEntry");
+            }
+        }
         private SkillHitModel _hitEntry;
         public SkillHitModel HitEntry {
             get { return _hitEntry; }
@@ -870,6 +888,7 @@ namespace NSC_Toolbox.Model {
                 OnPropertyChanged("HitEntry");
             }
         }
+
         private ObservableCollection<SkillEventModel> _eventList;
         public ObservableCollection<SkillEventModel> EventList {
             get { return _eventList; }
@@ -922,7 +941,8 @@ namespace NSC_Toolbox.Model {
             return new SkillActionModel {
                 ActionID = this.ActionID,
                 ActionType = this.ActionType,
-                Comment = this.Comment,
+                AnimationEntry = this.AnimationEntry,
+                HitEntry = this.HitEntry,
                 Gravity = this.Gravity,
                 Restitution = this.Restitution,
                 RandomDirection = this.RandomDirection,
@@ -954,7 +974,6 @@ namespace NSC_Toolbox.Model {
                 SkillHitMine = this.SkillHitMine,
                 AtkHitMine = this.AtkHitMine,
                 State = this.State,
-                HitEntry = this.HitEntry,
                 EventList = newEventList,
                 SoundList = newSoundList,
                 SkillHomingEntry = this.SkillHomingEntry,

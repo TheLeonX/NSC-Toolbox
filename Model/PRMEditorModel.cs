@@ -405,8 +405,8 @@ namespace NSC_Toolbox.Model {
             }
         }
 
-        private int _type;
-        public int Type {
+        private UInt16 _type;
+        public UInt16 Type {
             get { return _type; }
             set {
                 _type = value;
@@ -414,8 +414,8 @@ namespace NSC_Toolbox.Model {
             }
         }
 
-        private int _direction;
-        public int Direction {
+        private UInt16 _direction;
+        public UInt16 Direction {
             get { return _direction; }
             set {
                 _direction = value;
@@ -423,8 +423,8 @@ namespace NSC_Toolbox.Model {
             }
         }
 
-        private int _interpolation;
-        public int Interpolation {
+        private UInt16 _interpolation;
+        public UInt16 Interpolation {
             get { return _interpolation; }
             set {
                 _interpolation = value;
@@ -432,24 +432,24 @@ namespace NSC_Toolbox.Model {
             }
         }
 
-        private int _trigger_condition_1;
-        public int Trigger_condition_1 {
+        private Int16 _trigger_condition_1;
+        public Int16 Trigger_condition_1 {
             get { return _trigger_condition_1; }
             set {
                 _trigger_condition_1 = value;
                 OnPropertyChanged("Trigger_condition_1");
             }
         }
-        private int _trigger_condition_2;
-        public int Trigger_condition_2 {
+        private Int16 _trigger_condition_2;
+        public Int16 Trigger_condition_2 {
             get { return _trigger_condition_2; }
             set {
                 _trigger_condition_2 = value;
                 OnPropertyChanged("Trigger_condition_2");
             }
         }
-        private int _link_condition;
-        public int Link_condition {
+        private Int16 _link_condition;
+        public Int16 Link_condition {
             get { return _link_condition; }
             set {
                 _link_condition = value;

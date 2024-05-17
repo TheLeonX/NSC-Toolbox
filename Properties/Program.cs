@@ -69,6 +69,7 @@ namespace NSC_Toolbox.Properties
             //Copy all the files & Replaces any files with the same name
             foreach (string newPath in Directory.GetFiles(sourcePath, "*.xfbin", SearchOption.AllDirectories)) {
                 if (!newPath.Contains("characode") &&
+                    !newPath.Contains("damageprm") &&
                     !newPath.Contains("duelPlayerParam") &&
                     !newPath.Contains("playerSettingParam") &&
                     !newPath.Contains("skillCustomizeParam") &&
@@ -2527,7 +2528,7 @@ namespace NSC_Toolbox.Properties
             "ME_COMBOCAMERA_OFF",
             "ME_SHAKE_CAMERA_VERTICAL",
             "ME_SHAKE_CAMERA_HORIZONTAL", //43
-            "ME_DAMAGEDIRC_SET", 
+            "ME_DAMAGEDIRC_SET",
             "ME_DAMAGEDIRC_SET_COORD",
             "ME_DAMAGEDIRC_SET_COORD_REV",
             "ME_DISPDIRC_REVERSE",
@@ -3714,6 +3715,96 @@ namespace NSC_Toolbox.Properties
             "ME_OFFSET_SCALE_THROW_EFFECT",
             "ME_NOT_NOMALCOMBO_CAMERA_DIST",
             "ME_NOT_NOMALCOMBO_CAMERA_DIST_RESET"
+        };
+
+        public static string[] ProjectilePriorityCategory = {
+            "",
+            "SKILL_PRIORITY_CATEGORY_ATTACK",
+            "SKILL_PRIORITY_CATEGORY_SYURIKEN",
+            "SKILL_PRIORITY_CATEGORY_RUSH",
+            "SKILL_PRIORITY_CATEGORY_CHAKURA_SYURIKEN",
+            "SKILL_PRIORITY_CATEGORY_TOBIDOUGU_WEAK",
+            "SKILL_PRIORITY_CATEGORY_TOBIDOUGU_NORMAL",
+            "SKILL_PRIORITY_CATEGORY_TOBIDOUGU_STRONG",
+            "SKILL_PRIPRITY_CATEGORY_ATTACK",
+            "SKILL_PRIPRITY_CATEGORY_SYURIKEN",
+            "SKILL_PRIPRITY_CATEGORY_RUSH",
+            "SKILL_PRIPRITY_CATEGORY_CHAKURA_SYURIKEN",
+            "SKILL_PRIPRITY_CATEGORY_TOBIDOUGU_WEAK",
+            "SKILL_PRIPRITY_CATEGORY_TOBIDOUGU_NORMAL",
+            "SKILL_PRIPRITY_CATEGORY_TOBIDOUGU_STRONG"
+        };
+        public static string[] ProjectileAttributeType = {
+            "",
+            "SKILL_ATTRIBUTE_TYPE_FIRE",
+            "SKILL_ATTRIBUTE_TYPE_WATER",
+            "SKILL_ATTRIBUTE_TYPE_THUNDER",
+            "SKILL_ATTRIBUTE_TYPE_WIND",
+            "SKILL_ATTRIBUTE_TYPE_SOIL",
+            "SKILL_ATTRIBUTE_TYPE_WOOD"
+        };
+        public static string[] ProjectileActionType = {
+            "",
+            "SKILL_ACTION_TYPE_NONE",
+            "SKILL_ACTION_TYPE_ARROW",
+            "SKILL_ACTION_TYPE_ELEVATOR",
+            "SKILL_ACTION_TYPE_CRAWLER",
+            "SKILL_ACTION_TYPE_SINCURVE",
+            "SKILL_ACTION_TYPE_BOUNDBALL",
+            "SKILL_ACTION_TYPE_LASER",
+            "SKILL_ACTION_TYPE_LIGHTNING_CRAWL"
+        };
+        public static string[] ProjectileType = {
+            "",
+            "SKILL_TYPE_MOTION",
+            "SKILL_TYPE_EFFECT"
+        };
+        public static string[] ProjectileShotType = {
+            "",
+            "SKILL_SHOT_TYPE_DEFAULT",
+            "SKILL_SHOT_TYPE_N_WAY_HORIZONTAL",
+            "SKILL_SHOT_TYPE_RANDOM_CREATION",
+            "SKILL_SHOT_TYPE_ENEMY_FOOT",
+            "SKILL_SHOT_TYPE_ENEMY_TARGET",
+            "SKILL_SHOT_TYPE_HIT",
+            "SKILL_SHOT_TYPE_HIT_FOOT",
+            "SKILL_SHOT_TYPE_CONST_AXIS_UP",
+            "SKILL_SHOT_TYPE_ENEMY_UP_RANDOM"
+        };
+        public static string[] ProjectileDecalType = {
+            "",
+            "SKILL_DECAL_TYPE_HIT",
+            "SKILL_DECAL_TYPE_PASS"
+        };
+        public static string[] ProjectileEventType = {
+            "",
+            "SKILL_EVENT_TYPE_FRAME_ELAPSED",
+            "SKILL_EVENT_TYPE_FRAME_FIXED",
+            "SKILL_EVENT_TYPE_ANIMATION_END",
+            "SKILL_EVENT_TYPE_HIT_CHARACTER_DEFAULT",
+            "SKILL_EVENT_TYPE_HIT_CHARACTER_GUARD",
+            "SKILL_EVENT_TYPE_HIT_CHARACTER_KAWARIMI",
+            "SKILL_EVENT_TYPE_HIT_WORLD_DEFAULT",
+            "SKILL_EVENT_TYPE_HIT_WORLD_WATER",
+            "SKILL_EVENT_TYPE_HIT_WORLD_DIRT",
+            "SKILL_EVENT_TYPE_HIT_WORLD_STONE",
+            "SKILL_EVENT_TYPE_HIT_WORLD_GRASS",
+            "SKILL_EVENT_TYPE_HIT_WORLD_IRONSAND",
+            "SKILL_EVENT_TYPE_HIT_WORLD_SNOW",
+            "SKILL_EVENT_TYPE_HIT_WORLD_WALL",
+            "SKILL_EVENT_TYPE_HIT_WORLD_PLWALL",
+            "SKILL_EVENT_TYPE_HIT_WORLD_FLOOR",
+            "SKILL_EVENT_TYPE_HIT_SKILL_DEFAULT",
+            "SKILL_EVENT_TYPE_HIT_POINT",
+            "SKILL_EVENT_TYPE_HIT_POINT_ACTION"
+        };
+        public static string[] ProjectileCommand = {
+            "",
+            "SKILL_EVENT_COMMAND_NONE",
+            "SKILL_EVENT_COMMAND_CHANGE_ACTION",
+            "SKILL_EVENT_COMMAND_KILL",
+            "SKILL_EVENT_COMMAND_STICK",
+            "SKILL_EVENT_COMMAND_SHAKE"
         };
     }
 

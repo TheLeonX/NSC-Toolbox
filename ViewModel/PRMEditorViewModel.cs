@@ -139,7 +139,7 @@ namespace NSC_Toolbox.ViewModel
                     Interpolation_field = value.Interpolation;
                     Trigger_condition_1_field = value.Trigger_condition_1;
                     Trigger_condition_2_field = value.Trigger_condition_2;
-                    Link_condition_field = value.Link_condition + 1;
+                    Link_condition_field = (short)(value.Link_condition + 1);
                     DisableInterpolation_field = value.DisableInterpolation;
                     EnableCubeMan_field = value.EnableCubeMan;
                     EnableFaceAnim_field = value.EnableFaceAnim;
@@ -452,8 +452,8 @@ namespace NSC_Toolbox.ViewModel
             }
         }
 
-        private int _type_field;
-        public int Type_field {
+        private UInt16 _type_field;
+        public UInt16 Type_field {
             get { return _type_field; }
             set {
                 _type_field = value;
@@ -461,8 +461,8 @@ namespace NSC_Toolbox.ViewModel
             }
         }
 
-        private int _direction_field;
-        public int Direction_field {
+        private UInt16 _direction_field;
+        public UInt16 Direction_field {
             get { return _direction_field; }
             set {
                 _direction_field = value;
@@ -470,8 +470,8 @@ namespace NSC_Toolbox.ViewModel
             }
         }
 
-        private int _interpolation_field;
-        public int Interpolation_field {
+        private UInt16 _interpolation_field;
+        public UInt16 Interpolation_field {
             get { return _interpolation_field; }
             set {
                 _interpolation_field = value;
@@ -479,24 +479,24 @@ namespace NSC_Toolbox.ViewModel
             }
         }
 
-        private int _trigger_condition_1_field;
-        public int Trigger_condition_1_field {
+        private Int16 _trigger_condition_1_field;
+        public Int16 Trigger_condition_1_field {
             get { return _trigger_condition_1_field; }
             set {
                 _trigger_condition_1_field = value;
                 OnPropertyChanged("Trigger_condition_1_field");
             }
         }
-        private int _trigger_condition_2_field;
-        public int Trigger_condition_2_field {
+        private Int16 _trigger_condition_2_field;
+        public Int16 Trigger_condition_2_field {
             get { return _trigger_condition_2_field; }
             set {
                 _trigger_condition_2_field = value;
                 OnPropertyChanged("Trigger_condition_2_field");
             }
         }
-        private int _link_condition_field;
-        public int Link_condition_field {
+        private Int16 _link_condition_field;
+        public Int16 Link_condition_field {
             get { return _link_condition_field; }
             set {
                 _link_condition_field = value;
@@ -1033,13 +1033,13 @@ namespace NSC_Toolbox.ViewModel
                                 planm_entry.Press_end = -1;
                             }
                             planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3C);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x44) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x46) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x50) == 1);
-                            planm_entry.Link_condition = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3E);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x40);
+                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x44) == 1);
+                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x46) == 2);
+                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x50) == 1); 
+                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
+                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
+                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x3E);
+                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x40);
                             if (planm_entry.Trigger_condition_1 == 5)
                                 planm_entry.Trigger_condition_1 = 2;
                             else if (planm_entry.Trigger_condition_1 == 3)
@@ -1141,18 +1141,18 @@ namespace NSC_Toolbox.ViewModel
                                 planm_entry.Press_end = -1;
                             }
                             planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x38) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x3A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x3C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x3E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x40) == 1);
-                            planm_entry.Link_condition = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C);
+                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x38) == 1);
+                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3A) == 2);
+                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3C) == 1);
+                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3E) == 1);
+                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x40) == 1);
+                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4A);
+                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4C);
                             if (planm_entry.Trigger_condition_1 == 5)
                                 planm_entry.Trigger_condition_1 = 2;
                             else if (planm_entry.Trigger_condition_1 == 3)
                                 planm_entry.Trigger_condition_1 = 4;
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x52);
+                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x52);
 
                             int pl_anm_previous_ind = Program.S2_SG_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x54));
                             if (pl_anm_previous_ind != -1)
@@ -1249,19 +1249,19 @@ namespace NSC_Toolbox.ViewModel
                             planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
                             planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
                             int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x40);
-                            planm_entry.Interpolation = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x44);
-                            planm_entry.Type = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x46);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x48) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x4A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x50) == 1);
-                            planm_entry.Direction = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x58);
-                            planm_entry.Link_condition = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5C);
-                            planm_entry.Press_start = (Int16)BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5E);
-                            planm_entry.Press_end = (Int16)BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x60);
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x62);
+                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x44);
+                            planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x46);
+                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48) == 1);
+                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4A) == 2);
+                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
+                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
+                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x50) == 1);
+                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58);
+                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5A);
+                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5C);
+                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5E);
+                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x60);
+                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x62);
                             planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x64);
                             planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x84);
                             planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xA4);
@@ -1339,19 +1339,19 @@ namespace NSC_Toolbox.ViewModel
                             planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
                             planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
                             int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x40);
-                            planm_entry.Interpolation = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x44);
-                            planm_entry.Type = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x46);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x48) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x4A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x50) == 1);
-                            planm_entry.Direction = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x58);
-                            planm_entry.Link_condition = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5C);
-                            planm_entry.Press_start = (Int16)BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5E);
-                            planm_entry.Press_end = (Int16)BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x60);
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x62);
+                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x44);
+                            planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x46);
+                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48) == 1);
+                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4A) == 2);
+                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
+                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
+                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x50) == 1);
+                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58);
+                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5A);
+                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5C);
+                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5E);
+                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x60);
+                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x62);
                             planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x64);
                             planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x84);
                             planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xA4);
@@ -1429,19 +1429,19 @@ namespace NSC_Toolbox.ViewModel
                             planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
                             planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
                             int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x50);
-                            planm_entry.Interpolation = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x54);
-                            planm_entry.Type = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x56);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x58) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x60) == 1);
-                            planm_entry.Direction = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x68);
-                            planm_entry.Link_condition = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x6A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x6C);
-                            planm_entry.Press_start = (Int16)BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x6E);
-                            planm_entry.Press_end = (Int16)BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x70);
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x72);
+                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x54);
+                            planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x56);
+                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58) == 1);
+                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5A) == 2);
+                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5C) == 1);
+                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5E) == 1);
+                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x60) == 1);
+                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x68);
+                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6A);
+                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6C);
+                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6E);
+                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x70);
+                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x72);
                             planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
                             planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
                             planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xB4);
@@ -1519,19 +1519,19 @@ namespace NSC_Toolbox.ViewModel
                             planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
                             planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
                             int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x50);
-                            planm_entry.Interpolation = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x54);
-                            planm_entry.Type = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x56);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x58) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x5E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x60) == 1);
-                            planm_entry.Direction = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x68);
-                            planm_entry.Link_condition = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x6A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x6C);
-                            planm_entry.Press_start = (Int16)BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x6E);
-                            planm_entry.Press_end = (Int16)BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x70);
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x72);
+                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x54);
+                            planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x56);
+                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58) == 1);
+                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5A) == 2);
+                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5C) == 1);
+                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5E) == 1);
+                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x60) == 1);
+                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x68);
+                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6A);
+                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6C);
+                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6E);
+                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x70);
+                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x72);
                             planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
                             planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
                             planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xB4);
@@ -1608,18 +1608,18 @@ namespace NSC_Toolbox.ViewModel
                                 planm_entry.Press_end = -1;
                             }
                             planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x38) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x3A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x3C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x3E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadIntFromTwoBytes(binary.BinaryData, plAnmStartOffset + 0x40) == 1);
-                            planm_entry.Link_condition = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C);
+                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x38) == 1);
+                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3A) == 2);
+                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3C) == 1);
+                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3E) == 1);
+                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x40) == 1);
+                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4A);
+                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4C);
                             if (planm_entry.Trigger_condition_1 == 5)
                                 planm_entry.Trigger_condition_1 = 2;
                             else if (planm_entry.Trigger_condition_1 == 3)
                                 planm_entry.Trigger_condition_1 = 4;
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x52);
+                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x52);
                             planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x54);
                             planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
                             planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
@@ -2056,7 +2056,7 @@ namespace NSC_Toolbox.ViewModel
                 PL_ANM_List[SelectedPL_ANMIndex].Interpolation = Interpolation_field;
                 PL_ANM_List[SelectedPL_ANMIndex].Trigger_condition_1 = Trigger_condition_1_field;
                 PL_ANM_List[SelectedPL_ANMIndex].Trigger_condition_2 = Trigger_condition_2_field;
-                PL_ANM_List[SelectedPL_ANMIndex].Link_condition = Link_condition_field - 1;
+                PL_ANM_List[SelectedPL_ANMIndex].Link_condition = (short)(Link_condition_field - 1);
                 PL_ANM_List[SelectedPL_ANMIndex].DisableInterpolation = DisableInterpolation_field;
                 PL_ANM_List[SelectedPL_ANMIndex].EnableCubeMan = EnableCubeMan_field;
                 PL_ANM_List[SelectedPL_ANMIndex].EnableFaceAnim = EnableFaceAnim_field;
@@ -2108,19 +2108,19 @@ namespace NSC_Toolbox.ViewModel
                         planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binaryData, plAnmStartOffset);
                         planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binaryData, plAnmStartOffset + 0x20);
                         int funcCount = BinaryReader.b_ReadInt(binaryData, plAnmStartOffset + 0x50);
-                        planm_entry.Interpolation = BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x54);
-                        planm_entry.Type = BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x56);
-                        planm_entry.EnableCubeMan = (BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x58) == 1);
-                        planm_entry.EnableFaceAnim = (BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x5A) == 2);
-                        planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x5C) == 1);
-                        planm_entry.DisableInterpolation = (BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x5E) == 1);
-                        planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x60) == 1);
-                        planm_entry.Direction = BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x68);
-                        planm_entry.Link_condition = BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x6A);
-                        planm_entry.Trigger_condition_1 = BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x6C);
-                        planm_entry.Press_start = (Int16)BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x6E);
-                        planm_entry.Press_end = (Int16)BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x70);
-                        planm_entry.Trigger_condition_2 = BinaryReader.b_ReadIntFromTwoBytes(binaryData, plAnmStartOffset + 0x72);
+                        planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binaryData, plAnmStartOffset + 0x54);
+                        planm_entry.Type = BinaryReader.b_ReadUInt16(binaryData, plAnmStartOffset + 0x56);
+                        planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binaryData, plAnmStartOffset + 0x58) == 1);
+                        planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binaryData, plAnmStartOffset + 0x5A) == 2);
+                        planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binaryData, plAnmStartOffset + 0x5C) == 1);
+                        planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binaryData, plAnmStartOffset + 0x5E) == 1);
+                        planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binaryData, plAnmStartOffset + 0x60) == 1);
+                        planm_entry.Direction = BinaryReader.b_ReadUInt16(binaryData, plAnmStartOffset + 0x68);
+                        planm_entry.Link_condition = BinaryReader.b_ReadInt16(binaryData, plAnmStartOffset + 0x6A);
+                        planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binaryData, plAnmStartOffset + 0x6C);
+                        planm_entry.Press_start = BinaryReader.b_ReadInt16(binaryData, plAnmStartOffset + 0x6E);
+                        planm_entry.Press_end = BinaryReader.b_ReadInt16(binaryData, plAnmStartOffset + 0x70);
+                        planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binaryData, plAnmStartOffset + 0x72);
                         planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binaryData, plAnmStartOffset + 0x74);
                         planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binaryData, plAnmStartOffset + 0x94);
                         planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binaryData, plAnmStartOffset + 0xB4);
