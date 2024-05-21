@@ -1614,14 +1614,20 @@ namespace NSC_Toolbox.ViewModel {
         }
 
         public void AddFilePath() {
-            if (SelectedSkill is not null && FilePathTextBox_field != "" && FilePathTextBox_field is not null) {
-                if (SelectedSkill.FilePathList.Count != 3) {
+            if (SelectedSkill is not null) {
+                if (FilePathTextBox_field != "" && FilePathTextBox_field is not null){
+                    if (SelectedSkill.FilePathList.Count != 3) {
 
-                    SelectedSkill.FilePathList.Add(FilePathTextBox_field);
-                    SelectedFilePathIndex = SelectedSkill.FilePathList.Count - 1;
-                } else {
+                        SelectedSkill.FilePathList.Add(FilePathTextBox_field);
+                        SelectedFilePathIndex = SelectedSkill.FilePathList.Count - 1;
+                    } else {
 
-                    ModernWpf.MessageBox.Show("You can use maximum 3 paths for files!");
+                        ModernWpf.MessageBox.Show("You can use maximum 3 paths for files!");
+                    }
+                }
+                else {
+
+                    ModernWpf.MessageBox.Show("Write file path in field!");
                 }
             } else {
                 ModernWpf.MessageBox.Show("Select skill entry!");

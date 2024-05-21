@@ -62,6 +62,14 @@ namespace NSC_Toolbox.ViewModel {
                 OnPropertyChanged("PageModType_model_visibility");
             }
         }
+        private Visibility _pageModType_resources_visibility;
+        public Visibility PageModType_resources_visibility {
+            get { return _pageModType_resources_visibility; }
+            set {
+                _pageModType_resources_visibility = value;
+                OnPropertyChanged("PageModType_resources_visibility");
+            }
+        }
         private Visibility _pageModType_accessory_visibility;
         public Visibility PageModType_accessory_visibility {
             get { return _pageModType_accessory_visibility; }
@@ -110,6 +118,7 @@ namespace NSC_Toolbox.ViewModel {
                         PageModType_stage_visibility = Visibility.Hidden;
                         PageModType_model_visibility = Visibility.Hidden;
                         PageModType_accessory_visibility = Visibility.Hidden;
+                        PageModType_resources_visibility = Visibility.Hidden;
                         string characodePath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\characode.bin.xfbin";
 
                         if (File.Exists(DataWin32Path_field + "\\spc\\characode.bin.xfbin")) {
@@ -125,6 +134,7 @@ namespace NSC_Toolbox.ViewModel {
                         PageModType_stage_visibility = Visibility.Visible;
                         PageModType_model_visibility = Visibility.Hidden;
                         PageModType_accessory_visibility = Visibility.Hidden;
+                        PageModType_resources_visibility = Visibility.Hidden;
 
                         string stageInfoPath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\StageInfo.bin.xfbin";
 
@@ -141,6 +151,7 @@ namespace NSC_Toolbox.ViewModel {
                         PageModType_stage_visibility = Visibility.Hidden;
                         PageModType_model_visibility = Visibility.Visible;
                         PageModType_accessory_visibility = Visibility.Hidden;
+                        PageModType_resources_visibility = Visibility.Hidden;
 
                         string playerSettingParamPath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\playerSettingParam.bin.xfbin";
 
@@ -152,11 +163,20 @@ namespace NSC_Toolbox.ViewModel {
                         ImportModelList = PSPEditor.PlayerSettingParamList;
 
                         break;
-                    //Accessory export
+                    //Resources export
                     case 3:
                         PageModType_character_visibility = Visibility.Hidden;
                         PageModType_stage_visibility = Visibility.Hidden;
                         PageModType_model_visibility = Visibility.Hidden;
+                        PageModType_resources_visibility = Visibility.Visible;
+                        PageModType_accessory_visibility = Visibility.Hidden;
+                        break;
+                    //Accessory export
+                    case 4:
+                        PageModType_character_visibility = Visibility.Hidden;
+                        PageModType_stage_visibility = Visibility.Hidden;
+                        PageModType_model_visibility = Visibility.Hidden;
+                        PageModType_resources_visibility = Visibility.Hidden;
                         PageModType_accessory_visibility = Visibility.Visible;
                         break;
                 }
@@ -1055,11 +1075,11 @@ namespace NSC_Toolbox.ViewModel {
                                     }
                                 }
                                 if (ExportDuelPlayerParam.DuelPlayerParamList.Count < 1 && !ReplaceCharacter) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing duelPlayerParam entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing duelPlayerParam entry.");
                                     continue;
                                 }
                             } else if (!duelPlayerParamExist && !ReplaceCharacter) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing duelPlayerParam file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing duelPlayerParam file.");
                                 continue;
                             }
                             //playerSettingParam
@@ -1132,11 +1152,11 @@ namespace NSC_Toolbox.ViewModel {
                                     }
                                 }
                                 if (ExportSkillCustomizeParam.SkillCustomizeParamList.Count < 1 && !ReplaceCharacter && !partner) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing skillCustomizeParam entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing skillCustomizeParam entry.");
                                     continue;
                                 }
                             } else if (!playerSettingParamExist && !ReplaceCharacter && !partner) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing skillCustomizeParam file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing skillCustomizeParam file.");
                                 continue;
                             }
                             //spSkillCustomizeParam
@@ -1159,11 +1179,11 @@ namespace NSC_Toolbox.ViewModel {
                                     }
                                 }
                                 if (ExportSpSkillCustomizeParam.SpSkillCustomizeParamList.Count < 1 && !ReplaceCharacter && !partner) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing spSkillCustomizeParam entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing spSkillCustomizeParam entry.");
                                     continue;
                                 }
                             } else if (!SpSkillCustomizeParamExist && !ReplaceCharacter && !partner) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing spSkillCustomizeParam file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing spSkillCustomizeParam file.");
                                 continue;
                             }
                             //skillIndexSettingParam
@@ -1176,11 +1196,11 @@ namespace NSC_Toolbox.ViewModel {
                                     }
                                 }
                                 if (ExportSkillIndexParam.SkillIndexSettingParamList.Count < 1 && !ReplaceCharacter && !partner) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing skillIndexSettingParam entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing skillIndexSettingParam entry.");
                                     continue;
                                 }
                             } else if (!SpSkillCustomizeParamExist && !ReplaceCharacter && !partner) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing skillIndexSettingParam file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing skillIndexSettingParam file.");
                                 continue;
                             }
 
@@ -1194,11 +1214,11 @@ namespace NSC_Toolbox.ViewModel {
                                     }
                                 }
                                 if (ExportSupportSkillRecoverySpeed.SupportSkillRecoverySpeedParamList.Count < 1 && !ReplaceCharacter && !partner) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing supportSkillRecoverySpeedParam entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing supportSkillRecoverySpeedParam entry.");
                                     continue;
                                 }
                             } else if (!supportSkillRecoverySpeedParamExist && !ReplaceCharacter && !partner) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing supportSkillRecoverySpeedParam file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing supportSkillRecoverySpeedParam file.");
                                 continue;
                             }
                             //privateCamera
@@ -1211,11 +1231,11 @@ namespace NSC_Toolbox.ViewModel {
                                     }
                                 }
                                 if (ExportPrivateCamera.PrivateCameraList.Count < 1 && !ReplaceCharacter) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing privateCamera entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing privateCamera entry.");
                                     continue;
                                 }
                             } else if (!privateCameraExist && !ReplaceCharacter) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing privateCamera file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing privateCamera file.");
                                 continue;
                             }
 
@@ -1239,11 +1259,11 @@ namespace NSC_Toolbox.ViewModel {
 
                                 }
                                 if (ExportCharacterSelectParam.CharacterSelectParamList.Count < 1 && !ReplaceCharacter && !partner) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing characterSelectParam entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing characterSelectParam entry.");
                                     continue;
                                 }
                             } else if (!characterSelectParamExist && !ReplaceCharacter && !partner) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing characterSelectParam file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing characterSelectParam file.");
                                 continue;
                             }
                             //costumeBreakColorParam
@@ -1259,11 +1279,11 @@ namespace NSC_Toolbox.ViewModel {
 
                                 }
                                 if (ExportCostumeBreakColorParam.CostumeBreakColorParamList.Count < 1 && !ReplaceCharacter && !partner) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeBreakColorParam entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeBreakColorParam entry.");
                                     continue;
                                 }
                             } else if (!characterSelectParamExist && !ReplaceCharacter && !partner) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeBreakColorParam file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeBreakColorParam file.");
                                 continue;
                             }
                             //costumeParam
@@ -1282,11 +1302,11 @@ namespace NSC_Toolbox.ViewModel {
 
                                 }
                                 if (ExportCostumeParam.CostumeParamList.Count < 1 && !ReplaceCharacter && !partner) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeParam entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeParam entry.");
                                     continue;
                                 }
                             } else if (!costumeParamExist && !ReplaceCharacter && !partner) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeParam file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeParam file.");
                                 continue;
                             }
                             //player_icon
@@ -1298,11 +1318,11 @@ namespace NSC_Toolbox.ViewModel {
                                     }
                                 }
                                 if (ExportPlayerIcon.playerIconList.Count < 1 && !ReplaceCharacter && !partner) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing player_icon entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing player_icon entry.");
                                     continue;
                                 }
                             } else if (!playerIconExist && !ReplaceCharacter && !partner) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing player_icon file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing player_icon file.");
                                 continue;
                             }
                             //cmnparam
@@ -1315,11 +1335,11 @@ namespace NSC_Toolbox.ViewModel {
                                     }
                                 }
                                 if (ExportCmnParam.PlayerSndList.Count < 1 && !ReplaceCharacter) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing cmnparam player_snd entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing cmnparam player_snd entry.");
                                     continue;
                                 }
                             } else if (!cmnparamExist && !ReplaceCharacter) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing cmnparam player_snd file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing cmnparam player_snd file.");
                                 continue;
                             }
                             //supportActionParam
@@ -1332,11 +1352,11 @@ namespace NSC_Toolbox.ViewModel {
                                     }
                                 }
                                 if (ExportSupportActionParam.SupportActionParamList.Count < 1 && !ReplaceCharacter && !partner) {
-                                    ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing supportActionParam entry.");
+                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing supportActionParam entry.");
                                     continue;
                                 }
                             } else if (!playerSettingParamExist && !ReplaceCharacter && !partner) {
-                                ModernWpf.MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing supportActionParam file.");
+                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing supportActionParam file.");
                                 continue;
                             }
                             /*----------------------------------------NOT REQUIRED FILES--------------------------------------*/
@@ -1720,7 +1740,7 @@ namespace NSC_Toolbox.ViewModel {
                                 }
                             }
                             if (basemodel_code == "") {
-                                ModernWpf.MessageBox.Show("Model with PlayerSettingParam code " + model.PSP_code + " wasn't exported, cuz it has missing duelPlayerParam entry.");
+                                MessageBox.Show("Model with PlayerSettingParam code " + model.PSP_code + " wasn't exported, cuz it has missing duelPlayerParam entry.");
                                 continue;
                             }
                             //player_icon
@@ -1731,7 +1751,7 @@ namespace NSC_Toolbox.ViewModel {
                                 }
                             }
                             if (ExportModelPlayerIcon.playerIconList.Count < 1) {
-                                ModernWpf.MessageBox.Show("Model with PlayerSettingParam code " + model.PSP_code + " wasn't exported, cuz it has missing player_icon entry.");
+                                MessageBox.Show("Model with PlayerSettingParam code " + model.PSP_code + " wasn't exported, cuz it has missing player_icon entry.");
                                 continue;
                             }
                             //characterSelectParam
@@ -1746,7 +1766,7 @@ namespace NSC_Toolbox.ViewModel {
                                 }
                             }
                             if (ExportModelCharacterSelectParam.CharacterSelectParamList.Count < 1) {
-                                ModernWpf.MessageBox.Show("Model with PlayerSettingParam code " + model.PSP_code + " wasn't exported, cuz it has missing characterSelectParam entry.");
+                                MessageBox.Show("Model with PlayerSettingParam code " + model.PSP_code + " wasn't exported, cuz it has missing characterSelectParam entry.");
                                 continue;
                             }
                             //costumeParam
@@ -1760,7 +1780,7 @@ namespace NSC_Toolbox.ViewModel {
                                 }
                             }
                             if (ExportModelCostumeParam.CostumeParamList.Count < 1) {
-                                ModernWpf.MessageBox.Show("Model with PlayerSettingParam code " + model.PSP_code + " wasn't exported, cuz it has missing costumeParam entry.");
+                                MessageBox.Show("Model with PlayerSettingParam code " + model.PSP_code + " wasn't exported, cuz it has missing costumeParam entry.");
                                 continue;
                             }
                             //costumeBreakColorParam
@@ -1832,11 +1852,16 @@ namespace NSC_Toolbox.ViewModel {
                         }
 
                         break;
-                    //Compile Accessory Mod
+                    //Compile Resource Mod
                     case 3:
+                        break;
+                    //Compile Accessory Mod
+                    case 4:
                         break;
                 }
                 IsModCompiled = true;
+                if (File.Exists(mod_path + ".nsc"))
+                    File.Delete(mod_path + ".nsc");
                 ZipFile.CreateFromDirectory(mod_path, mod_path + ".nsc");
                 Directory.Delete(mod_path, true);
             }
