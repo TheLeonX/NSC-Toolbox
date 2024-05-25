@@ -11,6 +11,8 @@ using System.Windows.Data;
 using System.Windows;
 using Microsoft.Win32;
 using System.IO;
+using NSC_Toolbox.Properties;
+using DynamicData.Kernel;
 
 namespace NSC_Toolbox.ViewModel
 {
@@ -23,6 +25,8 @@ namespace NSC_Toolbox.ViewModel
                 OnPropertyChanged("SearchIndex_field");
             }
         }
+
+        public ObservableCollection<string> Sound_List { get; set; }
 
         private Visibility _loadingStatePlay;
         public Visibility LoadingStatePlay {
@@ -153,6 +157,14 @@ namespace NSC_Toolbox.ViewModel
                 OnPropertyChanged("Unk3_field");
             }
         }
+        private int _unk4;
+        public int Unk4_field {
+            get { return _unk4; }
+            set {
+                _unk4 = value;
+                OnPropertyChanged("Unk4_field");
+            }
+        }
         private bool _enableNearestGroundPos;
         public bool EnableNearestGroundPos_field {
             get { return _enableNearestGroundPos; }
@@ -180,9 +192,17 @@ namespace NSC_Toolbox.ViewModel
                     PlAnmEntry4_field = value.PlAnmEntry4;
                     PlAnmEntry5_field = value.PlAnmEntry5;
                     HeightSpawn_field = value.HeightSpawn;
-                    SoundID_field = value.SoundID;
+
+                    if (value.SoundID >= -1 && value.SoundID < 84)
+                        SoundID_field = value.SoundID + 1;
+                    else if (value.SoundID >= 0x1000 && value.SoundID < 0x139B)
+                        SoundID_field = value.SoundID + 1 + 84 - 0x1000;
+                    else if (value.SoundID >= 0x2000 && value.SoundID < 0x2080)
+                        SoundID_field = value.SoundID + 1 + 84 + 0x39B - 0x2000;
+
                     Unk2_field = value.Unk2;
                     Unk3_field = value.Unk3;
+                    Unk4_field = value.Unk4;
                     EnableNearestGroundPos_field = value.EnableNearestGroundPos;
                 }
 
@@ -203,6 +223,10 @@ namespace NSC_Toolbox.ViewModel
         public PlayerDoubleEffectParamViewModel() {
 
             LoadingStatePlay = Visibility.Hidden;
+            Sound_List = new ObservableCollection<string>();
+            for (int x = 0; x < Program.FULL_NSC_SFX_LIST.Length; x++) {
+                Sound_List.Add(Program.FULL_NSC_SFX_LIST[x]);
+            }
             PlayerDoubleEffectParamList = new ObservableCollection<PlayerDoubleEffectParamModel>();
             filePath = "";
         }
@@ -249,6 +273,7 @@ namespace NSC_Toolbox.ViewModel
                         PlayerDoubleEffectParamEntry.AttachBone = BinaryReader.b_ReadString(fileByte, ptr + 0x08 + BinaryReader.b_ReadInt(fileByte, ptr + 0x08));
                         PlayerDoubleEffectParamEntry.PlayAtStart = BinaryReader.b_ReadInt(fileByte, ptr + 0x10) == 1;
                         PlayerDoubleEffectParamEntry.PlayAtEnd = BinaryReader.b_ReadInt(fileByte, ptr + 0x14) == 1;
+                        PlayerDoubleEffectParamEntry.Unk4 = BinaryReader.b_ReadInt(fileByte, ptr + 0x18);
                         PlayerDoubleEffectParamEntry.Unk1 = BinaryReader.b_ReadInt(fileByte, ptr + 0x1C);
                         PlayerDoubleEffectParamEntry.EffectEntry = BinaryReader.b_ReadString(fileByte, ptr + 0x20 + BinaryReader.b_ReadInt(fileByte, ptr + 0x20));
                         PlayerDoubleEffectParamEntry.PlAnmEntry1 = BinaryReader.b_ReadString(fileByte, ptr + 0x28 + BinaryReader.b_ReadInt(fileByte, ptr + 0x28));
@@ -261,9 +286,7 @@ namespace NSC_Toolbox.ViewModel
                         PlayerDoubleEffectParamEntry.Unk2 = BinaryReader.b_ReadFloat(fileByte, ptr + 0x5C);
                         PlayerDoubleEffectParamEntry.Unk3 = BinaryReader.b_ReadInt(fileByte, ptr + 0x60) == 1;
                         PlayerDoubleEffectParamEntry.EnableNearestGroundPos = BinaryReader.b_ReadInt(fileByte, ptr + 0x70) == 1;
-
-                        if (BinaryReader.b_ReadInt(fileByte, ptr + 0x18) == 2)
-                            PlayerDoubleEffectParamList.Add(PlayerDoubleEffectParamEntry);
+                        PlayerDoubleEffectParamList.Add(PlayerDoubleEffectParamEntry);
                     }
                 } else {
                     ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
@@ -294,9 +317,17 @@ namespace NSC_Toolbox.ViewModel
                 SelectedPlayerDoubleEffectParam.PlAnmEntry4 = PlAnmEntry4_field;
                 SelectedPlayerDoubleEffectParam.PlAnmEntry5 = PlAnmEntry5_field;
                 SelectedPlayerDoubleEffectParam.HeightSpawn = HeightSpawn_field;
-                SelectedPlayerDoubleEffectParam.SoundID = SoundID_field;
+
+                if (SoundID_field >= 0 && SoundID_field < 85)
+                    SelectedPlayerDoubleEffectParam.SoundID = SoundID_field - 1;
+                else if(SoundID_field >= 85 && SoundID_field < 85+0x39B)
+                    SelectedPlayerDoubleEffectParam.SoundID = SoundID_field - 1 - 84 + 0x1000;
+                else if (SoundID_field >= 85 + 0x39B && SoundID_field < 85 + 0x39B+ 0x80)
+                    SelectedPlayerDoubleEffectParam.SoundID = SoundID_field - 1 - 84 - 0x39B + 0x2000;
+
                 SelectedPlayerDoubleEffectParam.Unk2 = Unk2_field;
                 SelectedPlayerDoubleEffectParam.Unk3 = Unk3_field;
+                SelectedPlayerDoubleEffectParam.Unk4 = Unk4_field;
                 SelectedPlayerDoubleEffectParam.EnableNearestGroundPos = EnableNearestGroundPos_field;
                 ModernWpf.MessageBox.Show("Entry was saved!");
             } else {
@@ -354,6 +385,7 @@ namespace NSC_Toolbox.ViewModel
                 PlayerDoubleEffectParamEntry.SoundID = -1;
                 PlayerDoubleEffectParamEntry.Unk2 = 0;
                 PlayerDoubleEffectParamEntry.Unk3 = false;
+                PlayerDoubleEffectParamEntry.Unk4 = 2;
                 PlayerDoubleEffectParamEntry.EnableNearestGroundPos = false;
             }
             PlayerDoubleEffectParamList.Add(PlayerDoubleEffectParamEntry);
@@ -577,7 +609,7 @@ namespace NSC_Toolbox.ViewModel
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(PlayerDoubleEffectParamList[x].CharacodeID), ptr);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(PlayerDoubleEffectParamList[x].PlayAtStart), ptr + 0x10);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(PlayerDoubleEffectParamList[x].PlayAtEnd), ptr + 0x14);
-                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(2), ptr + 0x18);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(PlayerDoubleEffectParamList[x].Unk4), ptr + 0x18);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(PlayerDoubleEffectParamList[x].Unk1), ptr + 0x1C);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes((float)1), ptr + 0x50);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(PlayerDoubleEffectParamList[x].HeightSpawn), ptr + 0x54);

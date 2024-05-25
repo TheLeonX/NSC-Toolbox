@@ -136,15 +136,17 @@ namespace NSC_Toolbox {
         }
 
         public static byte[] b_ReplaceString(byte[] actual, string str, int Index, int Count = -1) {
+            string new_str = str ?? "";
+
             if (Count == -1) {
-                for (int x2 = 0; x2 < str.Length; x2++) {
-                    actual[Index + x2] = (byte)str[x2];
+                for (int x2 = 0; x2 < new_str.Length; x2++) {
+                    actual[Index + x2] = (byte)new_str[x2];
                 }
             } else {
                 for (int x = 0; x < Count; x++) {
-                    if (str is not null) {
-                        if (str.Length > x) {
-                            actual[Index + x] = (byte)str[x];
+                    if (new_str is not null) {
+                        if (new_str.Length > x) {
+                            actual[Index + x] = (byte)new_str[x];
                         } else {
                             actual[Index + x] = 0;
                         }
@@ -155,17 +157,18 @@ namespace NSC_Toolbox {
             return actual;
         }
         public static string b_ReplaceRealString(string actual, string str, int Index, int Count = -1) {
+            string new_str = str ?? "";
             char[] test = actual.ToCharArray();
             string output = "";
             if (Count == -1) {
-                for (int x2 = 0; x2 < str.Length; x2++) {
+                for (int x2 = 0; x2 < new_str.Length; x2++) {
 
-                    test[Index + x2] = str[x2];
+                    test[Index + x2] = new_str[x2];
                 }
             } else {
                 for (int x = 0; x < Count; x++) {
-                    if (str.Length > x) {
-                        test[Index + x] = str[x];
+                    if (new_str.Length > x) {
+                        test[Index + x] = new_str[x];
                     } else {
                         test[Index + x] = '\0';
                     }
@@ -307,27 +310,29 @@ namespace NSC_Toolbox {
             return found;
         }
         public static int b_FindString(string actual, string str, int index = 0) {
-            int actualIndex = index;
-            char[] actualString = new char[str.Length];
-            bool f = false;
-
             int foundIndex = -1;
+            if (str != null) {
+                int actualIndex = index;
+                char[] actualString = new char[str.Length];
+                bool f = false;
 
-            for (int a = actualIndex; a < (actual.Length - str.Length); a++) {
-                f = true;
+                
+                for (int a = actualIndex; a < (actual.Length - str.Length); a++) {
+                    f = true;
 
-                for (int x = 0; x < str.Length; x++) {
-                    actualString[x] = actual[a + x];
+                    for (int x = 0; x < str.Length; x++) {
+                        actualString[x] = actual[a + x];
 
-                    if (actualString[x] != str[x]) {
-                        x = str.Length;
-                        f = false;
+                        if (actualString[x] != str[x]) {
+                            x = str.Length;
+                            f = false;
+                        }
                     }
-                }
 
-                if (f) {
-                    foundIndex = a;
-                    a = actual.Length;
+                    if (f) {
+                        foundIndex = a;
+                        a = actual.Length;
+                    }
                 }
             }
 
@@ -365,15 +370,20 @@ namespace NSC_Toolbox {
         }
 
         public static byte[] crc32(string str) {
-            byte[] bytestream = Encoding.ASCII.GetBytes(str);
-            var crc_table = crc32_table();
-            var crc = 0xffffffff;
-            foreach (var bytes in bytestream) {
-                var lookup_index = (crc >> 24 ^ bytes) & 0xff;
-                crc = (uint)((crc & 0xffffff) << 8 ^ crc_table[(int)lookup_index]);
+            if (str != null) {
+                byte[] bytestream = Encoding.ASCII.GetBytes(str);
+                var crc_table = crc32_table();
+                var crc = 0xffffffff;
+                foreach (var bytes in bytestream) {
+                    var lookup_index = (crc >> 24 ^ bytes) & 0xff;
+                    crc = (uint)((crc & 0xffffff) << 8 ^ crc_table[(int)lookup_index]);
+                }
+                crc = ~crc & 0xffffffff;
+                return BitConverter.GetBytes(crc);
+            } else {
+                return new byte[4] { 0xFF, 0xFF, 0xFF, 0xFF };
             }
-            crc = ~crc & 0xffffffff;
-            return BitConverter.GetBytes(crc);
+           
         }
     }
 }

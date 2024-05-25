@@ -14,7 +14,14 @@ using System.IO;
 
 namespace NSC_Toolbox.ViewModel {
     public class DamagePrmViewModel : INotifyPropertyChanged {
-        public ObservableCollection<DamagePrmModel> DamagePrmList { get; set; }
+        private ObservableCollection<DamagePrmModel> _damagePrmList;
+        public ObservableCollection<DamagePrmModel> DamagePrmList {
+            get { return _damagePrmList; }
+            set {
+                _damagePrmList = value;
+                OnPropertyChanged("DamagePrmList");
+            }
+        }
         public byte[] fileByte;
         public string filePath;
         public DamagePrmViewModel() {
@@ -26,6 +33,7 @@ namespace NSC_Toolbox.ViewModel {
         public void Clear() {
             DamagePrmList.Clear();
         }
+
 
         public void OpenFile(string basepath = "") {
             Clear();

@@ -997,717 +997,762 @@ namespace NSC_Toolbox.ViewModel
         }
 
         public void GenerateVer(PRMEditorModel binary) {
-            try {
-                PRMVER_Model VerEntry = new PRMVER_Model();
-                VerEntry.BinName = binary.BinName;
-                VerEntry.BinPath = binary.BinPath;
-                PRMVER_Model AwaVerEntry = new PRMVER_Model();
-                AwaVerEntry.BinName = binary.BinName.Replace("mot", "awa");
-                AwaVerEntry.BinPath = binary.BinPath.Replace("mot", "awa");
+            PRMVER_Model VerEntry = new PRMVER_Model();
+            VerEntry.BinName = binary.BinName;
+            VerEntry.BinPath = binary.BinPath;
+            PRMVER_Model AwaVerEntry = new PRMVER_Model();
+            AwaVerEntry.BinName = binary.BinName.Replace("mot", "awa");
+            AwaVerEntry.BinPath = binary.BinPath.Replace("mot", "awa");
 
-                if (VerList.Count == 0)
-                    CharacodeBinName_field = binary.BinName.Substring(0, binary.BinName.IndexOf("prm_"));
-                ObservableCollection<PRM_PL_ANM_Model> plAnmList = new ObservableCollection<PRM_PL_ANM_Model>();
-                ObservableCollection<PRM_PL_ANM_Model> plAnmAwaList = new ObservableCollection<PRM_PL_ANM_Model>();
-                int planm_entryCount = BinaryReader.b_ReadInt(binary.BinaryData, 0x34);
-                int plAnmStartOffset = 0x44;
-                switch (SelectedFormatIndex) {
-                    //Storm 1
-                    case 0:
-                        for (int i = 0; i < planm_entryCount; i++) {
-                            PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
-                            int pl_anm_ind = Program.S1_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x10));
-                            if (pl_anm_ind != -1)
-                                planm_entry.PL_ANM_current_name = Program.S1_PL_ANM_NAMES[pl_anm_ind];
-                            else {
-                                planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x10);
-                            }
-                            planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                            int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x30);
-                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x34);
-                            planm_entry.Type = 3;
-                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x38);
-                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x3A);
-                            if (planm_entry.Press_start == 0 && planm_entry.Press_end == 0) {
-                                planm_entry.Press_start = -1;
-                                planm_entry.Press_end = -1;
-                            }
-                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3C);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x44) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x46) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x50) == 1); 
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
-                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x3E);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x40);
-                            if (planm_entry.Trigger_condition_1 == 5)
-                                planm_entry.Trigger_condition_1 = 2;
-                            else if (planm_entry.Trigger_condition_1 == 3)
-                                planm_entry.Trigger_condition_1 = 4;
-                            planm_entry.Trigger_condition_2 = 0;
-                            short pl_anm_prev_index = (short)(BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x36) + 2);
-                            planm_entry.PL_ANM_previous_name = Program.S1_PL_ANM_NAMES[pl_anm_prev_index];
-                            planm_entry.PL_ANM_next_name = "";
-                            planm_entry.PL_ANM_DMG_name = "";
-                            plAnmStartOffset += 0x58;
-                            planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
-                            for (int func = 0; func < funcCount; func++) {
-                                bool dmg_entry = false;
-                                PRMFunction_Model funcEntry = new PRMFunction_Model();
-                                funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x04);
-                                int s1_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 2);
-                                funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset);
-                                funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_S1_LIST[s1_func_index]);
-                                //funcEntry.FunctionID = (Int16)s1_func_index;
-                                funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
-                                funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
-                                funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
-                                funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
-
-                                if (s1_func_index == 0x09 ||
-                                    s1_func_index == 0x30 ||
-                                    s1_func_index == 0x32 ||
-                                    s1_func_index == 0x34 ||
-                                    s1_func_index == 0x36 ||
-                                    s1_func_index == 0x3B) {
-                                    dmg_entry = true;
-                                }
-                                if (dmg_entry) {
-                                    funcEntry.DamageCode = Program.S1_DAMAGE_NAMES[BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x40)];
-                                    funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x42);
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = 0;
-                                    funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x50);
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x4C);
-                                    funcEntry.DamageVerticalPush = 1;
-                                    funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x54);
-                                    funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x56);
-                                    funcEntry.DamageFreezeTime = 0;
-
-                                    plAnmStartOffset += 0x60;
-                                } else {
-                                    funcEntry.DamageCode = "";
-                                    funcEntry.DamageHitEffectID = 0;
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = 0;
-                                    funcEntry.DamageAmount = 1;
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = 1;
-                                    funcEntry.DamageVerticalPush = 1;
-                                    funcEntry.DamageHitAmount = 1;
-                                    funcEntry.DamageHitFrequency = 0;
-                                    funcEntry.DamageFreezeTime = 0;
-                                    plAnmStartOffset += 0x40;
-
-                                }
-                                if (funcEntry.FunctionID > -1
-                                     && funcEntry.FunctionID != 0x8D
-                                     && funcEntry.FunctionID != 0x8E
-                                     && funcEntry.FunctionID != 0x8F
-                                     && funcEntry.FunctionID != 0x90
-                                     && funcEntry.FunctionID != 0x91
-                                     && funcEntry.FunctionID != 0x92
-                                     && funcEntry.FunctionID != 0x93) {
-                                    planm_entry.FunctionList.Add(funcEntry);
-                                }
-                            }
-                            if (planm_entry.PL_ANM_current_name != "" && planm_entry.PL_ANM_current_name != "DUMMY" && planm_entry.PL_ANM_animation != "DUMMY")
-                                plAnmList.Add(planm_entry);
+            if (VerList.Count == 0)
+                CharacodeBinName_field = binary.BinName.Substring(0, binary.BinName.IndexOf("prm_"));
+            ObservableCollection<PRM_PL_ANM_Model> plAnmList = new ObservableCollection<PRM_PL_ANM_Model>();
+            ObservableCollection<PRM_PL_ANM_Model> plAnmAwaList = new ObservableCollection<PRM_PL_ANM_Model>();
+            int planm_entryCount = BinaryReader.b_ReadInt(binary.BinaryData, 0x34);
+            int plAnmStartOffset = 0x44;
+            switch (SelectedFormatIndex) {
+                //Storm 1
+                case 0:
+                    for (int i = 0; i < planm_entryCount; i++) {
+                        PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
+                        int pl_anm_ind = Program.S1_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x10));
+                        if (pl_anm_ind != -1)
+                            planm_entry.PL_ANM_current_name = Program.S1_PL_ANM_NAMES[pl_anm_ind];
+                        else {
+                            planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x10);
                         }
-                        break;
-                    //Storm 2 & Gen
-                    case 1:
-                        for (int i = 0; i < planm_entryCount; i++) {
-                            PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
-                            bool awake_ver = false;
-                            if (BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset).Contains("AWA_") && !BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset).Contains("AWA_CUTIN"))
-                                awake_ver = true;
+                        planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                        int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x30);
+                        planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x34);
+                        planm_entry.Type = 3;
+                        planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x38);
+                        planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x3A);
+                        if (planm_entry.Press_start == 0 && planm_entry.Press_end == 0) {
+                            planm_entry.Press_start = -1;
+                            planm_entry.Press_end = -1;
+                        }
+                        planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3C);
+                        planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x44) == 1);
+                        planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x46) == 2);
+                        planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x50) == 1); 
+                        planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
+                        planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
+                        planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x3E);
+                        planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x40);
+                        if (planm_entry.Trigger_condition_1 == 5)
+                            planm_entry.Trigger_condition_1 = 2;
+                        else if (planm_entry.Trigger_condition_1 == 3)
+                            planm_entry.Trigger_condition_1 = 4;
+                        planm_entry.Trigger_condition_2 = 0;
+                        short pl_anm_prev_index = (short)(BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x36) + 2);
+                        planm_entry.PL_ANM_previous_name = Program.S1_PL_ANM_NAMES[pl_anm_prev_index];
+                        planm_entry.PL_ANM_next_name = "";
+                        planm_entry.PL_ANM_DMG_name = "";
+                        plAnmStartOffset += 0x58;
+                        planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
+                        for (int func = 0; func < funcCount; func++) {
+                            bool dmg_entry = false;
+                            PRMFunction_Model funcEntry = new PRMFunction_Model();
+                            funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x04);
+                            int s1_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 2);
+                            funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset);
+                            funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_S1_LIST[s1_func_index]);
+                            //funcEntry.FunctionID = (Int16)s1_func_index;
+                            funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
+                            funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
+                            funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
+                            funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
 
-                            int pl_anm_ind = Program.S2_SG_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset));
-                            if (pl_anm_ind != -1)
-                                planm_entry.PL_ANM_current_name = Program.S2_SG_PL_ANM_NAMES[pl_anm_ind];
-                            else {
-                                planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                            if (s1_func_index == 0x09 ||
+                                s1_func_index == 0x30 ||
+                                s1_func_index == 0x32 ||
+                                s1_func_index == 0x34 ||
+                                s1_func_index == 0x36 ||
+                                s1_func_index == 0x3B) {
+                                dmg_entry = true;
                             }
-                            planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
-                            int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x30);
-                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x34);
-                            planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x36);
-                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4E);
-                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x50);
-                            if (planm_entry.Press_start == 0 && planm_entry.Press_end == 0) {
-                                planm_entry.Press_start = -1;
-                                planm_entry.Press_end = -1;
-                            }
-                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x38) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x40) == 1);
-                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4C);
-                            if (planm_entry.Trigger_condition_1 == 5)
-                                planm_entry.Trigger_condition_1 = 2;
-                            else if (planm_entry.Trigger_condition_1 == 3)
-                                planm_entry.Trigger_condition_1 = 4;
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x52);
+                            if (dmg_entry) {
+                                funcEntry.DamageCode = Program.S1_DAMAGE_NAMES[BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x40)];
+                                funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x42);
 
-                            int pl_anm_previous_ind = Program.S2_SG_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x54));
-                            if (pl_anm_previous_ind != -1)
-                                planm_entry.PL_ANM_previous_name = Program.S2_SG_PL_ANM_NAMES[pl_anm_previous_ind];
-                            else {
-                                planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x54);
-                            }
-                            int pl_anm_next_ind = Program.S2_SG_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74));
-                            if (pl_anm_next_ind != -1)
-                                planm_entry.PL_ANM_next_name = Program.S2_SG_PL_ANM_NAMES[pl_anm_next_ind];
-                            else {
-                                planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
-                            }
+                                
 
-                            int pl_anm_DMG_ind = Program.S2_SG_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94));
-                            if (pl_anm_DMG_ind != -1)
-                                planm_entry.PL_ANM_DMG_name = Program.S2_SG_PL_ANM_NAMES[pl_anm_DMG_ind];
-                            else {
-                                planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
-                            }
-                            plAnmStartOffset += 0xB4;
-                            planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
-                            for (int func = 0; func < funcCount; func++) {
-                                string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x40);
-                                bool dmg_entry = false;
-                                if ((check_dmg.Contains("SKL_ATK") ||
-                                    check_dmg.Contains("ID") ||
-                                    check_dmg.Contains("SPSKILL_END") ||
-                                    check_dmg.Contains("DMG") ||
-                                    check_dmg.Contains("DAMAGE")) &&
-                                    !check_dmg.Contains("PL_ANM")) {
-                                    dmg_entry = true;
+                                string sound_code = Program.S1_SFX_SWING_LIST[funcEntry.DamageHitEffectID];
+                                int index_sound = Program.NSC_SFX_LIST.IndexOf(sound_code);
+                                if (index_sound != -1) {
+                                    PRMFunction_Model soundFuncEntry = new PRMFunction_Model();
+                                    soundFuncEntry.FunctionTiming = funcEntry.FunctionTiming;
+                                    soundFuncEntry.FunctionID = 0x8E;
+                                    soundFuncEntry.FunctionParam1 = (Int16)index_sound;
+                                    planm_entry.FunctionList.Add(soundFuncEntry);
                                 }
-                                PRMFunction_Model funcEntry = new PRMFunction_Model();
-                                funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                                int s2_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
-                                funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
-                                funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_S2_SG_LIST[s2_func_index]);
-                                funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
-                                funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
-                                funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
-                                funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
-                                if (dmg_entry) {
-                                    funcEntry.DamageCode = check_dmg;
-                                    funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x82);
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x84);
-                                    funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x90);
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x8C);
-                                    funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x9C);
-                                    funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x94);
-                                    funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x96);
-                                    funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x98);
 
-                                    plAnmStartOffset += 0xA0;
-                                } else {
-                                    funcEntry.DamageCode = "";
-                                    funcEntry.DamageHitEffectID = 0;
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = 0;
-                                    funcEntry.DamageAmount = 1;
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = 1;
-                                    funcEntry.DamageVerticalPush = 1;
-                                    funcEntry.DamageHitAmount = 1;
-                                    funcEntry.DamageHitFrequency = 0;
-                                    funcEntry.DamageFreezeTime = 0;
-                                    plAnmStartOffset += 0x40;
 
-                                }
-                                if (funcEntry.FunctionID > -1
+
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = 0;
+                                funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x50);
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x4C);
+                                funcEntry.DamageVerticalPush = 1;
+                                funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x54);
+                                funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x56);
+                                funcEntry.DamageFreezeTime = 0;
+
+                                plAnmStartOffset += 0x60;
+                            } else {
+                                funcEntry.DamageCode = "";
+                                funcEntry.DamageHitEffectID = 0;
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = 0;
+                                funcEntry.DamageAmount = 1;
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = 1;
+                                funcEntry.DamageVerticalPush = 1;
+                                funcEntry.DamageHitAmount = 1;
+                                funcEntry.DamageHitFrequency = 0;
+                                funcEntry.DamageFreezeTime = 0;
+                                plAnmStartOffset += 0x40;
+
+                            }
+                            if (funcEntry.FunctionID == 0x8E) {
+                                string sound_code = Program.S1_SFX_LIST[funcEntry.FunctionParam1];
+                                int new_param1 = Program.NSC_SFX_LIST.IndexOf(sound_code);
+
+                                if (new_param1 == -1)
+                                    continue;
+                                funcEntry.FunctionParam1 = (Int16)new_param1;
+                            }
+
+
+                            if (funcEntry.FunctionID > -1
                                     && funcEntry.FunctionID != 0x8D
-                                    && funcEntry.FunctionID != 0x8E
+                                    //&& funcEntry.FunctionID != 0x8E
                                     && funcEntry.FunctionID != 0x8F
                                     && funcEntry.FunctionID != 0x90
                                     && funcEntry.FunctionID != 0x91
                                     && funcEntry.FunctionID != 0x92
                                     && funcEntry.FunctionID != 0x93) {
-                                        planm_entry.FunctionList.Add(funcEntry);
-                                }
-                            }
-                            if (planm_entry.PL_ANM_current_name != "" && planm_entry.PL_ANM_current_name != "EMPTY" && planm_entry.PL_ANM_animation != "EMPTY" && !awake_ver)
-                                plAnmList.Add(planm_entry);
-                            else if (planm_entry.PL_ANM_current_name != "" && planm_entry.PL_ANM_current_name != "EMPTY" && planm_entry.PL_ANM_animation != "EMPTY" && awake_ver) {
-                                plAnmAwaList.Add(planm_entry);
-                            }
-                        }
-                        break;
-                    //Storm 3 Old
-                    case 2:
-                        for (int i = 0; i < planm_entryCount; i++) {
-                            PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
-                            planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                            planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
-                            int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x40);
-                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x44);
-                            planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x46);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x50) == 1);
-                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58);
-                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5C);
-                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5E);
-                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x60);
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x62);
-                            planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x64);
-                            planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x84);
-                            planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xA4);
-                            plAnmStartOffset += 0xC4;
-                            planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
-                            for (int func = 0; func < funcCount; func++) {
-                                string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x40);
-                                bool dmg_entry = false;
-                                if ((check_dmg.Contains("SKL_ATK") ||
-                                    check_dmg.Contains("ID") ||
-                                    check_dmg.Contains("SPSKILL_END") ||
-                                    check_dmg.Contains("DMG") ||
-                                    check_dmg.Contains("DAMAGE")) &&
-                                    !check_dmg.Contains("PL_ANM")) {
-                                    dmg_entry = true;
-                                }
-
-                                PRMFunction_Model funcEntry = new PRMFunction_Model();
-                                funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                                int s3_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
-                                funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
-                                funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_REV_S3_LIST[s3_func_index]);
-                                funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
-                                funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
-                                funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
-                                funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
-                                if (dmg_entry) {
-                                    funcEntry.DamageCode = check_dmg;
-                                    funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x82);
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x84);
-                                    funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x90);
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x8C);
-                                    funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x9C);
-                                    funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x94);
-                                    funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x96);
-                                    funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x98);
-
-                                    plAnmStartOffset += 0xA0;
-                                } else {
-                                    funcEntry.DamageCode = "";
-                                    funcEntry.DamageHitEffectID = 0;
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = 0;
-                                    funcEntry.DamageAmount = 1;
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = 1;
-                                    funcEntry.DamageVerticalPush = 1;
-                                    funcEntry.DamageHitAmount = 1;
-                                    funcEntry.DamageHitFrequency = 0;
-                                    funcEntry.DamageFreezeTime = 0;
-                                    plAnmStartOffset += 0x40;
-
-                                }
-                                if (funcEntry.FunctionID > -1
-                                    && funcEntry.FunctionID != 0x8D
-                                    && funcEntry.FunctionID != 0x8E
-                                    && funcEntry.FunctionID != 0x8F
-                                    && funcEntry.FunctionID != 0x90
-                                    && funcEntry.FunctionID != 0x91
-                                    && funcEntry.FunctionID != 0x92
-                                    && funcEntry.FunctionID != 0x93) {
-                                    planm_entry.FunctionList.Add(funcEntry);
-                                }
-                            }
-                            if (planm_entry.PL_ANM_current_name != "")
-                                plAnmList.Add(planm_entry);
-                        }
-                        break;
-                    //Storm 3 HD
-                    case 3:
-                        for (int i = 0; i < planm_entryCount; i++) {
-                            PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
-                            planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                            planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
-                            int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x40);
-                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x44);
-                            planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x46);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x50) == 1);
-                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58);
-                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5C);
-                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5E);
-                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x60);
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x62);
-                            planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x64);
-                            planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x84);
-                            planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xA4);
-                            plAnmStartOffset += 0xC4;
-                            planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
-                            for (int func = 0; func < funcCount; func++) {
-                                string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x48);
-                                bool dmg_entry = false;
-                                if ((check_dmg.Contains("SKL_ATK") ||
-                                    check_dmg.Contains("ID") ||
-                                    check_dmg.Contains("SPSKILL_END") ||
-                                    check_dmg.Contains("DMG") ||
-                                    check_dmg.Contains("DAMAGE")) &&
-                                    !check_dmg.Contains("PL_ANM")) {
-                                    dmg_entry = true;
-                                }
-
-                                PRMFunction_Model funcEntry = new PRMFunction_Model();
-                                funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                                int s3_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
-                                funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
-                                funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_REV_S3_LIST[s3_func_index]);
-                                funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
-                                funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
-                                funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
-                                funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
-                                if (dmg_entry) {
-                                    funcEntry.DamageCode = check_dmg;
-                                    funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x8A);
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x8C);
-                                    funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x98);
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x94);
-                                    funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x98);
-                                    funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9C);
-                                    funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9E);
-                                    funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0xA0);
-
-                                    plAnmStartOffset += 0xA8;
-                                } else {
-                                    funcEntry.DamageCode = "";
-                                    funcEntry.DamageHitEffectID = 0;
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = 0;
-                                    funcEntry.DamageAmount = 1;
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = 1;
-                                    funcEntry.DamageVerticalPush = 1;
-                                    funcEntry.DamageHitAmount = 1;
-                                    funcEntry.DamageHitFrequency = 0;
-                                    funcEntry.DamageFreezeTime = 0;
-                                    plAnmStartOffset += 0x48;
-
-                                }
-                                if (funcEntry.FunctionID > -1
-                                    && funcEntry.FunctionID != 0x8D
-                                    && funcEntry.FunctionID != 0x8E
-                                    && funcEntry.FunctionID != 0x8F
-                                    && funcEntry.FunctionID != 0x90
-                                    && funcEntry.FunctionID != 0x91
-                                    && funcEntry.FunctionID != 0x92
-                                    && funcEntry.FunctionID != 0x93) {
-                                    planm_entry.FunctionList.Add(funcEntry);
-                                }
-                            }
-                            if (planm_entry.PL_ANM_current_name != "")
-                                plAnmList.Add(planm_entry);
-                        }
-                        break;
-                    //Storm Rev
-                    case 4:
-                        for (int i = 0; i < planm_entryCount; i++) {
-                            PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
-                            planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                            planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
-                            int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x50);
-                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x54);
-                            planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x56);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x60) == 1);
-                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x68);
-                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6C);
-                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6E);
-                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x70);
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x72);
-                            planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
-                            planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
-                            planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xB4);
-                            plAnmStartOffset += 0xD4;
-                            planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
-                            for (int func = 0; func < funcCount; func++) {
-                                string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x40);
-                                bool dmg_entry = false;
-                                if ((check_dmg.Contains("SKL_ATK") ||
-                                    check_dmg.Contains("ID") ||
-                                    check_dmg.Contains("SPSKILL_END") ||
-                                    check_dmg.Contains("DMG") ||
-                                    check_dmg.Contains("DAMAGE")) &&
-                                    !check_dmg.Contains("PL_ANM")) {
-                                    dmg_entry = true;
-                                }
-
-                                PRMFunction_Model funcEntry = new PRMFunction_Model();
-                                funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                                int sr_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
-                                funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
-                                funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_REV_S3_LIST[sr_func_index]);
-                                funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
-                                funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
-                                funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
-                                funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
-                                if (dmg_entry) {
-                                    funcEntry.DamageCode = check_dmg;
-                                    funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x82);
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x84);
-                                    funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x90);
-                                    funcEntry.DamageGuard = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x94);
-                                    funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x8C);
-                                    funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0xA0);
-                                    funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x98);
-                                    funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9A);
-                                    funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9C);
-
-                                    plAnmStartOffset += 0xA4;
-                                } else {
-                                    funcEntry.DamageCode = "";
-                                    funcEntry.DamageHitEffectID = 0;
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = 0;
-                                    funcEntry.DamageAmount = 1;
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = 1;
-                                    funcEntry.DamageVerticalPush = 1;
-                                    funcEntry.DamageHitAmount = 1;
-                                    funcEntry.DamageHitFrequency = 0;
-                                    funcEntry.DamageFreezeTime = 0;
-                                    plAnmStartOffset += 0x40;
-
-                                }
-                                if (funcEntry.FunctionID > -1
-                                    && funcEntry.FunctionID != 0x8D
-                                    && funcEntry.FunctionID != 0x8E
-                                    && funcEntry.FunctionID != 0x8F
-                                    && funcEntry.FunctionID != 0x90
-                                    && funcEntry.FunctionID != 0x91
-                                    && funcEntry.FunctionID != 0x92
-                                    && funcEntry.FunctionID != 0x93) {
-                                    planm_entry.FunctionList.Add(funcEntry);
-                                }
-                            }
-                            if (planm_entry.PL_ANM_current_name != "")
-                                plAnmList.Add(planm_entry);
-                        }
-                        break;
-                    //Storm 4/Connections
-                    case 5:
-                        for (int i = 0; i < planm_entryCount; i++) {
-                            PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
-                            planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                            planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
-                            int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x50);
-                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x54);
-                            planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x56);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x60) == 1);
-                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x68);
-                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6C);
-                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6E);
-                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x70);
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x72);
-                            planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
-                            planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
-                            planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xB4);
-                            plAnmStartOffset += 0xD4;
-                            planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
-                            for (int func = 0; func < funcCount; func++) {
-                                string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x40);
-                                bool dmg_entry = false;
-                                if ((check_dmg.Contains("SKL_ATK") ||
-                                    check_dmg.Contains("ID") ||
-                                    check_dmg.Contains("SPSKILL_END") ||
-                                    check_dmg.Contains("DMG") ||
-                                    check_dmg.Contains("DAMAGE")) &&
-                                    !check_dmg.Contains("PL_ANM")) {
-                                    dmg_entry = true;
-                                }
-
-                                PRMFunction_Model funcEntry = new PRMFunction_Model();
-                                funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                                funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
-                                funcEntry.FunctionID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
-                                funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
-                                funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
-                                funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
-                                funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
-                                if (dmg_entry) {
-                                    funcEntry.DamageCode = check_dmg;
-                                    funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x82);
-                                    funcEntry.DamageHitSoundID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x84);
-                                    funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x86);
-                                    funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x88);
-                                    funcEntry.DamageGuard = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x8C);
-                                    funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x90);
-                                    funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x94);
-                                    funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x98);
-                                    funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9A);
-                                    funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9C);
-
-                                    plAnmStartOffset += 0xA0;
-                                } else {
-                                    funcEntry.DamageCode = "";
-                                    funcEntry.DamageHitEffectID = 0;
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = 0;
-                                    funcEntry.DamageAmount = 1;
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = 1;
-                                    funcEntry.DamageVerticalPush = 1;
-                                    funcEntry.DamageHitAmount = 1;
-                                    funcEntry.DamageHitFrequency = 0;
-                                    funcEntry.DamageFreezeTime = 0;
-                                    plAnmStartOffset += 0x40;
-
-                                }
                                 planm_entry.FunctionList.Add(funcEntry);
                             }
-                            if (planm_entry.PL_ANM_current_name != "")
-                                plAnmList.Add(planm_entry);
                         }
-                        break;
-                    //Hack Versus
-                    case 6:
-                        for (int i = 0; i < planm_entryCount; i++) {
-                            PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
+                        if (planm_entry.PL_ANM_current_name != "" && planm_entry.PL_ANM_current_name != "DUMMY" && planm_entry.PL_ANM_animation != "DUMMY")
+                            plAnmList.Add(planm_entry);
+                    }
+                    break;
+                //Storm 2 & Gen
+                case 1:
+                    for (int i = 0; i < planm_entryCount; i++) {
+                        PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
+                        bool awake_ver = false;
+                        if (BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset).Contains("AWA_") && !BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset).Contains("AWA_CUTIN"))
+                            awake_ver = true;
+
+                        int pl_anm_ind = Program.S2_SG_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset));
+                        if (pl_anm_ind != -1)
+                            planm_entry.PL_ANM_current_name = Program.S2_SG_PL_ANM_NAMES[pl_anm_ind];
+                        else {
                             planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                            planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
-                            int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x30);
-                            planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x34);
-                            planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x36);
-                            planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4E);
-                            planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x50);
-                            if (planm_entry.Press_start == 0 && planm_entry.Press_end == 0) {
-                                planm_entry.Press_start = -1;
-                                planm_entry.Press_end = -1;
-                            }
-                            planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48);
-                            planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x38) == 1);
-                            planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3A) == 2);
-                            planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3C) == 1);
-                            planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3E) == 1);
-                            planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x40) == 1);
-                            planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4A);
-                            planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4C);
-                            if (planm_entry.Trigger_condition_1 == 5)
-                                planm_entry.Trigger_condition_1 = 2;
-                            else if (planm_entry.Trigger_condition_1 == 3)
-                                planm_entry.Trigger_condition_1 = 4;
-                            planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x52);
-                            planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x54);
-                            planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
-                            planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
-                            plAnmStartOffset += 0xB4;
-                            planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
-                            for (int func = 0; func < funcCount; func++) {
-                                string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x40);
-                                bool dmg_entry = false;
-                                if ((check_dmg.Contains("SKL_ATK") ||
-                                    check_dmg.Contains("ID") ||
-                                    check_dmg.Contains("SPSKILL_END") ||
-                                    check_dmg.Contains("DMG") ||
-                                    check_dmg.Contains("DAMAGE")) &&
-                                    !check_dmg.Contains("PL_ANM")) {
-                                    dmg_entry = true;
-                                }
-                                PRMFunction_Model funcEntry = new PRMFunction_Model();
-                                funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
-                                int hv_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
-                                funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
-                                funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_HACK_VERSUS_LIST[hv_func_index]);
-                                funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
-                                funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
-                                funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
-                                funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
-                                if (dmg_entry) {
-                                    funcEntry.DamageCode = check_dmg;
-                                    funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x82);
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x84);
-                                    funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x90);
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x8C);
-                                    funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x9C);
-                                    funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x94);
-                                    funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x96);
-                                    funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x98);
-
-                                    plAnmStartOffset += 0xA4;
-                                } else {
-                                    funcEntry.DamageCode = "";
-                                    funcEntry.DamageHitEffectID = 0;
-                                    funcEntry.DamageHitSoundID = -1;
-                                    funcEntry.DamageCondition = 0;
-                                    funcEntry.DamageAmount = 1;
-                                    funcEntry.DamageGuard = -1;
-                                    funcEntry.DamageHorizontalPush = 1;
-                                    funcEntry.DamageVerticalPush = 1;
-                                    funcEntry.DamageHitAmount = 1;
-                                    funcEntry.DamageHitFrequency = 0;
-                                    funcEntry.DamageFreezeTime = 0;
-                                    plAnmStartOffset += 0x40;
-
-                                }
-                                if (funcEntry.FunctionID > -1
-                                    && funcEntry.FunctionID != 0x8D
-                                    && funcEntry.FunctionID != 0x8E
-                                    && funcEntry.FunctionID != 0x8F
-                                    && funcEntry.FunctionID != 0x90
-                                    && funcEntry.FunctionID != 0x91
-                                    && funcEntry.FunctionID != 0x92
-                                    && funcEntry.FunctionID != 0x93) {
-                                    planm_entry.FunctionList.Add(funcEntry);
-                                }
-                            }
-                            if (planm_entry.PL_ANM_current_name != "" && planm_entry.PL_ANM_current_name != "EMPTY" && planm_entry.PL_ANM_animation != "EMPTY")
-                                plAnmList.Add(planm_entry);
                         }
-                        break;
+                        planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
+                        int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x30);
+                        planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x34);
+                        planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x36);
+                        planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4E);
+                        planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x50);
+                        if (planm_entry.Press_start == 0 && planm_entry.Press_end == 0) {
+                            planm_entry.Press_start = -1;
+                            planm_entry.Press_end = -1;
+                        }
+                        planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48);
+                        planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x38) == 1);
+                        planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3A) == 2);
+                        planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3C) == 1);
+                        planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3E) == 1);
+                        planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x40) == 1);
+                        planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4A);
+                        planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4C);
+                        if (planm_entry.Trigger_condition_1 == 5)
+                            planm_entry.Trigger_condition_1 = 2;
+                        else if (planm_entry.Trigger_condition_1 == 3)
+                            planm_entry.Trigger_condition_1 = 4;
+                        planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x52);
 
-                }
+                        int pl_anm_previous_ind = Program.S2_SG_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x54));
+                        if (pl_anm_previous_ind != -1)
+                            planm_entry.PL_ANM_previous_name = Program.S2_SG_PL_ANM_NAMES[pl_anm_previous_ind];
+                        else {
+                            planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x54);
+                        }
+                        int pl_anm_next_ind = Program.S2_SG_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74));
+                        if (pl_anm_next_ind != -1)
+                            planm_entry.PL_ANM_next_name = Program.S2_SG_PL_ANM_NAMES[pl_anm_next_ind];
+                        else {
+                            planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
+                        }
 
-                if (SelectedFormatIndex == 1) {
-                    bool awa_contain = false;
-                    for (int i = 0; i < VerList.Count; i++) {
-                        if (VerList[i].BinName.Contains("awa"))
-                            awa_contain = true;
+                        int pl_anm_DMG_ind = Program.S2_SG_OG_PL_ANM_NAMES.IndexOf(BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94));
+                        if (pl_anm_DMG_ind != -1)
+                            planm_entry.PL_ANM_DMG_name = Program.S2_SG_PL_ANM_NAMES[pl_anm_DMG_ind];
+                        else {
+                            planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
+                        }
+                        plAnmStartOffset += 0xB4;
+                        planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
+                        for (int func = 0; func < funcCount; func++) {
+                            string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x40);
+                            bool dmg_entry = false;
+                            if ((check_dmg.Contains("SKL_ATK") ||
+                                check_dmg.Contains("ID") ||
+                                check_dmg.Contains("SPSKILL_END") ||
+                                check_dmg.Contains("DMG") ||
+                                check_dmg.Contains("DAMAGE")) &&
+                                !check_dmg.Contains("PL_ANM")) {
+                                dmg_entry = true;
+                            }
+                            PRMFunction_Model funcEntry = new PRMFunction_Model();
+                            funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                            int s2_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
+                            funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
+                            funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_S2_SG_LIST[s2_func_index]);
+                            funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
+                            funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
+                            funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
+                            funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
+                            if (dmg_entry) {
+                                funcEntry.DamageCode = check_dmg;
+                                funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x82);
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x84);
+                                funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x90);
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x8C);
+                                funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x9C);
+                                funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x94);
+                                funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x96);
+                                funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x98);
+
+                                plAnmStartOffset += 0xA0;
+                            } else {
+                                funcEntry.DamageCode = "";
+                                funcEntry.DamageHitEffectID = 0;
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = 0;
+                                funcEntry.DamageAmount = 1;
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = 1;
+                                funcEntry.DamageVerticalPush = 1;
+                                funcEntry.DamageHitAmount = 1;
+                                funcEntry.DamageHitFrequency = 0;
+                                funcEntry.DamageFreezeTime = 0;
+                                plAnmStartOffset += 0x40;
+
+                            }
+                            if (funcEntry.FunctionID == 0x8E) {
+                                string sound_code = Program.S2_SFX_LIST[funcEntry.FunctionParam1];
+                                int new_param1 = Program.NSC_SFX_LIST.IndexOf(sound_code);
+
+                                if (new_param1 == -1)
+                                    continue;
+                                funcEntry.FunctionParam1 = (Int16)new_param1;
+                            }
+                            if (funcEntry.FunctionID > -1
+                                && funcEntry.FunctionID != 0x8D
+                                //&& funcEntry.FunctionID != 0x8E
+                                && funcEntry.FunctionID != 0x8F
+                                && funcEntry.FunctionID != 0x90
+                                && funcEntry.FunctionID != 0x91
+                                && funcEntry.FunctionID != 0x92
+                                && funcEntry.FunctionID != 0x93) {
+                                    planm_entry.FunctionList.Add(funcEntry);
+                            }
+                        }
+                        if (planm_entry.PL_ANM_current_name != "" && planm_entry.PL_ANM_current_name != "EMPTY" && planm_entry.PL_ANM_animation != "EMPTY" && !awake_ver)
+                            plAnmList.Add(planm_entry);
+                        else if (planm_entry.PL_ANM_current_name != "" && planm_entry.PL_ANM_current_name != "EMPTY" && planm_entry.PL_ANM_animation != "EMPTY" && awake_ver) {
+                            plAnmAwaList.Add(planm_entry);
+                        }
                     }
-                    if (!awa_contain) {
-                        AwaVerEntry.PL_ANM_Sections = plAnmAwaList;
-                        VerList.Add(AwaVerEntry);
+                    break;
+                //Storm 3 Old
+                case 2:
+                    for (int i = 0; i < planm_entryCount; i++) {
+                        PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
+                        planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                        planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
+                        int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x40);
+                        planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x44);
+                        planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x46);
+                        planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48) == 1);
+                        planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4A) == 2);
+                        planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
+                        planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
+                        planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x50) == 1);
+                        planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58);
+                        planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5A);
+                        planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5C);
+                        planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5E);
+                        planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x60);
+                        planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x62);
+                        planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x64);
+                        planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x84);
+                        planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xA4);
+                        plAnmStartOffset += 0xC4;
+                        planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
+                        for (int func = 0; func < funcCount; func++) {
+                            string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x40);
+                            bool dmg_entry = false;
+                            if ((check_dmg.Contains("SKL_ATK") ||
+                                check_dmg.Contains("ID") ||
+                                check_dmg.Contains("SPSKILL_END") ||
+                                check_dmg.Contains("DMG") ||
+                                check_dmg.Contains("DAMAGE")) &&
+                                !check_dmg.Contains("PL_ANM")) {
+                                dmg_entry = true;
+                            }
+
+                            PRMFunction_Model funcEntry = new PRMFunction_Model();
+                            funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                            int s3_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
+                            funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
+                            funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_REV_S3_LIST[s3_func_index]);
+                            funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
+                            funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
+                            funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
+                            funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
+                            if (dmg_entry) {
+                                funcEntry.DamageCode = check_dmg;
+                                funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x82);
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x84);
+                                funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x90);
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x8C);
+                                funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x9C);
+                                funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x94);
+                                funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x96);
+                                funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x98);
+
+                                plAnmStartOffset += 0xA0;
+                            } else {
+                                funcEntry.DamageCode = "";
+                                funcEntry.DamageHitEffectID = 0;
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = 0;
+                                funcEntry.DamageAmount = 1;
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = 1;
+                                funcEntry.DamageVerticalPush = 1;
+                                funcEntry.DamageHitAmount = 1;
+                                funcEntry.DamageHitFrequency = 0;
+                                funcEntry.DamageFreezeTime = 0;
+                                plAnmStartOffset += 0x40;
+
+                            }
+                            if (funcEntry.FunctionID == 0x8E) {
+                                string sound_code = Program.S3_SFX_LIST[funcEntry.FunctionParam1];
+                                int new_param1 = Program.NSC_SFX_LIST.IndexOf(sound_code);
+
+                                if (new_param1 == -1)
+                                    continue;
+                                funcEntry.FunctionParam1 = (Int16)new_param1;
+                            }
+                            if (funcEntry.FunctionID > -1
+                                && funcEntry.FunctionID != 0x8D
+                                //&& funcEntry.FunctionID != 0x8E
+                                && funcEntry.FunctionID != 0x8F
+                                && funcEntry.FunctionID != 0x90
+                                && funcEntry.FunctionID != 0x91
+                                && funcEntry.FunctionID != 0x92
+                                && funcEntry.FunctionID != 0x93) {
+                                planm_entry.FunctionList.Add(funcEntry);
+                            }
+                        }
+                        if (planm_entry.PL_ANM_current_name != "")
+                            plAnmList.Add(planm_entry);
                     }
-                }
-                VerEntry.PL_ANM_Sections = plAnmList;
-                VerList.Add(VerEntry);
-            } catch (Exception) {
-                ModernWpf.MessageBox.Show("Wrong PRM format!");
+                    break;
+                //Storm 3 HD
+                case 3:
+                    for (int i = 0; i < planm_entryCount; i++) {
+                        PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
+                        planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                        planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
+                        int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x40);
+                        planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x44);
+                        planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x46);
+                        planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48) == 1);
+                        planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4A) == 2);
+                        planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4C) == 1);
+                        planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x4E) == 1);
+                        planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x50) == 1);
+                        planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58);
+                        planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5A);
+                        planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5C);
+                        planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x5E);
+                        planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x60);
+                        planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x62);
+                        planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x64);
+                        planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x84);
+                        planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xA4);
+                        plAnmStartOffset += 0xC4;
+                        planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
+                        for (int func = 0; func < funcCount; func++) {
+                            string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x48);
+                            bool dmg_entry = false;
+                            if ((check_dmg.Contains("SKL_ATK") ||
+                                check_dmg.Contains("ID") ||
+                                check_dmg.Contains("SPSKILL_END") ||
+                                check_dmg.Contains("DMG") ||
+                                check_dmg.Contains("DAMAGE")) &&
+                                !check_dmg.Contains("PL_ANM")) {
+                                dmg_entry = true;
+                            }
+
+                            PRMFunction_Model funcEntry = new PRMFunction_Model();
+                            funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                            int s3_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
+                            funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
+                            funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_REV_S3_LIST[s3_func_index]);
+                            funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
+                            funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
+                            funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
+                            funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
+                            if (dmg_entry) {
+                                funcEntry.DamageCode = check_dmg;
+                                funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x8A);
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x8C);
+                                funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x98);
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x94);
+                                funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x98);
+                                funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9C);
+                                funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9E);
+                                funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0xA0);
+
+                                plAnmStartOffset += 0xA8;
+                            } else {
+                                funcEntry.DamageCode = "";
+                                funcEntry.DamageHitEffectID = 0;
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = 0;
+                                funcEntry.DamageAmount = 1;
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = 1;
+                                funcEntry.DamageVerticalPush = 1;
+                                funcEntry.DamageHitAmount = 1;
+                                funcEntry.DamageHitFrequency = 0;
+                                funcEntry.DamageFreezeTime = 0;
+                                plAnmStartOffset += 0x48;
+
+                            }
+                            if (funcEntry.FunctionID == 0x8E) {
+                                string sound_code = Program.S3_SFX_LIST[funcEntry.FunctionParam1];
+                                int new_param1 = Program.NSC_SFX_LIST.IndexOf(sound_code);
+
+                                if (new_param1 == -1)
+                                    continue;
+                                funcEntry.FunctionParam1 = (Int16)new_param1;
+                            }
+                            if (funcEntry.FunctionID > -1
+                                && funcEntry.FunctionID != 0x8D
+                                //&& funcEntry.FunctionID != 0x8E
+                                && funcEntry.FunctionID != 0x8F
+                                && funcEntry.FunctionID != 0x90
+                                && funcEntry.FunctionID != 0x91
+                                && funcEntry.FunctionID != 0x92
+                                && funcEntry.FunctionID != 0x93) {
+                                planm_entry.FunctionList.Add(funcEntry);
+                            }
+                        }
+                        if (planm_entry.PL_ANM_current_name != "")
+                            plAnmList.Add(planm_entry);
+                    }
+                    break;
+                //Storm Rev
+                case 4:
+                    for (int i = 0; i < planm_entryCount; i++) {
+                        PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
+                        planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                        planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
+                        int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x50);
+                        planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x54);
+                        planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x56);
+                        planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58) == 1);
+                        planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5A) == 2);
+                        planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5C) == 1);
+                        planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5E) == 1);
+                        planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x60) == 1);
+                        planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x68);
+                        planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6A);
+                        planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6C);
+                        planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6E);
+                        planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x70);
+                        planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x72);
+                        planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
+                        planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
+                        planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xB4);
+                        plAnmStartOffset += 0xD4;
+                        planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
+                        for (int func = 0; func < funcCount; func++) {
+                            string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x40);
+                            bool dmg_entry = false;
+                            if ((check_dmg.Contains("SKL_ATK") ||
+                                check_dmg.Contains("ID") ||
+                                check_dmg.Contains("SPSKILL_END") ||
+                                check_dmg.Contains("DMG") ||
+                                check_dmg.Contains("DAMAGE")) &&
+                                !check_dmg.Contains("PL_ANM")) {
+                                dmg_entry = true;
+                            }
+
+                            PRMFunction_Model funcEntry = new PRMFunction_Model();
+                            funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                            int sr_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
+                            funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
+                            funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_REV_S3_LIST[sr_func_index]);
+                            funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
+                            funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
+                            funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
+                            funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
+                            if (dmg_entry) {
+                                funcEntry.DamageCode = check_dmg;
+                                funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x82);
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x84);
+                                funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x90);
+                                funcEntry.DamageGuard = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x94);
+                                funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x8C);
+                                funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0xA0);
+                                funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x98);
+                                funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9A);
+                                funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9C);
+
+                                plAnmStartOffset += 0xA4;
+                            } else {
+                                funcEntry.DamageCode = "";
+                                funcEntry.DamageHitEffectID = 0;
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = 0;
+                                funcEntry.DamageAmount = 1;
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = 1;
+                                funcEntry.DamageVerticalPush = 1;
+                                funcEntry.DamageHitAmount = 1;
+                                funcEntry.DamageHitFrequency = 0;
+                                funcEntry.DamageFreezeTime = 0;
+                                plAnmStartOffset += 0x40;
+
+                            }
+                            if (funcEntry.FunctionID > -1
+                                && funcEntry.FunctionID != 0x8D
+                                && funcEntry.FunctionID != 0x8E
+                                && funcEntry.FunctionID != 0x8F
+                                && funcEntry.FunctionID != 0x90
+                                && funcEntry.FunctionID != 0x91
+                                && funcEntry.FunctionID != 0x92
+                                && funcEntry.FunctionID != 0x93) {
+                                planm_entry.FunctionList.Add(funcEntry);
+                            }
+                        }
+                        if (planm_entry.PL_ANM_current_name != "")
+                            plAnmList.Add(planm_entry);
+                    }
+                    break;
+                //Storm 4/Connections
+                case 5:
+                    for (int i = 0; i < planm_entryCount; i++) {
+                        PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
+                        planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                        planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
+                        int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x50);
+                        planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x54);
+                        planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x56);
+                        planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x58) == 1);
+                        planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5A) == 2);
+                        planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5C) == 1);
+                        planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x5E) == 1);
+                        planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x60) == 1);
+                        planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x68);
+                        planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6A);
+                        planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6C);
+                        planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x6E);
+                        planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x70);
+                        planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x72);
+                        planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
+                        planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
+                        planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0xB4);
+                        plAnmStartOffset += 0xD4;
+                        planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
+                        for (int func = 0; func < funcCount; func++) {
+                            string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x40);
+                            bool dmg_entry = false;
+                            if ((check_dmg.Contains("SKL_ATK") ||
+                                check_dmg.Contains("ID") ||
+                                check_dmg.Contains("SPSKILL_END") ||
+                                check_dmg.Contains("DMG") ||
+                                check_dmg.Contains("DAMAGE")) &&
+                                !check_dmg.Contains("PL_ANM")) {
+                                dmg_entry = true;
+                            }
+
+                            PRMFunction_Model funcEntry = new PRMFunction_Model();
+                            funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                            funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
+                            funcEntry.FunctionID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
+                            funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
+                            funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
+                            funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
+                            funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
+                            if (dmg_entry) {
+                                funcEntry.DamageCode = check_dmg;
+                                funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x82);
+                                funcEntry.DamageHitSoundID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x84);
+                                funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x86);
+                                funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x88);
+                                funcEntry.DamageGuard = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x8C);
+                                funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x90);
+                                funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x94);
+                                funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x98);
+                                funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9A);
+                                funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x9C);
+
+                                plAnmStartOffset += 0xA0;
+                            } else {
+                                funcEntry.DamageCode = "";
+                                funcEntry.DamageHitEffectID = 0;
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = 0;
+                                funcEntry.DamageAmount = 1;
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = 1;
+                                funcEntry.DamageVerticalPush = 1;
+                                funcEntry.DamageHitAmount = 1;
+                                funcEntry.DamageHitFrequency = 0;
+                                funcEntry.DamageFreezeTime = 0;
+                                plAnmStartOffset += 0x40;
+
+                            }
+                            planm_entry.FunctionList.Add(funcEntry);
+                        }
+                        if (planm_entry.PL_ANM_current_name != "")
+                            plAnmList.Add(planm_entry);
+                    }
+                    break;
+                //Hack Versus
+                case 6:
+                    for (int i = 0; i < planm_entryCount; i++) {
+                        PRM_PL_ANM_Model planm_entry = new PRM_PL_ANM_Model();
+                        planm_entry.PL_ANM_current_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                        planm_entry.PL_ANM_animation = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x20);
+                        int funcCount = BinaryReader.b_ReadInt(binary.BinaryData, plAnmStartOffset + 0x30);
+                        planm_entry.Interpolation = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x34);
+                        planm_entry.Type = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x36);
+                        planm_entry.Press_start = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4E);
+                        planm_entry.Press_end = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x50);
+                        if (planm_entry.Press_start == 0 && planm_entry.Press_end == 0) {
+                            planm_entry.Press_start = -1;
+                            planm_entry.Press_end = -1;
+                        }
+                        planm_entry.Direction = BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x48);
+                        planm_entry.EnableCubeMan = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x38) == 1);
+                        planm_entry.EnableFaceAnim = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3A) == 2);
+                        planm_entry.EnableBackwardFacingFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3C) == 1);
+                        planm_entry.DisableInterpolation = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x3E) == 1);
+                        planm_entry.EnableAnimPosFix = (BinaryReader.b_ReadUInt16(binary.BinaryData, plAnmStartOffset + 0x40) == 1);
+                        planm_entry.Link_condition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4A);
+                        planm_entry.Trigger_condition_1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x4C);
+                        if (planm_entry.Trigger_condition_1 == 5)
+                            planm_entry.Trigger_condition_1 = 2;
+                        else if (planm_entry.Trigger_condition_1 == 3)
+                            planm_entry.Trigger_condition_1 = 4;
+                        planm_entry.Trigger_condition_2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x52);
+                        planm_entry.PL_ANM_previous_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x54);
+                        planm_entry.PL_ANM_next_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x74);
+                        planm_entry.PL_ANM_DMG_name = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x94);
+                        plAnmStartOffset += 0xB4;
+                        planm_entry.FunctionList = new ObservableCollection<PRMFunction_Model>();
+                        for (int func = 0; func < funcCount; func++) {
+                            string check_dmg = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset + 0x40);
+                            bool dmg_entry = false;
+                            if ((check_dmg.Contains("SKL_ATK") ||
+                                check_dmg.Contains("ID") ||
+                                check_dmg.Contains("SPSKILL_END") ||
+                                check_dmg.Contains("DMG") ||
+                                check_dmg.Contains("DAMAGE")) &&
+                                !check_dmg.Contains("PL_ANM")) {
+                                dmg_entry = true;
+                            }
+                            PRMFunction_Model funcEntry = new PRMFunction_Model();
+                            funcEntry.StringParam = BinaryReader.b_ReadString(binary.BinaryData, plAnmStartOffset);
+                            int hv_func_index = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x22);
+                            funcEntry.FunctionTiming = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x20);
+                            funcEntry.FunctionID = (Int16)Program.ME_NSC_LIST.IndexOf(Program.ME_HACK_VERSUS_LIST[hv_func_index]);
+                            funcEntry.FunctionParam1 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x24);
+                            funcEntry.FunctionParam2 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x26);
+                            funcEntry.FunctionParam3 = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x28);
+                            funcEntry.FunctionParam4 = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x2C);
+                            if (dmg_entry) {
+                                funcEntry.DamageCode = check_dmg;
+                                funcEntry.DamageHitEffectID = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x82);
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x84);
+                                funcEntry.DamageAmount = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x90);
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x8C);
+                                funcEntry.DamageVerticalPush = BinaryReader.b_ReadFloat(binary.BinaryData, plAnmStartOffset + 0x9C);
+                                funcEntry.DamageHitAmount = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x94);
+                                funcEntry.DamageHitFrequency = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x96);
+                                funcEntry.DamageFreezeTime = BinaryReader.b_ReadInt16(binary.BinaryData, plAnmStartOffset + 0x98);
+
+                                plAnmStartOffset += 0xA4;
+                            } else {
+                                funcEntry.DamageCode = "";
+                                funcEntry.DamageHitEffectID = 0;
+                                funcEntry.DamageHitSoundID = -1;
+                                funcEntry.DamageCondition = 0;
+                                funcEntry.DamageAmount = 1;
+                                funcEntry.DamageGuard = -1;
+                                funcEntry.DamageHorizontalPush = 1;
+                                funcEntry.DamageVerticalPush = 1;
+                                funcEntry.DamageHitAmount = 1;
+                                funcEntry.DamageHitFrequency = 0;
+                                funcEntry.DamageFreezeTime = 0;
+                                plAnmStartOffset += 0x40;
+
+                            }
+                            if (funcEntry.FunctionID > -1
+                                && funcEntry.FunctionID != 0x8D
+                                && funcEntry.FunctionID != 0x8E
+                                && funcEntry.FunctionID != 0x8F
+                                && funcEntry.FunctionID != 0x90
+                                && funcEntry.FunctionID != 0x91
+                                && funcEntry.FunctionID != 0x92
+                                && funcEntry.FunctionID != 0x93) {
+                                planm_entry.FunctionList.Add(funcEntry);
+                            }
+                        }
+                        if (planm_entry.PL_ANM_current_name != "" && planm_entry.PL_ANM_current_name != "EMPTY" && planm_entry.PL_ANM_animation != "EMPTY")
+                            plAnmList.Add(planm_entry);
+                    }
+                    break;
+
             }
+
+            if (SelectedFormatIndex == 1) {
+                bool awa_contain = false;
+                for (int i = 0; i < VerList.Count; i++) {
+                    if (VerList[i].BinName.Contains("awa"))
+                        awa_contain = true;
+                }
+                if (!awa_contain) {
+                    AwaVerEntry.PL_ANM_Sections = plAnmAwaList;
+                    VerList.Add(AwaVerEntry);
+                }
+            }
+            VerEntry.PL_ANM_Sections = plAnmList;
+            VerList.Add(VerEntry);
             
         }
 

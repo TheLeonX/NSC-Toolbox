@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows;
 using Microsoft.Win32;
 using System.IO;
+using NSC_Toolbox.Properties;
 
 namespace NSC_Toolbox.ViewModel
 {
@@ -24,6 +25,8 @@ namespace NSC_Toolbox.ViewModel
             }
         }
 
+        public ObservableCollection<string> Sound1_List { get; set; }
+        public ObservableCollection<string> Sound2_List { get; set; }
         private Visibility _loadingStatePlay;
         public Visibility LoadingStatePlay {
             get { return _loadingStatePlay; }
@@ -49,11 +52,11 @@ namespace NSC_Toolbox.ViewModel
                 OnPropertyChanged("ExtraDamageEffID_field");
             }
         }
-        private int _extraSoundID;
+        private int _extraSoundID_field;
         public int ExtraSoundID_field {
-            get { return _extraSoundID; }
+            get { return _extraSoundID_field; }
             set {
-                _extraSoundID = value;
+                _extraSoundID_field = value;
                 OnPropertyChanged("ExtraSoundID_field");
             }
         }
@@ -65,11 +68,11 @@ namespace NSC_Toolbox.ViewModel
                 OnPropertyChanged("EffectPrmID_field");
             }
         }
-        private int _soundID;
+        private int _soundID_field;
         public int SoundID_field {
-            get { return _soundID; }
+            get { return _soundID_field; }
             set {
-                _soundID = value;
+                _soundID_field = value;
                 OnPropertyChanged("SoundID_field");
             }
         }
@@ -106,9 +109,9 @@ namespace NSC_Toolbox.ViewModel
                 if (value is not null) {
                     DamageEffID_field = value.DamageEffID;
                     ExtraDamageEffID_field = value.ExtraDamageEffID;
-                    ExtraSoundID_field = value.ExtraSoundID;
+                    ExtraSoundID_field = value.ExtraSoundID+1;
                     EffectPrmID_field = value.EffectPrmID;
-                    SoundID_field = value.SoundID;
+                    SoundID_field = value.SoundID + 1;
                     Unk1_field = value.Unk1;
                     Unk2_field = value.Unk2;
                     ExtraEffectPrmID_field = value.ExtraEffectPrmID;
@@ -133,6 +136,16 @@ namespace NSC_Toolbox.ViewModel
             LoadingStatePlay = Visibility.Hidden;
             DamageEffList = new ObservableCollection<DamageEffModel>();
             filePath = "";
+            Sound1_List = new ObservableCollection<string> {
+                "No Sound"
+            }; 
+            Sound2_List = new ObservableCollection<string> {
+                "No Sound"
+            };
+            for (int x = 0; x < Program.NSC_SFX_LIST.Length; x++) {
+                Sound1_List.Add(x.ToString() + " = " + Program.NSC_SFX_LIST[x]);
+                Sound2_List.Add(x.ToString() + " = " + Program.NSC_SFX_LIST[x]);
+            }
         }
 
         public void Clear() {
@@ -202,9 +215,9 @@ namespace NSC_Toolbox.ViewModel
             if (SelectedDamageEff is not null) {
                 SelectedDamageEff.DamageEffID = DamageEffID_field;
                 SelectedDamageEff.ExtraDamageEffID = ExtraDamageEffID_field;
-                SelectedDamageEff.ExtraSoundID = ExtraSoundID_field;
+                SelectedDamageEff.ExtraSoundID = ExtraSoundID_field - 1;
                 SelectedDamageEff.EffectPrmID = EffectPrmID_field;
-                SelectedDamageEff.SoundID = SoundID_field;
+                SelectedDamageEff.SoundID = SoundID_field - 1;
                 SelectedDamageEff.Unk1 = Unk1_field;
                 SelectedDamageEff.Unk2 = Unk2_field;
                 SelectedDamageEff.ExtraEffectPrmID = ExtraEffectPrmID_field;

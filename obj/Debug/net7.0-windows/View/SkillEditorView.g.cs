@@ -82,7 +82,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.4.1;component/view/skilleditorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.5.0;component/view/skilleditorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\SkillEditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

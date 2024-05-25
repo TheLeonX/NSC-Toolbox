@@ -862,6 +862,7 @@ namespace NSC_Toolbox.ViewModel {
                         EffectPrmViewModel OriginalEffectPrm = new EffectPrmViewModel();
                         EffectPrmViewModel ImportEffectPrm = new EffectPrmViewModel();
                         DamagePrmViewModel ImportDamagePrm = new DamagePrmViewModel();
+                        DamagePrmViewModel OriginalDamagePrm = new DamagePrmViewModel();
 
                         if (duelPlayerParamExist)
                             ImportDuelPlayerParam.OpenFile(duelPlayerParamPath);
@@ -936,6 +937,7 @@ namespace NSC_Toolbox.ViewModel {
 
                         OriginalDamageEff.OpenFile(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\damageeff.bin.xfbin");
                         OriginalEffectPrm.OpenFile(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\effectprm.bin.xfbin");
+                        OriginalDamagePrm.OpenFile(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\damageprm.bin.xfbin");
 
                         if (damageprmExist)
                             ImportDamagePrm.OpenFile(damageprmPath);
@@ -1426,7 +1428,8 @@ namespace NSC_Toolbox.ViewModel {
                             }
                             //damageprm
                             if (damageprmExist) {
-                                for (int i = ImportDamagePrm.DamagePrmList.Count; i < ImportDamagePrm.DamagePrmList.Count; i++) {
+                                MessageBox.Show(OriginalDamagePrm.DamagePrmList.Count.ToString());
+                                for (int i = OriginalDamagePrm.DamagePrmList.Count; i < ImportDamagePrm.DamagePrmList.Count; i++) {
                                     if (ImportDamagePrm.DamagePrmList[i].Data[0] != 0) {
                                         ExportDamagePrm.DamagePrmList.Add((DamagePrmModel)ImportDamagePrm.DamagePrmList[i].Clone());
                                     }
