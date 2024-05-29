@@ -81,7 +81,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.0.5.0;component/view/characodeeditorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.1.0.0;component/view/characodeeditorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\CharacodeEditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
