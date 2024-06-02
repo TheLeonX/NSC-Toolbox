@@ -139,7 +139,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.1.0.5;component/view/characterselectparameditorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.1.0.6;component/view/characterselectparameditorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\CharacterSelectParamEditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -86,7 +86,7 @@ namespace NSC_Toolbox.Controls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.1.0.5;component/controls/kuramacontrol.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.1.0.6;component/controls/kuramacontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Controls\KuramaControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

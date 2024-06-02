@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
         
-        ui:WindowHelper.UseModernWindowStyle="True"  Width="1450" Height="920"
+        ui:WindowHelper.UseModernWindowStyle="True"  Width="1250" Height="900"
         Title="{DynamicResource m_skillEditor_title}">
     <Window.Background>
         <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
@@ -31,7 +31,7 @@
         <converter:ColorToStringConverter x:Key="ColorToStringConverter" />
     </Window.Resources>
     <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
-        <Grid Width="1670" Height="1070">
+        <Grid Width="1600" Height="1100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="*"/>
@@ -46,7 +46,7 @@
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="5"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="4*"/>
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="5"/>
@@ -204,7 +204,7 @@
             </Grid>
 
             <!--Action Params-->
-            <Grid Grid.Row="4" Grid.Column="5" Grid.RowSpan="3" Background="{DynamicResource Toolbox_button_background_color_1}">
+            <Grid Grid.Row="4" Grid.Column="5" Grid.RowSpan="1" Background="{DynamicResource Toolbox_button_background_color_1}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -756,7 +756,9 @@
                     </TabItem>
                 </TabControl>
             </Grid>
-            
+            <Button Command="{Binding SaveSkillCommand}" Grid.Row="8" Grid.Column="5" Grid.ColumnSpan="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                <TextBlock Text="{DynamicResource m_skillEditor_101}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+            </Button>
             <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
@@ -776,16 +778,17 @@
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Button Command="{Binding AddSkillCommand}" Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
                         <TextBlock Text="{DynamicResource m_AddEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
                     </Button>
-                    <Button Command="{Binding SaveSkillCommand}" Grid.Row="2" Grid.Column="4"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
-                        <TextBlock Text="{DynamicResource m_skillEditor_101}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
-                    </Button>
+                    
                     <Button Command="{Binding DeleteSkillCommand}" Grid.Row="2" Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
                         <TextBlock Text="{DynamicResource m_DeleteEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    </Button>
+                    <Button Command="{Binding DuplicateSkillCommand}" Grid.Row="2" Grid.Column="4"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+                        <TextBlock Text="{DynamicResource m_DupEntry}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
                     </Button>
                 </Grid>
                 <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding SkillTextBox_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
@@ -794,7 +797,7 @@
                 </Button>
                 
             </Grid>
-            <Button Command="{Binding SaveActionCommand}" Grid.Row="8" Grid.Column="5"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
+            <Button Command="{Binding SaveActionCommand}" Grid.Row="6" Grid.Column="5"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}">
                 <TextBlock Text="{DynamicResource m_skillEditor_103}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
             </Button>
             <!--<Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}" Background="Transparent">

@@ -5,6 +5,7 @@ using NSC_Toolbox.Properties;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -1213,6 +1214,7 @@ namespace NSC_Toolbox.ViewModel {
             get { return _selectedFilePathIndex; }
             set {
                 _selectedFilePathIndex = value;
+                FilePathTextBox_field = FilePathList[value];
                 OnPropertyChanged("SelectedFilePathIndex");
             }
         }
@@ -1242,6 +1244,7 @@ namespace NSC_Toolbox.ViewModel {
             }
         }
         public SkillEditorViewModel() {
+            filePath = "";
             SkillList = new ObservableCollection<SkillEntryModel>();
             ActionList = new ObservableCollection<SkillActionModel>();
             EventList = new ObservableCollection<SkillEventModel>();
@@ -1318,13 +1321,13 @@ namespace NSC_Toolbox.ViewModel {
                                             skillHitEntry.EnableHit = true;
                                             foreach (XmlAttribute attribute in xnode.Attributes) {
                                                 if (attribute.Name == "radius") {
-                                                    skillHitEntry.HitRadius = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                    skillHitEntry.HitRadius = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                 } else if (attribute.Name == "hitLimitV") {
-                                                    skillHitEntry.HitVerticalLimit = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                    skillHitEntry.HitVerticalLimit = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                 } else if (attribute.Name == "hitLimitH") {
-                                                    skillHitEntry.HitHorizontalLimit = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                    skillHitEntry.HitHorizontalLimit = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                 } else if (attribute.Name == "worldHitRadius") {
-                                                    skillHitEntry.HitWorldRadius = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                    skillHitEntry.HitWorldRadius = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                 } else if (attribute.Name == "priorityCategory") {
                                                     skillHitEntry.HitPriorityCategory = attribute.Value;
                                                 } else if (attribute.Name == "priorityOffset") {
@@ -1387,13 +1390,13 @@ namespace NSC_Toolbox.ViewModel {
                                                             ActionHitEntry.EnableHit = true;
                                                             foreach (XmlAttribute attribute in actionNode.Attributes) {
                                                                 if (attribute.Name == "hitRadius") {
-                                                                    ActionHitEntry.HitRadius = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                                    ActionHitEntry.HitRadius = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                                 } else if (attribute.Name == "hitLimitV") {
-                                                                    ActionHitEntry.HitVerticalLimit = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                                    ActionHitEntry.HitVerticalLimit = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                                 } else if (attribute.Name == "hitLimitH") {
-                                                                    ActionHitEntry.HitHorizontalLimit = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                                    ActionHitEntry.HitHorizontalLimit = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                                 } else if (attribute.Name == "hitRadiusWorld") {
-                                                                    ActionHitEntry.HitWorldRadius = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                                    ActionHitEntry.HitWorldRadius = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                                 } else if (attribute.Name == "damageId") {
                                                                     ActionHitEntry.HitDamageID = attribute.Value;
                                                                 } else if (attribute.Name == "hitPoint") {
@@ -1431,9 +1434,9 @@ namespace NSC_Toolbox.ViewModel {
                                                                 } else if (attribute.Name == "decalTextureName") {
                                                                     ActionDecalEntry.DecalTextureName = attribute.Value;
                                                                 } else if (attribute.Name == "decalHeightScale") {
-                                                                    ActionDecalEntry.DecalHeightScale = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                                    ActionDecalEntry.DecalHeightScale = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                                 } else if (attribute.Name == "decalWidthScale") {
-                                                                    ActionDecalEntry.DecalWidthScale = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                                    ActionDecalEntry.DecalWidthScale = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                                 }
                                                             }
                                                         }
@@ -1448,7 +1451,7 @@ namespace NSC_Toolbox.ViewModel {
                                                                 } else if (attribute.Name == "QuakeTime") {
                                                                     ActionCameraQuakeEntry.QuakeTime = Convert.ToInt32(attribute.Value);
                                                                 } else if (attribute.Name == "PerReduction") {
-                                                                    ActionCameraQuakeEntry.PerReduction = (float)Convert.ToDouble(attribute.Value.Replace('.', ','));
+                                                                    ActionCameraQuakeEntry.PerReduction = float.Parse(attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                                 }
                                                             }
                                                         }
@@ -1497,13 +1500,15 @@ namespace NSC_Toolbox.ViewModel {
                                                                     } else if (EffectAttribute.Name == "shotType") {
                                                                         ActionEffectEntry.ShotType = EffectAttribute.Value;
                                                                     } else if (EffectAttribute.Name == "shotParam1") {
-                                                                        ActionEffectEntry.ShotParam1 = (float)Convert.ToDouble(EffectAttribute.Value.Replace('.', ','));
+                                                                        ActionEffectEntry.ShotParam1 = float.Parse(EffectAttribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                                     } else if (EffectAttribute.Name == "shotParam2") {
-                                                                        ActionEffectEntry.ShotParam2 = (float)Convert.ToDouble(EffectAttribute.Value.Replace('.', ','));
+                                                                        ActionEffectEntry.ShotParam2 = float.Parse(EffectAttribute.Value, CultureInfo.InvariantCulture.NumberFormat);
                                                                     } else if (EffectAttribute.Name == "coord") {
                                                                         ActionEffectEntry.Coord = EffectAttribute.Value;
                                                                     } else if (EffectAttribute.Name == "targetDir") {
                                                                         ActionEffectEntry.TargetDir = Convert.ToBoolean(EffectAttribute.Value);
+                                                                    } else if (EffectAttribute.Name == "planeDir") {
+                                                                        ActionEffectEntry.PlaneDir = Convert.ToBoolean(EffectAttribute.Value);
                                                                     }
 
                                                                 }
@@ -1513,42 +1518,42 @@ namespace NSC_Toolbox.ViewModel {
                                                             ActionEventList.Add(ActionEventEntry);
                                                         }
                                                         //Values
-                                                        else if (actionNode.Name == "Gravity") {
-                                                            ActionEntry.Gravity = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                        else if (actionNode.Name == "Gravity") { 
+                                                            ActionEntry.Gravity = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "Restitution") {
-                                                            ActionEntry.Restitution = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.Restitution = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "RandomDirection") {
-                                                            ActionEntry.RandomDirection = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.RandomDirection = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "RandomRoll") {
-                                                            ActionEntry.RandomRoll = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.RandomRoll = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "ViewingAngle") {
-                                                            ActionEntry.ViewingAngle = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.ViewingAngle = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "Friction") {
-                                                            ActionEntry.Friction = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.Friction = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "Frequency_x") {
-                                                            ActionEntry.Frequency_x = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.Frequency_x = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "Frequency_y") {
-                                                            ActionEntry.Frequency_y = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.Frequency_y = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "Frequency_z") {
-                                                            ActionEntry.Frequency_z = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.Frequency_z = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "BankStrong") {
-                                                            ActionEntry.BankStrong = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.BankStrong = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "BankSpring") {
-                                                            ActionEntry.BankSpring = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.BankSpring = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "Amplitude_x") {
-                                                            ActionEntry.Amplitude_x = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.Amplitude_x = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "Amplitude_y") {
-                                                            ActionEntry.Amplitude_y = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.Amplitude_y = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "Amplitude_z") {
-                                                            ActionEntry.Amplitude_z = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.Amplitude_z = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "Velocity") {
-                                                            ActionEntry.Velocity = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.Velocity = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "VelocityRandomize") {
-                                                            ActionEntry.VelocityRandomize = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.VelocityRandomize = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "Inductivity") {
-                                                            ActionEntry.Inductivity = (float)Convert.ToDouble(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.Inductivity = float.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "NumLimitNum") {
-                                                            ActionEntry.NumLimitNum = Convert.ToInt32(actionNode.Attributes.GetNamedItem("value").Value.Replace('.', ','));
+                                                            ActionEntry.NumLimitNum = int.Parse(actionNode.Attributes.GetNamedItem("value").Value, CultureInfo.InvariantCulture.NumberFormat);
                                                         } else if (actionNode.Name == "HitAttach") {
                                                             ActionEntry.HitAttach = actionNode.Attributes.GetNamedItem("value").Value;
                                                         } else if (actionNode.Name == "HitAttach2") {
@@ -1654,6 +1659,16 @@ namespace NSC_Toolbox.ViewModel {
             new_skill_entry.ClassName = "";
 
             SkillList.Add(new_skill_entry);
+        }
+
+        public void DuplicateSkill() {
+            if (SelectedSkill is not null) {
+                SkillEntryModel new_skill_entry = (SkillEntryModel)SelectedSkill.Clone();
+                new_skill_entry.ChunkName = new_skill_entry.ChunkName + "_copy";
+                SkillList.Add(new_skill_entry);
+            } else {
+                ModernWpf.MessageBox.Show("Select Skill Entry!");
+            }
         }
 
         public void DeleteSkill() {
@@ -1965,43 +1980,56 @@ namespace NSC_Toolbox.ViewModel {
         }
 
         public void SaveFile() {
-            if (filePath != "") {
+            try {
+                if (SkillList.Count > 0) {
+                    if (filePath != "") {
 
-                if (File.Exists(filePath + ".backup")) {
-                    File.Delete(filePath + ".backup");
+                        if (File.Exists(filePath + ".backup")) {
+                            File.Delete(filePath + ".backup");
+                        }
+                        File.Copy(filePath, filePath + ".backup");
+                        File.WriteAllBytes(filePath, ConvertToFile());
+                        ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                    } else {
+                        SaveFileAs();
+                    }
+                } else {
+                    ModernWpf.MessageBox.Show("Your file is empty, you can't save it!");
                 }
-                File.Copy(filePath, filePath + ".backup");
-                File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
-            } else {
-                SaveFileAs();
+            }
+            catch (Exception ex) {
+                ModernWpf.MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
         }
 
         public void SaveFileAs(string basepath = "") {
-            SaveFileDialog s = new SaveFileDialog();
-            {
-                s.DefaultExt = ".xfbin";
-                s.Filter = "*.xfbin|*.xfbin";
-            }
-            if (basepath != "")
-                s.FileName = basepath;
-            else
-                s.ShowDialog();
-            if (s.FileName == "") {
-                return;
-            }
-            if (s.FileName == filePath) {
-                if (File.Exists(filePath + ".backup")) {
-                    File.Delete(filePath + ".backup");
+            if (SkillList.Count > 0) {
+                SaveFileDialog s = new SaveFileDialog();
+                {
+                    s.DefaultExt = ".xfbin";
+                    s.Filter = "*.xfbin|*.xfbin";
                 }
-                File.Copy(filePath, filePath + ".backup");
+                if (basepath != "")
+                    s.FileName = basepath;
+                else
+                    s.ShowDialog();
+                if (s.FileName == "") {
+                    return;
+                }
+                if (s.FileName == filePath) {
+                    if (File.Exists(filePath + ".backup")) {
+                        File.Delete(filePath + ".backup");
+                    }
+                    File.Copy(filePath, filePath + ".backup");
+                } else {
+                    filePath = s.FileName;
+                }
+                File.WriteAllBytes(filePath, ConvertToFile());
+                if (basepath == "")
+                    ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
             } else {
-                filePath = s.FileName;
+                ModernWpf.MessageBox.Show("Your file is empty, you can't save it!");
             }
-            File.WriteAllBytes(filePath, ConvertToFile());
-            if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
         }
 
         public byte[] ConvertToFile() {
@@ -2264,22 +2292,31 @@ namespace NSC_Toolbox.ViewModel {
                     if (SkillList[x].ActionList[i].HitEntry.HitHorizontalLimit != 0)
                         SkillHit.Add(new XAttribute("hitLimitH", SkillList[x].ActionList[i].HitEntry.HitHorizontalLimit));
 
+
+                    string SkillDecal_bool = Convert.ToString(SkillList[x].ActionList[i].SkillDecalEntry.UseDecalCheckBox);
+                    string SkillHomingChunk_bool1 = Convert.ToString(SkillList[x].ActionList[i].SkillHomingEntry.UseSkillHoming);
+                    string SkillHomingChunk_bool2 = Convert.ToString(SkillList[x].ActionList[i].SkillHomingEntry.UseEnemyHoming);
+                    string SkillCameraQuakeChunk_bool = Convert.ToString(SkillList[x].ActionList[i].SkillCameraQuakeEntry.UseCameraQuake);
+
+                    
+
                     XElement SkillDecalChunk = new XElement("SkillDecal",
-                        new XAttribute("UseDecalCheckBox", SkillList[x].ActionList[i].SkillDecalEntry.UseDecalCheckBox),
+                        new XAttribute("UseDecalCheckBox", char.ToUpper(SkillDecal_bool[0]) + SkillDecal_bool.Substring(1)),
                         new XAttribute("skillDecalType", SkillList[x].ActionList[i].SkillDecalEntry.SkillDecalType ?? ""),
                         new XAttribute("decalTextureName", SkillList[x].ActionList[i].SkillDecalEntry.DecalTextureName ?? ""),
                         new XAttribute("decalHeightScale", SkillList[x].ActionList[i].SkillDecalEntry.DecalHeightScale),
                         new XAttribute("decalWidthScale", SkillList[x].ActionList[i].SkillDecalEntry.DecalWidthScale)
                         );
                     XElement SkillHomingChunk = new XElement("SkillHoming",
-                        new XAttribute("useSkillHoming", SkillList[x].ActionList[i].SkillHomingEntry.UseSkillHoming),
+                        new XAttribute("useSkillHoming", char.ToUpper(SkillHomingChunk_bool1[0]) + SkillHomingChunk_bool1.Substring(1)),
                         new XAttribute("skillHomingSkillName", SkillList[x].ActionList[i].SkillHomingEntry.SkillHomingSkillName ?? ""),
                         new XAttribute("skillHomingDummy", SkillList[x].ActionList[i].SkillHomingEntry.SkillHomingDummy ?? ""),
                         new XAttribute("skillHomingActionNum", SkillList[x].ActionList[i].SkillHomingEntry.SkillHomingActionNum),
                         new XAttribute("playerHomingDummy", SkillList[x].ActionList[i].SkillHomingEntry.PlayerHomingDummy ?? ""),
-                        new XAttribute("useEnemyHoming", SkillList[x].ActionList[i].SkillHomingEntry.UseEnemyHoming)
+                        new XAttribute("useEnemyHoming", char.ToUpper(SkillHomingChunk_bool2[0]) + SkillHomingChunk_bool2.Substring(1))
                         );
                     XElement SkillCameraQuakeChunk = new XElement("CameraQuake",
+                        new XAttribute("useCameraQuake", char.ToUpper(SkillCameraQuakeChunk_bool[0]) + SkillCameraQuakeChunk_bool.Substring(1)),
                         new XAttribute("HeightStrength", SkillList[x].ActionList[i].SkillCameraQuakeEntry.HeightStrength),
                         new XAttribute("WidthStrength", SkillList[x].ActionList[i].SkillCameraQuakeEntry.WidthStrength),
                         new XAttribute("QuakeTime", SkillList[x].ActionList[i].SkillCameraQuakeEntry.QuakeTime),
@@ -2388,7 +2425,7 @@ namespace NSC_Toolbox.ViewModel {
                             EventElement.Add(new XAttribute("commandParameter", SkillList[x].ActionList[i].EventList[s].EventCommandParameter));
                         }
 
-                        if (SkillList[x].ActionList[i].EventList[s].EventArgument != 0) {
+                        if (SkillList[x].ActionList[i].EventList[s].EventArgument != 0 || SkillList[x].ActionList[i].EventList[s].EventType == "SKILL_EVENT_TYPE_FRAME_ELAPSED") {
                             EventElement.Add(new XAttribute("arg", SkillList[x].ActionList[i].EventList[s].EventArgument));
                         }
                         if (SkillList[x].ActionList[i].EventList[s].EnableLoopCount) {
@@ -2547,6 +2584,15 @@ namespace NSC_Toolbox.ViewModel {
                 return _deleteSkillCommand ??
                   (_deleteSkillCommand = new RelayCommand(obj => {
                       DeleteSkill();
+                  }));
+            }
+        }
+        private RelayCommand _duplicateSkillCommand;
+        public RelayCommand DuplicateSkillCommand {
+            get {
+                return _duplicateSkillCommand ??
+                  (_duplicateSkillCommand = new RelayCommand(obj => {
+                      DuplicateSkill();
                   }));
             }
         }
