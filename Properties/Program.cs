@@ -4277,7 +4277,9 @@ namespace NSC_Toolbox.Properties
             "S_lockon2",
             "S_homing",
             "S_flyLP",
-            "S_adv_chidori2"
+            "S_adv_chidori2",
+            "S_ice",
+            "S_gaugeUp"
         };
         public static string[] S3_SFX_LIST = {
             "S_book",

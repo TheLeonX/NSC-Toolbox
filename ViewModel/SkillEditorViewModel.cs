@@ -2239,14 +2239,18 @@ namespace NSC_Toolbox.ViewModel {
                 //Hit Chunk
                 XElement HitChunk = new XElement("Hit",
                    new XAttribute("radius", SkillList[x].HitEntry.HitRadius),
-                   new XAttribute("hitLimitV", SkillList[x].HitEntry.HitVerticalLimit),
-                   new XAttribute("hitLimitH", SkillList[x].HitEntry.HitHorizontalLimit),
                    new XAttribute("worldHitRadius", SkillList[x].HitEntry.HitWorldRadius),
                    new XAttribute("priorityCategory", SkillList[x].HitEntry.HitPriorityCategory ?? ""),
                    new XAttribute("priorityOffset", SkillList[x].HitEntry.HitPriorityOffset),
-                   new XAttribute("damageId", SkillList[x].HitEntry.HitDamageID ?? ""),
-                   new XAttribute("hitPoint", SkillList[x].HitEntry.HitPoint),
-                   new XAttribute("hitIntervalFrame", SkillList[x].HitEntry.HitIntervalFrame));
+                   new XAttribute("damageId", SkillList[x].HitEntry.HitDamageID ?? ""));
+                if (SkillList[x].HitEntry.HitVerticalLimit != 0)
+                    HitChunk.Add(new XAttribute("hitLimitV", SkillList[x].HitEntry.HitVerticalLimit));
+                if (SkillList[x].HitEntry.HitHorizontalLimit != 0)
+                    HitChunk.Add(new XAttribute("hitLimitH", SkillList[x].HitEntry.HitHorizontalLimit));
+                if (SkillList[x].HitEntry.HitPoint != 0)
+                    HitChunk.Add(new XAttribute("hitPoint", SkillList[x].HitEntry.HitPoint));
+                if (SkillList[x].HitEntry.HitIntervalFrame != 0)
+                    HitChunk.Add(new XAttribute("hitIntervalFrame", SkillList[x].HitEntry.HitIntervalFrame));
                 if (SkillList[x].HitEntry.SkillAttributeType is not null && SkillList[x].HitEntry.SkillAttributeType != "")
                     HitChunk.Add(new XAttribute("skillAttributeType", SkillList[x].HitEntry.SkillAttributeType ?? ""));
                 if (SkillList[x].HitEntry.RigidBody)

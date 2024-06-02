@@ -911,8 +911,8 @@ namespace NSC_Toolbox.ViewModel
                         }
                     }
                 }
-            } catch (Exception) {
-                ModernWpf.MessageBox.Show("Something is wrong with file. Send this file in modding group!");
+            } catch (Exception ex) {
+                ModernWpf.MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
             
         }
