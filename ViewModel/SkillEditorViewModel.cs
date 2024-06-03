@@ -1209,12 +1209,21 @@ namespace NSC_Toolbox.ViewModel {
                 OnPropertyChanged("FilePathList");
             }
         }
+
+        private string _selectedFilePath;
+        public string SelectedFilePath{
+            get { return _selectedFilePath; }
+            set {
+                _selectedFilePath = value;
+                FilePathTextBox_field = SelectedFilePath;
+                OnPropertyChanged("SelectedFilePath");
+            }
+        }
         private int _selectedFilePathIndex;
         public int SelectedFilePathIndex {
             get { return _selectedFilePathIndex; }
             set {
                 _selectedFilePathIndex = value;
-                FilePathTextBox_field = FilePathList[value];
                 OnPropertyChanged("SelectedFilePathIndex");
             }
         }
@@ -1640,10 +1649,8 @@ namespace NSC_Toolbox.ViewModel {
         }
 
         public void DeleteFilePath() {
-            if (SelectedSkill is not null && SelectedFilePathIndex != -1) {
-                int ind = SelectedFilePathIndex;
-                SelectedFilePathIndex = SelectedFilePathIndex - 1;
-                SelectedSkill.FilePathList.RemoveAt(ind);
+            if (SelectedSkill is not null && SelectedFilePath is not null) {
+                SelectedSkill.FilePathList.Remove(SelectedFilePath);
             } else {
                 ModernWpf.MessageBox.Show("Select skill entry and after that select path which you want to delete!");
             }

@@ -941,8 +941,8 @@ namespace NSC_Toolbox.Model {
             return new SkillActionModel {
                 ActionID = this.ActionID,
                 ActionType = this.ActionType,
-                AnimationEntry = this.AnimationEntry,
-                HitEntry = this.HitEntry,
+                AnimationEntry = (SkillAnimationModel)this.AnimationEntry.Clone(),
+                HitEntry = (SkillHitModel)this.HitEntry.Clone(),
                 Gravity = this.Gravity,
                 Restitution = this.Restitution,
                 RandomDirection = this.RandomDirection,
@@ -976,9 +976,9 @@ namespace NSC_Toolbox.Model {
                 State = this.State,
                 EventList = newEventList,
                 SoundList = newSoundList,
-                SkillHomingEntry = this.SkillHomingEntry,
-                SkillDecalEntry = this.SkillDecalEntry,
-                SkillCameraQuakeEntry = this.SkillCameraQuakeEntry,
+                SkillHomingEntry = (SkillHomingModel)this.SkillHomingEntry.Clone(),
+                SkillDecalEntry = (SkillDecalModel)this.SkillDecalEntry.Clone(),
+                SkillCameraQuakeEntry = (SkillCameraQuakeModel)this.SkillCameraQuakeEntry.Clone(),
             };
         }
         public event PropertyChangedEventHandler PropertyChanged;

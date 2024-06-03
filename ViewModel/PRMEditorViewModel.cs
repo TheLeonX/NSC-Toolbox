@@ -2656,6 +2656,7 @@ namespace NSC_Toolbox.ViewModel
             buffer8 = BitConverter.GetBytes(chunkCount + 3);
             fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
 
+            int chunk_count = 0;
 
             //chunks
 
@@ -2666,6 +2667,7 @@ namespace NSC_Toolbox.ViewModel
                 });
 
             for (int i = 0; i<VerList.Count; i++) {
+                chunk_count++;
                 byte[] verChunk = new byte[0];
                 verChunk = BinaryReader.b_AddBytes(verChunk, BitConverter.GetBytes(0x44), 1); //Size 1
                 verChunk = BinaryReader.b_AddBytes(verChunk, BitConverter.GetBytes(i + 1), 1); //ChunkMap Index
@@ -2737,10 +2739,12 @@ namespace NSC_Toolbox.ViewModel
                 }
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, verChunk);
             }
-            if (ProjectileList.Count > 0) {
 
+
+            if (ProjectileList.Count > 0) {
+                chunk_count++;
                 byte[] projectileChunk = new byte[0x04]; //Size 1
-                projectileChunk = BinaryReader.b_AddBytes(projectileChunk, BitConverter.GetBytes(VerList.Count + 1), 1); //ChunkMap Index
+                projectileChunk = BinaryReader.b_AddBytes(projectileChunk, BitConverter.GetBytes(chunk_count), 1); //ChunkMap Index
                 projectileChunk = BinaryReader.b_AddBytes(projectileChunk, BitConverter.GetBytes((UInt16)0x63), 1); // Version
                 projectileChunk = BinaryReader.b_AddBytes(projectileChunk, BitConverter.GetBytes((UInt16)0x9276), 1);
                 projectileChunk = BinaryReader.b_AddBytes(projectileChunk, new byte[0x04], 1); //Size 2
@@ -2763,8 +2767,9 @@ namespace NSC_Toolbox.ViewModel
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, projectileChunk);
             }
             if (MovementList.Count > 0) {
+                chunk_count++;
                 byte[] movementChunk = new byte[0x04]; //Size 1
-                movementChunk = BinaryReader.b_AddBytes(movementChunk, BitConverter.GetBytes(VerList.Count + 2), 1); //ChunkMap Index
+                movementChunk = BinaryReader.b_AddBytes(movementChunk, BitConverter.GetBytes(chunk_count), 1); //ChunkMap Index
                 movementChunk = BinaryReader.b_AddBytes(movementChunk, BitConverter.GetBytes((UInt16)0x63), 1); // Version
                 movementChunk = BinaryReader.b_AddBytes(movementChunk, BitConverter.GetBytes((UInt16)0x9276), 1);
                 movementChunk = BinaryReader.b_AddBytes(movementChunk, new byte[0x04], 1); //Size 2
@@ -2788,9 +2793,10 @@ namespace NSC_Toolbox.ViewModel
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, movementChunk);
             }
             if (CollisionList.Count > 0) {
+                chunk_count++;
 
                 byte[] collisionChunk = new byte[0x04]; //Size 1
-                collisionChunk = BinaryReader.b_AddBytes(collisionChunk, BitConverter.GetBytes(VerList.Count + 3), 1); //ChunkMap Index
+                collisionChunk = BinaryReader.b_AddBytes(collisionChunk, BitConverter.GetBytes(chunk_count), 1); //ChunkMap Index
                 collisionChunk = BinaryReader.b_AddBytes(collisionChunk, BitConverter.GetBytes((UInt16)0x63), 1); // Version
                 collisionChunk = BinaryReader.b_AddBytes(collisionChunk, BitConverter.GetBytes((UInt16)0x9276), 1);
                 collisionChunk = BinaryReader.b_AddBytes(collisionChunk, new byte[0x04], 1); //Size 2
