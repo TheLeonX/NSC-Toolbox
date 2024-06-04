@@ -30,7 +30,45 @@
     <v:String x:Key="m_mainWindow_012">Support Me</v:String>
     <v:String x:Key="m_mainWindow_013">GitHub Page</v:String>
 
+
+    <!--Add Costume Tool-->
+    <v:String x:Key="m_addCostume_title">Add Costume</v:String>
+    <v:String x:Key="m_addCostume_intro_title">Naruto Storm Connections - Add Costume</v:String>
+    <v:String x:Key="m_addCostume_intro_desc">This tool will help you to add costumes in most easiest way.</v:String>
+    <v:String  xml:space="preserve" x:Key="m_addCostume_warning">
+    For adding costume slots, you need to prepare your data_win32 folder.
+    Make sure you have following files in data_win32 folder for correct work of this tool:
+        
+        data_win32/spc/characode.bin.xfbin (optional, but if you want to add costume for new character, it will be required)
+        data_win32/spc/playerSettingParam.bin.xfbin
+        data_win32/spc/player_icon.xfbin
+        data_win32/spc/duelPlayerParam.xfbin
+        data_win32/ui/max/select/characterSelectParam.xfbin
+        data_win32/spc/costumeBreakParam.xfbin
+        data_win32/spc/costumeBreakColorParam.xfbin
+        data_win32/rpg/param/costumeParam.bin.xfbin
+        
+    This tool doesn't support appearanceAnm and afterAttachObject files!
+    This tool was made specifically for characters, which already have at least 1 model.
+    </v:String>
+    <v:String x:Key="m_addCostume_page1_desc">Select data_win32 folder.</v:String>
+    <v:String x:Key="m_addCostume_page2_desc">Set settings for adding costume.</v:String>
+    <v:String x:Key="m_addCostume_page2_001">Character Code</v:String>
+    <v:String x:Key="m_addCostume_page2_002">Base Costume Code</v:String>
+    <v:String x:Key="m_addCostume_page2_003">Base Costume Icon</v:String>
+    <v:String x:Key="m_addCostume_page2_004">Awakening Costume Code</v:String>
+    <v:String x:Key="m_addCostume_page2_005">Awakening Costume Icon</v:String>
+    <v:String x:Key="m_addCostume_page2_006">Alternative Color Count</v:String>
+    <v:String x:Key="m_addCostume_page2_007">Enable Armor Break Costume</v:String>
+    <v:String x:Key="m_addCostume_page2_008">Costume Name (message ID)</v:String>
+    <v:String x:Key="m_addCostume_page2_009">Costume Description (message ID)</v:String>
+    <v:String x:Key="m_addCostume_page2_010">Add Costume</v:String>
+    <v:String x:Key="m_addCostume_page2_011">Refresh</v:String>
     
+    <v:String  xml:space="preserve" x:Key="m_addCostume_page2_warning">
+If you want to add awakening model to character which doesn't have it, make sure character have &lt;codeAwake2Model&gt;bod1 entry in prm_load! If you want to make different costume for awakening, make sure character has enabled function in prm file for switching awakening model on costume! Required function is - 229: ME_SET_SUBSTITUTION_KEY. Examples you can find 3ksnprm.bin.xfbin or 2rocprm.bin.xfbin. Highly not recommended to add this changes!
+    </v:String>
+
     <!--Skill Editor-->
     <v:String x:Key="m_skillEditor_title">Projectile Editor</v:String>
     <v:String x:Key="m_skillEditor_001">Projectile Entries</v:String>
@@ -139,7 +177,7 @@
 
 
     <!--Export Mod-->
-    <v:String x:Key="m_exportMod_title">Naruto Storm Connection Mod Exporter</v:String>
+    <v:String x:Key="m_exportMod_title">Naruto Storm Connections Mod Exporter</v:String>
     <v:String x:Key="m_exportMod_page0_desc">This exporter will help you to prepare all stuff required for making mod, which can be compatible with NSC Mod Manager.</v:String>
     <v:String  xml:space="preserve" x:Key="m_exportMod_page0_warning">
     If your mod adding character, you need to add required files and entries for it:

@@ -215,6 +215,24 @@ namespace NSC_Toolbox.ViewModel
             }
             return -1;
         }
+        public string LastCostume() {
+            List<int> CostumeIds = new List<int>();
+
+            for (int i = 0; i < CostumeParamList.Count; i++) {
+                CostumeIds.Add(Convert.ToInt32(CostumeParamList[i].EntryString.Remove(0, CostumeParamList[i].EntryString.IndexOf("_") + 1)));
+            }
+            int maxCostumeId = CostumeIds.Max() + 10;
+            return "COSTUME_" + maxCostumeId.ToString("D5");
+        }
+        public int LastEntry() {
+            List<int> Ids = new List<int>();
+
+            for (int i = 0; i < CostumeParamList.Count; i++) {
+                Ids.Add(CostumeParamList[i].EntryIndex);
+            }
+            int maxId = Ids.Max();
+            return maxId + 1;
+        }
 
         public void SearchEntry() {
             if (SearchIndex_field > 0) {

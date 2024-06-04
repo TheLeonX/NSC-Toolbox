@@ -172,6 +172,35 @@ namespace NSC_Toolbox.ViewModel
 
         }
 
+        public CostumeBreakParamModel FindItemWithCharacodeID (int characode_id) {
+            CostumeBreakParamModel entry = new CostumeBreakParamModel() { ModelPath = "data/spc/" };
+
+            for (int i =0; i< CostumeBreakParamList.Count; i++) {
+                if (CostumeBreakParamList[i].CharacodeID == characode_id) {
+                    entry = (CostumeBreakParamModel)CostumeBreakParamList[i].Clone();
+                    break;
+                }
+            }
+
+
+
+            return entry;
+        }
+
+        public bool ItemExist(int characode_id) {
+            bool exist = false;
+
+            for (int i = 0; i < CostumeBreakParamList.Count; i++) {
+                if (CostumeBreakParamList[i].CharacodeID == characode_id) {
+                    exist = true;
+                    break;
+                }
+            }
+
+
+
+            return exist;
+        }
         public void RemoveEntry() {
             if (SelectedCostumeBreakParam is not null) {
                 CostumeBreakParamList.Remove(SelectedCostumeBreakParam);

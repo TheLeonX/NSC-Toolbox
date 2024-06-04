@@ -726,6 +726,36 @@ namespace NSC_Toolbox.ViewModel {
             }
         }
 
+        public DuelPlayerParamModel FindItemWithCharacode(string characode) {
+            DuelPlayerParamModel return_item = new DuelPlayerParamModel();
+
+            for (int i = 0; i<DuelPlayerParamList.Count; i++) {
+                if (DuelPlayerParamList[i].BinName.Contains(characode)) {
+                    return_item = DuelPlayerParamList[i]; 
+                    break;
+                }
+            }
+
+
+            return return_item;
+        }
+
+        public int FindFreeCostumeSlot(DuelPlayerParamModel entry) {
+            int free_slot = 0;
+
+            for (int i = 0; i<20; i++ ) {
+                if ((entry.BaseCostumes[i].CostumeName ?? "") == "") {
+                    free_slot = i;
+                    break;
+                }
+            }
+            
+
+
+            return free_slot;
+        }
+
+
         public void RemoveEntry() {
             if (SelectedDPP is not null) {
                 DuelPlayerParamList.Remove(SelectedDPP);

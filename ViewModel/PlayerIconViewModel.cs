@@ -172,6 +172,18 @@ namespace NSC_Toolbox.ViewModel {
 
         }
 
+        public PlayerIconModel FindItemWithCharacodeID(int characode_id) {
+            PlayerIconModel entry = new PlayerIconModel();
+            for (int i = 0; i < playerIconList.Count; i++) {
+                if (playerIconList[i].CharacodeID == characode_id && playerIconList[i].CostumeID == 0) {
+                    entry = (PlayerIconModel)playerIconList[i].Clone();
+                    break;
+                }
+            }
+
+            return entry;
+        }
+
         public void RemoveEntry() {
             if (SelectedPlayerIcon is not null) {
                 playerIconList.Remove(SelectedPlayerIcon);

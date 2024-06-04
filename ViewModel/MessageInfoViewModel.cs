@@ -542,32 +542,38 @@ namespace NSC_Toolbox.ViewModel
                 MessageInfo_List.Add(new ObservableCollection<MessageInfoModel>());
         }
         public void OpenFiles(string basepath = "") {
-            if (basepath == "") {
-                var dialog = new CommonOpenFileDialog();
-                dialog.IsFolderPicker = true;
-                CommonFileDialogResult result = dialog.ShowDialog();
-                if (result == CommonFileDialogResult.Ok)
-                    filePath = dialog.FileName;
-                else {
-                    LoadingStatePlay = Visibility.Hidden;
-                    return;
-                }
-            } else
-                filePath = basepath;
-            if (Directory.Exists(filePath)) {
-                string[] files = Directory.GetFiles(filePath, "messageInfo.bin.xfbin", SearchOption.AllDirectories);
-                Clear();
-                if (files.Length == 15) {
-                    for (int i = 0; i< files.Length; i++) {
-                        CreateMessageInfoList(files[i], i);
+            try {
+                if (basepath == "") {
+                    var dialog = new CommonOpenFileDialog();
+                    dialog.IsFolderPicker = true;
+                    CommonFileDialogResult result = dialog.ShowDialog();
+                    if (result == CommonFileDialogResult.Ok)
+                        filePath = dialog.FileName;
+                    else {
+                        LoadingStatePlay = Visibility.Hidden;
+                        return;
                     }
-                    MessageInfo_preview_List = MessageInfo_List[SelectedMessageInfoIndex];
-                } else {
-                    ModernWpf.MessageBox.Show("This tool requires all messageInfo files to be loaded in directory!");
-                    LoadingStatePlay = Visibility.Hidden;
-                    return;
+                } else
+                    filePath = basepath;
+                if (Directory.Exists(filePath)) {
+                    string[] files = Directory.GetFiles(filePath, "messageInfo.bin.xfbin", SearchOption.AllDirectories);
+                    Clear();
+                    if (files.Length == 15) {
+                        for (int i = 0; i < files.Length; i++) {
+                            CreateMessageInfoList(files[i], i);
+                        }
+                        MessageInfo_preview_List = MessageInfo_List[SelectedMessageInfoIndex];
+                    } else {
+                        MessageBox.Show("This tool requires all messageInfo files to be loaded in directory!");
+                        LoadingStatePlay = Visibility.Hidden;
+                        return;
+                    }
                 }
             }
+            catch (Exception ex) {
+                MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
+            }
+            
         }
         public static ObservableCollection<MessageInfoModel> OpenFile(string basepath) {
             ObservableCollection<MessageInfoModel> return_message = new ObservableCollection<MessageInfoModel>();
@@ -594,42 +600,54 @@ namespace NSC_Toolbox.ViewModel
         }
 
         public void AddEntries() {
-            MessageInfoModel messageEntry = new MessageInfoModel();
-            messageEntry.CRC32Code = new byte[4] { 0xFF, 0xFF, 0xFF, 0xFF };
-            messageEntry.MainText = new byte[0];
-            messageEntry.SecondaryText = new byte[0];
-            messageEntry.Speaker = new byte[0];
-            messageEntry.ACBFileID = -1;
-            messageEntry.CueID = -1;
-            messageEntry.DisableText = false;
-            for (int i = 0; i<15; i++) {
-                MessageInfo_List[i].Add((MessageInfoModel)messageEntry.Clone());
-            }
-            MessageInfo_preview_List = MessageInfo_List[SelectedMessageInfoIndex]; 
-            SelectedMessageIndex = MessageInfo_preview_List.Count - 1;
-            CollectionViewSource.GetDefaultView(MessageInfo_preview_List).MoveCurrentTo(SelectedMessageInfo);
-            ModernWpf.MessageBox.Show("Entry was added!");
-        }
-        public void DupEntries() {
-            if (SelectedMessageIndex > -1) {
+            try {
+                MessageInfoModel messageEntry = new MessageInfoModel();
+                messageEntry.CRC32Code = new byte[4] { 0xFF, 0xFF, 0xFF, 0xFF };
+                messageEntry.MainText = new byte[0];
+                messageEntry.SecondaryText = new byte[0];
+                messageEntry.Speaker = new byte[0];
+                messageEntry.ACBFileID = -1;
+                messageEntry.CueID = -1;
+                messageEntry.DisableText = false;
                 for (int i = 0; i<15; i++) {
-                    MessageInfoModel messageEntry = (MessageInfoModel)MessageInfo_List[i][SelectedMessageIndex].Clone();
-                    MessageInfo_List[i].Add(messageEntry);
+                    MessageInfo_List[i].Add((MessageInfoModel)messageEntry.Clone());
                 }
-            MessageInfo_preview_List = MessageInfo_List[SelectedMessageInfoIndex]; 
+                MessageInfo_preview_List = MessageInfo_List[SelectedMessageInfoIndex]; 
                 SelectedMessageIndex = MessageInfo_preview_List.Count - 1;
                 CollectionViewSource.GetDefaultView(MessageInfo_preview_List).MoveCurrentTo(SelectedMessageInfo);
                 ModernWpf.MessageBox.Show("Entry was added!");
+            } catch (Exception ex) {
+                MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
+            }
+        }
+        public void DupEntries() {
+            try {
+                if (SelectedMessageIndex > -1) {
+                    for (int i = 0; i<15; i++) {
+                        MessageInfoModel messageEntry = (MessageInfoModel)MessageInfo_List[i][SelectedMessageIndex].Clone();
+                        MessageInfo_List[i].Add(messageEntry);
+                    }
+                MessageInfo_preview_List = MessageInfo_List[SelectedMessageInfoIndex]; 
+                    SelectedMessageIndex = MessageInfo_preview_List.Count - 1;
+                    CollectionViewSource.GetDefaultView(MessageInfo_preview_List).MoveCurrentTo(SelectedMessageInfo);
+                    ModernWpf.MessageBox.Show("Entry was added!");
+                }
+            } catch (Exception ex) {
+                MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
         }
         public void DeleteEntries() {
-            if (SelectedMessageIndex > -1) {
-                int ind = SelectedMessageIndex;
-                for (int i = 0; i < 15; i++) {
-                    MessageInfo_List[i].RemoveAt(ind);
+            try {
+                if (SelectedMessageIndex > -1) {
+                    int ind = SelectedMessageIndex;
+                    for (int i = 0; i < 15; i++) {
+                        MessageInfo_List[i].RemoveAt(ind);
+                    }
+                    SelectedMessageIndex = ind - 1;
+                    ModernWpf.MessageBox.Show("Entry was added!");
                 }
-                SelectedMessageIndex = ind - 1;
-                ModernWpf.MessageBox.Show("Entry was added!");
+            } catch (Exception ex) {
+                MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
         }
         public int SearchStringIndex(ObservableCollection<MessageInfoModel> FunctionList, string member_name, int Selected) {
@@ -646,7 +664,8 @@ namespace NSC_Toolbox.ViewModel
             return -1;
         }
         public void SearchTextEntry() {
-            if (SearchEntry_field is not null && MessageInfo_preview_List.Count > 0) {
+            try {
+                if (SearchEntry_field is not null && MessageInfo_preview_List.Count > 0) {
                 if (SearchStringIndex(MessageInfo_preview_List, SearchEntry_field, SelectedMessageIndex) != -1) {
                     SelectedMessageIndex = SearchStringIndex(MessageInfo_preview_List, SearchEntry_field, SelectedMessageIndex);
                     CollectionViewSource.GetDefaultView(MessageInfo_preview_List).MoveCurrentTo(SelectedMessageInfo);
@@ -658,182 +677,197 @@ namespace NSC_Toolbox.ViewModel
                         ModernWpf.MessageBox.Show("There is no entry with that text.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+                }
+            } catch (Exception ex) {
+                MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
         }
         public void SearchCRC32Entry() {
-            if (SearchEntry_field is not null && MessageInfo_preview_List.Count > 0) {
-                bool found = false;
-                byte[] FindCRC32 = BinaryReader.crc32(SearchEntry_field);
-                for (int i = 0; i < MessageInfo_preview_List.Count; i++) {
-                    if (BitConverter.ToString(MessageInfo_preview_List[i].CRC32Code) == BitConverter.ToString(FindCRC32)) {
-                        SelectedMessageIndex = i;
-                        CollectionViewSource.GetDefaultView(MessageInfo_preview_List).MoveCurrentTo(SelectedMessageInfo);
-                        found = true;
-                        continue;
+            try {
+                if (SearchEntry_field is not null && MessageInfo_preview_List.Count > 0) {
+                    bool found = false;
+                    byte[] FindCRC32 = BinaryReader.crc32(SearchEntry_field);
+                    for (int i = 0; i < MessageInfo_preview_List.Count; i++) {
+                        if (BitConverter.ToString(MessageInfo_preview_List[i].CRC32Code) == BitConverter.ToString(FindCRC32)) {
+                            SelectedMessageIndex = i;
+                            CollectionViewSource.GetDefaultView(MessageInfo_preview_List).MoveCurrentTo(SelectedMessageInfo);
+                            found = true;
+                            continue;
+                        }
+                    }
+                    if (!found) {
+                        ModernWpf.MessageBox.Show("Couldn't find section with that Message ID.");
                     }
                 }
-                if (!found) {
-                    ModernWpf.MessageBox.Show("Couldn't find section with that Message ID.");
-                }
+            } catch (Exception ex) {
+                MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
         }
         public void SaveEntries() {
-            if (MessageInfo_preview_List.Count > 0 && SelectedMessageIndex > -1) {
-                if (SearchEntry_field is not null & SearchEntry_field != "") {
-                    byte[] CRC32Code = BinaryReader.crc32(SearchEntry_field);
-                    for (int i = 0; i < MessageInfo_preview_List.Count; i++) {
-                        if (BitConverter.ToString(MessageInfo_preview_List[i].CRC32Code) == BitConverter.ToString(CRC32Code)) {
-                            ModernWpf.MessageBox.Show("Entry with that Message ID already exist in file!");
-                            return;
+            try {
+                if (MessageInfo_preview_List.Count > 0 && SelectedMessageIndex > -1) {
+                    if (SearchEntry_field is not null & SearchEntry_field != "") {
+                        byte[] CRC32Code = BinaryReader.crc32(SearchEntry_field);
+                        for (int i = 0; i < MessageInfo_preview_List.Count; i++) {
+                            if (BitConverter.ToString(MessageInfo_preview_List[i].CRC32Code) == BitConverter.ToString(CRC32Code)) {
+                                ModernWpf.MessageBox.Show("Entry with that Message ID already exist in file!");
+                                return;
+                            }
                         }
+                        MessageInfo_List[0][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[1][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[2][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[3][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[4][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[5][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[6][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[7][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[8][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[9][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[10][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[11][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[12][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[13][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        MessageInfo_List[14][SelectedMessageIndex].CRC32Code = CRC32Code;
+                        SearchEntry_field = "";
                     }
-                    MessageInfo_List[0][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[1][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[2][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[3][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[4][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[5][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[6][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[7][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[8][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[9][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[10][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[11][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[12][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[13][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    MessageInfo_List[14][SelectedMessageIndex].CRC32Code = CRC32Code;
-                    SearchEntry_field = "";
+
+
+                    MessageInfo_List[0][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_1_field);
+                    MessageInfo_List[0][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_1_field);
+                    MessageInfo_List[0][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_1_field);
+                    MessageInfo_List[0][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[0][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[0][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[1][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_2_field);
+                    MessageInfo_List[1][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_2_field);
+                    MessageInfo_List[1][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_2_field);
+                    MessageInfo_List[1][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[1][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[1][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[2][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_3_field);
+                    MessageInfo_List[2][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_3_field);
+                    MessageInfo_List[2][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_3_field);
+                    MessageInfo_List[2][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[2][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[2][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[3][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_4_field);
+                    MessageInfo_List[3][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_4_field);
+                    MessageInfo_List[3][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_4_field);
+                    MessageInfo_List[3][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[3][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[3][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[4][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_5_field);
+                    MessageInfo_List[4][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_5_field);
+                    MessageInfo_List[4][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_5_field);
+                    MessageInfo_List[4][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[4][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[4][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[5][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_6_field);
+                    MessageInfo_List[5][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_6_field);
+                    MessageInfo_List[5][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_6_field);
+                    MessageInfo_List[5][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[5][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[5][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[6][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_7_field);
+                    MessageInfo_List[6][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_7_field);
+                    MessageInfo_List[6][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_7_field);
+                    MessageInfo_List[6][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[6][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[6][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[7][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_8_field);
+                    MessageInfo_List[7][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_8_field);
+                    MessageInfo_List[7][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_8_field);
+                    MessageInfo_List[7][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[7][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[7][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[8][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_9_field);
+                    MessageInfo_List[8][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_9_field);
+                    MessageInfo_List[8][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_9_field);
+                    MessageInfo_List[8][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[8][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[8][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[9][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_10_field);
+                    MessageInfo_List[9][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_10_field);
+                    MessageInfo_List[9][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_10_field);
+                    MessageInfo_List[9][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[9][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[9][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[10][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_11_field);
+                    MessageInfo_List[10][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_11_field);
+                    MessageInfo_List[10][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_11_field);
+                    MessageInfo_List[10][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[10][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[10][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[11][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_12_field);
+                    MessageInfo_List[11][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_12_field);
+                    MessageInfo_List[11][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_12_field);
+                    MessageInfo_List[11][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[11][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[11][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[12][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_13_field);
+                    MessageInfo_List[12][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_13_field);
+                    MessageInfo_List[12][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_13_field);
+                    MessageInfo_List[12][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[12][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[12][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[13][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_14_field);
+                    MessageInfo_List[13][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_14_field);
+                    MessageInfo_List[13][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_14_field);
+                    MessageInfo_List[13][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[13][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[13][SelectedMessageIndex].DisableText = DisableText_field;
+
+                    MessageInfo_List[14][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_15_field);
+                    MessageInfo_List[14][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_15_field);
+                    MessageInfo_List[14][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_15_field);
+                    MessageInfo_List[14][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
+                    MessageInfo_List[14][SelectedMessageIndex].CueID = CueID_field;
+                    MessageInfo_List[14][SelectedMessageIndex].DisableText = DisableText_field;
+                    ModernWpf.MessageBox.Show("Entry was saved!");
                 }
-
-
-                MessageInfo_List[0][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_1_field);
-                MessageInfo_List[0][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_1_field);
-                MessageInfo_List[0][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_1_field);
-                MessageInfo_List[0][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[0][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[0][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[1][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_2_field);
-                MessageInfo_List[1][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_2_field);
-                MessageInfo_List[1][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_2_field);
-                MessageInfo_List[1][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[1][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[1][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[2][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_3_field);
-                MessageInfo_List[2][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_3_field);
-                MessageInfo_List[2][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_3_field);
-                MessageInfo_List[2][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[2][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[2][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[3][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_4_field);
-                MessageInfo_List[3][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_4_field);
-                MessageInfo_List[3][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_4_field);
-                MessageInfo_List[3][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[3][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[3][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[4][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_5_field);
-                MessageInfo_List[4][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_5_field);
-                MessageInfo_List[4][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_5_field);
-                MessageInfo_List[4][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[4][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[4][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[5][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_6_field);
-                MessageInfo_List[5][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_6_field);
-                MessageInfo_List[5][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_6_field);
-                MessageInfo_List[5][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[5][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[5][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[6][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_7_field);
-                MessageInfo_List[6][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_7_field);
-                MessageInfo_List[6][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_7_field);
-                MessageInfo_List[6][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[6][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[6][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[7][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_8_field);
-                MessageInfo_List[7][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_8_field);
-                MessageInfo_List[7][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_8_field);
-                MessageInfo_List[7][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[7][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[7][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[8][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_9_field);
-                MessageInfo_List[8][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_9_field);
-                MessageInfo_List[8][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_9_field);
-                MessageInfo_List[8][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[8][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[8][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[9][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_10_field);
-                MessageInfo_List[9][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_10_field);
-                MessageInfo_List[9][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_10_field);
-                MessageInfo_List[9][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[9][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[9][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[10][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_11_field);
-                MessageInfo_List[10][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_11_field);
-                MessageInfo_List[10][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_11_field);
-                MessageInfo_List[10][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[10][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[10][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[11][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_12_field);
-                MessageInfo_List[11][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_12_field);
-                MessageInfo_List[11][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_12_field);
-                MessageInfo_List[11][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[11][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[11][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[12][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_13_field);
-                MessageInfo_List[12][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_13_field);
-                MessageInfo_List[12][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_13_field);
-                MessageInfo_List[12][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[12][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[12][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[13][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_14_field);
-                MessageInfo_List[13][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_14_field);
-                MessageInfo_List[13][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_14_field);
-                MessageInfo_List[13][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[13][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[13][SelectedMessageIndex].DisableText = DisableText_field;
-
-                MessageInfo_List[14][SelectedMessageIndex].MainText = Encoding.UTF8.GetBytes(MainText_lang_15_field);
-                MessageInfo_List[14][SelectedMessageIndex].SecondaryText = Encoding.UTF8.GetBytes(SecondaryText_lang_15_field);
-                MessageInfo_List[14][SelectedMessageIndex].Speaker = Encoding.UTF8.GetBytes(Speaker_lang_15_field);
-                MessageInfo_List[14][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
-                MessageInfo_List[14][SelectedMessageIndex].CueID = CueID_field;
-                MessageInfo_List[14][SelectedMessageIndex].DisableText = DisableText_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+            } catch (Exception ex) {
+                MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
         }
 
         public void SaveFileAs(string basepath = "") {
-            if (basepath == "") {
-                var dialog = new CommonOpenFileDialog();
-                dialog.IsFolderPicker = true;
-                dialog.Title = "Select data_win32 folder or folder where will be placed messageInfo folder";
-                dialog.ShowDialog();
-                basepath = dialog.FileName;
-            }
-            for (int i = 0; i < 15; i++) {
-                string path = basepath + "\\message\\WIN64\\" + Program.langList[i];
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-                string file_path = path + "\\messageInfo.bin.xfbin";
-                if (File.Exists(file_path)) {
-                    if (File.Exists(file_path + ".backup")) {
-                        File.Delete(file_path + ".backup");
-                    }
-                    File.Copy(file_path, file_path + ".backup");
+            try {
+                if (basepath == "") {
+                    var dialog = new CommonOpenFileDialog();
+                    dialog.IsFolderPicker = true;
+                    dialog.Title = "Select data_win32 folder or folder where will be placed messageInfo folder";
+                    dialog.ShowDialog();
+                    basepath = dialog.FileName;
                 }
-                File.WriteAllBytes(file_path, ConvertToFile(i));
+                for (int i = 0; i < 15; i++) {
+                    string path = basepath + "\\message\\WIN64\\" + Program.langList[i];
+                    if (!Directory.Exists(path))
+                        Directory.CreateDirectory(path);
+                    string file_path = path + "\\messageInfo.bin.xfbin";
+                    if (File.Exists(file_path)) {
+                        if (File.Exists(file_path + ".backup")) {
+                            File.Delete(file_path + ".backup");
+                        }
+                        File.Copy(file_path, file_path + ".backup");
+                    }
+                    File.WriteAllBytes(file_path, ConvertToFile(i));
+                }
+            } catch (Exception ex) {
+                MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
 
         }
@@ -912,235 +946,239 @@ namespace NSC_Toolbox.ViewModel
         }
 
         public byte[] ConvertToFile(int ListIndex) {
-            LoadingStatePlay = Visibility.Visible;
-            // Build the header
-            int totalLength4 = 0;
-
             byte[] fileBytes36 = new byte[127] { 0x4E, 0x55, 0x43, 0x43, 0x00, 0x00, 0x00, 0x79, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xBC, 0x00, 0x00, 0x00, 0x03, 0x00, 0x79, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x3B, 0x00, 0x00, 0x01, 0x49, 0x00, 0x00, 0x4C, 0xE3, 0x00, 0x00, 0x01, 0x4B, 0x00, 0x00, 0x0F, 0x6F, 0x00, 0x00, 0x01, 0x4B, 0x00, 0x00, 0x0F, 0x84, 0x00, 0x00, 0x05, 0x20, 0x00, 0x00, 0x00, 0x00, 0x6E, 0x75, 0x63, 0x63, 0x43, 0x68, 0x75, 0x6E, 0x6B, 0x4E, 0x75, 0x6C, 0x6C, 0x00, 0x6E, 0x75, 0x63, 0x63, 0x43, 0x68, 0x75, 0x6E, 0x6B, 0x42, 0x69, 0x6E, 0x61, 0x72, 0x79, 0x00, 0x6E, 0x75, 0x63, 0x63, 0x43, 0x68, 0x75, 0x6E, 0x6B, 0x50, 0x61, 0x67, 0x65, 0x00, 0x6E, 0x75, 0x63, 0x63, 0x43, 0x68, 0x75, 0x6E, 0x6B, 0x49, 0x6E, 0x64, 0x65, 0x78, 0x00 };
-            int PtrNucc = fileBytes36.Length;
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-            fileBytes36 = BinaryReader.b_AddString(fileBytes36, "WIN64/" + Program.langList[ListIndex] + "/messageInfo.bin");
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+            try {
+                LoadingStatePlay = Visibility.Visible;
+                // Build the header
+                int totalLength4 = 0;
 
-            int PtrPath = fileBytes36.Length;
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-            fileBytes36 = BinaryReader.b_AddString(fileBytes36, "messageInfo");
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-            fileBytes36 = BinaryReader.b_AddString(fileBytes36, "Page0");
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-            fileBytes36 = BinaryReader.b_AddString(fileBytes36, "index");
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-
-            int PtrName = fileBytes36.Length;
-            totalLength4 = PtrName;
-            int AddedBytes = 0;
-
-            while (fileBytes36.Length % 4 != 0) {
-                AddedBytes++;
+                int PtrNucc = fileBytes36.Length;
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-            }
+                fileBytes36 = BinaryReader.b_AddString(fileBytes36, "WIN64/" + Program.langList[ListIndex] + "/messageInfo.bin");
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
 
-            // Build bin1
-            totalLength4 = fileBytes36.Length;
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[48]
-            {
-                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x03
-            });
+                int PtrPath = fileBytes36.Length;
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+                fileBytes36 = BinaryReader.b_AddString(fileBytes36, "messageInfo");
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+                fileBytes36 = BinaryReader.b_AddString(fileBytes36, "Page0");
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+                fileBytes36 = BinaryReader.b_AddString(fileBytes36, "index");
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
 
-            int PtrSection = fileBytes36.Length;
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[16]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                2,
-                0,
-                0,
-                0,
-                3
-            });
+                int PtrName = fileBytes36.Length;
+                totalLength4 = PtrName;
+                int AddedBytes = 0;
 
-            totalLength4 = fileBytes36.Length;
+                while (fileBytes36.Length % 4 != 0) {
+                    AddedBytes++;
+                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+                }
 
-            int PathLength = PtrPath - 127;
-            int NameLength = PtrName - PtrPath;
-            int Section1Length = PtrSection - PtrName - AddedBytes;
-            int FullLength = totalLength4 - 68 + 40;
-            int ReplaceIndex8 = 16;
-            byte[] buffer8 = BitConverter.GetBytes(FullLength);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 36;
-            buffer8 = BitConverter.GetBytes(2);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 40;
-            buffer8 = BitConverter.GetBytes(PathLength);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 44;
-            buffer8 = BitConverter.GetBytes(4);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 48;
-            buffer8 = BitConverter.GetBytes(NameLength);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 52;
-            buffer8 = BitConverter.GetBytes(4);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 56;
-            buffer8 = BitConverter.GetBytes(Section1Length);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 60;
-            buffer8 = BitConverter.GetBytes(4);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[40]
+                // Build bin1
+                totalLength4 = fileBytes36.Length;
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[48]
                 {
-                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x00
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x03
                 });
 
-            int size1_index = fileBytes36.Length - 0x10;
-            int size2_index = fileBytes36.Length - 0x4;
-            int count_index = fileBytes36.Length + 0x4;
+                int PtrSection = fileBytes36.Length;
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[16]
+                {
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    2,
+                    0,
+                    0,
+                    0,
+                    3
+                });
+
+                totalLength4 = fileBytes36.Length;
+
+                int PathLength = PtrPath - 127;
+                int NameLength = PtrName - PtrPath;
+                int Section1Length = PtrSection - PtrName - AddedBytes;
+                int FullLength = totalLength4 - 68 + 40;
+                int ReplaceIndex8 = 16;
+                byte[] buffer8 = BitConverter.GetBytes(FullLength);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
+                ReplaceIndex8 = 36;
+                buffer8 = BitConverter.GetBytes(2);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
+                ReplaceIndex8 = 40;
+                buffer8 = BitConverter.GetBytes(PathLength);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
+                ReplaceIndex8 = 44;
+                buffer8 = BitConverter.GetBytes(4);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
+                ReplaceIndex8 = 48;
+                buffer8 = BitConverter.GetBytes(NameLength);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
+                ReplaceIndex8 = 52;
+                buffer8 = BitConverter.GetBytes(4);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
+                ReplaceIndex8 = 56;
+                buffer8 = BitConverter.GetBytes(Section1Length);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
+                ReplaceIndex8 = 60;
+                buffer8 = BitConverter.GetBytes(4);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
+
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[40]
+                    {
+                        0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x00
+                    });
+
+                int size1_index = fileBytes36.Length - 0x10;
+                int size2_index = fileBytes36.Length - 0x4;
+                int count_index = fileBytes36.Length + 0x4;
 
 
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[0x10] { 0xE9, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[0x10] { 0xE9, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });
 
-            int startPtr = fileBytes36.Length;
-            //fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[MessageInfo_List[ListIndex].Count * 0x30]);
-            //List<int> MainText_pointer = new List<int>();
-            //List<int> SecondaryText_pointer = new List<int>();
-            //List<int> Speaker_pointer = new List<int>();
-            //ModernWpf.MessageBox.Show("test 1");
-            //for (int x = 0; x < MessageInfo_List[ListIndex].Count; x++) {
-            //    MainText_pointer.Add(fileBytes36.Length);
-            //    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, MessageInfo_List[ListIndex][x].MainText);
-            //    SecondaryText_pointer.Add(fileBytes36.Length);
-            //    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, MessageInfo_List[ListIndex][x].SecondaryText);
-            //    Speaker_pointer.Add(fileBytes36.Length);
-            //    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, MessageInfo_List[ListIndex][x].Speaker);
+                int startPtr = fileBytes36.Length;
+                //fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[MessageInfo_List[ListIndex].Count * 0x30]);
+                //List<int> MainText_pointer = new List<int>();
+                //List<int> SecondaryText_pointer = new List<int>();
+                //List<int> Speaker_pointer = new List<int>();
+                //ModernWpf.MessageBox.Show("test 1");
+                //for (int x = 0; x < MessageInfo_List[ListIndex].Count; x++) {
+                //    MainText_pointer.Add(fileBytes36.Length);
+                //    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, MessageInfo_List[ListIndex][x].MainText);
+                //    SecondaryText_pointer.Add(fileBytes36.Length);
+                //    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, MessageInfo_List[ListIndex][x].SecondaryText);
+                //    Speaker_pointer.Add(fileBytes36.Length);
+                //    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, MessageInfo_List[ListIndex][x].Speaker);
 
-            //}
-            //ModernWpf.MessageBox.Show("test 2");
-            //for (int x = 0; x < MessageInfo_List[ListIndex].Count; x++) {
-            //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MainText_pointer[x] - startPtr - (0x30 * x) - 0x08), startPtr + (0x30 * x) + 0x08);
-            //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MainText_pointer[x] - startPtr - (0x30 * x) - 0x10), startPtr + (0x30 * x) + 0x10);
-            //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MainText_pointer[x] - startPtr - (0x30 * x) - 0x18), startPtr + (0x30 * x) + 0x18);
-            //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[2] { 0xFF, 0xFF }, 0x24);
-            //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex][x].ACBFileID), startPtr + (0x30 * x) + 0x26);
-            //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex][x].CueID), startPtr + (0x30 * x) + 0x28);
-            //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex][x].DisableText), startPtr + (0x30 * x) + 0x2A);
-            //}
+                //}
+                //ModernWpf.MessageBox.Show("test 2");
+                //for (int x = 0; x < MessageInfo_List[ListIndex].Count; x++) {
+                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MainText_pointer[x] - startPtr - (0x30 * x) - 0x08), startPtr + (0x30 * x) + 0x08);
+                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MainText_pointer[x] - startPtr - (0x30 * x) - 0x10), startPtr + (0x30 * x) + 0x10);
+                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MainText_pointer[x] - startPtr - (0x30 * x) - 0x18), startPtr + (0x30 * x) + 0x18);
+                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[2] { 0xFF, 0xFF }, 0x24);
+                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex][x].ACBFileID), startPtr + (0x30 * x) + 0x26);
+                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex][x].CueID), startPtr + (0x30 * x) + 0x28);
+                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex][x].DisableText), startPtr + (0x30 * x) + 0x2A);
+                //}
 
 
-            List<byte> file = new List<byte>();
-            for (int x3 = 0; x3 < MessageInfo_List[ListIndex].Count * 0x30; x3++) {
-                file.Add(0);
+                List<byte> file = new List<byte>();
+                for (int x3 = 0; x3 < MessageInfo_List[ListIndex].Count * 0x30; x3++) {
+                    file.Add(0);
+                }
+
+                List<int> SpeakerTextPointer = new List<int>();
+                List<int> SecondaryTextPointer = new List<int>();
+                List<int> MainTextPointer = new List<int>();
+
+                for (int x2 = 0; x2 < MessageInfo_List[ListIndex].Count; x2++) {
+                    SpeakerTextPointer.Add(file.Count);
+                    int nameLength3 = MessageInfo_List[ListIndex][x2].Speaker.Length;
+                    if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].Speaker) != "") {
+                        for (int a17 = 0; a17 < nameLength3; a17++) {
+                            file.Add(MessageInfo_List[ListIndex][x2].Speaker[a17]);
+                        }
+                        file.Add(0);
+                    }
+                    SecondaryTextPointer.Add(file.Count);
+                    nameLength3 = MessageInfo_List[ListIndex][x2].SecondaryText.Length;
+                    if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].SecondaryText) != "") {
+                        for (int a17 = 0; a17 < nameLength3; a17++) {
+                            file.Add(MessageInfo_List[ListIndex][x2].SecondaryText[a17]);
+                        }
+                        file.Add(0);
+                    }
+                    MainTextPointer.Add(file.Count);
+                    nameLength3 = MessageInfo_List[ListIndex][x2].MainText.Length;
+                    if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].MainText) != "" ) {
+                        for (int a17 = 0; a17 < nameLength3; a17++) {
+                            file.Add(MessageInfo_List[ListIndex][x2].MainText[a17]);
+                        }
+                        file.Add(0);
+                    }
+                    if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].Speaker) != "") {
+                        int newPointer3 = SpeakerTextPointer[x2] - 0x30 * x2 - 0x08;
+                        byte[] ptrBytes3 = BitConverter.GetBytes(newPointer3);
+                        for (int a7 = 0; a7 < 4; a7++) {
+                            file[0x30 * x2 + 0x08 + a7] = ptrBytes3[a7];
+                        }
+                    }
+                    if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].SecondaryText) != "") {
+                        int newPointer3 = SecondaryTextPointer[x2] - 0x30 * x2 - 0x10;
+                        byte[] ptrBytes3 = BitConverter.GetBytes(newPointer3);
+                        for (int a7 = 0; a7 < 4; a7++) {
+                            file[0x30 * x2 + 0x10 + a7] = ptrBytes3[a7];
+                        }
+                    }
+                    if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].MainText) != "") {
+                        int newPointer3 = MainTextPointer[x2] - 0x30 * x2 - 0x18;
+                        byte[] ptrBytes3 = BitConverter.GetBytes(newPointer3);
+                        for (int a7 = 0; a7 < 4; a7++) {
+                            file[0x30 * x2 + 0x18 + a7] = ptrBytes3[a7];
+                        }
+                    }
+
+
+
+                    // VALUES
+                    byte[] o_a = MessageInfo_List[ListIndex][x2].CRC32Code;
+                    for (int a8 = 0; a8 < 4; a8++) {
+                        file[0x30 * x2 + 0 + a8] = o_a[a8];
+                    }
+                    for (int a8 = 0; a8 < 2; a8++) {
+                        file[0x30 * x2 + 0x24 + a8] = 0xFF;
+                    }
+                    o_a = BitConverter.GetBytes(MessageInfo_List[ListIndex][x2].ACBFileID);
+                    for (int a8 = 0; a8 < 2; a8++) {
+                        file[0x30 * x2 + 0x26 + a8] = o_a[a8];
+                    }
+                    o_a = BitConverter.GetBytes(MessageInfo_List[ListIndex][x2].CueID);
+                    for (int a8 = 0; a8 < 2; a8++) {
+                        file[0x30 * x2 + 0x28 + a8] = o_a[a8];
+                    }
+                    file[0x30 * x2 + 0x2A] = BitConverter.GetBytes(MessageInfo_List[ListIndex][x2].DisableText)[0];
+                }
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, file.ToArray());
+                file = new List<byte>();
+
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - startPtr + 0x14), size1_index, 1);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - startPtr + 0x10), size2_index, 1);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex].Count), count_index);
+                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[20]
+                {
+                    0,
+                    0,
+                    0,
+                    8,
+                    0,
+                    0,
+                    0,
+                    2,
+                    0,
+                    0x79, 0x21, 0x77,
+                    0,
+                    0,
+                    0,
+                    4,
+                    0,
+                    0,
+                    0,
+                    0
+                });
+            } catch (Exception ex) {
+                MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
-
-            List<int> SpeakerTextPointer = new List<int>();
-            List<int> SecondaryTextPointer = new List<int>();
-            List<int> MainTextPointer = new List<int>();
-
-            for (int x2 = 0; x2 < MessageInfo_List[ListIndex].Count; x2++) {
-                SpeakerTextPointer.Add(file.Count);
-                int nameLength3 = MessageInfo_List[ListIndex][x2].Speaker.Length;
-                if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].Speaker) != "") {
-                    for (int a17 = 0; a17 < nameLength3; a17++) {
-                        file.Add(MessageInfo_List[ListIndex][x2].Speaker[a17]);
-                    }
-                    file.Add(0);
-                }
-                SecondaryTextPointer.Add(file.Count);
-                nameLength3 = MessageInfo_List[ListIndex][x2].SecondaryText.Length;
-                if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].SecondaryText) != "") {
-                    for (int a17 = 0; a17 < nameLength3; a17++) {
-                        file.Add(MessageInfo_List[ListIndex][x2].SecondaryText[a17]);
-                    }
-                    file.Add(0);
-                }
-                MainTextPointer.Add(file.Count);
-                nameLength3 = MessageInfo_List[ListIndex][x2].MainText.Length;
-                if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].MainText) != "" ) {
-                    for (int a17 = 0; a17 < nameLength3; a17++) {
-                        file.Add(MessageInfo_List[ListIndex][x2].MainText[a17]);
-                    }
-                    file.Add(0);
-                }
-                if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].Speaker) != "") {
-                    int newPointer3 = SpeakerTextPointer[x2] - 0x30 * x2 - 0x08;
-                    byte[] ptrBytes3 = BitConverter.GetBytes(newPointer3);
-                    for (int a7 = 0; a7 < 4; a7++) {
-                        file[0x30 * x2 + 0x08 + a7] = ptrBytes3[a7];
-                    }
-                }
-                if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].SecondaryText) != "") {
-                    int newPointer3 = SecondaryTextPointer[x2] - 0x30 * x2 - 0x10;
-                    byte[] ptrBytes3 = BitConverter.GetBytes(newPointer3);
-                    for (int a7 = 0; a7 < 4; a7++) {
-                        file[0x30 * x2 + 0x10 + a7] = ptrBytes3[a7];
-                    }
-                }
-                if (Encoding.UTF8.GetString(MessageInfo_List[ListIndex][x2].MainText) != "") {
-                    int newPointer3 = MainTextPointer[x2] - 0x30 * x2 - 0x18;
-                    byte[] ptrBytes3 = BitConverter.GetBytes(newPointer3);
-                    for (int a7 = 0; a7 < 4; a7++) {
-                        file[0x30 * x2 + 0x18 + a7] = ptrBytes3[a7];
-                    }
-                }
-
-
-
-                // VALUES
-                byte[] o_a = MessageInfo_List[ListIndex][x2].CRC32Code;
-                for (int a8 = 0; a8 < 4; a8++) {
-                    file[0x30 * x2 + 0 + a8] = o_a[a8];
-                }
-                for (int a8 = 0; a8 < 2; a8++) {
-                    file[0x30 * x2 + 0x24 + a8] = 0xFF;
-                }
-                o_a = BitConverter.GetBytes(MessageInfo_List[ListIndex][x2].ACBFileID);
-                for (int a8 = 0; a8 < 2; a8++) {
-                    file[0x30 * x2 + 0x26 + a8] = o_a[a8];
-                }
-                o_a = BitConverter.GetBytes(MessageInfo_List[ListIndex][x2].CueID);
-                for (int a8 = 0; a8 < 2; a8++) {
-                    file[0x30 * x2 + 0x28 + a8] = o_a[a8];
-                }
-                file[0x30 * x2 + 0x2A] = BitConverter.GetBytes(MessageInfo_List[ListIndex][x2].DisableText)[0];
-            }
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, file.ToArray());
-            file = new List<byte>();
-
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - startPtr + 0x14), size1_index, 1);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - startPtr + 0x10), size2_index, 1);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex].Count), count_index);
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[20]
-            {
-                0,
-                0,
-                0,
-                8,
-                0,
-                0,
-                0,
-                2,
-                0,
-                0x79, 0x21, 0x77,
-                0,
-                0,
-                0,
-                4,
-                0,
-                0,
-                0,
-                0
-            });
             return fileBytes36;
         }
 

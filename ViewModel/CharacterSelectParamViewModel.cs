@@ -800,6 +800,42 @@ namespace NSC_Toolbox.ViewModel {
 
         }
 
+        public CharacterSelectParamModel FindItem(string psp_code) {
+            CharacterSelectParamModel entry = new CharacterSelectParamModel();
+
+            for (int i = 0; i<CharacterSelectParamList.Count; i++) {
+
+                if (CharacterSelectParamList[i].CSP_code == psp_code) {
+                    entry = (CharacterSelectParamModel)CharacterSelectParamList[i].Clone();
+                    break;
+                }
+            }
+            return entry;
+        }
+
+        public int GetFreeCostumeSlot(string psp_code) {
+            int page_index = 0;
+            int slot_index = 0;
+            for (int i = 0; i < CharacterSelectParamList.Count; i++) {
+
+                if (CharacterSelectParamList[i].CSP_code == psp_code) {
+                    page_index = CharacterSelectParamList[i].PageIndex;
+                    slot_index = CharacterSelectParamList[i].SlotIndex;
+                    break;
+                }
+            }
+
+            List<int> FreeSlotList = new List<int>();
+            for (int i = 0; i < CharacterSelectParamList.Count; i++) {
+
+                if (CharacterSelectParamList[i].PageIndex == page_index && CharacterSelectParamList[i].SlotIndex == slot_index) {
+                    FreeSlotList.Add(CharacterSelectParamList[i].CostumeIndex);
+                }
+            }
+
+            return FreeSlotList.Max()+1;
+        }
+
         public void RemoveEntry() {
             if (SelectedCSP is not null) {
                 CharacterSelectParamList.Remove(SelectedCSP);

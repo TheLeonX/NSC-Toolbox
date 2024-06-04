@@ -735,8 +735,8 @@ namespace NSC_Toolbox.ViewModel {
                 await Task.Run(() => CompileModProcess(output_folder));
                 LoadingStatePlay = Visibility.Hidden;
                 SystemSounds.Beep.Play();
-            } catch (Exception) {
-                //...
+            } catch (Exception ex) {
+                ModernWpf.MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
         }
 

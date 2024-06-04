@@ -280,3 +280,5 @@ E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\View\SkillEditorView
 E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\System.Text.Encoding.CodePages.dll
 E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\runtimes\win\lib\net7.0\System.Text.Encoding.CodePages.dll
 E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\ParamFiles\damageprm.bin.xfbin
+E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\View\AddCostumeView.g.cs
+E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\View\AddCostumeView.baml

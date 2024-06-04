@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using DynamicData;
+using Microsoft.Win32;
 using NSC_Toolbox.Model;
 using System;
 using System.Collections.Generic;
@@ -247,6 +248,29 @@ namespace NSC_Toolbox.ViewModel
             }
 
         }
+
+
+        public int GetFreeSlot() {
+
+            List<int> PSP_ID_LIST = new List<int>();
+            for (int i = 0; i < PlayerSettingParamList.Count; i++) {
+                PSP_ID_LIST.Add(PlayerSettingParamList[i].PSP_ID);
+            }
+
+            return PSP_ID_LIST.Max()+1;
+        }
+
+        public PlayerSettingParamModel FindItemWithCharacodeID(int characode_id) {
+            PlayerSettingParamModel entry = new PlayerSettingParamModel();
+
+            for (int i=0; i < PlayerSettingParamList.Count; i++) {
+                if (PlayerSettingParamList[i].CharacodeID == characode_id && PlayerSettingParamList[i].CostumeID == 0) {
+                    entry = (PlayerSettingParamModel)PlayerSettingParamList[i].Clone(); break;
+                }
+            }
+
+            return entry;
+        } 
 
         public void RemoveEntry() {
             if (SelectedPSP is not null) {

@@ -111,8 +111,8 @@ namespace NSC_Toolbox.Properties
         {
             "Character",
             "Stage",
-            "Model",
-            "Resource (export nothing, but files from data_win32 excluding param files)",
+            "Costume",
+            "Resource (export files excluding param files)",
             //"Accessory"
 
         };

@@ -467,6 +467,17 @@ namespace NSC_Toolbox.ViewModel {
                   }));
             }
         }
+        private RelayCommand _addCostumeCommand;
+        public RelayCommand AddCostumeCommand {
+            get {
+                return _addCostumeCommand ??
+                  (_addCostumeCommand = new RelayCommand(obj => {
+                      AddCostumeView AddCostume = new AddCostumeView();
+                      AddCostume.Show();
+
+                  }));
+            }
+        }
         private RelayCommand _saveSettingsCommand;
         public RelayCommand SaveSettingsCommand {
             get {
