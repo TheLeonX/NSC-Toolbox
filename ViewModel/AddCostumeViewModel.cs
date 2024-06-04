@@ -99,22 +99,62 @@ namespace NSC_Toolbox.ViewModel {
                         charEditor.OpenFile(characodePath);
                         ImportCharacterList = charEditor.CharacodeList;
                     } else {
-                        ModernWpf.MessageBox.Show("Some files are missing!");
-                        MissingFiles_field = "Missing files:\n\n";
-                        if (!File.Exists(value + "\\spc\\playerSettingParam.bin.xfbin"))
-                            MissingFiles_field += value + "\\spc\\playerSettingParam.bin.xfbin\n";
-                        if (!File.Exists(value + "\\spc\\player_icon.xfbin"))
-                            MissingFiles_field += value + "\\spc\\player_icon.xfbin\n";
-                        if (!File.Exists(value + "\\spc\\duelPlayerParam.xfbin"))
-                            MissingFiles_field += value + "\\spc\\duelPlayerParam.xfbin\n";
-                        if (!File.Exists(value + "\\spc\\costumeBreakColorParam.xfbin"))
-                            MissingFiles_field += value + "\\spc\\costumeBreakColorParam.xfbin\n";
-                        if (!File.Exists(value + "\\spc\\costumeBreakParam.xfbin"))
-                            MissingFiles_field += value + "\\spc\\costumeBreakParam.xfbin\n";
-                        if (!File.Exists(value + "\\rpg\\param\\costumeParam.bin.xfbin"))
-                            MissingFiles_field += value + "\\rpg\\param\\costumeParam.bin.xfbin\n";
-                        if (!File.Exists(value + "\\ui\\max\\select\\characterSelectParam.xfbin"))
-                            MissingFiles_field += value + "\\ui\\max\\select\\characterSelectParam.xfbin";
+                        MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show("Some files doesn't exist! Do you want to add missing files in directory?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.Yes) {
+
+                            IsDataWin32Exist = Directory.Exists(DataWin32Path_field);
+                            if (IsDataWin32Exist) {
+
+                                if (!Directory.Exists(DataWin32Path_field + "\\spc\\"))
+                                    Directory.CreateDirectory(DataWin32Path_field + "\\rpg\\param\\");
+                                if (!Directory.Exists(DataWin32Path_field + "\\rpg\\param\\"))
+                                    Directory.CreateDirectory(DataWin32Path_field + "\\rpg\\param\\");
+                                if (!Directory.Exists(DataWin32Path_field + "\\ui\\max\\select\\"))
+                                    Directory.CreateDirectory(DataWin32Path_field + "\\ui\\max\\select\\");
+
+                                if (!File.Exists(DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin"))
+                                    File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\playerSettingParam.bin.xfbin", DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin");
+                                if (!File.Exists(DataWin32Path_field + "\\spc\\player_icon.xfbin"))
+                                    File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\player_icon.xfbin", DataWin32Path_field + "\\spc\\player_icon.xfbin");
+                                if (!File.Exists(DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin"))
+                                    File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\duelPlayerParam.xfbin", DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin");
+                                if (!File.Exists(DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin"))
+                                    File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\costumeBreakColorParam.xfbin", DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin");
+                                if (!File.Exists(DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin"))
+                                    File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\costumeBreakParam.xfbin", DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin");
+                                if (!File.Exists(DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin"))
+                                    File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\costumeParam.bin.xfbin", DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin");
+                                if (!File.Exists(DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin"))
+                                    File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\characterSelectParam.xfbin", DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin");
+
+
+                                string characodePath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\characode.bin.xfbin";
+                                if (File.Exists(DataWin32Path_field + "\\spc\\characode.bin.xfbin")) {
+                                    characodePath = DataWin32Path_field + "\\spc\\characode.bin.xfbin";
+                                }
+                                CharacodeEditorViewModel charEditor = new CharacodeEditorViewModel();
+                                charEditor.OpenFile(characodePath);
+                                ImportCharacterList = charEditor.CharacodeList;
+                            } else {
+                                ModernWpf.MessageBox.Show("Directory doesn't exist!");
+                            }
+                        } else {
+                            MissingFiles_field = "Missing files:\n\n";
+                            if (!File.Exists(DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin"))
+                                MissingFiles_field += DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin\n";
+                            if (!File.Exists(DataWin32Path_field + "\\spc\\player_icon.xfbin"))
+                                MissingFiles_field += DataWin32Path_field + "\\spc\\player_icon.xfbin\n";
+                            if (!File.Exists(DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin"))
+                                MissingFiles_field += DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin\n";
+                            if (!File.Exists(DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin"))
+                                MissingFiles_field += DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin\n";
+                            if (!File.Exists(DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin"))
+                                MissingFiles_field += DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin\n";
+                            if (!File.Exists(DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin"))
+                                MissingFiles_field += DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin\n";
+                            if (!File.Exists(DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin"))
+                                MissingFiles_field += DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin";
+                        }
                     }
                 } else
                     IsDataWin32Exist = false;
@@ -244,22 +284,64 @@ namespace NSC_Toolbox.ViewModel {
                         ImportCharacterList = charEditor.CharacodeList;
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("Some files doesn't exist!");
-                    MissingFiles_field = "Missing files:\n\n";
-                    if (!File.Exists(DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin"))
-                        MissingFiles_field += DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin\n";
-                    if (!File.Exists(DataWin32Path_field + "\\spc\\player_icon.xfbin"))
-                        MissingFiles_field += DataWin32Path_field + "\\spc\\player_icon.xfbin\n";
-                    if (!File.Exists(DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin"))
-                        MissingFiles_field += DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin\n";
-                    if (!File.Exists(DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin"))
-                        MissingFiles_field += DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin\n";
-                    if (!File.Exists(DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin"))
-                        MissingFiles_field += DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin\n";
-                    if (!File.Exists(DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin"))
-                        MissingFiles_field += DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin\n";
-                    if (!File.Exists(DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin"))
-                        MissingFiles_field += DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin";
+                    MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show("Some files doesn't exist! Do you want to add missing files in directory?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes) {
+                        
+                        IsDataWin32Exist = Directory.Exists(DataWin32Path_field);
+                        if (IsDataWin32Exist) {
+
+                            if (!Directory.Exists(DataWin32Path_field + "\\spc\\"))
+                                Directory.CreateDirectory(DataWin32Path_field + "\\rpg\\param\\");
+                            if (!Directory.Exists(DataWin32Path_field + "\\rpg\\param\\"))
+                                Directory.CreateDirectory(DataWin32Path_field + "\\rpg\\param\\");
+                            if (!Directory.Exists(DataWin32Path_field + "\\ui\\max\\select\\"))
+                                Directory.CreateDirectory(DataWin32Path_field + "\\ui\\max\\select\\");
+
+                            if (!File.Exists(DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin"))
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\playerSettingParam.bin.xfbin", DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin");
+                            if (!File.Exists(DataWin32Path_field + "\\spc\\player_icon.xfbin"))
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\player_icon.xfbin", DataWin32Path_field + "\\spc\\player_icon.xfbin");
+                            if (!File.Exists(DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin"))
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\duelPlayerParam.xfbin", DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin");
+                            if (!File.Exists(DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin"))
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\costumeBreakColorParam.xfbin", DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin");
+                            if (!File.Exists(DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin"))
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\costumeBreakParam.xfbin", DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin");
+                            if (!File.Exists(DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin"))
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\costumeParam.bin.xfbin", DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin");
+                            if (!File.Exists(DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin"))
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\characterSelectParam.xfbin", DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin");
+
+
+                            string characodePath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\characode.bin.xfbin";
+                            if (File.Exists(DataWin32Path_field + "\\spc\\characode.bin.xfbin")) {
+                                characodePath = DataWin32Path_field + "\\spc\\characode.bin.xfbin";
+                            }
+                            CharacodeEditorViewModel charEditor = new CharacodeEditorViewModel();
+                            charEditor.OpenFile(characodePath);
+                            ImportCharacterList = charEditor.CharacodeList;
+                        } else {
+                            ModernWpf.MessageBox.Show("Directory doesn't exist!");
+                        }
+                    } else {
+                        MissingFiles_field = "Missing files:\n\n";
+                        if (!File.Exists(DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin"))
+                            MissingFiles_field += DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin\n";
+                        if (!File.Exists(DataWin32Path_field + "\\spc\\player_icon.xfbin"))
+                            MissingFiles_field += DataWin32Path_field + "\\spc\\player_icon.xfbin\n";
+                        if (!File.Exists(DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin"))
+                            MissingFiles_field += DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin\n";
+                        if (!File.Exists(DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin"))
+                            MissingFiles_field += DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin\n";
+                        if (!File.Exists(DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin"))
+                            MissingFiles_field += DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin\n";
+                        if (!File.Exists(DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin"))
+                            MissingFiles_field += DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin\n";
+                        if (!File.Exists(DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin"))
+                            MissingFiles_field += DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin";
+                    }
+                    
+                    
                 }
             } else
                 IsDataWin32Exist = false;
