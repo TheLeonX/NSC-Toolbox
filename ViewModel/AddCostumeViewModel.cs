@@ -106,7 +106,7 @@ namespace NSC_Toolbox.ViewModel {
                             if (IsDataWin32Exist) {
 
                                 if (!Directory.Exists(DataWin32Path_field + "\\spc\\"))
-                                    Directory.CreateDirectory(DataWin32Path_field + "\\rpg\\param\\");
+                                    Directory.CreateDirectory(DataWin32Path_field + "\\spc\\");
                                 if (!Directory.Exists(DataWin32Path_field + "\\rpg\\param\\"))
                                     Directory.CreateDirectory(DataWin32Path_field + "\\rpg\\param\\");
                                 if (!Directory.Exists(DataWin32Path_field + "\\ui\\max\\select\\"))
@@ -291,7 +291,7 @@ namespace NSC_Toolbox.ViewModel {
                         if (IsDataWin32Exist) {
 
                             if (!Directory.Exists(DataWin32Path_field + "\\spc\\"))
-                                Directory.CreateDirectory(DataWin32Path_field + "\\rpg\\param\\");
+                                Directory.CreateDirectory(DataWin32Path_field + "\\spc\\");
                             if (!Directory.Exists(DataWin32Path_field + "\\rpg\\param\\"))
                                 Directory.CreateDirectory(DataWin32Path_field + "\\rpg\\param\\");
                             if (!Directory.Exists(DataWin32Path_field + "\\ui\\max\\select\\"))
