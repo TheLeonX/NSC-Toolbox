@@ -89,7 +89,7 @@ namespace NSC_Toolbox {
             
             #line default
             #line hidden
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.1.1.2;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.1.1.3;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

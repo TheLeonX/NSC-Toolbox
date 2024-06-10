@@ -37,39 +37,38 @@ namespace NSC_Toolbox.ViewModel {
             get { return _importCharacterItem; }
             set {
                 _importCharacterItem = value;
+                if (value is not null) {
+                    DuelPlayerParamEditorViewModel duelPlayerParamEditor = new DuelPlayerParamEditorViewModel();
+                    PlayerIconViewModel playerIconEditor = new PlayerIconViewModel();
+                    PlayerSettingParamViewModel playerSettingParamEditor = new PlayerSettingParamViewModel();
+                    CostumeBreakParamViewModel costumeBreakParamEditor = new CostumeBreakParamViewModel();
 
-                DuelPlayerParamEditorViewModel duelPlayerParamEditor = new DuelPlayerParamEditorViewModel();
-                PlayerIconViewModel playerIconEditor = new PlayerIconViewModel();
-                PlayerSettingParamViewModel playerSettingParamEditor = new PlayerSettingParamViewModel();
-                CostumeBreakParamViewModel costumeBreakParamEditor = new CostumeBreakParamViewModel();
-
-                duelPlayerParamEditor.OpenFile(DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin");
-                playerSettingParamEditor.OpenFile(DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin");
-                playerIconEditor.OpenFile(DataWin32Path_field + "\\spc\\player_icon.xfbin");
-                costumeBreakParamEditor.OpenFile(DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin");
-
-
-                string characode_name = value.CharacodeName;
-                int characode_id = value.CharacodeIndex;
-
-                DuelPlayerParamModel dpp_entry = duelPlayerParamEditor.FindItemWithCharacode(characode_name);
-
-                BaseCostumeCode_field = dpp_entry.BaseCostumes[0].CostumeName;
-                AwakeCostumeCode_field = dpp_entry.AwakeCostumes[0].CostumeName;
+                    duelPlayerParamEditor.OpenFile(DataWin32Path_field + "\\spc\\duelPlayerParam.xfbin");
+                    playerSettingParamEditor.OpenFile(DataWin32Path_field + "\\spc\\playerSettingParam.bin.xfbin");
+                    playerIconEditor.OpenFile(DataWin32Path_field + "\\spc\\player_icon.xfbin");
+                    costumeBreakParamEditor.OpenFile(DataWin32Path_field + "\\spc\\costumeBreakParam.xfbin");
 
 
-                PlayerIconModel playerIconEntry = playerIconEditor.FindItemWithCharacodeID(characode_id);
+                    string characode_name = value.CharacodeName;
+                    int characode_id = value.CharacodeIndex;
 
-                BaseCostumeIcon_field = playerIconEntry.BaseIcon;
-                AwakeCostumeIcon_field = playerIconEntry.AwakeIcon;
+                    DuelPlayerParamModel dpp_entry = duelPlayerParamEditor.FindItemWithCharacode(characode_name);
 
-
-                CostumeBreakParamModel costumeBreakParamEntry = costumeBreakParamEditor.FindItemWithCharacodeID(characode_id);
-
-                EnableArmorBreak_field = costumeBreakParamEditor.ItemExist(characode_id);
+                    BaseCostumeCode_field = dpp_entry.BaseCostumes[0].CostumeName;
+                    AwakeCostumeCode_field = dpp_entry.AwakeCostumes[0].CostumeName;
 
 
+                    PlayerIconModel playerIconEntry = playerIconEditor.FindItemWithCharacodeID(characode_id);
 
+                    BaseCostumeIcon_field = playerIconEntry.BaseIcon;
+                    AwakeCostumeIcon_field = playerIconEntry.AwakeIcon;
+
+
+                    CostumeBreakParamModel costumeBreakParamEntry = costumeBreakParamEditor.FindItemWithCharacodeID(characode_id);
+
+                    EnableArmorBreak_field = costumeBreakParamEditor.ItemExist(characode_id);
+
+                }
                 OnPropertyChanged("ImportCharacterItem");
             }
         }
@@ -388,7 +387,6 @@ namespace NSC_Toolbox.ViewModel {
                         //psp_entry.CharacterNameMessageID = CostumeNameCSP_field ?? "";
                         //psp_entry.CostumeDescriptionMessageID = CostumeNameCollection_field ?? "";
                         psp_entry.CostumeID = costume_dpp_index;
-                        psp_entry.Unk1 = costume_dpp_index;
                         playerSettingParamEditor.PlayerSettingParamList.Add(psp_entry);
 
                         PlayerIconModel playerIconEntry = playerIconEditor.FindItemWithCharacodeID(characode_id);

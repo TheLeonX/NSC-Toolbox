@@ -1428,7 +1428,6 @@ namespace NSC_Toolbox.ViewModel {
                             }
                             //damageprm
                             if (damageprmExist) {
-                                MessageBox.Show(OriginalDamagePrm.DamagePrmList.Count.ToString());
                                 for (int i = OriginalDamagePrm.DamagePrmList.Count; i < ImportDamagePrm.DamagePrmList.Count; i++) {
                                     if (ImportDamagePrm.DamagePrmList[i].Data[0] != 0) {
                                         ExportDamagePrm.DamagePrmList.Add((DamagePrmModel)ImportDamagePrm.DamagePrmList[i].Clone());
@@ -1748,7 +1747,7 @@ namespace NSC_Toolbox.ViewModel {
                             }
                             //player_icon
                             foreach (PlayerIconModel PlayerIconEntry in ImportModelPlayerIcon.playerIconList) {
-                                if (PlayerIconEntry.CharacodeID == model.CharacodeID) {
+                                if (PlayerIconEntry.CharacodeID == model.CharacodeID && PlayerIconEntry.CostumeID == model_index) {
                                     ExportModelPlayerIcon.playerIconList.Add((PlayerIconModel)PlayerIconEntry.Clone());
                                     break;
                                 }
@@ -1807,7 +1806,7 @@ namespace NSC_Toolbox.ViewModel {
                             if (costumeBreakParamExist) {
 
                                 foreach (CostumeBreakParamModel costumeBreakEntry in ImportModelCostumeBreakParam.CostumeBreakParamList) {
-                                    if (costumeBreakEntry.CharacodeID == model.CharacodeID) {
+                                    if (costumeBreakEntry.CharacodeID == model.CharacodeID && costumeBreakEntry.CostumeID == model_index) {
                                         ExportModelCostumeBreakParam.CostumeBreakParamList.Add((CostumeBreakParamModel)costumeBreakEntry.Clone());
                                     }
                                 }
