@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,8 +55,8 @@ namespace NSC_Toolbox.ViewModel {
             get { return _selectedBaseCostume; }
             set {
                 _selectedBaseCostume = value;
-                if (value is not null && value.CostumeName is not null) {
-                    BaseCostume_field = value.CostumeName;
+                if (value is not null) {
+                    BaseCostume_field = value.CostumeName ?? "";
                 }
                 OnPropertyChanged("SelectedBaseCostume");
             }
@@ -82,8 +83,8 @@ namespace NSC_Toolbox.ViewModel {
             get { return _selectedAwakeCostume; }
             set {
                 _selectedAwakeCostume = value;
-                if (value is not null && value.CostumeName is not null) {
-                    AwakeCostume_field = value.CostumeName;
+                if (value is not null) {
+                    AwakeCostume_field = value.CostumeName ?? "";
                 }
                 OnPropertyChanged("SelectedAwakeCostume");
             }
@@ -123,38 +124,297 @@ namespace NSC_Toolbox.ViewModel {
             }
         }
 
-        private byte _chakraDashCondition_field;
-        public byte ChakraDashCondition_field {
-            get { return _chakraDashCondition_field; }
+        //private byte _chakraDashCondition_field;
+        //public byte ChakraDashCondition_field {
+        //    get { return _chakraDashCondition_field; }
+        //    set {
+        //        _chakraDashCondition_field = value;
+        //        OnPropertyChanged("ChakraDashCondition_field");
+        //    }
+        //}
+        //private byte _awakeningCondition1_field;
+        //public byte AwakeningCondition1_field {
+        //    get { return _awakeningCondition1_field; }
+        //    set {
+        //        _awakeningCondition1_field = value;
+        //        OnPropertyChanged("AwakeningCondition1_field");
+        //    }
+        //}
+        //private byte _awakeningCondition2_field;
+        //public byte AwakeningCondition2_field {
+        //    get { return _awakeningCondition2_field; }
+        //    set {
+        //        _awakeningCondition2_field = value;
+        //        OnPropertyChanged("AwakeningCondition2_field");
+        //    }
+        //}
+        //private byte _awakeningJutsuController_field;
+        //public byte AwakeningJutsuController_field {
+        //    get { return _awakeningJutsuController_field; }
+        //    set {
+        //        _awakeningJutsuController_field = value;
+        //        OnPropertyChanged("AwakeningJutsuController_field");
+        //    }
+        //}
+
+
+        private bool _cond_flag_1_field;
+        public bool Cond_flag_1_field {
+            get { return _cond_flag_1_field; }
             set {
-                _chakraDashCondition_field = value;
-                OnPropertyChanged("ChakraDashCondition_field");
+                _cond_flag_1_field = value;
+                OnPropertyChanged("Cond_flag_1_field");
             }
         }
-        private byte _awakeningCondition1_field;
-        public byte AwakeningCondition1_field {
-            get { return _awakeningCondition1_field; }
+        private bool _cond_flag_2_field;
+        public bool Cond_flag_2_field {
+            get { return _cond_flag_2_field; }
             set {
-                _awakeningCondition1_field = value;
-                OnPropertyChanged("AwakeningCondition1_field");
+                _cond_flag_2_field = value;
+                OnPropertyChanged("Cond_flag_2_field");
             }
         }
-        private byte _awakeningCondition2_field;
-        public byte AwakeningCondition2_field {
-            get { return _awakeningCondition2_field; }
+        private bool _cond_flag_3_field;
+        public bool Cond_flag_3_field {
+            get { return _cond_flag_3_field; }
             set {
-                _awakeningCondition2_field = value;
-                OnPropertyChanged("AwakeningCondition2_field");
+                _cond_flag_3_field = value;
+                OnPropertyChanged("Cond_flag_3_field");
             }
         }
-        private byte _awakeningJutsuController_field;
-        public byte AwakeningJutsuController_field {
-            get { return _awakeningJutsuController_field; }
+        private bool _cond_flag_4_field;
+        public bool Cond_flag_4_field {
+            get { return _cond_flag_4_field; }
             set {
-                _awakeningJutsuController_field = value;
-                OnPropertyChanged("AwakeningJutsuController_field");
+                _cond_flag_4_field = value;
+                OnPropertyChanged("Cond_flag_4_field");
             }
         }
+        private bool _cond_flag_5_field;
+        public bool Cond_flag_5_field {
+            get { return _cond_flag_5_field; }
+            set {
+                _cond_flag_5_field = value;
+                OnPropertyChanged("Cond_flag_5_field");
+            }
+        }
+        private bool _cond_flag_6_field;
+        public bool Cond_flag_6_field {
+            get { return _cond_flag_6_field; }
+            set {
+                _cond_flag_6_field = value;
+                OnPropertyChanged("Cond_flag_6_field");
+            }
+        }
+        private bool _cond_flag_7_field;
+        public bool Cond_flag_7_field {
+            get { return _cond_flag_7_field; }
+            set {
+                _cond_flag_7_field = value;
+                OnPropertyChanged("Cond_flag_7_field");
+            }
+        }
+        private bool _cond_flag_8_field;
+        public bool Cond_flag_8_field {
+            get { return _cond_flag_8_field; }
+            set {
+                _cond_flag_8_field = value;
+                OnPropertyChanged("Cond_flag_8_field");
+            }
+        }
+        private bool _cond_flag_9_field;
+        public bool Cond_flag_9_field {
+            get { return _cond_flag_9_field; }
+            set {
+                _cond_flag_9_field = value;
+                OnPropertyChanged("Cond_flag_9_field");
+            }
+        }
+        private bool _cond_flag_10_field;
+        public bool Cond_flag_10_field {
+            get { return _cond_flag_10_field; }
+            set {
+                _cond_flag_10_field = value;
+                OnPropertyChanged("Cond_flag_10_field");
+            }
+        }
+        private bool _cond_flag_11_field;
+        public bool Cond_flag_11_field {
+            get { return _cond_flag_11_field; }
+            set {
+                _cond_flag_11_field = value;
+                OnPropertyChanged("Cond_flag_11_field");
+            }
+        }
+        private bool _cond_flag_12_field;
+        public bool Cond_flag_12_field {
+            get { return _cond_flag_12_field; }
+            set {
+                _cond_flag_12_field = value;
+                OnPropertyChanged("Cond_flag_12_field");
+            }
+        }
+        private bool _cond_flag_13_field;
+        public bool Cond_flag_13_field {
+            get { return _cond_flag_13_field; }
+            set {
+                _cond_flag_13_field = value;
+                OnPropertyChanged("Cond_flag_13_field");
+            }
+        }
+        private bool _cond_flag_14_field;
+        public bool Cond_flag_14_field {
+            get { return _cond_flag_14_field; }
+            set {
+                _cond_flag_14_field = value;
+                OnPropertyChanged("Cond_flag_14_field");
+            }
+        }
+        private bool _cond_flag_15_field;
+        public bool Cond_flag_15_field {
+            get { return _cond_flag_15_field; }
+            set {
+                _cond_flag_15_field = value;
+                OnPropertyChanged("Cond_flag_15_field");
+            }
+        }
+        private bool _cond_flag_16_field;
+        public bool Cond_flag_16_field {
+            get { return _cond_flag_16_field; }
+            set {
+                _cond_flag_16_field = value;
+                OnPropertyChanged("Cond_flag_16_field");
+            }
+        }
+        private bool _cond_flag_17_field;
+        public bool Cond_flag_17_field {
+            get { return _cond_flag_17_field; }
+            set {
+                _cond_flag_17_field = value;
+                OnPropertyChanged("Cond_flag_17_field");
+            }
+        }
+        private bool _cond_flag_18_field;
+        public bool Cond_flag_18_field {
+            get { return _cond_flag_18_field; }
+            set {
+                _cond_flag_18_field = value;
+                OnPropertyChanged("Cond_flag_18_field");
+            }
+        }
+        private bool _cond_flag_19_field;
+        public bool Cond_flag_19_field {
+            get { return _cond_flag_19_field; }
+            set {
+                _cond_flag_19_field = value;
+                OnPropertyChanged("Cond_flag_19_field");
+            }
+        }
+        private bool _cond_flag_20_field;
+        public bool Cond_flag_20_field {
+            get { return _cond_flag_20_field; }
+            set {
+                _cond_flag_20_field = value;
+                OnPropertyChanged("Cond_flag_20_field");
+            }
+        }
+        private bool _cond_flag_21_field;
+        public bool Cond_flag_21_field {
+            get { return _cond_flag_21_field; }
+            set {
+                _cond_flag_21_field = value;
+                OnPropertyChanged("Cond_flag_21_field");
+            }
+        }
+        private bool _cond_flag_22_field;
+        public bool Cond_flag_22_field {
+            get { return _cond_flag_22_field; }
+            set {
+                _cond_flag_22_field = value;
+                OnPropertyChanged("Cond_flag_22_field");
+            }
+        }
+        private bool _cond_flag_23_field;
+        public bool Cond_flag_23_field {
+            get { return _cond_flag_23_field; }
+            set {
+                _cond_flag_23_field = value;
+                OnPropertyChanged("Cond_flag_23_field");
+            }
+        }
+        private bool _cond_flag_24_field;
+        public bool Cond_flag_24_field {
+            get { return _cond_flag_24_field; }
+            set {
+                _cond_flag_24_field = value;
+                OnPropertyChanged("Cond_flag_24_field");
+            }
+        }
+        private bool _cond_flag_25_field;
+        public bool Cond_flag_25_field {
+            get { return _cond_flag_25_field; }
+            set {
+                _cond_flag_25_field = value;
+                OnPropertyChanged("Cond_flag_25_field");
+            }
+        }
+        private bool _cond_flag_26_field;
+        public bool Cond_flag_26_field {
+            get { return _cond_flag_26_field; }
+            set {
+                _cond_flag_26_field = value;
+                OnPropertyChanged("Cond_flag_26_field");
+            }
+        }
+        private bool _cond_flag_27_field;
+        public bool Cond_flag_27_field {
+            get { return _cond_flag_27_field; }
+            set {
+                _cond_flag_27_field = value;
+                OnPropertyChanged("Cond_flag_27_field");
+            }
+        }
+        private bool _cond_flag_28_field;
+        public bool Cond_flag_28_field {
+            get { return _cond_flag_28_field; }
+            set {
+                _cond_flag_28_field = value;
+                OnPropertyChanged("Cond_flag_28_field");
+            }
+        }
+        private bool _cond_flag_29_field;
+        public bool Cond_flag_29_field {
+            get { return _cond_flag_29_field; }
+            set {
+                _cond_flag_29_field = value;
+                OnPropertyChanged("Cond_flag_29_field");
+            }
+        }
+        private bool _cond_flag_30_field;
+        public bool Cond_flag_30_field {
+            get { return _cond_flag_30_field; }
+            set {
+                _cond_flag_30_field = value;
+                OnPropertyChanged("Cond_flag_30_field");
+            }
+        }
+        private bool _cond_flag_31_field;
+        public bool Cond_flag_31_field {
+            get { return _cond_flag_31_field; }
+            set {
+                _cond_flag_31_field = value;
+                OnPropertyChanged("Cond_flag_31_field");
+            }
+        }
+        private bool _cond_flag_32_field;
+        public bool Cond_flag_32_field {
+            get { return _cond_flag_32_field; }
+            set {
+                _cond_flag_32_field = value;
+                OnPropertyChanged("Cond_flag_32_field");
+            }
+        }
+
         private uint _awaBodyPriority_field;
         public uint AwaBodyPriority_field {
             get { return _awaBodyPriority_field; }
@@ -502,10 +762,52 @@ namespace NSC_Toolbox.ViewModel {
                     Characode_field = value.BinName.Substring(0, value.BinName.Length - 7);
                     MotionCode_field = value.MotionCode;
                     Partner_field = value.Partner;
-                    ChakraDashCondition_field = value.ChakraDashCondition;
-                    AwakeningCondition1_field = value.AwakeningCondition1;
-                    AwakeningCondition2_field = value.AwakeningCondition2;
-                    AwakeningJutsuController_field = value.AwakeningJutsuController;
+                    Cond_flag_1_field = (value.ConditionFlag & ConditionFlags.ENABLE_AWAKENING_JUTSU) == ConditionFlags.ENABLE_AWAKENING_JUTSU;
+                    Cond_flag_2_field = (value.ConditionFlag & ConditionFlags.UNK_1) == ConditionFlags.UNK_1;
+                    Cond_flag_3_field = (value.ConditionFlag & ConditionFlags.UNK_2) == ConditionFlags.UNK_2;
+                    Cond_flag_4_field = (value.ConditionFlag & ConditionFlags.UNK_3) == ConditionFlags.UNK_3;
+
+                    Cond_flag_5_field = (value.ConditionFlag & ConditionFlags.UNK_4) == ConditionFlags.UNK_4;
+                    Cond_flag_6_field = (value.ConditionFlag & ConditionFlags.UNK_5) == ConditionFlags.UNK_5;
+                    Cond_flag_7_field = (value.ConditionFlag & ConditionFlags.UNK_6) == ConditionFlags.UNK_6;
+                    Cond_flag_8_field = (value.ConditionFlag & ConditionFlags.UNK_7) == ConditionFlags.UNK_7;
+
+                    Cond_flag_9_field = (value.ConditionFlag & ConditionFlags.ENABLE_GIANT_AWAKENING_COND) == ConditionFlags.ENABLE_GIANT_AWAKENING_COND;
+                    Cond_flag_10_field = (value.ConditionFlag & ConditionFlags.ENABLE_PRIVATE_CAMERA) == ConditionFlags.ENABLE_PRIVATE_CAMERA;
+                    Cond_flag_11_field = (value.ConditionFlag & ConditionFlags.ENABLE_GIANT_AWAKENING_LAND_SOUND) == ConditionFlags.ENABLE_GIANT_AWAKENING_LAND_SOUND;
+                    Cond_flag_12_field = (value.ConditionFlag & ConditionFlags.ENABLE_AWAKENING_HITMARK) == ConditionFlags.ENABLE_AWAKENING_HITMARK;
+
+                    Cond_flag_13_field = (value.ConditionFlag & ConditionFlags.UNK_8) == ConditionFlags.UNK_8;
+                    Cond_flag_14_field = (value.ConditionFlag & ConditionFlags.UNK_9) == ConditionFlags.UNK_9;
+                    Cond_flag_15_field = (value.ConditionFlag & ConditionFlags.UNK_10) == ConditionFlags.UNK_10;
+                    Cond_flag_16_field = (value.ConditionFlag & ConditionFlags.UNK_11) == ConditionFlags.UNK_11;
+
+                    Cond_flag_17_field = (value.ConditionFlag & ConditionFlags.UNK_12) == ConditionFlags.UNK_12;
+                    Cond_flag_18_field = (value.ConditionFlag & ConditionFlags.UNK_13) == ConditionFlags.UNK_13;
+                    Cond_flag_19_field = (value.ConditionFlag & ConditionFlags.ENABLE_BASE_GLOW) == ConditionFlags.ENABLE_BASE_GLOW;
+                    Cond_flag_20_field = (value.ConditionFlag & ConditionFlags.ENABLE_AWAKE_GLOW) == ConditionFlags.ENABLE_AWAKE_GLOW;
+
+                    Cond_flag_21_field = (value.ConditionFlag & ConditionFlags.ENABLE_TELEPORT_DASH) == ConditionFlags.ENABLE_TELEPORT_DASH;
+                    Cond_flag_22_field = (value.ConditionFlag & ConditionFlags.UNK_14) == ConditionFlags.UNK_14;
+                    Cond_flag_23_field = (value.ConditionFlag & ConditionFlags.UNK_15) == ConditionFlags.UNK_15;
+                    Cond_flag_24_field = (value.ConditionFlag & ConditionFlags.ENABLE_AWAKENING_MOVESET) == ConditionFlags.ENABLE_AWAKENING_MOVESET;
+
+                    Cond_flag_25_field = (value.ConditionFlag & ConditionFlags.UNK_16) == ConditionFlags.UNK_16;
+                    Cond_flag_26_field = (value.ConditionFlag & ConditionFlags.UNK_17) == ConditionFlags.UNK_17;
+                    Cond_flag_27_field = (value.ConditionFlag & ConditionFlags.UNK_18) == ConditionFlags.UNK_18;
+                    Cond_flag_28_field = (value.ConditionFlag & ConditionFlags.ENABLE_PUPPET_COND) == ConditionFlags.ENABLE_PUPPET_COND;
+
+                    Cond_flag_29_field = (value.ConditionFlag & ConditionFlags.ENABLE_PUPPET_USER_COND) == ConditionFlags.ENABLE_PUPPET_USER_COND;
+                    Cond_flag_30_field = (value.ConditionFlag & ConditionFlags.UNK_19) == ConditionFlags.UNK_19;
+                    Cond_flag_31_field = (value.ConditionFlag & ConditionFlags.UNK_20) == ConditionFlags.UNK_20;
+                    Cond_flag_32_field = (value.ConditionFlag & ConditionFlags.UNK_21) == ConditionFlags.UNK_21;
+
+
+                    //ChakraDashCondition_field = value.ChakraDashCondition;
+                    //AwakeningCondition1_field = value.AwakeningCondition1;
+                    //AwakeningCondition2_field = value.AwakeningCondition2;
+                    //AwakeningJutsuController_field = value.AwakeningJutsuController;
+
                     AwaBodyPriority_field = value.AwaBodyPriority;
                     DefaultAwaSkillIndex_field = value.DefaultAwaSkillIndex;
                     Support1_field = value.Support1;
@@ -588,141 +890,149 @@ namespace NSC_Toolbox.ViewModel {
             DuelPlayerParamList.Clear();
         }
         public void OpenFile(string basepath = "") {
-            Clear();
-            if (basepath == "") {
-                OpenFileDialog myDialog = new OpenFileDialog();
-                myDialog.Filter = "XFBIN Container (*.xfbin)|*.xfbin";
-                myDialog.CheckFileExists = true;
-                myDialog.Multiselect = false;
-                if (myDialog.ShowDialog() == true) {
-                    filePath = myDialog.FileName;
+            try {
+                Clear();
+                if (basepath == "") {
+                    OpenFileDialog myDialog = new OpenFileDialog();
+                    myDialog.Filter = "XFBIN Container (*.xfbin)|*.xfbin";
+                    myDialog.CheckFileExists = true;
+                    myDialog.Multiselect = false;
+                    if (myDialog.ShowDialog() == true) {
+                        filePath = myDialog.FileName;
+                    } else {
+                        return;
+                    }
                 } else {
-                    return;
+                    filePath = basepath;
                 }
-            } else {
-                filePath = basepath;
+                if (File.Exists(filePath)) {
+                    byte[] FileBytes = File.ReadAllBytes(filePath);
+                    ObservableCollection<DuelPlayerParamModel> temp_list = new ObservableCollection<DuelPlayerParamModel>();
+
+                    int EntryCount = BinaryReader.b_ReadIntRev(FileBytes, 36) - 1;
+                    int Index3 = 128;
+                    for (int x = 0; x < EntryCount; x++) {
+                        DuelPlayerParamList.Add(new DuelPlayerParamModel());
+                    }
+                    for (int x = 0; x < EntryCount; x++) {
+                        string path = BinaryReader.b_ReadString(FileBytes, Index3);
+                        DuelPlayerParamList[x].BinPath = path;
+                        Index3 = Index3 + path.Length + 1;
+                    }
+                    Index3++;
+                    List<string> binName = new List<string>();
+                    for (int x = 0; x < EntryCount + 2; x++) {
+                        string name = BinaryReader.b_ReadString(FileBytes, Index3);
+                        binName.Add(name);
+                        Index3 = Index3 + name.Length + 1;
+                    }
+                    binName.RemoveAt(1);
+                    binName.RemoveAt(1);
+                    for (int x = 0; x < EntryCount; x++) {
+                        DuelPlayerParamList[x].BinName = binName[x];
+                    }
+
+                    int StartOfFile = 68 + BinaryReader.b_ReadIntRev(FileBytes, 16);
+                    for (int x = 0; x < EntryCount; x++) {
+                        ObservableCollection<CostumeModel> baseCostumeList = new ObservableCollection<CostumeModel>();
+                        ObservableCollection<CostumeModel> awaCostumeList = new ObservableCollection<CostumeModel>();
+                        int _ptr = StartOfFile + 760 * x + 48 * x;
+                        DuelPlayerParamList[x].MotionCode = BinaryReader.b_ReadString(FileBytes, _ptr);
+                        for (int c2 = 0; c2 < 20; c2++) {
+                            string cid = BinaryReader.b_ReadString(FileBytes, _ptr + 8 + 8 * c2);
+                            CostumeModel entry = new CostumeModel();
+                            entry.CostumeName = cid;
+                            entry.CostumeIndex = c2;
+
+                            baseCostumeList.Add(entry);
+                        }
+                        for (int c = 0; c < 20; c++) {
+                            string awkcid = BinaryReader.b_ReadString(FileBytes, _ptr + 168 + 8 * c);
+                            CostumeModel entry = new CostumeModel();
+                            entry.CostumeName = awkcid;
+                            entry.CostumeIndex = c;
+                            awaCostumeList.Add(entry);
+                        }
+                        DuelPlayerParamList[x].BaseCostumes = baseCostumeList;
+                        DuelPlayerParamList[x].AwakeCostumes = awaCostumeList;
+                        DuelPlayerParamList[x].Partner = BinaryReader.b_ReadString(FileBytes, _ptr + 328);
+
+                        DuelPlayerParamList[x].ConditionFlag = (ConditionFlags)BinaryReader.b_ReadIntRev(FileBytes, _ptr + 336);
+
+                        //DuelPlayerParamList[x].ChakraDashCondition = FileBytes[_ptr + 336];
+                        //DuelPlayerParamList[x].AwakeningCondition1 = FileBytes[_ptr + 337];
+                        //DuelPlayerParamList[x].AwakeningCondition2 = FileBytes[_ptr + 338];
+                        //DuelPlayerParamList[x].AwakeningJutsuController = FileBytes[_ptr + 339];
+                        DuelPlayerParamList[x].AwaBodyPriority = (uint)BinaryReader.b_ReadInt(FileBytes, _ptr + 352);
+                        DuelPlayerParamList[x].DefaultAwaSkillIndex = BinaryReader.b_ReadInt(FileBytes, _ptr + 356);
+
+
+                        List<int> FlagList = new List<int>();
+                        for (int c = 0; c < 15; c++) {
+                            FlagList.Add(BinaryReader.b_ReadInt(FileBytes, _ptr + 360 + (4 * c)));
+                        }
+                        DuelPlayerParamList[x].Flag_settings = FlagList;
+                        DuelPlayerParamList[x].Support1 = BinaryReader.b_ReadString(FileBytes, _ptr + 420);
+                        DuelPlayerParamList[x].Support2 = BinaryReader.b_ReadString(FileBytes, _ptr + 428);
+                        DuelPlayerParamList[x].CameraDistance = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 436);
+                        DuelPlayerParamList[x].Unk1 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 438);
+                        DuelPlayerParamList[x].VictoryCameraAngle = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 440);
+                        DuelPlayerParamList[x].Unk2 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 442);
+                        DuelPlayerParamList[x].Unk3 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 444);
+                        DuelPlayerParamList[x].Unk4 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 446);
+
+                        DuelPlayerParamList[x].BaseMovementSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 448);
+                        DuelPlayerParamList[x].BaseChakraDashSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 452);
+                        DuelPlayerParamList[x].GuardPressure = BinaryReader.b_ReadFloat(FileBytes, _ptr + 456);
+                        DuelPlayerParamList[x].AirDashSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 460);
+                        DuelPlayerParamList[x].Attack = BinaryReader.b_ReadFloat(FileBytes, _ptr + 464);
+                        DuelPlayerParamList[x].Defense = BinaryReader.b_ReadFloat(FileBytes, _ptr + 468);
+                        DuelPlayerParamList[x].AssistDamage = BinaryReader.b_ReadFloat(FileBytes, _ptr + 472);
+                        DuelPlayerParamList[x].ItemBuffDuration = BinaryReader.b_ReadFloat(FileBytes, _ptr + 476);
+                        DuelPlayerParamList[x].ChakraChargeSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 480);
+                        DuelPlayerParamList[x].AwakeningCondition = BinaryReader.b_ReadString(FileBytes, _ptr + 484);
+                        DuelPlayerParamList[x].AwakeHPRequirement = BinaryReader.b_ReadFloat(FileBytes, _ptr + 500);
+                        DuelPlayerParamList[x].BaseNinjaDashSpeed = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 504);
+                        DuelPlayerParamList[x].BaseAirDashDuration = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 506);
+                        DuelPlayerParamList[x].BaseGroundedChakraDashDuration = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 508);
+
+                        DuelPlayerParamList[x].Unk5 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 510);
+                        DuelPlayerParamList[x].Unk6 = BinaryReader.b_ReadFloat(FileBytes, _ptr + 512);
+
+                        List<string> ItemList = new List<string>();
+                        List<int> ItemCountList = new List<int>();
+                        for (int i = 0; i < 4; i++) {
+                            ItemList.Add(BinaryReader.b_ReadString(FileBytes, _ptr + 516 + 32 * i));
+                            ItemCountList.Add(BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 546 + 32 * i));
+                        }
+                        DuelPlayerParamList[x].Items = ItemList;
+                        DuelPlayerParamList[x].ItemsDuration = ItemCountList;
+                        DuelPlayerParamList[x].AwakeMovementSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 644);
+                        DuelPlayerParamList[x].AwakeChakraDashSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 648);
+                        DuelPlayerParamList[x].AwakeNinjaDashSpeed = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 652);
+                        DuelPlayerParamList[x].AwakeAirDashDuration = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 654);
+                        DuelPlayerParamList[x].AwakeGroundedChakraDashDuration = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 656);
+                        DuelPlayerParamList[x].Unk7 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 658);
+
+                        List<float> unk8_17List = new List<float>();
+                        for (int i = 0; i < 10; i++) {
+                            unk8_17List.Add(BinaryReader.b_ReadFloat(FileBytes, _ptr + 660 + (4 * i)));
+                        }
+                        DuelPlayerParamList[x].Unk8_17 = unk8_17List;
+                        DuelPlayerParamList[x].Unk18 = BinaryReader.b_ReadInt(FileBytes, _ptr + 700);
+                        DuelPlayerParamList[x].EnableChakraDashPriority = Convert.ToBoolean(BinaryReader.b_ReadInt(FileBytes, _ptr + 704));
+                        DuelPlayerParamList[x].AwakeningDebuffEnabler = Convert.ToBoolean(BinaryReader.b_ReadInt(FileBytes, _ptr + 708));
+                        DuelPlayerParamList[x].ChakraCostAwakening = BinaryReader.b_ReadFloat(FileBytes, _ptr + 712);
+                        DuelPlayerParamList[x].Unk19 = BinaryReader.b_ReadFloat(FileBytes, _ptr + 716);
+                        DuelPlayerParamList[x].ChakraBlockRecoverySpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 720);
+                        DuelPlayerParamList[x].AwakeningActionChargeSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 724);
+
+                    }
+                    Index3++;
+                }
             }
-            if (File.Exists(filePath)) {
-                byte[] FileBytes = File.ReadAllBytes(filePath);
-                ObservableCollection<DuelPlayerParamModel> temp_list = new ObservableCollection<DuelPlayerParamModel>();
-
-                int EntryCount = BinaryReader.b_ReadIntRev(FileBytes, 36) - 1;
-                int Index3 = 128;
-                for (int x = 0; x < EntryCount; x++) {
-                    DuelPlayerParamList.Add(new DuelPlayerParamModel());
-                }
-                for (int x = 0; x < EntryCount; x++) {
-                    string path = BinaryReader.b_ReadString(FileBytes, Index3);
-                    DuelPlayerParamList[x].BinPath = path;
-                    Index3 = Index3 + path.Length + 1;
-                }
-                Index3++;
-                List<string> binName = new List<string>();
-                for (int x = 0; x < EntryCount + 2; x++) {
-                    string name = BinaryReader.b_ReadString(FileBytes, Index3);
-                    binName.Add(name);
-                    Index3 = Index3 + name.Length + 1;
-                }
-                binName.RemoveAt(1);
-                binName.RemoveAt(1);
-                for (int x = 0; x < EntryCount; x++) {
-                    DuelPlayerParamList[x].BinName = binName[x];
-                }
-
-                int StartOfFile = 68 + BinaryReader.b_ReadIntRev(FileBytes, 16);
-                for (int x = 0; x < EntryCount; x++) {
-                    ObservableCollection<CostumeModel> baseCostumeList = new ObservableCollection<CostumeModel>();
-                    ObservableCollection<CostumeModel> awaCostumeList = new ObservableCollection<CostumeModel>();
-                    int _ptr = StartOfFile + 760 * x + 48 * x;
-                    DuelPlayerParamList[x].MotionCode = BinaryReader.b_ReadString(FileBytes, _ptr);
-                    for (int c2 = 0; c2 < 20; c2++) {
-                        string cid = BinaryReader.b_ReadString(FileBytes, _ptr + 8 + 8 * c2);
-                        CostumeModel entry = new CostumeModel();
-                        entry.CostumeName = cid;
-                        entry.CostumeIndex = c2;
-
-                        baseCostumeList.Add(entry);
-                    }
-                    for (int c = 0; c < 20; c++) {
-                        string awkcid = BinaryReader.b_ReadString(FileBytes, _ptr + 168 + 8 * c);
-                        CostumeModel entry = new CostumeModel();
-                        entry.CostumeName = awkcid;
-                        entry.CostumeIndex = c;
-                        awaCostumeList.Add(entry);
-                    }
-                    DuelPlayerParamList[x].BaseCostumes = baseCostumeList;
-                    DuelPlayerParamList[x].AwakeCostumes = awaCostumeList;
-                    DuelPlayerParamList[x].Partner = BinaryReader.b_ReadString(FileBytes, _ptr + 328);
-                    DuelPlayerParamList[x].ChakraDashCondition = FileBytes[_ptr + 336];
-                    DuelPlayerParamList[x].AwakeningCondition1 = FileBytes[_ptr + 337];
-                    DuelPlayerParamList[x].AwakeningCondition2 = FileBytes[_ptr + 338];
-                    DuelPlayerParamList[x].AwakeningJutsuController = FileBytes[_ptr + 339];
-                    DuelPlayerParamList[x].AwaBodyPriority = (uint)BinaryReader.b_ReadInt(FileBytes, _ptr + 352);
-                    DuelPlayerParamList[x].DefaultAwaSkillIndex = BinaryReader.b_ReadInt(FileBytes, _ptr + 356);
-
-
-                    List<int> FlagList = new List<int>();
-                    for (int c = 0; c<15; c++) {
-                        FlagList.Add(BinaryReader.b_ReadInt(FileBytes, _ptr + 360 + (4*c)));
-                    }
-                    DuelPlayerParamList[x].Flag_settings = FlagList;
-                    DuelPlayerParamList[x].Support1 = BinaryReader.b_ReadString(FileBytes, _ptr + 420);
-                    DuelPlayerParamList[x].Support2 = BinaryReader.b_ReadString(FileBytes, _ptr + 428);
-                    DuelPlayerParamList[x].CameraDistance = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 436);
-                    DuelPlayerParamList[x].Unk1 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 438);
-                    DuelPlayerParamList[x].VictoryCameraAngle = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 440);
-                    DuelPlayerParamList[x].Unk2 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 442);
-                    DuelPlayerParamList[x].Unk3 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 444);
-                    DuelPlayerParamList[x].Unk4 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 446);
-
-                    DuelPlayerParamList[x].BaseMovementSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 448);
-                    DuelPlayerParamList[x].BaseChakraDashSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 452);
-                    DuelPlayerParamList[x].GuardPressure = BinaryReader.b_ReadFloat(FileBytes, _ptr + 456);
-                    DuelPlayerParamList[x].AirDashSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 460);
-                    DuelPlayerParamList[x].Attack = BinaryReader.b_ReadFloat(FileBytes, _ptr + 464);
-                    DuelPlayerParamList[x].Defense = BinaryReader.b_ReadFloat(FileBytes, _ptr + 468);
-                    DuelPlayerParamList[x].AssistDamage = BinaryReader.b_ReadFloat(FileBytes, _ptr + 472);
-                    DuelPlayerParamList[x].ItemBuffDuration = BinaryReader.b_ReadFloat(FileBytes, _ptr + 476);
-                    DuelPlayerParamList[x].ChakraChargeSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 480);
-                    DuelPlayerParamList[x].AwakeningCondition = BinaryReader.b_ReadString(FileBytes, _ptr + 484);
-                    DuelPlayerParamList[x].AwakeHPRequirement = BinaryReader.b_ReadFloat(FileBytes, _ptr + 500);
-                    DuelPlayerParamList[x].BaseNinjaDashSpeed = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 504);
-                    DuelPlayerParamList[x].BaseAirDashDuration = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 506);
-                    DuelPlayerParamList[x].BaseGroundedChakraDashDuration = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 508);
-
-                    DuelPlayerParamList[x].Unk5 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 510);
-                    DuelPlayerParamList[x].Unk6 = BinaryReader.b_ReadFloat(FileBytes, _ptr + 512);
-
-                    List<string> ItemList = new List<string>();
-                    List<int> ItemCountList = new List<int>();
-                    for (int i = 0; i < 4; i++) {
-                        ItemList.Add(BinaryReader.b_ReadString(FileBytes, _ptr + 516 + 32 * i));
-                        ItemCountList.Add(BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 546 + 32 * i));
-                    }
-                    DuelPlayerParamList[x].Items = ItemList;
-                    DuelPlayerParamList[x].ItemsDuration = ItemCountList;
-                    DuelPlayerParamList[x].AwakeMovementSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 644);
-                    DuelPlayerParamList[x].AwakeChakraDashSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 648);
-                    DuelPlayerParamList[x].AwakeNinjaDashSpeed = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 652);
-                    DuelPlayerParamList[x].AwakeAirDashDuration = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 654);
-                    DuelPlayerParamList[x].AwakeGroundedChakraDashDuration = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 656);
-                    DuelPlayerParamList[x].Unk7 = (uint)BinaryReader.b_ReadIntFromTwoBytes(FileBytes, _ptr + 658);
-
-                    List<float> unk8_17List = new List<float>();
-                    for (int i = 0; i < 10; i++) {
-                        unk8_17List.Add(BinaryReader.b_ReadFloat(FileBytes, _ptr + 660 + (4* i)));
-                    }
-                    DuelPlayerParamList[x].Unk8_17 = unk8_17List;
-                    DuelPlayerParamList[x].Unk18 = BinaryReader.b_ReadInt(FileBytes, _ptr + 700);
-                    DuelPlayerParamList[x].EnableChakraDashPriority = Convert.ToBoolean(BinaryReader.b_ReadInt(FileBytes, _ptr + 704));
-                    DuelPlayerParamList[x].AwakeningDebuffEnabler = Convert.ToBoolean(BinaryReader.b_ReadInt(FileBytes, _ptr + 708));
-                    DuelPlayerParamList[x].ChakraCostAwakening = BinaryReader.b_ReadFloat(FileBytes, _ptr + 712);
-                    DuelPlayerParamList[x].Unk19 = BinaryReader.b_ReadFloat(FileBytes, _ptr + 716);
-                    DuelPlayerParamList[x].ChakraBlockRecoverySpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 720);
-                    DuelPlayerParamList[x].AwakeningActionChargeSpeed = BinaryReader.b_ReadFloat(FileBytes, _ptr + 724);
-                    
-                }
-                Index3++;
+            catch (Exception ex) {
+                ModernWpf.MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
         }
 
@@ -775,57 +1085,96 @@ namespace NSC_Toolbox.ViewModel {
             }
         }
         public void SaveEntry() {
-            if (SelectedDPP is not null) {
-                DuelPlayerParamList[SelectedDPPIndex].BinPath = "D:/next5/char_hi/param/player/Converter/bin/" + Characode_field + "prm_bas.bin";
-                DuelPlayerParamList[SelectedDPPIndex].BinName = Characode_field + "prm_bas";
-                DuelPlayerParamList[SelectedDPPIndex].MotionCode = MotionCode_field;
-                DuelPlayerParamList[SelectedDPPIndex].Partner = Partner_field;
-                DuelPlayerParamList[SelectedDPPIndex].ChakraDashCondition = ChakraDashCondition_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeningCondition1 = AwakeningCondition1_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeningCondition2 = AwakeningCondition2_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeningJutsuController = AwakeningJutsuController_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwaBodyPriority = AwaBodyPriority_field;
-                DuelPlayerParamList[SelectedDPPIndex].DefaultAwaSkillIndex = DefaultAwaSkillIndex_field;
-                DuelPlayerParamList[SelectedDPPIndex].Support1 = Support1_field;
-                DuelPlayerParamList[SelectedDPPIndex].Support2 = Support2_field;
-                DuelPlayerParamList[SelectedDPPIndex].CameraDistance = CameraDistance_field;
-                DuelPlayerParamList[SelectedDPPIndex].Unk1 = Unk1_field;
-                DuelPlayerParamList[SelectedDPPIndex].VictoryCameraAngle = VictoryCameraAngle_field;
-                DuelPlayerParamList[SelectedDPPIndex].Unk2 = Unk2_field;
-                DuelPlayerParamList[SelectedDPPIndex].Unk3 = Unk3_field;
-                DuelPlayerParamList[SelectedDPPIndex].Unk4 = Unk4_field;
-                DuelPlayerParamList[SelectedDPPIndex].BaseMovementSpeed = BaseMovementSpeed_field;
-                DuelPlayerParamList[SelectedDPPIndex].BaseChakraDashSpeed = BaseChakraDashSpeed_field;
-                DuelPlayerParamList[SelectedDPPIndex].GuardPressure = GuardPressure_field;
-                DuelPlayerParamList[SelectedDPPIndex].AirDashSpeed = AirDashSpeed_field;
-                DuelPlayerParamList[SelectedDPPIndex].Attack = Attack_field;
-                DuelPlayerParamList[SelectedDPPIndex].Defense = Defense_field;
-                DuelPlayerParamList[SelectedDPPIndex].AssistDamage = AssistDamage_field;
-                DuelPlayerParamList[SelectedDPPIndex].ItemBuffDuration = ItemBuffDuration_field;
-                DuelPlayerParamList[SelectedDPPIndex].ChakraChargeSpeed = ChakraChargeSpeed_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeningCondition = AwakeningCondition_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeHPRequirement = AwakeHPRequirement_field;
-                DuelPlayerParamList[SelectedDPPIndex].BaseNinjaDashSpeed = BaseNinjaDashSpeed_field;
-                DuelPlayerParamList[SelectedDPPIndex].BaseAirDashDuration = BaseAirDashDuration_field;
-                DuelPlayerParamList[SelectedDPPIndex].BaseGroundedChakraDashDuration = BaseGroundedChakraDashDuration_field;
-                DuelPlayerParamList[SelectedDPPIndex].Items[0] = Items1_field;
-                DuelPlayerParamList[SelectedDPPIndex].Items[1] = Items2_field;
-                DuelPlayerParamList[SelectedDPPIndex].Items[2] = Items3_field;
-                DuelPlayerParamList[SelectedDPPIndex].Items[3] = Items4_field;
-                DuelPlayerParamList[SelectedDPPIndex].ItemsDuration[0] = ItemsDuration1_field;
-                DuelPlayerParamList[SelectedDPPIndex].ItemsDuration[1] = ItemsDuration2_field;
-                DuelPlayerParamList[SelectedDPPIndex].ItemsDuration[2] = ItemsDuration3_field;
-                DuelPlayerParamList[SelectedDPPIndex].ItemsDuration[3] = ItemsDuration4_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeMovementSpeed = AwakeMovementSpeed_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeChakraDashSpeed = AwakeChakraDashSpeed_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeNinjaDashSpeed = AwakeNinjaDashSpeed_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeAirDashDuration = AwakeAirDashDuration_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeGroundedChakraDashDuration = AwakeGroundedChakraDashDuration_field;
-                DuelPlayerParamList[SelectedDPPIndex].EnableChakraDashPriority = EnableChakraDashPriority_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeningDebuffEnabler = AwakeningDebuffEnabler_field;
-                DuelPlayerParamList[SelectedDPPIndex].ChakraCostAwakening = ChakraCostAwakening_field;
-                DuelPlayerParamList[SelectedDPPIndex].ChakraBlockRecoverySpeed = ChakraBlockRecoverySpeed_field;
-                DuelPlayerParamList[SelectedDPPIndex].AwakeningActionChargeSpeed = AwakeningActionChargeSpeed_field;
+            if (SelectedDPP is not null && (Characode_field ?? "") != "") {
+                SelectedDPP.BinPath = "D:/next5/char_hi/param/player/Converter/bin/" + (Characode_field ?? "") + "prm_bas.bin";
+                SelectedDPP.BinName = (Characode_field ?? "") + "prm_bas";
+                SelectedDPP.MotionCode = MotionCode_field;
+                SelectedDPP.Partner = Partner_field;
+
+
+                ConditionFlags saved_flags = ConditionFlags.None;
+                saved_flags |= Cond_flag_1_field ? ConditionFlags.ENABLE_AWAKENING_JUTSU : ConditionFlags.None;
+                saved_flags |= Cond_flag_2_field ? ConditionFlags.UNK_1 : ConditionFlags.None;
+                saved_flags |= Cond_flag_3_field ? ConditionFlags.UNK_2 : ConditionFlags.None;
+                saved_flags |= Cond_flag_4_field ? ConditionFlags.UNK_3 : ConditionFlags.None;
+                saved_flags |= Cond_flag_5_field ? ConditionFlags.UNK_4 : ConditionFlags.None;
+                saved_flags |= Cond_flag_6_field ? ConditionFlags.UNK_5 : ConditionFlags.None;
+                saved_flags |= Cond_flag_7_field ? ConditionFlags.UNK_6 : ConditionFlags.None;
+                saved_flags |= Cond_flag_8_field ? ConditionFlags.UNK_7 : ConditionFlags.None;
+                saved_flags |= Cond_flag_9_field ? ConditionFlags.ENABLE_GIANT_AWAKENING_COND : ConditionFlags.None;
+                saved_flags |= Cond_flag_10_field ? ConditionFlags.ENABLE_PRIVATE_CAMERA : ConditionFlags.None;
+                saved_flags |= Cond_flag_11_field ? ConditionFlags.ENABLE_GIANT_AWAKENING_LAND_SOUND : ConditionFlags.None;
+                saved_flags |= Cond_flag_12_field ? ConditionFlags.ENABLE_AWAKENING_HITMARK : ConditionFlags.None;
+                saved_flags |= Cond_flag_13_field ? ConditionFlags.UNK_8 : ConditionFlags.None;
+                saved_flags |= Cond_flag_14_field ? ConditionFlags.UNK_9 : ConditionFlags.None;
+                saved_flags |= Cond_flag_15_field ? ConditionFlags.UNK_10 : ConditionFlags.None;
+                saved_flags |= Cond_flag_16_field ? ConditionFlags.UNK_11 : ConditionFlags.None;
+                saved_flags |= Cond_flag_17_field ? ConditionFlags.UNK_12 : ConditionFlags.None;
+                saved_flags |= Cond_flag_18_field ? ConditionFlags.UNK_13 : ConditionFlags.None;
+                saved_flags |= Cond_flag_19_field ? ConditionFlags.ENABLE_BASE_GLOW : ConditionFlags.None;
+                saved_flags |= Cond_flag_20_field ? ConditionFlags.ENABLE_AWAKE_GLOW : ConditionFlags.None;
+                saved_flags |= Cond_flag_21_field ? ConditionFlags.ENABLE_TELEPORT_DASH : ConditionFlags.None;
+                saved_flags |= Cond_flag_22_field ? ConditionFlags.UNK_14 : ConditionFlags.None;
+                saved_flags |= Cond_flag_23_field ? ConditionFlags.UNK_15 : ConditionFlags.None;
+                saved_flags |= Cond_flag_24_field ? ConditionFlags.ENABLE_AWAKENING_MOVESET : ConditionFlags.None;
+                saved_flags |= Cond_flag_25_field ? ConditionFlags.UNK_16 : ConditionFlags.None;
+                saved_flags |= Cond_flag_26_field ? ConditionFlags.UNK_17 : ConditionFlags.None;
+                saved_flags |= Cond_flag_27_field ? ConditionFlags.UNK_18 : ConditionFlags.None;
+                saved_flags |= Cond_flag_28_field ? ConditionFlags.ENABLE_PUPPET_COND : ConditionFlags.None;
+                saved_flags |= Cond_flag_29_field ? ConditionFlags.ENABLE_PUPPET_USER_COND : ConditionFlags.None;
+                saved_flags |= Cond_flag_30_field ? ConditionFlags.UNK_19 : ConditionFlags.None;
+                saved_flags |= Cond_flag_31_field ? ConditionFlags.UNK_20 : ConditionFlags.None;
+                saved_flags |= Cond_flag_32_field ? ConditionFlags.UNK_21 : ConditionFlags.None;
+
+                SelectedDPP.ConditionFlag = saved_flags;
+
+
+                //SelectedDPP.ChakraDashCondition = ChakraDashCondition_field;
+                //SelectedDPP.AwakeningCondition1 = AwakeningCondition1_field;
+                //SelectedDPP.AwakeningCondition2 = AwakeningCondition2_field;
+                //SelectedDPP.AwakeningJutsuController = AwakeningJutsuController_field;
+                SelectedDPP.AwaBodyPriority = AwaBodyPriority_field;
+                SelectedDPP.DefaultAwaSkillIndex = DefaultAwaSkillIndex_field;
+                SelectedDPP.Support1 = Support1_field;
+                SelectedDPP.Support2 = Support2_field;
+                SelectedDPP.CameraDistance = CameraDistance_field;
+                SelectedDPP.Unk1 = Unk1_field;
+                SelectedDPP.VictoryCameraAngle = VictoryCameraAngle_field;
+                SelectedDPP.Unk2 = Unk2_field;
+                SelectedDPP.Unk3 = Unk3_field;
+                SelectedDPP.Unk4 = Unk4_field;
+                SelectedDPP.BaseMovementSpeed = BaseMovementSpeed_field;
+                SelectedDPP.BaseChakraDashSpeed = BaseChakraDashSpeed_field;
+                SelectedDPP.GuardPressure = GuardPressure_field;
+                SelectedDPP.AirDashSpeed = AirDashSpeed_field;
+                SelectedDPP.Attack = Attack_field;
+                SelectedDPP.Defense = Defense_field;
+                SelectedDPP.AssistDamage = AssistDamage_field;
+                SelectedDPP.ItemBuffDuration = ItemBuffDuration_field;
+                SelectedDPP.ChakraChargeSpeed = ChakraChargeSpeed_field;
+                SelectedDPP.AwakeningCondition = AwakeningCondition_field;
+                SelectedDPP.AwakeHPRequirement = AwakeHPRequirement_field;
+                SelectedDPP.BaseNinjaDashSpeed = BaseNinjaDashSpeed_field;
+                SelectedDPP.BaseAirDashDuration = BaseAirDashDuration_field;
+                SelectedDPP.BaseGroundedChakraDashDuration = BaseGroundedChakraDashDuration_field;
+                SelectedDPP.Items[0] = Items1_field;
+                SelectedDPP.Items[1] = Items2_field;
+                SelectedDPP.Items[2] = Items3_field;
+                SelectedDPP.Items[3] = Items4_field;
+                SelectedDPP.ItemsDuration[0] = ItemsDuration1_field;
+                SelectedDPP.ItemsDuration[1] = ItemsDuration2_field;
+                SelectedDPP.ItemsDuration[2] = ItemsDuration3_field;
+                SelectedDPP.ItemsDuration[3] = ItemsDuration4_field;
+                SelectedDPP.AwakeMovementSpeed = AwakeMovementSpeed_field;
+                SelectedDPP.AwakeChakraDashSpeed = AwakeChakraDashSpeed_field;
+                SelectedDPP.AwakeNinjaDashSpeed = AwakeNinjaDashSpeed_field;
+                SelectedDPP.AwakeAirDashDuration = AwakeAirDashDuration_field;
+                SelectedDPP.AwakeGroundedChakraDashDuration = AwakeGroundedChakraDashDuration_field;
+                SelectedDPP.EnableChakraDashPriority = EnableChakraDashPriority_field;
+                SelectedDPP.AwakeningDebuffEnabler = AwakeningDebuffEnabler_field;
+                SelectedDPP.ChakraCostAwakening = ChakraCostAwakening_field;
+                SelectedDPP.ChakraBlockRecoverySpeed = ChakraBlockRecoverySpeed_field;
+                SelectedDPP.AwakeningActionChargeSpeed = AwakeningActionChargeSpeed_field;
                 ModernWpf.MessageBox.Show("Entry was saved!");
             } else {
                 ModernWpf.MessageBox.Show("Select entry!");
@@ -891,10 +1240,14 @@ namespace NSC_Toolbox.ViewModel {
                 DPP_entry.BaseCostumes = new_CostumeList;
                 DPP_entry.AwakeCostumes = new_awaCostumeList;
                 DPP_entry.Partner = "";
-                DPP_entry.ChakraDashCondition = 0;
-                DPP_entry.AwakeningCondition1 = 0;
-                DPP_entry.AwakeningCondition2 = 64;
-                DPP_entry.AwakeningJutsuController = 0;
+
+
+                DPP_entry.ConditionFlag |= ConditionFlags.None | ConditionFlags.UNK_10;
+
+                //DPP_entry.ChakraDashCondition = 0;
+                //DPP_entry.AwakeningCondition1 = 0;
+                //DPP_entry.AwakeningCondition2 = 64;
+                //DPP_entry.AwakeningJutsuController = 0;
                 DPP_entry.AwaBodyPriority = 190;
                 DPP_entry.DefaultAwaSkillIndex = -1;
 
@@ -1008,7 +1361,7 @@ namespace NSC_Toolbox.ViewModel {
             fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
 
             for (int x6 = 0; x6 < DuelPlayerParamList.Count; x6++) {
-                fileBytes36 = BinaryReader.b_AddString(fileBytes36, DuelPlayerParamList[x6].BinPath);
+                fileBytes36 = BinaryReader.b_AddString(fileBytes36, DuelPlayerParamList[x6].BinPath ?? "");
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
             }
 
@@ -1016,7 +1369,7 @@ namespace NSC_Toolbox.ViewModel {
             fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
 
             for (int x5 = 0; x5 < 1; x5++) {
-                fileBytes36 = BinaryReader.b_AddString(fileBytes36, DuelPlayerParamList[x5].BinName);
+                fileBytes36 = BinaryReader.b_AddString(fileBytes36, DuelPlayerParamList[x5].BinName ?? "");
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
             }
             fileBytes36 = BinaryReader.b_AddString(fileBytes36, "Page0");
@@ -1025,7 +1378,7 @@ namespace NSC_Toolbox.ViewModel {
             fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
 
             for (int x4 = 1; x4 < DuelPlayerParamList.Count; x4++) {
-                fileBytes36 = BinaryReader.b_AddString(fileBytes36, DuelPlayerParamList[x4].BinName);
+                fileBytes36 = BinaryReader.b_AddString(fileBytes36, DuelPlayerParamList[x4].BinName ?? "");
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
             }
 
@@ -1227,17 +1580,19 @@ namespace NSC_Toolbox.ViewModel {
                 }));
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[760]);
                 int _ptr = 68 + FullLength + 48 * x + 760 * x;
-                fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].MotionCode, _ptr, 8);
+                fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].MotionCode ?? "", _ptr, 8);
                 for (int i = 0; i < 20; i++) {
-                    fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].BaseCostumes[i].CostumeName, _ptr + 8 + 8 * i, 8);
-                    fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].AwakeCostumes[i].CostumeName, _ptr + 168 + 8 * i, 8);
+                    fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].BaseCostumes[i].CostumeName ?? "", _ptr + 8 + 8 * i, 8);
+                    fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].AwakeCostumes[i].CostumeName ?? "", _ptr + 168 + 8 * i, 8);
                 }
 
                 fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].Partner, _ptr + 0x148, 8);
-                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].ChakraDashCondition }, _ptr + 0x150);
-                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].AwakeningCondition1 }, _ptr + 0x151);
-                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].AwakeningCondition2 }, _ptr + 0x152);
-                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].AwakeningJutsuController }, _ptr + 0x153);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes((int)DuelPlayerParamList[x].ConditionFlag), _ptr + 0x150, 1);
+
+                //fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].ChakraDashCondition }, _ptr + 0x150);
+                //fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].AwakeningCondition1 }, _ptr + 0x151);
+                //fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].AwakeningCondition2 }, _ptr + 0x152);
+                //fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].AwakeningJutsuController }, _ptr + 0x153);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].AwaBodyPriority), _ptr + 0x160);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].DefaultAwaSkillIndex), _ptr + 0x164);
 
@@ -1261,7 +1616,7 @@ namespace NSC_Toolbox.ViewModel {
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].AssistDamage), _ptr + 0x1D8);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].ItemBuffDuration), _ptr + 0x1DC);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].ChakraChargeSpeed), _ptr + 0x1E0);
-                fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].AwakeningCondition, _ptr + 0x1E4, 16);
+                fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].AwakeningCondition ?? "", _ptr + 0x1E4, 16);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].AwakeHPRequirement), _ptr + 0x1F4);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].BaseNinjaDashSpeed), _ptr + 0x1F8);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].BaseAirDashDuration), _ptr + 0x1FA);
@@ -1269,7 +1624,7 @@ namespace NSC_Toolbox.ViewModel {
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].Unk5), _ptr + 0x1FE);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].Unk6), _ptr + 0x200);
                 for (int i = 0; i < DuelPlayerParamList[x].Items.Count; i++) {
-                    fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].Items[i], _ptr + 0x204 + (0x20 * i), 28);
+                    fileBytes36 = BinaryReader.b_ReplaceString(fileBytes36, DuelPlayerParamList[x].Items[i] ?? "", _ptr + 0x204 + (0x20 * i), 28);
                     fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].ItemsDuration[i]), _ptr + 0x222 + (0x20 * i));
                 }
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].AwakeMovementSpeed), _ptr + 0x284);

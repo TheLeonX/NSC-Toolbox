@@ -82,7 +82,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.1.1.3;component/view/stageinfoeditorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.1.1.4;component/view/stageinfoeditorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\StageInfoEditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -27,6 +27,9 @@ namespace NSC_Toolbox.ViewModel {
                 OnPropertyChanged("CharacterManagementVisibility");
             }
         }
+
+
+
         private Visibility _otherToolsVisibility;
         public Visibility OtherToolsVisibility {
             get { return _otherToolsVisibility; }
@@ -217,6 +220,8 @@ namespace NSC_Toolbox.ViewModel {
             }
         }
         public TitleViewModel() {
+
+
             ToolTabState = 1;
             KuramaName = "Kyuruto";
             MeouchCounter = 0;

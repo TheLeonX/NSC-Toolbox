@@ -84,7 +84,7 @@ namespace NSC_Toolbox.Properties
                     !newPath.Contains("awakeAura") &&
                     !newPath.Contains("appearanceAnm") &&
                     !newPath.Contains("skillIndexSettingParam") &&
-                    !newPath.Contains("spTypeSipportParam") &&
+                    !newPath.Contains("spTypeSupportParam") &&
                     !newPath.Contains("privateCamera") &&
                     !newPath.Contains("costumeBreakParam") &&
                     !newPath.Contains("costumeBreakColorParam") &&
@@ -102,7 +102,9 @@ namespace NSC_Toolbox.Properties
                     !newPath.Contains("meDecalParam") &&
                     !newPath.Contains("situationVoice") &&
                     !newPath.Contains("playerDecalSetting") &&
-                    !newPath.Contains("pairSpSkillCombinationParam")
+                    !newPath.Contains("pairSpSkillCombinationParam") &&
+                    !newPath.Contains("1cmnbod1") &&
+                    !newPath.Contains("1cmnprm")
                     )
                     File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
             }

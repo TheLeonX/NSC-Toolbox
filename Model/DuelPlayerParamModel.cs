@@ -59,38 +59,50 @@ namespace NSC_Toolbox.Model {
             }
         }
 
-        private byte _chakraDashCondition;
-        public byte ChakraDashCondition {
-            get { return _chakraDashCondition; }
+        //private byte _chakraDashCondition;
+        //public byte ChakraDashCondition {
+        //    get { return _chakraDashCondition; }
+        //    set {
+        //        _chakraDashCondition = value;
+        //        OnPropertyChanged("ChakraDashCondition");
+        //    }
+        //}
+        //private byte _awakeningCondition1;
+        //public byte AwakeningCondition1 {
+        //    get { return _awakeningCondition1; }
+        //    set {
+        //        _awakeningCondition1 = value;
+        //        OnPropertyChanged("AwakeningCondition1");
+        //    }
+        //}
+        //private byte _awakeningCondition2;
+        //public byte AwakeningCondition2 {
+        //    get { return _awakeningCondition2; }
+        //    set {
+        //        _awakeningCondition2 = value;
+        //        OnPropertyChanged("AwakeningCondition2");
+        //    }
+        //}
+        //private byte _awakeningJutsuController;
+        //public byte AwakeningJutsuController {
+        //    get { return _awakeningJutsuController; }
+        //    set {
+        //        _awakeningJutsuController = value;
+        //        OnPropertyChanged("AwakeningJutsuController");
+        //    }
+        //}
+
+        private ConditionFlags _conditionFlag;
+        public ConditionFlags ConditionFlag {
+            get { return _conditionFlag; }
             set {
-                _chakraDashCondition = value;
-                OnPropertyChanged("ChakraDashCondition");
+                _conditionFlag = value;
+                OnPropertyChanged("ConditionFlag");
             }
         }
-        private byte _awakeningCondition1;
-        public byte AwakeningCondition1 {
-            get { return _awakeningCondition1; }
-            set {
-                _awakeningCondition1 = value;
-                OnPropertyChanged("AwakeningCondition1");
-            }
-        }
-        private byte _awakeningCondition2;
-        public byte AwakeningCondition2 {
-            get { return _awakeningCondition2; }
-            set {
-                _awakeningCondition2 = value;
-                OnPropertyChanged("AwakeningCondition2");
-            }
-        }
-        private byte _awakeningJutsuController;
-        public byte AwakeningJutsuController {
-            get { return _awakeningJutsuController; }
-            set {
-                _awakeningJutsuController = value;
-                OnPropertyChanged("AwakeningJutsuController");
-            }
-        }
+
+
+
         private uint _awaBodyPriority;
         public uint AwaBodyPriority {
             get { return _awaBodyPriority; }
@@ -476,10 +488,11 @@ namespace NSC_Toolbox.Model {
                 BaseCostumes = newBaseCostumes,
                 AwakeCostumes = newAwakeCostumes,
                 Partner = this.Partner,
-                ChakraDashCondition = this.ChakraDashCondition,
-                AwakeningCondition1 = this.AwakeningCondition1,
-                AwakeningCondition2 = this.AwakeningCondition2,
-                AwakeningJutsuController = this.AwakeningJutsuController,
+                ConditionFlag = this.ConditionFlag,
+                //ChakraDashCondition = this.ChakraDashCondition,
+                //AwakeningCondition1 = this.AwakeningCondition1,
+                //AwakeningCondition2 = this.AwakeningCondition2,
+                //AwakeningJutsuController = this.AwakeningJutsuController,
                 AwaBodyPriority = this.AwaBodyPriority,
                 DefaultAwaSkillIndex = this.DefaultAwaSkillIndex,
                 Flag_settings = newFlagSettings,
@@ -568,4 +581,54 @@ namespace NSC_Toolbox.Model {
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
+
+    [Flags]
+    public enum ConditionFlags : uint {
+        None = 0,
+        //Articles
+        ENABLE_AWAKENING_JUTSU = 0x01,
+        UNK_1 = 0x02,
+        UNK_2 = 0x04,
+        UNK_3 = 0x08,
+
+        UNK_4 = 0x10,
+        UNK_5 = 0x20,
+        UNK_6 = 0x40,
+        UNK_7 = 0x80,
+
+        ENABLE_GIANT_AWAKENING_COND = 0x100,
+        ENABLE_PRIVATE_CAMERA = 0x200,
+        ENABLE_GIANT_AWAKENING_LAND_SOUND = 0x400,
+        ENABLE_AWAKENING_HITMARK = 0x800,
+
+        UNK_8 = 0x1000,
+        UNK_9 = 0x2000,
+        UNK_10 = 0x4000,
+        UNK_11 = 0x8000,
+
+        UNK_12 = 0x10000,
+        UNK_13 = 0x20000,
+        ENABLE_BASE_GLOW = 0x40000,
+        ENABLE_AWAKE_GLOW = 0x80000,
+
+
+        ENABLE_TELEPORT_DASH = 0x100000,
+        UNK_14 = 0x200000,
+        UNK_15 = 0x400000,
+        ENABLE_AWAKENING_MOVESET = 0x800000,
+
+        UNK_16 = 0x1000000,
+        UNK_17 = 0x2000000,
+        UNK_18 = 0x4000000,
+        ENABLE_PUPPET_COND = 0x8000000,
+
+        ENABLE_PUPPET_USER_COND = 0x10000000,
+        UNK_19 = 0x20000000,
+        UNK_20 = 0x40000000,
+        UNK_21 = 0x80000000,
+
+        ALL = ~None,
+    }
+   
+
 }

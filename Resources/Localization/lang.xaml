@@ -16,7 +16,7 @@
 
     <!-- Title Window-->
     <v:String x:Key="m_Title">Naruto Storm Connections - Toolbox</v:String>
-    <v:String x:Key="m_mainWindow_001">Character Management</v:String>
+    <v:String x:Key="m_mainWindow_001">Character Tools</v:String>
     <v:String x:Key="m_mainWindow_002">Stage Management</v:String>
     <v:String x:Key="m_mainWindow_003">Story Mode Management</v:String>
     <v:String x:Key="m_mainWindow_004">Other Tools</v:String>
@@ -50,6 +50,14 @@
         
     This tool doesn't support appearanceAnm and afterAttachObject files!
     This tool was made specifically for characters, which already have at least 1 model.
+        
+        Some characters load more than just costume file. If you aren't sure what to load, you need to get prm_load file of your character and check all entries with &lt;codeModel&gt;,
+        for example: &lt;codeModel&gt;bod1 - that's costume, &lt;codeModel&gt;spl1_bod1 - that's file which loads assets for Ultimate Jutsu in case if costume is different.
+        
+    Also, don't forget to check if you enabled armor break or no, cuz if you enable it but won't load files for it, you will get infinity loading. If you don't have files and aren't sure about that - just disable armor break.
+    
+    Sometimes issue can happen in team mode - that's cuz you probably picking characters which have Team Ultimate Jutsu. Sometimes they load extra assets as well, depending on costume.
+    If you aren't sure what files you should load - look for all mentions of costume which is already exist in game for your character!
     </v:String>
     <v:String x:Key="m_addCostume_page1_desc">Select data_win32 folder.</v:String>
     <v:String x:Key="m_addCostume_page2_desc">Set settings for adding costume.</v:String>
@@ -675,6 +683,10 @@ If you want to add awakening model to character which doesn't have it, make sure
 
 
     <!--DuelPlayerParamEditor Window-->
+    
+    
+    
+    
     <v:String x:Key="m_DuelPlayerParamEditor">Character Setting Editor</v:String>
     <v:String x:Key="m_baseCostumeList">Base Costume List</v:String>
     <v:String x:Key="m_awakeningCostumeList">Awakening Costume List</v:String>
@@ -722,6 +734,42 @@ If you want to add awakening model to character which doesn't have it, make sure
     <v:String x:Key="m_partner">Partner</v:String>
     <v:String x:Key="m_enableChakraDashPrior">Enable Awa Chakra Dash Priority</v:String>
     <v:String x:Key="m_modelCode">Model Code</v:String>
+
+
+    <v:String x:Key="m_dpp_cond_1">Enable Awakening Jutsu</v:String>
+    <v:String x:Key="m_dpp_cond_2">Unknown 1</v:String>
+    <v:String x:Key="m_dpp_cond_3">Unknown 2</v:String>
+    <v:String x:Key="m_dpp_cond_4">Unknown 3</v:String>
+    <v:String x:Key="m_dpp_cond_5">Unknown 4</v:String>
+    <v:String x:Key="m_dpp_cond_6">Unknown 5</v:String>
+    <v:String x:Key="m_dpp_cond_7">Unknown 6</v:String>
+    <v:String x:Key="m_dpp_cond_8">Unknown 7 </v:String>
+    <v:String x:Key="m_dpp_cond_9">Enable Giant Awakening Condition</v:String>
+    <v:String x:Key="m_dpp_cond_10">Enable Private Camera</v:String>
+    <v:String x:Key="m_dpp_cond_11">Enable Giant Awakening Land Sound</v:String>
+    <v:String x:Key="m_dpp_cond_12">Enable Hitmark Effect (for awakening)</v:String>
+    <v:String x:Key="m_dpp_cond_13">Unknown 8</v:String>
+    <v:String x:Key="m_dpp_cond_14">Unknown 9</v:String>
+    <v:String x:Key="m_dpp_cond_15">Unknown 10</v:String>
+    <v:String x:Key="m_dpp_cond_16">Unknown 11</v:String>
+    <v:String x:Key="m_dpp_cond_17">Unknown 12</v:String>
+    <v:String x:Key="m_dpp_cond_18">Unknown 13</v:String>
+    <v:String x:Key="m_dpp_cond_19">Enable Glow Effect for Base Form</v:String>
+    <v:String x:Key="m_dpp_cond_20">Enable Glow Effect for Awakening Form</v:String>
+    <v:String x:Key="m_dpp_cond_21">Enable Teleport for awakening dash</v:String>
+    <v:String x:Key="m_dpp_cond_22">Unknown 14</v:String>
+    <v:String x:Key="m_dpp_cond_23">Unknown 15</v:String>
+    <v:String x:Key="m_dpp_cond_24">Enable Awakening Moveset</v:String>
+    <v:String x:Key="m_dpp_cond_25">Unknown 16</v:String>
+    <v:String x:Key="m_dpp_cond_26">Unknown 17</v:String>
+    <v:String x:Key="m_dpp_cond_27">Unknown 18</v:String>
+    <v:String x:Key="m_dpp_cond_28">Enable Puppet Condition (Self Stagger on ground, Bounce in Air)</v:String>
+    <v:String x:Key="m_dpp_cond_29">Enable Puppet User Condition (requires puppet)</v:String>
+    <v:String x:Key="m_dpp_cond_30">Unknown 19</v:String>
+    <v:String x:Key="m_dpp_cond_31">Unknown 20</v:String>
+    <v:String x:Key="m_dpp_cond_32">Unknown 21</v:String>
+
+
 
     <!--PRM Editor-->
     <v:String x:Key="m_PRMEDitorFormat">Import File Format</v:String>

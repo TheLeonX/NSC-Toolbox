@@ -25,7 +25,7 @@
     <Viewbox  Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
         <Grid Height="800" Width="900">
             <xctk:Wizard FinishButtonClosesWindow="True" HelpButtonVisibility="Hidden"  FontFamily="{StaticResource NarutoFont}" Height="800" Width="900" >
-                <!--<xctk:WizardPage x:Name="IntroPage"
+                <xctk:WizardPage x:Name="IntroPage"
                                         Title="{DynamicResource m_addCostume_intro_title}"
                                         Description="{DynamicResource m_addCostume_intro_desc}" 
                                         Foreground="White"
@@ -37,7 +37,7 @@
                     </xctk:WizardPage.ExteriorPanelBackground>
                     <TextBlock  xml:space="preserve" Grid.Row="3"  Grid.Column="0" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Top"  FontFamily="{StaticResource NarutoFont}" Foreground="White" Text="{DynamicResource m_addCostume_warning}"  FontSize="14"/>
 
-                </xctk:WizardPage>-->
+                </xctk:WizardPage>
                 <xctk:WizardPage x:Name="Page1"
                                         Foreground="White"
                                         Background="{DynamicResource Toolbox_button_background_color_1}"

@@ -13,7 +13,7 @@
         xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
         Width="1250" Height="480"
         ui:WindowHelper.UseModernWindowStyle="True"
-        Title="{DynamicResource m_skillCustomizeParamEditor}">
+        Title="{DynamicResource m_spSkillCustomizeParamEditor}">
 
     <Window.Background>
         <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
