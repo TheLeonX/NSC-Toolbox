@@ -251,13 +251,13 @@ namespace NSC_Toolbox.ViewModel
                         SelectedPRMLoad.Condition = 0x101;
                         break;
                     case 11:
-                        SelectedPRMLoad.Condition = 0x102;
+                        SelectedPRMLoad.Condition = 0x201;
                         break;
                     case 12:
-                        SelectedPRMLoad.Condition = 0x104;
+                        SelectedPRMLoad.Condition = 0x401;
                         break;
                     case 13:
-                        SelectedPRMLoad.Condition = 0x108;
+                        SelectedPRMLoad.Condition = 0x801;
                         break;
                 }
 

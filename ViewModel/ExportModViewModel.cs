@@ -896,6 +896,8 @@ namespace NSC_Toolbox.ViewModel {
 
                         if (costumeParamExist)
                             ImportCostumeParam.OpenFile(costumeParamPath);
+                        else
+                            ImportCostumeParam.OpenFile(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\costumeParam.bin.xfbin");
 
                         if (playerIconExist)
                             ImportPlayerIcon.OpenFile(playerIconPath);
@@ -1289,7 +1291,7 @@ namespace NSC_Toolbox.ViewModel {
                                 continue;
                             }
                             //costumeParam
-                            if (costumeParamExist) {
+                           // if (costumeParamExist) {
 
                                 foreach (CostumeParamModel CostumeEntry in ImportCostumeParam.CostumeParamList) {
                                     for (int i = 0; i < ExportPlayerSettingParam.PlayerSettingParamList.Count; i++) {
@@ -1307,10 +1309,10 @@ namespace NSC_Toolbox.ViewModel {
                                     MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeParam entry.");
                                     continue;
                                 }
-                            } else if (!costumeParamExist && !ReplaceCharacter && !partner) {
-                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeParam file.");
-                                continue;
-                            }
+                            //} else if (!costumeParamExist && !ReplaceCharacter && !partner) {
+                            //    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeParam file.");
+                            //    continue;
+                            //}
                             //player_icon
                             if (playerIconExist) {
 
