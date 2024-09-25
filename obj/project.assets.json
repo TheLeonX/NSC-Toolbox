@@ -3554,26 +3554,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\ARDOR\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.40.0",
+    "version": "1.50.0",
     "restore": {
-      "projectUniqueName": "E:\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
+      "projectUniqueName": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
       "projectName": "NSC-Toolbox",
-      "projectPath": "E:\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "E:\\Desktop\\C# Projects\\NSC-Toolbox\\obj\\",
+      "projectPath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
+      "packagesPath": "C:\\Users\\ARDOR\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\ARDOR\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3587,8 +3580,8 @@
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows",
           "projectReferences": {
-            "E:\\Desktop\\C# Projects\\XFBIN_LIB\\XFBIN_LIB.csproj": {
-              "projectPath": "E:\\Desktop\\C# Projects\\XFBIN_LIB\\XFBIN_LIB.csproj"
+            "C:\\Users\\ARDOR\\Desktop\\C# Projects\\XFBIN_LIB\\XFBIN_LIB.csproj": {
+              "projectPath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\XFBIN_LIB\\XFBIN_LIB.csproj"
             }
           }
         }
@@ -3597,6 +3590,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3651,6 +3649,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[7.0.20, 7.0.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x86",
+            "version": "[7.0.20, 7.0.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[7.0.20, 7.0.20]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[7.0.20, 7.0.20]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -3659,7 +3675,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   },
