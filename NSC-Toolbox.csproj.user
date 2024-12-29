@@ -100,9 +100,6 @@
     <Compile Update="View\SupportSkillRecoverySpeedParamEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\TrailEditorView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\KuramaControl.xaml">
@@ -205,9 +202,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\TitleView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\TrailEditorView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
