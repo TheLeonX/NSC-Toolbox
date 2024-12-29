@@ -597,6 +597,27 @@ namespace NSC_Toolbox.ViewModel
 
         public void CreateMessageInfoList(string basepath, int index) {
             MessageInfo_List[index] = OpenFile(basepath);
+
+            //TEMPORARY FIX
+            //if (index == 13)
+            //{
+            //    if (MessageInfo_List[13].Count != MessageInfo_List[0].Count)
+            //    {
+            //        MessageInfoModel messageEntry = new MessageInfoModel();
+            //        messageEntry.CRC32Code = new byte[4] { 0xFF, 0xFF, 0xFF, 0xFF };
+            //        messageEntry.Speaker = new byte[0];
+            //        messageEntry.SecondaryText = new byte[0];
+            //        messageEntry.MainText = new byte[0];
+            //        messageEntry.ACBFileID = -1;
+            //        messageEntry.CueID = -1;
+            //        messageEntry.DisableText = false;
+            //        do
+            //        {
+            //            MessageInfo_List[13].Add(messageEntry);
+            //        } while (MessageInfo_List[13].Count != MessageInfo_List[0].Count);
+            //    }
+            //}
+            
         }
 
         public void AddEntries() {
@@ -1047,30 +1068,7 @@ namespace NSC_Toolbox.ViewModel
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[0x10] { 0xE9, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });
 
                 int startPtr = fileBytes36.Length;
-                //fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[MessageInfo_List[ListIndex].Count * 0x30]);
-                //List<int> MainText_pointer = new List<int>();
-                //List<int> SecondaryText_pointer = new List<int>();
-                //List<int> Speaker_pointer = new List<int>();
-                //ModernWpf.MessageBox.Show("test 1");
-                //for (int x = 0; x < MessageInfo_List[ListIndex].Count; x++) {
-                //    MainText_pointer.Add(fileBytes36.Length);
-                //    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, MessageInfo_List[ListIndex][x].MainText);
-                //    SecondaryText_pointer.Add(fileBytes36.Length);
-                //    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, MessageInfo_List[ListIndex][x].SecondaryText);
-                //    Speaker_pointer.Add(fileBytes36.Length);
-                //    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, MessageInfo_List[ListIndex][x].Speaker);
 
-                //}
-                //ModernWpf.MessageBox.Show("test 2");
-                //for (int x = 0; x < MessageInfo_List[ListIndex].Count; x++) {
-                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MainText_pointer[x] - startPtr - (0x30 * x) - 0x08), startPtr + (0x30 * x) + 0x08);
-                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MainText_pointer[x] - startPtr - (0x30 * x) - 0x10), startPtr + (0x30 * x) + 0x10);
-                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MainText_pointer[x] - startPtr - (0x30 * x) - 0x18), startPtr + (0x30 * x) + 0x18);
-                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[2] { 0xFF, 0xFF }, 0x24);
-                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex][x].ACBFileID), startPtr + (0x30 * x) + 0x26);
-                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex][x].CueID), startPtr + (0x30 * x) + 0x28);
-                //    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(MessageInfo_List[ListIndex][x].DisableText), startPtr + (0x30 * x) + 0x2A);
-                //}
 
 
                 List<byte> file = new List<byte>();

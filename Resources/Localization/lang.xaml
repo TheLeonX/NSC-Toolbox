@@ -77,6 +77,40 @@
 If you want to add awakening model to character which doesn't have it, make sure character have &lt;codeAwake2Model&gt;bod1 entry in prm_load! If you want to make different costume for awakening, make sure character has enabled function in prm file for switching awakening model on costume! Required function is - 229: ME_SET_SUBSTITUTION_KEY. Examples you can find 3ksnprm.bin.xfbin or 2rocprm.bin.xfbin. Highly not recommended to add this changes!
     </v:String>
 
+    <!--Trail Editor-->
+
+    <v:String x:Key="m_trailEditor">Trail Editor</v:String>
+    <v:String x:Key="m_trailEditor_clumpList">Clump List</v:String>
+    <v:String x:Key="m_trailEditor_clumpName">Clump Name</v:String>
+    <v:String x:Key="m_trailEditor_clumpPath">Clump Path</v:String>
+    <v:String x:Key="m_trailEditor_clump">Clump</v:String>
+
+    <v:String x:Key="m_trailEditor_billboardList">BillBoard List</v:String>
+    <v:String x:Key="m_trailEditor_billboardName">BillBoard Name</v:String>
+    <v:String x:Key="m_trailEditor_billboardPath">BillBoard Path</v:String>
+    <v:String x:Key="m_trailEditor_billboard">Billboard (Trail)</v:String>
+    
+    <v:String x:Key="m_trailEditor_animationName">Animation Name</v:String>
+    <v:String x:Key="m_trailEditor_animationPath">Animation Path</v:String>
+    <v:String x:Key="m_trailEditor_fadeTime">Fade Time</v:String>
+    <v:String x:Key="m_trailEditor_unk1">Unknown 1</v:String>
+    <v:String x:Key="m_trailEditor_unk2">Unknown 2</v:String>
+    <v:String x:Key="m_trailEditor_unk3">Unknown 3</v:String>
+    <v:String x:Key="m_trailEditor_Color">Color</v:String>
+    <v:String x:Key="m_trailEditor_ColorBlend">Color Blend</v:String>
+
+
+    <v:String x:Key="m_trailEditor_Width_1">Width 1</v:String>
+    <v:String x:Key="m_trailEditor_Width_2">Width 2</v:String>
+    <v:String x:Key="m_trailEditor_Width_3">Width 3</v:String>
+    <v:String x:Key="m_trailEditor_FirstBone">Start Coord</v:String>
+    <v:String x:Key="m_trailEditor_SecondBone">End Coord</v:String>
+    <v:String x:Key="m_trailEditor_Timeline">Timeline</v:String>
+    <v:String x:Key="m_trailEditor_Frame">Frame</v:String>
+    <v:String x:Key="m_trailEditor_toggleTrailDisable">Disabled Trail</v:String>
+    <v:String x:Key="m_trailEditor_toggleTrailEnable">Enabled Trail</v:String>
+    <v:String x:Key="m_trailEditor_toggleTrail">Toggle</v:String>
+
     <!--Skill Editor-->
     <v:String x:Key="m_skillEditor_title">Projectile Editor</v:String>
     <v:String x:Key="m_skillEditor_001">Projectile Entries</v:String>

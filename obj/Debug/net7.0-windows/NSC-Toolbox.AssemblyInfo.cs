@@ -13,11 +13,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("TheLeonX")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.5.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.50+8b414d3adb89cdce224671796f0d1263de8136e5")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.5.0.1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.50+20579e8e716efe3b00502fef5622e19298e86017")]
 [assembly: System.Reflection.AssemblyProductAttribute("NSC-Toolbox")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NSC-Toolbox")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.5.0.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.5.0.1")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 

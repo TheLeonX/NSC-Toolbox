@@ -90,7 +90,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.5.0.0;component/view/spskillcustomizeparameditorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.5.0.1;component/view/spskillcustomizeparameditorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\SpSkillCustomizeParamEditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
