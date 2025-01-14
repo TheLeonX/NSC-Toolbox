@@ -1810,35 +1810,47 @@ namespace NSC_Toolbox.ViewModel {
             fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[StageInfoList.Count * 0x130]);
             List<int> FilePathEntry_pointer = new List<int>();
             List<int> ObjectEntry_pointer = new List<int>();
-            for (int x = 0; x < StageInfoList.Count; x++) {
-                FilePathEntry_pointer.Add(fileBytes36.Length);
-                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[StageInfoList[x].FilePaths.Count * 0x8]);
-                ObjectEntry_pointer.Add(fileBytes36.Length);
-                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[StageInfoList[x].Objects.Count * 0xB0]);
-
-            }
             List<int> StageName_pointer = new List<int>();
             List<int> StageMessageID_pointer = new List<int>();
             List<int> StageFilter_pointer = new List<int>();
-            for (int x = 0; x < StageInfoList.Count; x++) {
+
+            for (int x = 0; x < StageInfoList.Count; x++)
+            {
+                // StageName
                 StageName_pointer.Add(fileBytes36.Length);
                 fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].StageName);
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+
+                // StageMessageID
                 StageMessageID_pointer.Add(fileBytes36.Length);
                 fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].StageMessageID);
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+
+                // StageFilter
                 StageFilter_pointer.Add(fileBytes36.Length);
                 fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].StageFilter);
                 fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
 
-            }
-            for (int x = 0; x<StageInfoList.Count; x++) {
+                // FilePaths
+                FilePathEntry_pointer.Add(fileBytes36.Length);
+                for (int i = 0; i < StageInfoList[x].FilePaths.Count; i++)
+                {
+                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[0x8]);
+                }
+
+                // Objects
+                ObjectEntry_pointer.Add(fileBytes36.Length);
+                for (int i = 0; i < StageInfoList[x].Objects.Count; i++)
+                {
+                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[0xB0]);
+                }
+
                 byte[] stageEntry = new byte[0x130];
                 stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageName_pointer[x] - startPtr - (0x130 * x)), 0);
                 stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageMessageID_pointer[x] - startPtr - (0x130 * x) - 0x08), 0x08);
                 stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageFilter_pointer[x] - startPtr - (0x130 * x) - 0x10), 0x10);
 
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].FilePaths.Count), 0x18); 
+                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].FilePaths.Count), 0x18);
                 stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(FilePathEntry_pointer[x] - startPtr - (0x130 * x) - 0x20), 0x20);
                 stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].Objects.Count), 0x28);
                 stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(ObjectEntry_pointer[x] - startPtr - (0x130 * x) - 0x30), 0x30);
@@ -1898,15 +1910,17 @@ namespace NSC_Toolbox.ViewModel {
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, stageEntry, startPtr + (x * 0x130));
 
                 //Paths
-                for (int i = 0; i < StageInfoList[x].FilePaths.Count; i++) {
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - FilePathEntry_pointer[x] - (i * 0x08)), FilePathEntry_pointer[x] + (i*0x08));
+                for (int i = 0; i < StageInfoList[x].FilePaths.Count; i++)
+                {
+                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - FilePathEntry_pointer[x] - (i * 0x08)), FilePathEntry_pointer[x] + (i * 0x08));
                     fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].FilePaths[i].FilePath);
                     fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
 
                 }
 
                 //Objects
-                for (int i = 0; i < StageInfoList[x].Objects.Count; i++) {
+                for (int i = 0; i < StageInfoList[x].Objects.Count; i++)
+                {
 
                     fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0)), ObjectEntry_pointer[x] + (i * 0xB0));
                     fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].ObjectFilePath);
@@ -1919,7 +1933,7 @@ namespace NSC_Toolbox.ViewModel {
                     fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
                     fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x18), ObjectEntry_pointer[x] + (i * 0xB0) + 0x18);
                     fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].PositionBoneName);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]); 
+                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
                     fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].EntryType), ObjectEntry_pointer[x] + (i * 0xB0) + 0x20);
                     fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].AnimationSpeed), ObjectEntry_pointer[x] + (i * 0xB0) + 0x24);
                     fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].EnableCameraHideObject), ObjectEntry_pointer[x] + (i * 0xB0) + 0x28);
@@ -1961,8 +1975,8 @@ namespace NSC_Toolbox.ViewModel {
                     fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].BreakableWallSound);
                     fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
                 }
-
             }
+
 
 
 
@@ -1993,6 +2007,7 @@ namespace NSC_Toolbox.ViewModel {
             });
             ConvertedFile = fileBytes36;
             LoadingStatePlay = Visibility.Hidden;
+
         }
 
         private RelayCommand _saveFileAsCommand;

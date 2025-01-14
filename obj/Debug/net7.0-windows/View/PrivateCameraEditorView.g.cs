@@ -81,7 +81,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.5.1.0;component/view/privatecameraeditorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.5.2.0;component/view/privatecameraeditorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\PrivateCameraEditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

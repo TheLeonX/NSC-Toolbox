@@ -122,16 +122,30 @@ namespace NSC_Toolbox {
             return a;
         }
 
-        public static byte[] b_ReplaceBytes(byte[] actual, byte[] bytesToReplace, int Index, int Invert = 0) {
-            if (Invert == 0) {
-                for (int x2 = 0; x2 < bytesToReplace.Length; x2++) {
-                    actual[Index + x2] = bytesToReplace[x2];
-                }
-            } else {
-                for (int x = 0; x < bytesToReplace.Length; x++) {
-                    actual[Index + x] = bytesToReplace[bytesToReplace.Length - 1 - x];
-                }
+        //public static byte[] b_ReplaceBytes(byte[] actual, byte[] bytesToReplace, int Index, int Invert = 0) {
+        //    if (Invert == 0) {
+        //        for (int x2 = 0; x2 < bytesToReplace.Length; x2++) {
+        //            actual[Index + x2] = bytesToReplace[x2];
+        //        }
+        //    } else {
+        //        for (int x = 0; x < bytesToReplace.Length; x++) {
+        //            actual[Index + x] = bytesToReplace[bytesToReplace.Length - 1 - x];
+        //        }
+        //    }
+        //    return actual;
+        //}
+
+        public static byte[] b_ReplaceBytes(byte[] actual, byte[] bytesToReplace, int Index, int Invert = 0)
+        {
+            int length = bytesToReplace.Length;
+
+            for (int i = 0; i < length; i++)
+            {
+                actual[Index + i] = Invert == 0
+                    ? bytesToReplace[i]
+                    : bytesToReplace[length - 1 - i];
             }
+
             return actual;
         }
 
@@ -180,22 +194,39 @@ namespace NSC_Toolbox {
             return output;
         }
 
-        public static byte[] b_AddBytes(byte[] actual, byte[] bytesToAdd, int Reverse = 0, int index = 0, int count = -1) {
-            List<byte> a = actual.ToList();
-            if (Reverse == 0) {
-                if (count == -1)
-                    count = bytesToAdd.Length;
-                for (int x = index; x < count; x++) {
-                    a.Add(bytesToAdd[x]);
-                }
-            } else {
-                if (count == -1) 
-                    count = bytesToAdd.Length;
-                for (int x = index; x < count; x++) {
-                    a.Add(bytesToAdd[bytesToAdd.Length - 1 - x]);
-                }
-            }
-            return a.ToArray();
+        //public static byte[] b_AddBytes(byte[] actual, byte[] bytesToAdd, int Reverse = 0, int index = 0, int count = -1) {
+        //    List<byte> a = actual.ToList();
+        //    if (Reverse == 0) {
+        //        if (count == -1)
+        //            count = bytesToAdd.Length;
+        //        for (int x = index; x < count; x++) {
+        //            a.Add(bytesToAdd[x]);
+        //        }
+        //    } else {
+        //        if (count == -1) 
+        //            count = bytesToAdd.Length;
+        //        for (int x = index; x < count; x++) {
+        //            a.Add(bytesToAdd[bytesToAdd.Length - 1 - x]);
+        //        }
+        //    }
+        //    return a.ToArray();
+        //}
+        public static byte[] b_AddBytes(byte[] actual, byte[] bytesToAdd, int Reverse = 0, int index = 0, int count = -1)
+        {
+            if (bytesToAdd == null || bytesToAdd.Length == 0)
+                return actual;
+
+            count = count == -1 ? bytesToAdd.Length : count;
+
+            // Ensure index and count are within bounds
+            index = Math.Clamp(index, 0, bytesToAdd.Length);
+            count = Math.Clamp(count, 0, bytesToAdd.Length - index);
+
+            IEnumerable<byte> segment = Reverse == 0
+                ? bytesToAdd.Skip(index).Take(count)
+                : bytesToAdd.Reverse().Skip(index).Take(count);
+
+            return actual.Concat(segment).ToArray();
         }
 
         public static byte[] b_AddInt(byte[] actual, int _num) {
@@ -231,18 +262,35 @@ namespace NSC_Toolbox {
             return arr;
         }
 
-        public static byte[] b_AddString(byte[] actual, string _str, int count = -1) {
-            List<byte> a = actual.ToList();
-            if (_str is not null) {
-                for (int x2 = 0; x2 < _str.Length; x2++) {
-                    a.Add((byte)_str[x2]);
-                }
-                for (int x = _str.Length; x < count; x++) {
-                    a.Add(0);
-                }
-            }
-            return a.ToArray();
+        //public static byte[] b_AddString(byte[] actual, string _str, int count = -1) {
+        //    List<byte> a = actual.ToList();
+        //    if (_str is not null) {
+        //        for (int x2 = 0; x2 < _str.Length; x2++) {
+        //            a.Add((byte)_str[x2]);
+        //        }
+        //        for (int x = _str.Length; x < count; x++) {
+        //            a.Add(0);
+        //        }
+        //    }
+        //    return a.ToArray();
+        //}
+
+        public static byte[] b_AddString(byte[] actual, string _str, int count = -1)
+        {
+            if (_str is null) return actual;
+
+            // Convert the string to bytes
+            var strBytes = Encoding.UTF8.GetBytes(_str);
+
+            // Calculate padding size if count is specified
+            int paddingSize = count > 0 ? Math.Max(0, count - strBytes.Length) : 0;
+
+            // Combine the original bytes, string bytes, and padding
+            return actual.Concat(strBytes)
+                         .Concat(new byte[paddingSize])
+                         .ToArray();
         }
+
 
         public static byte[] b_AddFloat(byte[] actual, float f) {
             List<byte> a = actual.ToList();

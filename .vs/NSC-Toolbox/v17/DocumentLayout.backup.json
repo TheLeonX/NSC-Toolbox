@@ -59,12 +59,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "NSC-Toolbox",
+              "Title": "NSC-Toolbox.csproj",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeDocumentMoniker": "NSC-Toolbox.csproj",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
-              "RelativeToolTip": "NSC-Toolbox.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAYAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj*",
+              "RelativeToolTip": "NSC-Toolbox.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2024-12-29T14:57:50.452Z",
               "EditorCaption": ""
@@ -77,7 +77,7 @@
               "RelativeDocumentMoniker": "BinaryReader.cs",
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\BinaryReader.cs",
               "RelativeToolTip": "BinaryReader.cs",
-              "ViewState": "AgIAAF8BAAAAAAAAAAAAAGQBAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAMoAAAAAAAAAAAAUwJUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-28T11:17:55.548Z",
               "EditorCaption": ""
@@ -113,9 +113,10 @@
               "RelativeDocumentMoniker": "ViewModel\\StageInfoViewModel.cs",
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\StageInfoViewModel.cs",
               "RelativeToolTip": "ViewModel\\StageInfoViewModel.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAAAE0AAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAJUGAAAAAAAAAAA5wKkGAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T10:42:08.42Z"
+              "WhenOpened": "2024-11-19T10:42:08.42Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
