@@ -231,7 +231,6 @@ If you want to add awakening model to character which doesn't have it, make sure
         skillIndexSettingParam.xfbin
         privateCamera.bin.xfbin
         spSkillCustomizeParam.xfbin
-        costumeBreakColorParam.xfbin
         cmnparam.xfbin
         supportActionparam.xfbin
         supportSkillRecoverySpeedParam.xfbin
@@ -606,10 +605,9 @@ If you want to add awakening model to character which doesn't have it, make sure
     <v:String x:Key="m_PRMloadFileType_16">15 - ???</v:String>
     <v:String x:Key="m_PRMloadCostumeIndex">Costume Index (duelPlayerParam)</v:String>
     <v:String x:Key="m_PRMloadLoadCondition">Load Condition</v:String>
-    <v:String x:Key="m_PRMloadLoadCondition_1">Always Load</v:String>
-    <v:String x:Key="m_PRMloadLoadCondition_2">Load for supports</v:String>
-    <v:String x:Key="m_PRMloadLoadCondition_3">Load for leader (base)</v:String>
-    <v:String x:Key="m_PRMloadLoadCondition_4">Load for awakening</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_1">Base</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_2">Support</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_4">Awakening</v:String>
     <v:String x:Key="m_PRMloadLoadCondition_5">Jutsu 1</v:String>
     <v:String x:Key="m_PRMloadLoadCondition_6">Jutsu 2</v:String>
     <v:String x:Key="m_PRMloadLoadCondition_7">Jutsu 3</v:String>

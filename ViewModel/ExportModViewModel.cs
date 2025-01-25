@@ -764,8 +764,10 @@ namespace NSC_Toolbox.ViewModel {
             bool privateCameraExist = File.Exists(privateCameraPath);
             string characterSelectParamPath = DataWin32Path_field + "\\ui\\max\\select\\characterSelectParam.xfbin";
             bool characterSelectParamExist = File.Exists(characterSelectParamPath);
+
             string costumeBreakColorParamPath = DataWin32Path_field + "\\spc\\costumeBreakColorParam.xfbin";
             bool costumeBreakColorParamExist = File.Exists(costumeBreakColorParamPath);
+
             string costumeParamPath = DataWin32Path_field + "\\rpg\\param\\costumeParam.bin.xfbin";
             bool costumeParamExist = File.Exists(costumeParamPath);
             string playerIconPath = DataWin32Path_field + "\\spc\\player_icon.xfbin";
@@ -1282,14 +1284,15 @@ namespace NSC_Toolbox.ViewModel {
                                     }
 
                                 }
-                                if (ExportCostumeBreakColorParam.CostumeBreakColorParamList.Count < 1 && !ReplaceCharacter && !partner) {
-                                    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeBreakColorParam entry.");
-                                    continue;
-                                }
-                            } else if (!characterSelectParamExist && !ReplaceCharacter && !partner) {
-                                MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeBreakColorParam file.");
-                                continue;
-                            }
+                                //if (ExportCostumeBreakColorParam.CostumeBreakColorParamList.Count < 1 && !ReplaceCharacter && !partner) {
+                                //    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeBreakColorParam entry.");
+                                //    continue;
+                                //}
+                            } 
+                            //else if (!characterSelectParamExist && !ReplaceCharacter && !partner) {
+                            //    MessageBox.Show("Character with characode " + character.CharacodeName + " wasn't exported, cuz it has missing costumeBreakColorParam file.");
+                            //    continue;
+                            //}
                             //costumeParam
                            // if (costumeParamExist) {
 
@@ -1843,7 +1846,8 @@ namespace NSC_Toolbox.ViewModel {
                             ExportModelCharacterSelectParam.SaveFileAs(model_path + "\\ui\\max\\select\\characterSelectParam.xfbin");
                             if (ExportModelCostumeBreakParam.CostumeBreakParamList.Count > 0)
                                 ExportModelCostumeBreakParam.SaveFileAs(model_path + "\\spc\\costumeBreakParam.xfbin");
-                            ExportModelCostumeBreakColorParam.SaveFileAs(model_path + "\\spc\\costumeBreakColorParam.xfbin");
+                            if (ExportModelCostumeBreakColorParam.CostumeBreakColorParamList.Count > 0)
+                                ExportModelCostumeBreakColorParam.SaveFileAs(model_path + "\\spc\\costumeBreakColorParam.xfbin");
                             ExportModelCostumeParam.SaveFileAs(model_path + "\\rpg\\param\\costumeParam.bin.xfbin");
                             if (ExportModelMessageInfo.MessageInfo_List[0].Count > 0)
                                 ExportModelMessageInfo.SaveFileAs(model_path);

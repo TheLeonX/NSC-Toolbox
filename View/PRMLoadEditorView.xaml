@@ -20,7 +20,7 @@
         <Grid Width="750" Height="580">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
@@ -131,52 +131,37 @@
                 <Label  Grid.Row="9" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_PRMloadCostumeIndex}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
                 <xctk:IntegerUpDown Value="{Binding CostumeIndex_field}" MinHeight="30" Grid.Row="10" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="20" Minimum="-1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <Label Grid.Row="12" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_PRMloadLoadCondition}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
-                <ComboBox Grid.Row="13" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" SelectedIndex="{Binding Condition_field}">
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_1}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_2}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
+                <Grid Grid.Row="13" Background="{DynamicResource Toolbox_button_background_color_1}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_3}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_4}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_5}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_6}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_7}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_8}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_9}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_10}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_11}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_12}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_13}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="{StaticResource m_PRMloadLoadCondition_14}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
-                    </ComboBoxItem>
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_1}" IsChecked="{Binding IsConditionCommon}" Grid.Row="0" Grid.Column="0" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_2}" IsChecked="{Binding IsConditionSupport}" Grid.Row="0" Grid.Column="1" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_4}" IsChecked="{Binding IsConditionAwakening}" Grid.Row="1" Grid.Column="0" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_5}" IsChecked="{Binding IsConditionJutsu1}" Grid.Row="1" Grid.Column="1" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_6}" IsChecked="{Binding IsConditionJutsu2}" Grid.Row="2" Grid.Column="0" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_7}" IsChecked="{Binding IsConditionJutsu3}" Grid.Row="2" Grid.Column="1" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_8}" IsChecked="{Binding IsConditionJutsu4}" Grid.Row="3" Grid.Column="0" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_9}" IsChecked="{Binding IsConditionJutsu5}" Grid.Row="3" Grid.Column="1" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_10}" IsChecked="{Binding IsConditionJutsu6}" Grid.Row="4" Grid.Column="0" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_11}" IsChecked="{Binding IsConditionUltimateJutsu1}" Grid.Row="4" Grid.Column="1" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_12}" IsChecked="{Binding IsConditionUltimateJutsu2}" Grid.Row="5" Grid.Column="0" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_13}" IsChecked="{Binding IsConditionUltimateJutsu3}" Grid.Row="5" Grid.Column="1" />
+                    <CheckBox  Content="{DynamicResource m_PRMloadLoadCondition_14}" IsChecked="{Binding IsConditionUltimateJutsu4}" Grid.Row="6" Grid.Column="0" />
+                </Grid>
 
-                </ComboBox>
+
 
             </Grid>
             <Grid Grid.Column="1" Grid.Row="3" >

@@ -65,6 +65,166 @@ namespace NSC_Toolbox.ViewModel
                 OnPropertyChanged("Condition_field");
             }
         }
+
+        public bool IsConditionCommon
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_COMMON) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_COMMON, value);
+                    OnPropertyChanged("IsConditionCommon");
+                }
+            }
+        }
+        public bool IsConditionSupport
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_SUPPORT) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_SUPPORT, value);
+                    OnPropertyChanged("IsConditionSupport");
+                }
+            }
+        }
+        public bool IsConditionAwakening
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_AWAKENING) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_AWAKENING, value);
+                    OnPropertyChanged("IsConditionAwakening");
+                }
+            }
+        }
+
+        public bool IsConditionJutsu1
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_JUTSU1) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_JUTSU1, value);
+                    OnPropertyChanged("IsConditionJutsu1");
+                }
+            }
+        }
+        public bool IsConditionJutsu2
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_JUTSU2) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_JUTSU2, value);
+                    OnPropertyChanged("IsConditionJutsu2");
+                }
+            }
+        }
+        public bool IsConditionJutsu3
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_JUTSU3) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_JUTSU3, value);
+                    OnPropertyChanged("IsConditionJutsu3");
+                }
+            }
+        }
+        public bool IsConditionJutsu4
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_JUTSU4) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_JUTSU4, value);
+                    OnPropertyChanged("IsConditionJutsu4");
+                }
+            }
+        }
+        public bool IsConditionJutsu5
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_JUTSU5) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_JUTSU5, value);
+                    OnPropertyChanged("IsConditionJutsu5");
+                }
+            }
+        }
+        public bool IsConditionJutsu6
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_JUTSU6) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_JUTSU6, value);
+                    OnPropertyChanged("IsConditionJutsu6");
+                }
+            }
+        }
+
+        public bool IsConditionUltimateJutsu1
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_ULTIMATE1) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_ULTIMATE1, value);
+                    OnPropertyChanged("IsConditionUltimateJutsu1");
+                }
+            }
+        }
+        public bool IsConditionUltimateJutsu2
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_ULTIMATE2) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_ULTIMATE2, value);
+                    OnPropertyChanged("IsConditionUltimateJutsu2");
+                }
+            }
+        }
+        public bool IsConditionUltimateJutsu3
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_ULTIMATE3) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_ULTIMATE3, value);
+                    OnPropertyChanged("IsConditionUltimateJutsu3");
+                }
+            }
+        }
+        public bool IsConditionUltimateJutsu4
+        {
+            get => SelectedPRMLoad?.IsFlagSet(PrmLoadConditionFlags.LOAD_ULTIMATE4) ?? false;
+            set
+            {
+                if (SelectedPRMLoad != null)
+                {
+                    SelectedPRMLoad.SetFlag(PrmLoadConditionFlags.LOAD_ULTIMATE4, value);
+                    OnPropertyChanged("IsConditionUltimateJutsu4");
+                }
+            }
+        }
+
         public ObservableCollection<PRMLoad_Model> PRMLoadList { get; set; }
         private PRMLoad_Model _selectedPRMLoad;
         public PRMLoad_Model SelectedPRMLoad {
@@ -76,53 +236,21 @@ namespace NSC_Toolbox.ViewModel
                     FileName_field = value.FileName;
                     Type_field = value.Type;
                     CostumeIndex_field = value.CostumeIndex;
-                    switch (value.Condition) {
-                        case 0x01:
-                            Condition_field = 0;
-                            break;
-                        case 0x02:
-                            Condition_field = 1;
-                            break;
-                        case 0x03:
-                            Condition_field = 2;
-                            break;
-                        case 0x05:
-                            Condition_field = 3;
-                            break;
-                        case 0x0B:
-                            Condition_field = 4;
-                            break;
-                        case 0x13:
-                            Condition_field = 5;
-                            break;
-                        case 0x23:
-                            Condition_field = 6;
-                            break;
-                        case 0x43:
-                            Condition_field = 7;
-                            break;
-                        case 0x83:
-                            Condition_field = 8;
-                            break;
-                        case 0x320:
-                            Condition_field = 9;
-                            break;
-                        case 0x101:
-                            Condition_field = 10;
-                            break;
-                        case 0x201:
-                            Condition_field = 11;
-                            break;
-                        case 0x401:
-                            Condition_field = 12;
-                            break;
-                        case 0x801:
-                            Condition_field = 13;
-                            break;
-                        default:
-                            Condition_field = 0;
-                            break;
-                    }
+
+                    OnPropertyChanged("IsConditionCommon");
+                    OnPropertyChanged("IsConditionSupport");
+                    OnPropertyChanged("IsConditionAwakening");
+                    OnPropertyChanged("IsConditionJutsu1");
+                    OnPropertyChanged("IsConditionJutsu2");
+                    OnPropertyChanged("IsConditionJutsu3");
+                    OnPropertyChanged("IsConditionJutsu4");
+                    OnPropertyChanged("IsConditionJutsu5");
+                    OnPropertyChanged("IsConditionJutsu6");
+                    OnPropertyChanged("IsConditionUltimateJutsu1");
+                    OnPropertyChanged("IsConditionUltimateJutsu2");
+                    OnPropertyChanged("IsConditionUltimateJutsu3");
+                    OnPropertyChanged("IsConditionUltimateJutsu4");
+
                 }
                 OnPropertyChanged("SelectedPRMLoad");
             }
@@ -216,50 +344,26 @@ namespace NSC_Toolbox.ViewModel
                 SelectedPRMLoad.Type = Type_field;
                 SelectedPRMLoad.CostumeIndex = CostumeIndex_field;
 
-                switch (Condition_field) {
-                    case 0:
-                        SelectedPRMLoad.Condition = 0x01;
-                        break;
-                    case 1:
-                        SelectedPRMLoad.Condition = 0x02;
-                        break;
-                    case 2:
-                        SelectedPRMLoad.Condition = 0x03;
-                        break;
-                    case 3:
-                        SelectedPRMLoad.Condition = 0x05;
-                        break;
-                    case 4:
-                        SelectedPRMLoad.Condition = 0x0B;
-                        break;
-                    case 5:
-                        SelectedPRMLoad.Condition = 0x13;
-                        break;
-                    case 6:
-                        SelectedPRMLoad.Condition = 0x23;
-                        break;
-                    case 7:
-                        SelectedPRMLoad.Condition = 0x43;
-                        break;
-                    case 8:
-                        SelectedPRMLoad.Condition = 0x83;
-                        break;
-                    case 9:
-                        SelectedPRMLoad.Condition = 0x2003;
-                        break;
-                    case 10:
-                        SelectedPRMLoad.Condition = 0x101;
-                        break;
-                    case 11:
-                        SelectedPRMLoad.Condition = 0x201;
-                        break;
-                    case 12:
-                        SelectedPRMLoad.Condition = 0x401;
-                        break;
-                    case 13:
-                        SelectedPRMLoad.Condition = 0x801;
-                        break;
+
+                if (SelectedPRMLoad.Condition == 0)
+                {
+                    SelectedPRMLoad.Condition = 0;  // Only set it to 0 if needed
                 }
+
+                // Add flags if conditions are checked
+                if (IsConditionCommon) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_COMMON;
+                if (IsConditionSupport) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_SUPPORT;
+                if (IsConditionAwakening) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_AWAKENING;
+                if (IsConditionJutsu1) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_JUTSU1;
+                if (IsConditionJutsu2) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_JUTSU2;
+                if (IsConditionJutsu3) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_JUTSU3;
+                if (IsConditionJutsu4) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_JUTSU4;
+                if (IsConditionJutsu5) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_JUTSU5;
+                if (IsConditionJutsu6) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_JUTSU6;
+                if (IsConditionUltimateJutsu1) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_ULTIMATE1;
+                if (IsConditionUltimateJutsu2) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_ULTIMATE2;
+                if (IsConditionUltimateJutsu3) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_ULTIMATE3;
+                if (IsConditionUltimateJutsu4) SelectedPRMLoad.Condition |= (int)PrmLoadConditionFlags.LOAD_ULTIMATE4;
 
 
             } else {

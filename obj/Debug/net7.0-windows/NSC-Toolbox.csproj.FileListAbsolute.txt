@@ -283,9 +283,6 @@ E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\ParamFiles\damageprm
 E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\View\AddCostumeView.g.cs
 E:\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\View\AddCostumeView.baml
 E:\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\ParamFiles\costumeBreakParam.xfbin
-C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.dll
-C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\refint\NSC-Toolbox.dll
-C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.pdb
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.csproj.AssemblyReference.cache
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\Resources\Localization\lang.baml
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\Controls\KuramaControl.g.cs
@@ -567,5 +564,8 @@ C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Tool
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.csproj.CoreCompileInputs.cache
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.sourcelink.json
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Tool.8369BC5B.Up2Date
+C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.dll
+C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\refint\NSC-Toolbox.dll
+C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.pdb
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\NSC-Toolbox.genruntimeconfig.cache
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\ref\NSC-Toolbox.dll
