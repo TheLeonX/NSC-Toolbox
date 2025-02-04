@@ -220,7 +220,12 @@ namespace NSC_Toolbox.ViewModel {
             }
         }
         public TitleViewModel() {
-
+            if (Properties.Settings.Default.MustUpgrade)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.MustUpgrade = false;
+                Properties.Settings.Default.Save();
+            }
 
             ToolTabState = 1;
             KuramaName = "Kyuruto";

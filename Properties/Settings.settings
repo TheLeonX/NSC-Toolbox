@@ -20,5 +20,8 @@
     <Setting Name="ModdingGroupLink" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://discord.gg/naruto-storm-modding-server-841394026599022682</Value>
     </Setting>
+    <Setting Name="MustUpgrade" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
