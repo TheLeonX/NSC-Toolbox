@@ -30,6 +30,42 @@
     <v:String x:Key="m_mainWindow_012">Support Me</v:String>
     <v:String x:Key="m_mainWindow_013">GitHub Page</v:String>
 
+    <!--Add Team Ultimate Jutsu-->
+
+    <v:String x:Key="m_addTUJ">Add Team Ultimate Jutsu</v:String>
+    <v:String x:Key="m_addTUJ_intro_title">Naruto Storm Connections - Add Team Ultimate Jutsu</v:String>
+    <v:String x:Key="m_addTUJ_intro_desc">This tool will help you to add team ultimate jutsu in one click (almost).</v:String>
+    <v:String  xml:space="preserve" x:Key="m_addTUJ_warning">
+For adding team utlimate jutsu, you need to prepare your root folder.
+Make sure you have following files in root folder for correct work of this tool:
+    
+    moddingapi/mods/base_game/pairSpSkillManagerParam.xfbin
+    data_win32/spc/characode.bin.xfbin
+    data_win32/spc/pairSpSkillCombinationParam.xfbin
+    data_win32/sound/cmnparam.xfbin
+
+New Team Ultimate Jutsus are a thing now, but there are few slots which game doesn't want to read, this tool will add Team Ultimate Jutsus on slots which game can load. Might be fixed in future.
+
+</v:String>
+    <v:String x:Key="m_addTUJ_page1_desc">Select root folder of game.</v:String>
+    <v:String x:Key="m_addTUJ_page1_001">Root Folder</v:String>
+    <v:String x:Key="m_addTUJ_page1_002">Select Root Folder</v:String>
+    <v:String x:Key="m_addTUJ_page2_desc">Set settings for your Team Ultimate Jutsu</v:String>
+    <v:String x:Key="m_addTUJ_page2_001">Characode List</v:String>
+    <v:String x:Key="m_addTUJ_page2_002">Add Team Ultimate Jutsu</v:String>
+    <v:String x:Key="m_addTUJ_page2_003">Team Ultimate Jutsu Label (ex: 2nrt3ssk)</v:String>
+    <v:String x:Key="m_addTUJ_page2_004">Team Ultimate Jutsu Name (MessageID)</v:String>
+
+    <!-- PairSpSkillCombinationParam Editor-->
+    <v:String x:Key="m_pairSpSkillCombinationParamEditor">Team Ultimate Jutsu Param Editor</v:String>
+    <v:String x:Key="m_pairSpSkill_characodeList">Characode List</v:String>
+    <v:String x:Key="m_pairSpSkill_memberCount">Member Count</v:String>
+    <v:String x:Key="m_pairSpSkill_chakraCost1">Chakra cost 1 (doesn't work)</v:String>
+    <v:String x:Key="m_pairSpSkill_chakraCost2">Chakra cost 2 (doesn't work)</v:String>
+    <v:String x:Key="m_pairSpSkill_flag1">Flag 1</v:String>
+    <v:String x:Key="m_pairSpSkill_flag2">Flag 2</v:String>
+    <v:String x:Key="m_pairSpSkill_ID">Team Ultimate Jutsu ID</v:String>
+    <v:String x:Key="m_pairSpSkill_Name">Team Ultimate Name</v:String>
 
     <!--Add Costume Tool-->
     <v:String x:Key="m_addCostume_title">Add Costume</v:String>
@@ -287,6 +323,10 @@ If you want to add awakening model to character which doesn't have it, make sure
     <v:String x:Key="m_exportMod_page3_exportCharacter">Characters for export</v:String>
     <v:String x:Key="m_exportMod_page3_exportCharacter_warning">For icons in character select menu, add for every costume file with icon name, for example, if costume has base icon - "nrt16", it means you have to add icon "nrt16_charicon_s.xfbin" in "ui/flash/OTHER/charicon_s" folder. To pack icon, you can use "XFBIN texture" tool or XFBIN Parser. If you will not add that icon, mod manager will skip that icon and won't load it.</v:String>
 
+
+    <v:String x:Key="m_exportMod_page3_tuj_001">Select Team Ultimate Jutsu</v:String>
+
+
     <v:String x:Key="m_exportMod_page4_desc">Change icon and description for your mod</v:String>
     <v:String x:Key="m_exportMod_page4_modName">Mod name</v:String>
     <v:String x:Key="m_exportMod_page4_modDesc">Description</v:String>
@@ -325,6 +365,7 @@ If you want to add awakening model to character which doesn't have it, make sure
     <v:String x:Key="m_mainWindowTool_025">Support Action Editor (supportActionParam.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_026">Support Skill Recovery Speed Editor (supportSkillRecoverySpeedParam.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_027">Projectile Editor</v:String>
+    <v:String x:Key="m_mainWindowTool_028">Team Ultimate Jutsu Param Editor (pairSpSkillCombinationParam.xfbin)</v:String>
     <v:String x:Key="m_option001">Stretch Mode</v:String>
     <v:String x:Key="m_option002">Fill</v:String>
     <v:String x:Key="m_option003">Uniform</v:String>

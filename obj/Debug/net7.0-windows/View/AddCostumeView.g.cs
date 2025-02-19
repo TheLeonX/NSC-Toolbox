@@ -106,7 +106,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.6.0.0;component/view/addcostumeview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V1.6.1.0;component/view/addcostumeview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\AddCostumeView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

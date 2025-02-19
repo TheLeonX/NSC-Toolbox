@@ -9,8 +9,8 @@
     <PlatformTarget>x86</PlatformTarget>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>white_TB.ico</ApplicationIcon>
-    <AssemblyVersion>1.6.0.0</AssemblyVersion>
-    <FileVersion>1.6.0.0</FileVersion>
+    <AssemblyVersion>1.6.1.0</AssemblyVersion>
+    <FileVersion>1.6.1.0</FileVersion>
     <Authors>TheLeonX</Authors>
     <Version>1.60</Version>
   </PropertyGroup>
@@ -111,7 +111,13 @@
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\info.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\pairSpSkillManagerParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\partnerSlotParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\skip_intro.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\specialCondParam.xfbin">
@@ -135,6 +141,9 @@
     <None Update="ParamFiles\characterSelectParam.xfbin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ParamFiles\cmnparam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ParamFiles\costumeBreakColorParam.xfbin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -154,6 +163,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ParamFiles\effectprm.bin.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ParamFiles\pairSpSkillCombinationParam.xfbin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ParamFiles\playerSettingParam.bin.xfbin">

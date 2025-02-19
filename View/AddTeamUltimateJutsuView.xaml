@@ -1,0 +1,220 @@
+﻿<Window x:Class="NSC_Toolbox.View.AddTeamUltimateJutsuView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NSC_Toolbox.View"
+        xmlns:local2="clr-namespace:NSC_Toolbox"
+        xmlns:converter="clr-namespace:NSC_Toolbox.Converter"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
+        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" xmlns:Controls="clr-namespace:NSC_Toolbox.Controls"
+        mc:Ignorable="d"
+        xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
+        
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="{DynamicResource m_addTUJ}" Height="800" Width="900">
+    <Window.Background>
+        <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+    </Window.Background>
+    <Window.Resources>
+        <converter:GetNameFromPathConverter x:Key="GetNameFromPathConverter"/>
+        <converter:BitImageLoader x:Key="BitImageLoader"/>
+        <converter:CharacodeToNameConverter x:Key="CharacodeToNameConverter"/>
+    </Window.Resources>
+    <Viewbox  Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
+        <Grid Height="800" Width="900">
+            <xctk:Wizard FinishButtonClosesWindow="True" HelpButtonVisibility="Hidden"  FontFamily="{StaticResource NarutoFont}" Height="800" Width="900" >
+                <xctk:WizardPage x:Name="IntroPage"
+                                        Title="{DynamicResource m_addTUJ_intro_title}"
+                                        Description="{DynamicResource m_addTUJ_intro_desc}" 
+                                        Foreground="White"
+                                        BackButtonVisibility="Hidden"
+                                        NextPage="{Binding ElementName=Page1}"
+                                        Background="{DynamicResource Toolbox_button_background_color_1}">
+                    <xctk:WizardPage.ExteriorPanelBackground>
+                        <ImageBrush ImageSource="/Resources/Styles/UI/background/wizard_background_1.png" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+                    </xctk:WizardPage.ExteriorPanelBackground>
+                    <TextBlock  xml:space="preserve" Grid.Row="3"  Grid.Column="0" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Top"  FontFamily="{StaticResource NarutoFont}" Foreground="White" Text="{DynamicResource m_addTUJ_warning}"  FontSize="14"/>
+
+                </xctk:WizardPage>
+                <xctk:WizardPage x:Name="Page1"
+                                        Foreground="White"
+                                        Background="{DynamicResource Toolbox_button_background_color_1}"
+                                        Title="{DynamicResource m_addTUJ_intro_title}"
+                                        Description="{DynamicResource m_addTUJ_page1_desc}"
+                                        NextPage="{Binding ElementName=Page2}"
+                                        PreviousPage="{Binding ElementName=IntroPage}"
+                                        CanSelectNextPage="{Binding IsRootFolderExist}">
+                    <xctk:WizardPage.ExteriorPanelBackground>
+                        <ImageBrush ImageSource="/Resources/Styles/UI/background/wizard_background_1.png" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+                    </xctk:WizardPage.ExteriorPanelBackground>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="1" Grid.Column="3" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Command="{Binding SelectRootFolderCommand}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_addTUJ_page1_002}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                            <Button Command="{Binding RefreshRootFolderCommand}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_addCostume_page2_011}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                        </Grid>
+                        <Label Grid.Row="0"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_addTUJ_page1_001}"  FontSize="12"/>
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding RootFolderPath_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <TextBlock Grid.Row="3"  Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="Red" Text="{Binding MissingFiles_field}" TextAlignment="Left" FontSize="14"/>
+
+                    </Grid>
+                </xctk:WizardPage>
+                <xctk:WizardPage x:Name="Page2"
+                                        Foreground="White"
+                                        Background="{DynamicResource Toolbox_button_background_color_1}"
+                                        Title="{DynamicResource m_addTUJ_intro_title}"
+                                        Description="{DynamicResource m_addTUJ_page2_desc}"
+                                        PreviousPage="{Binding ElementName=Page1}"
+                                        CanSelectNextPage="False"
+                                 NextButtonVisibility="Hidden">
+                    <xctk:WizardPage.ExteriorPanelBackground>
+                        <ImageBrush ImageSource="/Resources/Styles/UI/background/wizard_background_1.png" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+                    </xctk:WizardPage.ExteriorPanelBackground>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"  Grid.Column="3" Content="{DynamicResource m_addTUJ_page2_001}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"  FontSize="12"/>
+                        <ListBox Grid.Row="1" Grid.Column="2" 
+         IsSynchronizedWithCurrentItem="True" 
+         SelectionChanged="BringSelectionIntoView"  
+         ItemsSource="{Binding CharacodeIDList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+         Background="{DynamicResource Toolbox_button_background_color_1}" 
+         BorderBrush="{DynamicResource Toolbox_button_border_color_1}" 
+         BorderThickness="1" 
+         HorizontalAlignment="Stretch" 
+         VerticalAlignment="Stretch" 
+         SelectedIndex="{Binding SelectedCharacodeIDIndex}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Characode ID: " 
+                               FontFamily="{StaticResource NarutoFont}" 
+                               Foreground="Orange" 
+                               FontSize="12"/>
+                                            <TextBlock Text="{Binding}" 
+                               FontFamily="{StaticResource NarutoFont}" 
+                               Foreground="{DynamicResource Toolbox_button_text_color_1}" 
+                               FontSize="12"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Name: " 
+                               FontFamily="{StaticResource NarutoFont}" 
+                               Foreground="Orange" 
+                               FontSize="12"/>
+                                            <TextBlock FontFamily="{StaticResource NarutoFont}" 
+           Foreground="{DynamicResource Toolbox_button_text_color_1}" 
+           FontSize="12">
+                                                <TextBlock.Text>
+                                                    <MultiBinding Converter="{StaticResource CharacodeToNameConverter}">
+                                                        <Binding Path="."/>
+                                                        <!-- Передаёт CharacodeID -->
+                                                        <Binding Path="DataContext.ImportCharacterList" 
+                     RelativeSource="{RelativeSource AncestorType=Window}"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Label Grid.Row="3"  Grid.Column="3" Content="{DynamicResource m_addCostume_page2_001}"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"  FontSize="12"/>
+                        <ComboBox ItemsSource="{Binding ImportCharacterList}" SelectedItem="{Binding ImportCharacterItem}" DisplayMemberPath="CharacodeName" Grid.Column="3"  Grid.Row="4" Grid.ColumnSpan="1" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
+                        <Grid Grid.Column="2" Grid.Row="6" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Button Command="{Binding AddCharacodeEntryCommand}" Grid.Column="0" Grid.Row="0" Content="{DynamicResource m_AddEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                            <Button Command="{Binding DeleteCharacodeEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                           
+                        </Grid>
+                        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="7">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="5"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_addTUJ_page2_003}"  FontSize="10"/>
+                            <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding TUJ_label_field}" MaxLength="15" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+
+                            <Label Grid.Column="0"  Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_addTUJ_page2_004}"  FontSize="10"/>
+                            <TextBox Grid.Column="0" Grid.Row="4" Text="{Binding TUJ_Name_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+
+                            <Label Grid.Row="6" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_pairSpSkill_memberCount}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                            <xctk:IntegerUpDown Grid.Row="7" MinHeight="30" Value="{Binding MemberCount_field}" FontFamily="{StaticResource NarutoFont}"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="3" Minimum="1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                            <CheckBox  Content="{DynamicResource m_pairSpSkill_flag1}" IsChecked="{Binding Condition1_field}" Grid.Row="9" Grid.Column="0" />
+                            <CheckBox  Content="{DynamicResource m_pairSpSkill_flag2}" IsChecked="{Binding Condition2_field}" Grid.Row="11" Grid.Column="0" />
+                        </Grid>
+
+                        <Button Grid.Row="9" Grid.Column="0" Command="{Binding AddTUJCommand}" MinHeight="50" Grid.ColumnSpan="3" Content="{DynamicResource m_addTUJ_page2_002}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+
+                    </Grid>
+                </xctk:WizardPage>
+            </xctk:Wizard>
+            <!--<Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}" Panel.ZIndex="10" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Controls:LoadingControl Grid.Row="2" Grid.Column="2" LoadingState="{Binding LoadingStatePlay}"/>
+            </Grid>-->
+        </Grid>
+    </Viewbox>
+</Window>

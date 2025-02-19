@@ -64,7 +64,10 @@ namespace NSC_Toolbox {
         public static int b_ReadIntRev(byte[] fileBytes, int index) {
             return BinaryReader.b_byteArrayToIntRev(BinaryReader.b_ReadByteArray(fileBytes, index, 4));
         }
-
+        public static bool b_ReadBool(byte[] fileBytes, int index)
+        {
+            return b_ReadInt(fileBytes, index) != 0;
+        }
         public static float b_ReadFloat(byte[] actual, int index) {
 
             return BitConverter.ToSingle(actual, index);
@@ -120,6 +123,34 @@ namespace NSC_Toolbox {
                 }
             }
             return a;
+        }
+
+        public static string b_ReadStringPtr(byte[] actual, int index, int count = -1)
+        {
+            // Read the pointer (offset) stored at 'index'
+            int offset = BitConverter.ToInt32(actual, index);
+            // Calculate the starting position of the string
+            int stringStart = index + offset;
+
+            var sb = new StringBuilder();
+            if (count == -1)
+            {
+                // Read until a null terminator is found
+                for (int i = stringStart; i < actual.Length; i++)
+                {
+                    if (actual[i] == 0)
+                        break;
+                    sb.Append((char)actual[i]);
+                }
+            } else
+            {
+                // Read a fixed number of characters
+                for (int i = stringStart; i < stringStart + count; i++)
+                {
+                    sb.Append((char)actual[i]);
+                }
+            }
+            return sb.ToString();
         }
 
         //public static byte[] b_ReplaceBytes(byte[] actual, byte[] bytesToReplace, int Index, int Invert = 0) {

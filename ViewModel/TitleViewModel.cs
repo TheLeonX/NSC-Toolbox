@@ -488,6 +488,21 @@ namespace NSC_Toolbox.ViewModel {
                   }));
             }
         }
+
+        private RelayCommand _addTUJCommand;
+        public RelayCommand AddTUJCommand
+        {
+            get
+            {
+                return _addTUJCommand ??
+                  (_addTUJCommand = new RelayCommand(obj => {
+                      AddTeamUltimateJutsuView AddTUJ = new AddTeamUltimateJutsuView();
+                      AddTUJ.Show();
+
+                  }));
+            }
+        }
+
         private RelayCommand _saveSettingsCommand;
         public RelayCommand SaveSettingsCommand {
             get {
@@ -805,6 +820,21 @@ namespace NSC_Toolbox.ViewModel {
                   }));
             }
         }
+
+        private RelayCommand _pairSpSkillCombinationParamRunButtonCommand;
+        public RelayCommand PairSpSkillCombinationParamRunButtonCommand
+        {
+            get
+            {
+                return _pairSpSkillCombinationParamRunButtonCommand ??
+                  (_pairSpSkillCombinationParamRunButtonCommand = new RelayCommand(obj => {
+                      PairSpSkillCombinationParamEditorView pairSpSkillEditor = new PairSpSkillCombinationParamEditorView();
+                      pairSpSkillEditor.Show();
+
+                  }));
+            }
+        }
+
         private RelayCommand _skillEditorRunButtonCommand;
         public RelayCommand SkillEditorRunButtonCommand {
             get {

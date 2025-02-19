@@ -16,6 +16,9 @@
     <Compile Update="View\AddCostumeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\AddTeamUltimateJutsuView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\AfterAttachObjectEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -56,6 +59,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\MessageInfoEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\PairSpSkillCombinationParamEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\PlayerDoubleEffectParamEditorView.xaml.cs">
@@ -117,6 +123,9 @@
     <Page Update="View\AddCostumeView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\AddTeamUltimateJutsuView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\AfterAttachObjectEditorView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -157,6 +166,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\MessageInfoEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\PairSpSkillCombinationParamEditorView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\PlayerDoubleEffectParamEditorView.xaml">

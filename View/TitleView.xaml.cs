@@ -171,5 +171,11 @@ namespace NSC_Toolbox {
             VM.KyurutoDialogTextLoader("This tool will help you to edit skill files for projectiles in game.",
                 20);
         }
+        private void PairSpSkillEditor_MouseEnter(object sender, MouseEventArgs e)
+        {
+            TitleViewModel VM = ((TitleViewModel)this.DataContext);
+            VM.KyurutoDialogTextLoader("This tool will let you to add more Team Ultimate Jutsus in game!",
+                20);
+        }
     }
 }

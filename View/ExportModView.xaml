@@ -21,6 +21,7 @@
     <Window.Resources>
         <converter:GetNameFromPathConverter x:Key="GetNameFromPathConverter"/>
         <converter:BitImageLoader x:Key="BitImageLoader"/>
+        <converter:PlaceholderToUnavailableConverter  x:Key="PlaceholderToUnavailableConverter"/>
     </Window.Resources>
     <Viewbox  Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
         <Grid Height="800" Width="900">
@@ -358,7 +359,49 @@
                             <Button IsEnabled="{Binding IsModReady}" Grid.Row="17" Grid.Column="0" Command="{Binding CompileModCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_pageFinish_compile}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
 
                         </Grid>
-
+                        <Grid Visibility="{Binding PageModType_tuj_visibility}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_tuj_001}"  FontSize="12"/>
+                            <ComboBox ItemsSource="{Binding TeamUltimateJutsuList}"
+                                      SelectedItem="{Binding SelectedTeamUltimateJutsu}"
+                                      SelectedIndex="{Binding SelectedTeamUltimateJutsuIndex}"
+                                      Grid.Row="1"
+                                      Foreground="{DynamicResource Toolbox_button_text_color_1}"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch"
+                                      FontFamily="{StaticResource NarutoFont}"
+                                      Background="{DynamicResource Toolbox_button_background_color_1}"
+                                      BorderBrush="{DynamicResource Toolbox_button_border_color_1}"
+                                      BorderThickness="1">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource PlaceholderToUnavailableConverter}}"
+                                                   FontFamily="{StaticResource NarutoFont}">     
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding}" Value="placeholder">
+                                                            <!-- Cross out the text when the value is "placeholder" -->
+                                                            <!-- <Setter Property="TextDecorations" Value="Strikethrough"/>-->
+                                                            <!-- Change the color to grayish when the value is "placeholder" -->
+                                                            <Setter Property="Foreground" Value="Gray"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
                         <!--<Grid Visibility="{Binding PageModType_accessory_visibility}">
                         <Label Grid.Row="0"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_selectAccessory}"  FontSize="12"/>
                     </Grid>-->

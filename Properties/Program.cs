@@ -115,6 +115,7 @@ namespace NSC_Toolbox.Properties
             "Stage",
             "Costume",
             "Resource (export files excluding param files)",
+            "Team Ultimate Jutsu",
             //"Accessory"
 
         };

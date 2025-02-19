@@ -1,9 +1,10 @@
-﻿
+﻿C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\GeneratedInternalTypeHelper.g.cs
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\App.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\Controls\KuramaControl.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\Controls\LoadingControl.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\Resources\Styles\LightStyle.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\AddCostumeView.xaml;;
+FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\AddTeamUltimateJutsuView.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\AfterAttachObjectEditorView.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\AppearanceAnmEditorView.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\AwakeAuraEditorView.xaml;;
@@ -18,6 +19,7 @@ FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\DuelPlayerParamEditorView.x
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\EffectPrmEditorView.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\ExportModView.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\MessageInfoEditorView.xaml;;
+FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\PairSpSkillCombinationParamEditorView.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\PlayerDoubleEffectParamEditorView.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\PlayerIconEditorView.xaml;;
 FC:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\View\PlayerSettingParamEditorView.xaml;;
