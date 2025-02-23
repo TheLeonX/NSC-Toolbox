@@ -30,6 +30,13 @@
     <v:String x:Key="m_mainWindow_012">Support Me</v:String>
     <v:String x:Key="m_mainWindow_013">GitHub Page</v:String>
 
+    <!--Special Interaction Manager-->
+
+    <v:String x:Key="m_SIM_MainCharacterID">Main Character ID</v:String>
+    <v:String x:Key="m_SIM_triggerList">Trigger Character ID List</v:String>
+    <v:String x:Key="m_SIM_triggerID">Trigger Character ID</v:String>
+
+
     <!--Add Team Ultimate Jutsu-->
 
     <v:String x:Key="m_addTUJ">Add Team Ultimate Jutsu</v:String>
@@ -366,6 +373,7 @@ If you want to add awakening model to character which doesn't have it, make sure
     <v:String x:Key="m_mainWindowTool_026">Support Skill Recovery Speed Editor (supportSkillRecoverySpeedParam.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_027">Projectile Editor</v:String>
     <v:String x:Key="m_mainWindowTool_028">Team Ultimate Jutsu Param Editor (pairSpSkillCombinationParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_029">UJ Special Interaction Manager (specialInteractionManager.xfbin)</v:String>
     <v:String x:Key="m_option001">Stretch Mode</v:String>
     <v:String x:Key="m_option002">Fill</v:String>
     <v:String x:Key="m_option003">Uniform</v:String>

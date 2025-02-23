@@ -210,6 +210,9 @@
                         <Button MouseEnter="PairSpSkillEditor_MouseEnter" Command="{Binding PairSpSkillCombinationParamRunButtonCommand}" Grid.Column="3" Grid.Row="5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_028}"/>
                         </Button>
+                        <Button MouseEnter="PairSpSkillEditor_MouseEnter" Command="{Binding SpecialInteractionManagerParamRunButtonCommand}" Grid.Column="1" Grid.Row="7" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                            <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_029}"/>
+                        </Button>
                         <Border Grid.ColumnSpan="20" Grid.RowSpan="50" BorderBrush="White" BorderThickness="2,2,2,2"/>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10"/>

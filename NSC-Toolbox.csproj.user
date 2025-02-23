@@ -91,6 +91,9 @@
     <Compile Update="View\SkillIndexSettingParamEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\SpecialInteractionManagerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\SpSkillCustomizeParamEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -196,6 +199,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\SkillIndexSettingParamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\SpecialInteractionManagerView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\SpSkillCustomizeParamEditorView.xaml">

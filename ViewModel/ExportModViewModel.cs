@@ -160,7 +160,8 @@ namespace NSC_Toolbox.ViewModel
                         PageModType_model_visibility = Visibility.Hidden;
                         PageModType_accessory_visibility = Visibility.Hidden;
                         PageModType_resources_visibility = Visibility.Hidden;
-                        
+                        PageModType_tuj_visibility = Visibility.Hidden;
+
                         break;
                     //Stage export
                     case 1:
@@ -1064,6 +1065,10 @@ namespace NSC_Toolbox.ViewModel
             string pairSpSkillManagerPath = Path.Combine(Path.GetDirectoryName(DataWin32Path_field), "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin");
             bool pairSpSkillManagerExist = File.Exists(pairSpSkillManagerPath);
 
+
+            string specialInteractionManagerPath = Path.Combine(Path.GetDirectoryName(DataWin32Path_field), "moddingapi", "mods", "base_game", "specialInteractionManager.xfbin");
+            bool specialInteractionManagerExist = File.Exists(specialInteractionManagerPath);
+
             //Create config file
             var MyIni = new IniFile(@mod_path + "\\mod_config.ini");
             MyIni.Write("ModName", ModName_field, "ModManager");
@@ -1136,6 +1141,7 @@ namespace NSC_Toolbox.ViewModel
                         EffectPrmViewModel ImportEffectPrm = new EffectPrmViewModel();
                         DamagePrmViewModel ImportDamagePrm = new DamagePrmViewModel();
                         DamagePrmViewModel OriginalDamagePrm = new DamagePrmViewModel();
+                        SpecialInteractionManagerViewModel ImportSpecialInteraction = new SpecialInteractionManagerViewModel();
 
                         if (duelPlayerParamExist)
                             ImportDuelPlayerParam.OpenFile(duelPlayerParamPath);
@@ -1209,6 +1215,9 @@ namespace NSC_Toolbox.ViewModel
 
                         if (effectprmExist)
                             ImportEffectPrm.OpenFile(effectprmPath);
+
+                        if (specialInteractionManagerExist)
+                            ImportSpecialInteraction.OpenFile(specialInteractionManagerPath);
 
                         OriginalDamageEff.OpenFile(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\damageeff.bin.xfbin");
                         OriginalEffectPrm.OpenFile(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ParamFiles\\effectprm.bin.xfbin");
@@ -1959,6 +1968,40 @@ namespace NSC_Toolbox.ViewModel
 
                             }
 
+                            if (specialInteractionManagerExist)
+                            {
+                                SpecialInteractionManagerModel specialInteractionEntry = ImportSpecialInteraction.SpecialInteractionList.FirstOrDefault(item => item.MainCharacodeID == character.CharacodeIndex);
+
+                                //specialInteractionManager
+                                string characodeNamesString = string.Join(",",
+                                   specialInteractionEntry.TriggerList
+                                   .Select(id =>
+                                   {
+                                       // Find the character entry in ImportCharacterList
+                                       var character = ImportCharacterList.FirstOrDefault(c => c.CharacodeIndex == id);
+                                       if (character == null)
+                                       {
+                                           // If we can't find the character, log a message and return
+                                           MessageBox.Show($"Character with characode index {id} not found in characode.bin.xfbin file.");
+                                           return null; // This will be handled by the Where clause below
+                                       }
+                                       return character.CharacodeName;
+                                   })
+                                   .Where(name => name != null) // Only include non-null CharacodeNames
+                                   .ToArray());
+                                if (characodeNamesString.Split(',').Length != specialInteractionEntry.TriggerList.Count)
+                                {
+                                    return;
+                                }
+                                if (specialInteractionEntry.TriggerList.Count > 0)
+                                {
+                                    var specialInteractionIni = new IniFile(mod_path + "\\Characters\\" + character.CharacodeName + "\\specialInteraction_config.ini");
+
+                                    //specialInteractionIni.Write("MainCharacode", character.CharacodeName, "ModManager");
+                                    specialInteractionIni.Write("TriggerList", characodeNamesString, "ModManager");
+                                }
+                            }
+                            
 
 
                             //Save All Params

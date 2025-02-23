@@ -1,5 +1,5 @@
 ﻿NSC-Toolbox
-1.6.1.0
+1.6.2.0
 
 winexe
 C#
@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\App.xaml
-36-330510240
+37720066715
 1-854401585
-122-2074490547
+1251698622747
 2331036358025
-Controls\KuramaControl.xaml;Controls\LoadingControl.xaml;Resources\Localization\lang.xaml;Resources\Styles\LightStyle.xaml;View\AddCostumeView.xaml;View\AddTeamUltimateJutsuView.xaml;View\AfterAttachObjectEditorView.xaml;View\AppearanceAnmEditorView.xaml;View\AwakeAuraEditorView.xaml;View\CharacodeEditorView.xaml;View\CharacterSelectParamEditorView.xaml;View\cmnparamEditorView.xaml;View\CostumeBreakColorParamEditorView.xaml;View\CostumeBreakParamEditorView.xaml;View\CostumeParamEditorView.xaml;View\DamageEffEditorView.xaml;View\DuelPlayerParamEditorView.xaml;View\EffectPrmEditorView.xaml;View\ExportModView.xaml;View\MessageInfoEditorView.xaml;View\PairSpSkillCombinationParamEditorView.xaml;View\PlayerDoubleEffectParamEditorView.xaml;View\PlayerIconEditorView.xaml;View\PlayerSettingParamEditorView.xaml;View\PrivateCameraEditorView.xaml;View\PRMEditorView.xaml;View\PRMLoadEditorView.xaml;View\SkillCustomizeParamEditorView.xaml;View\SkillEditorView.xaml;View\SkillIndexSettingParamEditorView.xaml;View\SpSkillCustomizeParamEditorView.xaml;View\SpTypeSupportParamEditorView.xaml;View\StageInfoEditorView.xaml;View\SupportActionParamEditorView.xaml;View\SupportSkillRecoverySpeedParamEditorView.xaml;View\TitleView.xaml;
+Controls\KuramaControl.xaml;Controls\LoadingControl.xaml;Resources\Localization\lang.xaml;Resources\Styles\LightStyle.xaml;View\AddCostumeView.xaml;View\AddTeamUltimateJutsuView.xaml;View\AfterAttachObjectEditorView.xaml;View\AppearanceAnmEditorView.xaml;View\AwakeAuraEditorView.xaml;View\CharacodeEditorView.xaml;View\CharacterSelectParamEditorView.xaml;View\cmnparamEditorView.xaml;View\CostumeBreakColorParamEditorView.xaml;View\CostumeBreakParamEditorView.xaml;View\CostumeParamEditorView.xaml;View\DamageEffEditorView.xaml;View\DuelPlayerParamEditorView.xaml;View\EffectPrmEditorView.xaml;View\ExportModView.xaml;View\MessageInfoEditorView.xaml;View\PairSpSkillCombinationParamEditorView.xaml;View\PlayerDoubleEffectParamEditorView.xaml;View\PlayerIconEditorView.xaml;View\PlayerSettingParamEditorView.xaml;View\PrivateCameraEditorView.xaml;View\PRMEditorView.xaml;View\PRMLoadEditorView.xaml;View\SkillCustomizeParamEditorView.xaml;View\SkillEditorView.xaml;View\SkillIndexSettingParamEditorView.xaml;View\SpecialInteractionManagerView.xaml;View\SpSkillCustomizeParamEditorView.xaml;View\SpTypeSupportParamEditorView.xaml;View\StageInfoEditorView.xaml;View\SupportActionParamEditorView.xaml;View\SupportSkillRecoverySpeedParamEditorView.xaml;View\TitleView.xaml;
 
 False
 

@@ -577,3 +577,6 @@ C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\ParamFil
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\ParamFiles\pairSpSkillCombinationParam.xfbin
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\ModdingAPIFiles\moddingapi\mods\base_game\pairSpSkillManagerParam.xfbin
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\ModdingAPIFiles\moddingapi\mods\base_game\skip_intro.dll
+C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\View\SpecialInteractionManagerView.g.cs
+C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net7.0-windows\View\SpecialInteractionManagerView.baml
+C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net7.0-windows\ModdingAPIFiles\moddingapi\mods\base_game\specialInteractionManager.xfbin

@@ -9,8 +9,8 @@
     <PlatformTarget>x86</PlatformTarget>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>white_TB.ico</ApplicationIcon>
-    <AssemblyVersion>1.6.1.0</AssemblyVersion>
-    <FileVersion>1.6.1.0</FileVersion>
+    <AssemblyVersion>1.6.2.0</AssemblyVersion>
+    <FileVersion>1.6.2.0</FileVersion>
     <Authors>TheLeonX</Authors>
     <Version>1.60</Version>
   </PropertyGroup>
@@ -121,6 +121,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\specialCondParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\specialInteractionManager.xfbin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\susanooCondParam.xfbin">

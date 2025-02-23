@@ -834,6 +834,19 @@ namespace NSC_Toolbox.ViewModel {
                   }));
             }
         }
+        private RelayCommand _specialInteractionManagerParamRunButtonCommand;
+        public RelayCommand SpecialInteractionManagerParamRunButtonCommand
+        {
+            get
+            {
+                return _specialInteractionManagerParamRunButtonCommand ??
+                  (_specialInteractionManagerParamRunButtonCommand = new RelayCommand(obj => {
+                      SpecialInteractionManagerView specialInteractionEditor = new SpecialInteractionManagerView();
+                      specialInteractionEditor.Show();
+
+                  }));
+            }
+        }
 
         private RelayCommand _skillEditorRunButtonCommand;
         public RelayCommand SkillEditorRunButtonCommand {
