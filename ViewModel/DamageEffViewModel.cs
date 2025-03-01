@@ -197,7 +197,7 @@ namespace NSC_Toolbox.ViewModel
                         DamageEffList.Add(DamageEffEntry);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
                     return;
                 }
             }
@@ -208,7 +208,7 @@ namespace NSC_Toolbox.ViewModel
             if (SelectedDamageEff is not null) {
                 DamageEffList.Remove(SelectedDamageEff);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveEntry() {
@@ -221,9 +221,9 @@ namespace NSC_Toolbox.ViewModel
                 SelectedDamageEff.Unk1 = Unk1_field;
                 SelectedDamageEff.Unk2 = Unk2_field;
                 SelectedDamageEff.ExtraEffectPrmID = ExtraEffectPrmID_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public int SearchByteIndex(ObservableCollection<DamageEffModel> FunctionList, int member_index, int Selected) {
@@ -248,11 +248,11 @@ namespace NSC_Toolbox.ViewModel
                         SelectedDamageEffIndex = SearchByteIndex(DamageEffList, SearchIndex_field, 0);
                         CollectionViewSource.GetDefaultView(DamageEffList).MoveCurrentTo(SelectedDamageEff);
                     } else {
-                        ModernWpf.MessageBox.Show("There is no entry with that Characode ID.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_3"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             } else {
-                ModernWpf.MessageBox.Show("Write ID in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_4"]);
             }
         }
 
@@ -272,7 +272,7 @@ namespace NSC_Toolbox.ViewModel
                 DamageEffEntry.ExtraEffectPrmID = 0;
             }
             DamageEffList.Add(DamageEffEntry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
 
         public void SaveFile() {
@@ -283,7 +283,7 @@ namespace NSC_Toolbox.ViewModel
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
                 SaveFileAs();
             }
@@ -312,7 +312,7 @@ namespace NSC_Toolbox.ViewModel
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
         public byte[] ConvertToFile() {

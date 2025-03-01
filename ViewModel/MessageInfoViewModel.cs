@@ -564,7 +564,7 @@ namespace NSC_Toolbox.ViewModel
                         }
                         MessageInfo_preview_List = MessageInfo_List[SelectedMessageInfoIndex];
                     } else {
-                        MessageBox.Show("This tool requires all messageInfo files to be loaded in directory!");
+                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_39"]);
                         LoadingStatePlay = Visibility.Hidden;
                         return;
                     }
@@ -636,7 +636,7 @@ namespace NSC_Toolbox.ViewModel
                 MessageInfo_preview_List = MessageInfo_List[SelectedMessageInfoIndex]; 
                 SelectedMessageIndex = MessageInfo_preview_List.Count - 1;
                 CollectionViewSource.GetDefaultView(MessageInfo_preview_List).MoveCurrentTo(SelectedMessageInfo);
-                ModernWpf.MessageBox.Show("Entry was added!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
             } catch (Exception ex) {
                 MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
             }
@@ -651,7 +651,7 @@ namespace NSC_Toolbox.ViewModel
                 MessageInfo_preview_List = MessageInfo_List[SelectedMessageInfoIndex]; 
                     SelectedMessageIndex = MessageInfo_preview_List.Count - 1;
                     CollectionViewSource.GetDefaultView(MessageInfo_preview_List).MoveCurrentTo(SelectedMessageInfo);
-                    ModernWpf.MessageBox.Show("Entry was added!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
                 }
             } catch (Exception ex) {
                 MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
@@ -665,7 +665,7 @@ namespace NSC_Toolbox.ViewModel
                         MessageInfo_List[i].RemoveAt(ind);
                     }
                     SelectedMessageIndex = ind - 1;
-                    ModernWpf.MessageBox.Show("Entry was added!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
                 }
             } catch (Exception ex) {
                 MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);
@@ -695,7 +695,7 @@ namespace NSC_Toolbox.ViewModel
                         SelectedMessageIndex = SearchStringIndex(MessageInfo_preview_List, SearchEntry_field, -1);
                         CollectionViewSource.GetDefaultView(MessageInfo_preview_List).MoveCurrentTo(SelectedMessageInfo);
                     } else {
-                        ModernWpf.MessageBox.Show("There is no entry with that text.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_40"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 }
@@ -717,7 +717,7 @@ namespace NSC_Toolbox.ViewModel
                         }
                     }
                     if (!found) {
-                        ModernWpf.MessageBox.Show("Couldn't find section with that Message ID.");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_41"]);
                     }
                 }
             } catch (Exception ex) {
@@ -731,7 +731,7 @@ namespace NSC_Toolbox.ViewModel
                         byte[] CRC32Code = BinaryReader.crc32(SearchEntry_field);
                         for (int i = 0; i < MessageInfo_preview_List.Count; i++) {
                             if (BitConverter.ToString(MessageInfo_preview_List[i].CRC32Code) == BitConverter.ToString(CRC32Code)) {
-                                ModernWpf.MessageBox.Show("Entry with that Message ID already exist in file!");
+                                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_42"]);
                                 return;
                             }
                         }
@@ -858,7 +858,7 @@ namespace NSC_Toolbox.ViewModel
                     MessageInfo_List[14][SelectedMessageIndex].ACBFileID = (short)(ACBFileID_field - 1);
                     MessageInfo_List[14][SelectedMessageIndex].CueID = CueID_field;
                     MessageInfo_List[14][SelectedMessageIndex].DisableText = DisableText_field;
-                    ModernWpf.MessageBox.Show("Entry was saved!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
                 }
             } catch (Exception ex) {
                 MessageBox.Show(ex.StackTrace + "\n\n" + ex.Message);

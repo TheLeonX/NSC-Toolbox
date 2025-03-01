@@ -45,17 +45,17 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Characode: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                            <TextBlock Text="{Binding Characode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                            <TextBlock Text=" Bones: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                            <TextBlock Text="{Binding MainBone, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="PaleVioletRed" FontSize="12"/>
-                            <TextBlock Text=" " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                            <TextBlock Text="{Binding SecondaryBone, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="CadetBlue" FontSize="12"/>
+                            <TextBlock Text="Characode: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="16"/>
+                            <TextBlock Text="{Binding Characode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                            <TextBlock Text=" Bones: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="16"/>
+                            <TextBlock Text="{Binding MainBone, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="PaleVioletRed" FontSize="16"/>
+                            <TextBlock Text=" " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="16"/>
+                            <TextBlock Text="{Binding SecondaryBone, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="CadetBlue" FontSize="16"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="3">
+            <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="3"  Background="{DynamicResource Toolbox_button_background_color_1}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -86,17 +86,17 @@
                     <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource m_awakeAuraCharacode}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource m_awakeAuraCharacode}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <TextBox MaxLength="7" Grid.Row="1" Grid.Column="0" Text="{Binding Characode_field}" Grid.ColumnSpan="3"  VerticalContentAlignment="Center" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
-                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource m_awakeAuraSkillFile}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource m_awakeAuraSkillFile}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding SkillFile_field}" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
-                <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource m_awakeAuraSkillEntry}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource m_awakeAuraSkillEntry}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding SkillEntryName_field}" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
-                <Label Grid.Row="9" Grid.Column="0" Content="{DynamicResource m_awakeAuraMainBone}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="9" Grid.Column="0" Content="{DynamicResource m_awakeAuraMainBone}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <TextBox Grid.Row="10" Grid.Column="0" Text="{Binding MainBone_field}" Grid.ColumnSpan="1" VerticalContentAlignment="Center" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
-                <Label Grid.Row="12" Grid.Column="0" Content="{DynamicResource m_awakeAuraSecondaryBone}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="12" Grid.Column="0" Content="{DynamicResource m_awakeAuraSecondaryBone}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <TextBox Grid.Row="13" Grid.Column="0" Text="{Binding SecondaryBone_field}" Grid.ColumnSpan="1" VerticalContentAlignment="Center" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
-                <Label Grid.Row="15" Grid.Column="0" Content="{DynamicResource m_awakeAuraState}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="15" Grid.Column="0" Content="{DynamicResource m_awakeAuraState}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <ComboBox Grid.Row="16" Grid.Column="0" SelectedIndex="{Binding State_field}"  Grid.ColumnSpan="3" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1">
                     <ComboBoxItem>
                         <TextBlock Text="{StaticResource m_awakeAuraState_1}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
@@ -108,7 +108,7 @@
                         <TextBlock Text="{StaticResource m_awakeAuraState_3}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
                     </ComboBoxItem>
                 </ComboBox>
-                <Label Grid.Row="18" Grid.Column="0" Content="{DynamicResource m_awakeAuraCondition}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="18" Grid.Column="0" Content="{DynamicResource m_awakeAuraCondition}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <ComboBox Grid.Row="19" Grid.Column="0" SelectedIndex="{Binding Condition_field}" Grid.ColumnSpan="3" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1">
                     <ComboBoxItem>
                         <TextBlock Text="{StaticResource m_awakeAuraCondition_1}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
@@ -121,13 +121,13 @@
                     </ComboBoxItem>
                 </ComboBox>
                 <CheckBox Grid.Row="21"  VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding Unk1_field}">
-                    <TextBlock Text="{StaticResource m_unknown}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                    <TextBlock Text="{StaticResource m_unknown}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="14"/>
                 </CheckBox>
                 <CheckBox Grid.Row="10" Grid.Column="2" VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding MainBoneUsePlayerModel_field}">
-                    <TextBlock Text="{StaticResource m_awakeAuraEnablePlayerModel}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                    <TextBlock Text="{StaticResource m_awakeAuraEnablePlayerModel}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="14"/>
                 </CheckBox>
                 <CheckBox Grid.Row="13" Grid.Column="2" VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding SecondaryBoneUsePlayerModel_field}">
-                    <TextBlock Text="{StaticResource m_awakeAuraEnablePlayerModel}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="10"/>
+                    <TextBlock Text="{StaticResource m_awakeAuraEnablePlayerModel}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="14"/>
                 </CheckBox>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" >
@@ -139,13 +139,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Command="{Binding AddDupEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddDupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                <Button Command="{Binding SearchEntryCommand}" Content="{DynamicResource m_SearchEntry}" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Button Command="{Binding AddDupEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddDupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                <Button Command="{Binding SearchEntryCommand}" Content="{DynamicResource m_SearchEntry}" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                 <TextBox Foreground="{DynamicResource Toolbox_button_text_color_1}" Text="{Binding SearchTextBox_field}" FontFamily="{StaticResource NarutoFont}" Grid.Row="2"  Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
 
             </Grid>
-            <Button Command="{Binding SaveEntryCommand}"  Grid.Row="4" Grid.Column="3" Content="{DynamicResource m_SaveEntry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+            <Button Command="{Binding SaveEntryCommand}"  Grid.Row="4" Grid.Column="3" Content="{DynamicResource m_SaveEntry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
             <Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}" Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10"/>

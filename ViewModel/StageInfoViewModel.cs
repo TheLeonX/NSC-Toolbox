@@ -1109,7 +1109,7 @@ namespace NSC_Toolbox.ViewModel {
                         StageInfoList.Add(StageInfoEntry);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
                     return;
                 }
             }
@@ -1120,7 +1120,7 @@ namespace NSC_Toolbox.ViewModel {
             if (SelectedStage is not null) {
                 StageInfoList.Remove(SelectedStage);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveEntry() {
@@ -1236,9 +1236,9 @@ namespace NSC_Toolbox.ViewModel {
                 }
                 SelectedStage.FilePaths = newFilePathList;
                 FilePathList = SelectedStage.FilePaths;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public int SearchStringIndex(ObservableCollection<StageInfoModel> FunctionList, string member_name, int Selected) {
@@ -1265,11 +1265,11 @@ namespace NSC_Toolbox.ViewModel {
                         SelectedStageIndex = SearchStringIndex(StageInfoList, StageTextBoxString, -1);
                         CollectionViewSource.GetDefaultView(StageInfoList).MoveCurrentTo(SelectedStage);
                     } else {
-                        ModernWpf.MessageBox.Show("There is no entry with that name.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_18"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             } else {
-                ModernWpf.MessageBox.Show("Write text in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_17"]);
             }
         }
 
@@ -1339,14 +1339,14 @@ namespace NSC_Toolbox.ViewModel {
                 StageEntry.RockColor = Color.FromArgb(255, 0, 0, 0);
             }
             StageInfoList.Add(StageEntry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
         public void CopyEntry() {
             if (SelectedStage is not null) {
                 CopiedStageProperties = (StageInfoModel)SelectedStage.Clone();
-                ModernWpf.MessageBox.Show("Stage properties were copied!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_95"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void PasteEntry() {
@@ -1516,10 +1516,10 @@ namespace NSC_Toolbox.ViewModel {
                 SunShaftBlurWidth_field = SelectedStage.SunShaftBlurWidth;
                 SunShaftAttenuationCoefficient_field = SelectedStage.SunShaftAttenuationCoefficient;
                 RockColor_field = SelectedStage.RockColor;
-                ModernWpf.MessageBox.Show("Properties were pasted!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_96"]);
 
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
 
@@ -1546,16 +1546,16 @@ namespace NSC_Toolbox.ViewModel {
                 StagePathComboBoxList.RemoveAt(StagePathComboBoxList.IndexOf(SelectedFilePath.FilePath));
                 FilePathList.Remove(SelectedFilePath);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SavePathEntry() {
             if (SelectedStage is not null && SelectedFilePath is not null) {
                 SelectedFilePath.FilePath = FilePathTextBox_field;
                 StagePathComboBoxList[StagePathComboBoxList.IndexOf(SelectedFilePath.FilePath) + 1] = FilePathTextBox_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void AddPathEntry() {
@@ -1565,17 +1565,17 @@ namespace NSC_Toolbox.ViewModel {
                     PathEntry.FilePath = FilePathTextBox_field;
                     FilePathList.Add(PathEntry);
                     StagePathComboBoxList.Add(FilePathTextBox_field);
-                    ModernWpf.MessageBox.Show("Entry was added!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
 
                 } else
-                    ModernWpf.MessageBox.Show("Path already exist in list!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_97"]);
             }
         }
         public void RemoveObjectEntry() {
             if (SelectedStage is not null && SelectedObject is not null) {
                 ObjectList.Remove(SelectedObject);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveObjectEntry() {
@@ -1603,9 +1603,9 @@ namespace NSC_Toolbox.ViewModel {
                 SelectedObject.BreakableObjectSpeed01 = BreakableObjectSpeed01_field;
                 SelectedObject.BreakableObjectSpeed02 = BreakableObjectSpeed02_field;
                 SelectedObject.BreakableObjectSpeed03 = BreakableObjectSpeed03_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void AddObjectEntry() {
@@ -1637,9 +1637,9 @@ namespace NSC_Toolbox.ViewModel {
                 ObjectEntry.BreakableObjectSpeed02 = 0;
                 ObjectEntry.BreakableObjectSpeed03 = 0;
                 ObjectList.Add(ObjectEntry);
-                ModernWpf.MessageBox.Show("Entry was added!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveFile() {
@@ -2216,7 +2216,7 @@ namespace NSC_Toolbox.ViewModel {
         public async Task ConvertFileAsync(bool skip_message) {
             await Task.Run(() => ConvertToFile());
             if (!skip_message)
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

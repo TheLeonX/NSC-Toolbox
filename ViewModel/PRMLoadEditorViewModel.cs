@@ -287,46 +287,61 @@ namespace NSC_Toolbox.ViewModel
             filePath = "";
         }
         public void OpenFile(string basepath = "") {
-            Clear();
-            if (basepath == "") {
-                OpenFileDialog myDialog = new OpenFileDialog();
-                myDialog.Filter = "XFBIN Container (*.xfbin)|*.xfbin";
-                myDialog.CheckFileExists = true;
-                myDialog.Multiselect = false;
-                if (myDialog.ShowDialog() == DialogResult.OK) {
-                    filePath = myDialog.FileName;
-                } else {
-                    return;
-                }
-            } else {
-                filePath = basepath;
-            }
-            if (File.Exists(filePath)) {
-                byte[] FileBytes = File.ReadAllBytes(filePath);
-                int fileSectionIndex = XfbinParser.GetFileSectionIndex(FileBytes);
-                int startIndex = fileSectionIndex + 0x1C;
-
-                string BinName = "";
-                // Get character name
-                BinName = XfbinParser.GetNameList(FileBytes)[0];
-                CharacodeBinName = BinName.Substring(0, BinName.IndexOf("prm_load"));
-                if (BinName.Contains("prm_load")) {
-                    int entryCount = BinaryReader.b_ReadInt(FileBytes, startIndex);
-                    for (int c = 0; c < entryCount; c++) {
-                        int ptr = startIndex + 4 + (c * 0x50);
-                        PRMLoad_Model prm_load_entry = new PRMLoad_Model();
-                        prm_load_entry.FilePath = BinaryReader.b_ReadString(FileBytes, ptr + 0x04);
-                        prm_load_entry.FileName = BinaryReader.b_ReadString(FileBytes, ptr + 0x24);
-                        prm_load_entry.Type = BinaryReader.b_ReadInt(FileBytes, ptr + 0x44);
-                        prm_load_entry.CostumeIndex = BinaryReader.b_ReadInt(FileBytes, ptr + 0x48);
-                        prm_load_entry.Condition = BinaryReader.b_ReadInt(FileBytes, ptr + 0x4C);
-                        PRMLoadList.Add(prm_load_entry);
+            try
+            {
+                Clear();
+                if (basepath == "")
+                {
+                    OpenFileDialog myDialog = new OpenFileDialog();
+                    myDialog.Filter = "XFBIN Container (*.xfbin)|*.xfbin";
+                    myDialog.CheckFileExists = true;
+                    myDialog.Multiselect = false;
+                    if (myDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        filePath = myDialog.FileName;
+                    } else
+                    {
+                        return;
                     }
-                } else {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
-                    return;
+                } else
+                {
+                    filePath = basepath;
                 }
+                if (File.Exists(filePath))
+                {
+                    byte[] FileBytes = File.ReadAllBytes(filePath);
+                    int fileSectionIndex = XfbinParser.GetFileSectionIndex(FileBytes);
+                    int startIndex = fileSectionIndex + 0x1C;
+
+                    string BinName = "";
+                    // Get character name
+                    BinName = XfbinParser.GetNameList(FileBytes)[0];
+                    CharacodeBinName = BinName.Substring(0, BinName.IndexOf("prm_load"));
+                    if (BinName.Contains("prm_load"))
+                    {
+                        int entryCount = BinaryReader.b_ReadInt(FileBytes, startIndex);
+                        for (int c = 0; c < entryCount; c++)
+                        {
+                            int ptr = startIndex + 4 + (c * 0x50);
+                            PRMLoad_Model prm_load_entry = new PRMLoad_Model();
+                            prm_load_entry.FilePath = BinaryReader.b_ReadString(FileBytes, ptr + 0x04);
+                            prm_load_entry.FileName = BinaryReader.b_ReadString(FileBytes, ptr + 0x24);
+                            prm_load_entry.Type = BinaryReader.b_ReadInt(FileBytes, ptr + 0x44);
+                            prm_load_entry.CostumeIndex = BinaryReader.b_ReadInt(FileBytes, ptr + 0x48);
+                            prm_load_entry.Condition = BinaryReader.b_ReadInt(FileBytes, ptr + 0x4C);
+                            PRMLoadList.Add(prm_load_entry);
+                        }
+                    } else
+                    {
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
+                        return;
+                    }
+                }
+            } catch (Exception ex)
+            {
+                ModernWpf.MessageBox.Show($"Error: {ex.Message}\n\n{ex.StackTrace}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
 
         }
 
@@ -334,7 +349,7 @@ namespace NSC_Toolbox.ViewModel
             if (SelectedPRMLoad is not null) {
                 PRMLoadList.Remove(SelectedPRMLoad);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveEntry() {
@@ -367,7 +382,7 @@ namespace NSC_Toolbox.ViewModel
 
 
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
 
@@ -380,7 +395,7 @@ namespace NSC_Toolbox.ViewModel
             prm_load_entry.CostumeIndex = -1;
             prm_load_entry.Condition = 1;
             PRMLoadList.Add(prm_load_entry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
 
         public void SaveFile() {
@@ -391,7 +406,7 @@ namespace NSC_Toolbox.ViewModel
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
                 SaveFileAs();
             }
@@ -420,7 +435,7 @@ namespace NSC_Toolbox.ViewModel
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
 

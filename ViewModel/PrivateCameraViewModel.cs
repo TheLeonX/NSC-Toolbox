@@ -221,7 +221,7 @@ namespace NSC_Toolbox.ViewModel
                         PrivateCameraList.Add(privateCameraEntry);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
                     return;
                 }
             }
@@ -235,7 +235,7 @@ namespace NSC_Toolbox.ViewModel
                 }
                 PrivateCameraList.Remove(SelectedPrivateCamera);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveEntry() {
@@ -251,9 +251,9 @@ namespace NSC_Toolbox.ViewModel
                 SelectedPrivateCamera.Unk2 = Unk2_field;
                 SelectedPrivateCamera.CameraDistance2 = CameraDistance2_field;
                 SelectedPrivateCamera.FOV2 = FOV2_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
 
@@ -263,7 +263,7 @@ namespace NSC_Toolbox.ViewModel
                 SelectedPrivateCameraIndex = SearchIndex_field - 1;
                 CollectionViewSource.GetDefaultView(PrivateCameraList).MoveCurrentTo(SelectedPrivateCamera);
             } else {
-                ModernWpf.MessageBox.Show("Write text in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_17"]);
             }
         }
 
@@ -288,7 +288,7 @@ namespace NSC_Toolbox.ViewModel
                 privateCameraEntry.FOV2 = 50;
             }
             PrivateCameraList.Add(privateCameraEntry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
 
         public void SaveFile() {
@@ -299,7 +299,7 @@ namespace NSC_Toolbox.ViewModel
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
                 SaveFileAs();
             }
@@ -328,7 +328,7 @@ namespace NSC_Toolbox.ViewModel
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
         public byte[] ConvertToFile() {

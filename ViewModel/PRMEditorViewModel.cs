@@ -1808,7 +1808,7 @@ namespace NSC_Toolbox.ViewModel
                 }
                 MovementList.Remove(SelectedMovement);
             } else {
-                ModernWpf.MessageBox.Show("Select Movement Entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_44"]);
             }
         }
         public void SaveMovementEntry() {
@@ -1822,9 +1822,9 @@ namespace NSC_Toolbox.ViewModel
                 MovementList[SelectedMovementIndex].CircleVelocityStrength = CircleVelocityStrength_field;
                 MovementList[SelectedMovementIndex].MovementFrequency = MovementFrequency_field;
                 MovementList[SelectedMovementIndex].ForwardVelocity = ForwardVelocity_field;
-                ModernWpf.MessageBox.Show("Movement was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_45"]);
             } else {
-                ModernWpf.MessageBox.Show("Select Movement Entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_44"]);
             }
         }
         public void AddDupMovementEntry() {
@@ -1844,13 +1844,13 @@ namespace NSC_Toolbox.ViewModel
             }
             MovementEntry.MovementItemIndex = MovementList.Count;
             MovementList.Add(MovementEntry);
-            ModernWpf.MessageBox.Show("Movement was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_46"]);
         }
         public void RemoveProjectileEntry() {
             if (SelectedProjectile is not null) {
                 ProjectileList.Remove(SelectedProjectile);
             } else {
-                ModernWpf.MessageBox.Show("Select Projectile entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_47"]);
             }
         }
         public void SaveProjectileEntry() {
@@ -1860,9 +1860,9 @@ namespace NSC_Toolbox.ViewModel
                 ProjectileList[SelectedProjectileIndex].SkillFileName = SkillFileName_field;
                 ProjectileList[SelectedProjectileIndex].SkillEntryName = SkillEntryName_field;
                 ProjectileList[SelectedProjectileIndex].Unk = Unk_field;
-                ModernWpf.MessageBox.Show("Projectile was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_48"]);
             } else {
-                ModernWpf.MessageBox.Show("Select Projectile entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_47"]);
             }
         }
         public void AddDupProjectileEntry() {
@@ -1877,13 +1877,13 @@ namespace NSC_Toolbox.ViewModel
                 ProjectileEntry.Unk = 0;
             }
             ProjectileList.Add(ProjectileEntry);
-            ModernWpf.MessageBox.Show("Projectile was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_49"]);
         }
         public void RemoveCollisionEntry() {
             if (SelectedCollision is not null) {
                 CollisionList.Remove(SelectedCollision);
             } else {
-                ModernWpf.MessageBox.Show("Select Collision entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_50"]);
             }
         }
         public void SaveCollisionEntry() {
@@ -1895,9 +1895,9 @@ namespace NSC_Toolbox.ViewModel
                 CollisionList[SelectedCollisionIndex].HurtboxRadius = HurtboxRadiusCollision_field;
                 CollisionList[SelectedCollisionIndex].Hurtbox_Y_Pos = Hurtbox_Y_PosCollision_field;
                 CollisionList[SelectedCollisionIndex].Hurtbox_Z_Pos = Hurtbox_Z_PosCollision_field;
-                ModernWpf.MessageBox.Show("Collision was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_51"]);
             } else {
-                ModernWpf.MessageBox.Show("Select Collision entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_50"]);
             }
         }
         public void AddDupCollisionEntry() {
@@ -1915,14 +1915,14 @@ namespace NSC_Toolbox.ViewModel
                 CollisionEntry.Hurtbox_Z_Pos = 0;
             }
             CollisionList.Add(CollisionEntry);
-            ModernWpf.MessageBox.Show("Collision was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_52"]);
         }
 
         public void RemoveVerEntry() {
             if (SelectedVer is not null) {
                 VerList.Remove(SelectedVer);
             } else {
-                ModernWpf.MessageBox.Show("Select Ver Entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_53"]);
             }
         }
         public void SaveVerEntry() {
@@ -1982,12 +1982,12 @@ namespace NSC_Toolbox.ViewModel
                     if (!exist) {
                         VerList[SelectedVerIndex].BinName = VerList[SelectedVerIndex].BinName.Substring(0, VerList[SelectedVerIndex].BinName.IndexOf("prm_")) + prm_binName;
                         VerList[SelectedVerIndex].BinPath = "D:/next5/char_hi/param/player/Converter/bin/" + VerList[SelectedVerIndex].BinName.Substring(0, VerList[SelectedVerIndex].BinName.IndexOf("prm_")) + "/" + VerList[SelectedVerIndex].BinName.Substring(0, VerList[SelectedVerIndex].BinName.IndexOf("prm_")) + prm_binName + ".bin";
-                        ModernWpf.MessageBox.Show("Ver Entry was saved!");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_54"]);
                     } else
-                        ModernWpf.MessageBox.Show("That Ver Entry already exist!");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_55"]);
                 }
             } else {
-                ModernWpf.MessageBox.Show("Select Ver Entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_53"]);
             }
         }
         public void AddVerEntry() {
@@ -2056,13 +2056,13 @@ namespace NSC_Toolbox.ViewModel
 
                     }
                     VerList.Add(VerEntry);
-                    ModernWpf.MessageBox.Show("Ver Entry was added!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_56"]);
                 } else {
-                    ModernWpf.MessageBox.Show("Ver Entry with that type already exist in file.");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_57"]);
 
                 }
             } else {
-                ModernWpf.MessageBox.Show("Select Ver Entry type.");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_58"]);
 
             }
         }
@@ -2075,9 +2075,9 @@ namespace NSC_Toolbox.ViewModel
                     VerList[i].BinPath = "D:/next5/char_hi/param/player/Converter/bin/" + CharacodeBinName_field + "/" + CharacodeBinName_field + prm_bin + ".bin";
                 }
                 // Add Projectile, Collision and Movement code
-                ModernWpf.MessageBox.Show("Characode was changed successfully!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_59"]);
             } else {
-                ModernWpf.MessageBox.Show("No Ver Entries");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_60"]);
             }
         }
 
@@ -2085,7 +2085,7 @@ namespace NSC_Toolbox.ViewModel
             if (SelectedPL_ANM is not null) {
                 PL_ANM_List.Remove(SelectedPL_ANM);
             } else {
-                ModernWpf.MessageBox.Show("Select PL_ANM entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_61"]);
             }
         }
         public void SavePLANMEntry() {
@@ -2109,9 +2109,9 @@ namespace NSC_Toolbox.ViewModel
                 PL_ANM_List[SelectedPL_ANMIndex].EnableBackwardFacingFix = EnableBackwardFacingFix_field;
                 PL_ANM_List[SelectedPL_ANMIndex].Press_start = Press_start_field;
                 PL_ANM_List[SelectedPL_ANMIndex].Press_end = Press_end_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void AddDupPLANMEntry() {
@@ -2141,7 +2141,7 @@ namespace NSC_Toolbox.ViewModel
                 PlAnmEntry.FunctionList = new ObservableCollection<PRMFunction_Model>();
             }
             PL_ANM_List.Add(PlAnmEntry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
         public void PastePLANMEntry() {
             try {
@@ -2223,26 +2223,29 @@ namespace NSC_Toolbox.ViewModel
                             planm_entry.FunctionList.Add(funcEntry);
                         }
                         VerList[SelectedVerIndex].PL_ANM_Sections.Add(planm_entry);
-                        ModernWpf.MessageBox.Show("PL_ANM entry was imported successfully!");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_62"]);
                     } else {
-                        ModernWpf.MessageBox.Show("Empty clipboard or corrupted data!");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_63"]);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("Select Ver Entry!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_53"]);
                 }
             }
-            catch (Exception) {
-                ModernWpf.MessageBox.Show("Something is wrong with PL_ANM entry data.");
-                SaveFile();
+            catch (Exception ex) {
+                ModernWpf.MessageBox.Show($"Error: {ex.Message}\n\n{ex.StackTrace}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //SaveFile();
             }
         }
-        public void CopyPLANMEntry() {
-            try {
-                if (SelectedPL_ANM is not null) {
+        public void CopyPLANMEntry()
+        {
+            try
+            {
+                if (SelectedPL_ANM is not null)
+                {
                     byte[] copyBytes = new byte[0xD4];
                     int _ptr = 0;
-                    copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.PL_ANM_current_name), _ptr);
-                    copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.PL_ANM_animation), _ptr + 0x20);
+                    copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.PL_ANM_current_name ?? ""), _ptr);
+                    copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.PL_ANM_animation ?? ""), _ptr + 0x20);
                     copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList.Count), _ptr + 0x50);
                     copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.Interpolation), _ptr + 0x54);
                     copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.Type), _ptr + 0x56);
@@ -2258,27 +2261,30 @@ namespace NSC_Toolbox.ViewModel
                     copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.Press_start), _ptr + 0x6E);
                     copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.Press_end), _ptr + 0x70);
                     copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.Trigger_condition_2), _ptr + 0x72);
-                    copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.PL_ANM_previous_name), _ptr + 0x74);
-                    copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.PL_ANM_next_name), _ptr + 0x94);
-                    copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.PL_ANM_DMG_name), _ptr + 0xB4);
+                    copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.PL_ANM_previous_name ?? ""), _ptr + 0x74);
+                    copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.PL_ANM_next_name ?? ""), _ptr + 0x94);
+                    copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.PL_ANM_DMG_name ?? ""), _ptr + 0xB4);
                     _ptr += 0xD4;
 
-                    for (int func = 0; func < SelectedPL_ANM.FunctionList.Count; func++) {
+                    for (int func = 0; func < SelectedPL_ANM.FunctionList.Count; func++)
+                    {
                         bool dmg_entry = false;
                         copyBytes = BinaryReader.b_AddBytes(copyBytes, new byte[0x40]);
-                        if (SelectedPL_ANM.FunctionList[func].DamageCode != "") {
+                        if (!string.IsNullOrEmpty(SelectedPL_ANM.FunctionList[func].DamageCode))
+                        {
                             dmg_entry = true;
                             copyBytes = BinaryReader.b_AddBytes(copyBytes, new byte[0x60]);
                         }
-                        copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.FunctionList[func].StringParam), _ptr);
+                        copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.FunctionList[func].StringParam ?? ""), _ptr);
                         copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList[func].FunctionTiming), _ptr + 0x20);
                         copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList[func].FunctionID), _ptr + 0x22);
                         copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList[func].FunctionParam1), _ptr + 0x24);
                         copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList[func].FunctionParam2), _ptr + 0x26);
                         copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList[func].FunctionParam3), _ptr + 0x28);
                         copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList[func].FunctionParam4), _ptr + 0x2C);
-                        if (dmg_entry) {
-                            copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.FunctionList[func].DamageCode), _ptr + 0x40);
+                        if (dmg_entry)
+                        {
+                            copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, Encoding.ASCII.GetBytes(SelectedPL_ANM.FunctionList[func].DamageCode ?? ""), _ptr + 0x40);
                             copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList[func].DamageHitEffectID), _ptr + 0x82);
                             copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList[func].DamageHitSoundID), _ptr + 0x84);
                             copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList[func].DamageCondition), _ptr + 0x86);
@@ -2291,31 +2297,33 @@ namespace NSC_Toolbox.ViewModel
                             copyBytes = BinaryReader.b_ReplaceBytes(copyBytes, BitConverter.GetBytes(SelectedPL_ANM.FunctionList[func].DamageFreezeTime), _ptr + 0x9C);
                             _ptr += 0xA0;
                         } else
+                        {
                             _ptr += 0x40;
-
+                        }
                     }
                     string convertedCode = "";
-                    for (int i = 0; i < copyBytes.Length; i++) {
-                        convertedCode = convertedCode + " " + copyBytes[i].ToString("X2");
+                    for (int i = 0; i < copyBytes.Length; i++)
+                    {
+                        convertedCode += " " + copyBytes[i].ToString("X2");
                     }
-                    Clipboard.SetText(convertedCode.Substring(1, convertedCode.Length - 1));
-                    ModernWpf.MessageBox.Show("PL_ANM entry was copied successfully!");
-
-                } else {
-                    ModernWpf.MessageBox.Show("Select PL_ANM entry!");
+                    Clipboard.SetText(convertedCode.Substring(1));
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_64"]);
+                } else
+                {
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_61"]);
                 }
-            }
-            catch (Exception) {
-
-                SaveFile();
+            } catch (Exception ex)
+            {
+                ModernWpf.MessageBox.Show($"Error: {ex.Message}\n\n{ex.StackTrace}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         public void RemoveFunctionEntry() {
             if (SelectedVer is not null && SelectedPL_ANM is not null && SelectedFunction is not null) {
                 VerList[SelectedVerIndex].PL_ANM_Sections[SelectedPL_ANMIndex].FunctionList.Remove(SelectedFunction);
             } else {
-                ModernWpf.MessageBox.Show("Select function!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_65"]);
             }
         }
         public void SaveFunctionEntry() {
@@ -2339,9 +2347,9 @@ namespace NSC_Toolbox.ViewModel
                 VerList[SelectedVerIndex].PL_ANM_Sections[SelectedPL_ANMIndex].FunctionList[SelectedFunctionIndex].DamageVerticalPush = DamageVerticalPush_field;
                 VerList[SelectedVerIndex].PL_ANM_Sections[SelectedPL_ANMIndex].FunctionList[SelectedFunctionIndex].DamageHitAmount = DamageHitAmount_field;
                 VerList[SelectedVerIndex].PL_ANM_Sections[SelectedPL_ANMIndex].FunctionList[SelectedFunctionIndex].DamageGuard = DamageGuard_field;
-                ModernWpf.MessageBox.Show("Function was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_66"]);
             } else {
-                ModernWpf.MessageBox.Show("Select function!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_65"]);
             }
         }
         public void AddDupFunctionEntry() {
@@ -2371,7 +2379,7 @@ namespace NSC_Toolbox.ViewModel
 
             }
             VerList[SelectedVerIndex].PL_ANM_Sections[SelectedPL_ANMIndex].FunctionList.Add(FunctionEntry);
-            ModernWpf.MessageBox.Show("Function was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_67"]);
         }
         public void PasteFunctionEntry() {
             try {
@@ -2425,16 +2433,16 @@ namespace NSC_Toolbox.ViewModel
 
                         }
                         VerList[SelectedVerIndex].PL_ANM_Sections[SelectedPL_ANMIndex].FunctionList.Add(funcEntry);
-                        ModernWpf.MessageBox.Show("Function entry was imported successfully!");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_68"]);
                     } else {
-                        ModernWpf.MessageBox.Show("Empty clipboard or corrupted data!");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_63"]);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("Select PL_ANM Entry!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_61"]);
                 }
             } catch(Exception) {
 
-                ModernWpf.MessageBox.Show("Something is wrong with Function entry data.");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_69"]);
                 SaveFile();
             }
         }
@@ -2475,10 +2483,10 @@ namespace NSC_Toolbox.ViewModel
                         convertedCode = convertedCode + " " + copyBytes[i].ToString("X2");
                     }
                     Clipboard.SetText(convertedCode.Substring(1, convertedCode.Length - 1));
-                    ModernWpf.MessageBox.Show("Function entry was copied successfully!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_70"]);
 
                 } else {
-                    ModernWpf.MessageBox.Show("Select Function entry!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_71"]);
                 }
             }
             catch (Exception) {
@@ -2495,12 +2503,12 @@ namespace NSC_Toolbox.ViewModel
                     }
                     File.Copy(filePath, filePath + ".backup");
                     File.WriteAllBytes(filePath, ConvertToFile());
-                    ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
                 } else {
                     SaveFileAs();
                 }
             } else {
-                ModernWpf.MessageBox.Show("Unable to save file. File data is empty!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_72"]);
             }
         }
 
@@ -2528,9 +2536,9 @@ namespace NSC_Toolbox.ViewModel
                 }
                 File.WriteAllBytes(filePath, ConvertToFile());
                 if (basepath == "")
-                    ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
-                ModernWpf.MessageBox.Show("Unable to save file. File data is empty!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_72"]);
             }
         }
 

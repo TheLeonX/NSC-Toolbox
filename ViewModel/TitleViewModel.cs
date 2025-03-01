@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Media.Animation;
 using Octokit;
 using System.Media;
+using Application = System.Windows.Application;
 
 namespace NSC_Toolbox.ViewModel {
     public class TitleViewModel : INotifyPropertyChanged {
@@ -211,6 +212,16 @@ namespace NSC_Toolbox.ViewModel {
                 OnPropertyChanged("TextColor_field");
             }
         }
+        private int _language_field;
+        public int Language_field
+        {
+            get { return _language_field; }
+            set
+            {
+                _language_field = value;
+                OnPropertyChanged("Language_field");
+            }
+        }
         private string _backgroundImagePath_field;
         public string BackgroundImagePath_field {
             get { return _backgroundImagePath_field; }
@@ -228,7 +239,7 @@ namespace NSC_Toolbox.ViewModel {
             }
 
             ToolTabState = 1;
-            KuramaName = "Kyuruto";
+            KuramaName = (string)System.Windows.Application.Current.Resources["m_kyuruto"];
             MeouchCounter = 0;
             MeouchVisibility = Visibility.Hidden;
             KyurutoVisibility = Visibility.Visible;
@@ -237,7 +248,7 @@ namespace NSC_Toolbox.ViewModel {
             Credits2024Visibility = Visibility.Hidden;
             MeouchEffectAutoPlay = false;
             MeouchEffectRepeat = RepeatBehavior.Forever;
-            KyurutoDialogTextLoader("Hello! You can call me " + KuramaName + ".", 50);
+            KyurutoDialogTextLoader((string)System.Windows.Application.Current.Resources["m_kyuruto_1"]  +" " + KuramaName + ".", 50);
 
             switch (Properties.Settings.Default.StretchMode) {
                 case "Fill":
@@ -250,6 +261,19 @@ namespace NSC_Toolbox.ViewModel {
                     StretchMode_field = 2;
                     break;
             }
+
+            switch (Properties.Settings.Default.Language)
+            {
+                case "en-US":
+                    Language_field = 0;
+                    ChangeLanguage(Properties.Settings.Default.Language);
+                    break;
+                case "ru-RU":
+                    Language_field = 1;
+                    ChangeLanguage(Properties.Settings.Default.Language);
+                    break;
+            }
+           
             BackgroundColor_field = Properties.Settings.Default.BackgroundColor1;
             ButtonColor_field = Properties.Settings.Default.ButtonColor1;
             TextColor_field = Properties.Settings.Default.TextColor1;
@@ -262,6 +286,42 @@ namespace NSC_Toolbox.ViewModel {
             }
             CheckGitHubNewerVersion();
         }
+
+
+        public void ChangeLanguage(string lang)
+        {
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save(); // Save the setting
+
+            // Get the merged dictionaries collection
+            var mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+
+            // Find and remove the existing localization dictionary
+            ResourceDictionary localizationDictionary = null;
+            foreach (var dict in mergedDictionaries)
+            {
+                if (dict.Source != null && dict.Source.OriginalString.Contains("Resources/Localization/lang"))
+                {
+                    localizationDictionary = dict;
+                    break;
+                }
+            }
+            if (localizationDictionary != null)
+            {
+                mergedDictionaries.Remove(localizationDictionary);
+            }
+
+            // Load the new dictionary
+            var newDict = new ResourceDictionary();
+            if (lang == "ru-RU")
+                newDict.Source = new Uri("Resources/Localization/lang.ru-RU.xaml", UriKind.Relative);
+            else
+                newDict.Source = new Uri("Resources/Localization/lang.xaml", UriKind.Relative);
+
+            mergedDictionaries.Add(newDict);
+        }
+
+
 
         private async System.Threading.Tasks.Task CheckGitHubNewerVersion() {
             //Get all releases from GitHub
@@ -280,7 +340,7 @@ namespace NSC_Toolbox.ViewModel {
             int versionComparison = localVersion.CompareTo(latestGitHubVersion);
             if (versionComparison < 0) {
                 SystemSounds.Beep.Play();
-                ModernWpf.MessageBox.Show("There is new version of Toolbox on GitHub page.");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_update_1"]);
             }
 
         }
@@ -297,6 +357,18 @@ namespace NSC_Toolbox.ViewModel {
                     Properties.Settings.Default.StretchMode = "None";
                     break;
             }
+
+            switch (Language_field)
+            {
+                case 0: //English
+                    Properties.Settings.Default.Language = "en-US";
+                    break;
+                case 1: //Russian
+                    Properties.Settings.Default.Language = "ru-RU";
+                    break;
+            }
+
+            ChangeLanguage(Properties.Settings.Default.Language);
             Properties.Settings.Default.BackgroundColor1 = BackgroundColor_field;
             Properties.Settings.Default.ButtonColor1 = ButtonColor_field;
             Properties.Settings.Default.TextColor1 = TextColor_field;
@@ -306,7 +378,7 @@ namespace NSC_Toolbox.ViewModel {
             }
             Properties.Settings.Default.Save();
             if (restart)
-                ModernWpf.MessageBox.Show("Some changes requires to restart toolbox!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_9"]);
         }
         public void ResetSettings() {
             bool restart = false;
@@ -325,7 +397,7 @@ namespace NSC_Toolbox.ViewModel {
             BackgroundImagePath_field = "UI/background/bg_toolbox_main.png";
             Properties.Settings.Default.Save();
             if (restart)
-                ModernWpf.MessageBox.Show("Some changes requires to restart toolbox!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_9"]);
         }
         public void SelectImageBackground() {
             OpenFileDialog myDialog = new OpenFileDialog();
@@ -367,7 +439,7 @@ namespace NSC_Toolbox.ViewModel {
             CommonFileDialogResult result = dialog.ShowDialog();
             if (result == CommonFileDialogResult.Ok) {
                 Program.CopyFilesRecursively(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ModdingAPIFiles", dialog.FileName);
-                ModernWpf.MessageBox.Show("ModdingAPI was installed!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_update_2"]);
             } else {
                 return;
             }
@@ -380,7 +452,7 @@ namespace NSC_Toolbox.ViewModel {
             if (result == CommonFileDialogResult.Ok)
                 if (Directory.Exists(dialog.FileName + "\\moddingapi")) {
 
-                    MessageBoxResult warning = (MessageBoxResult)ModernWpf.MessageBox.Show("You are sure that you want to delete ModdingAPI? All mods inside of it will be deleted too.", "Do you want to delete it?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    MessageBoxResult warning = (MessageBoxResult)ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_10"], "Do you want to delete it?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     if (warning == MessageBoxResult.Yes) {
 
                         Directory.Delete(dialog.FileName + "\\moddingapi", true);
@@ -388,7 +460,7 @@ namespace NSC_Toolbox.ViewModel {
                             File.Delete(dialog.FileName + "\\xinput9_1_0.dll");
                         if (File.Exists(dialog.FileName + "\\xinput9_1_0_o.dll"))
                             File.Delete(dialog.FileName + "\\xinput9_1_0_o.dll");
-                        ModernWpf.MessageBox.Show("ModdingAPI was deleted!");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_update_3"]);
                     }
                 } else {
                     return;
@@ -855,6 +927,34 @@ namespace NSC_Toolbox.ViewModel {
                   (_skillEditorRunButtonCommand = new RelayCommand(obj => {
                       SkillEditorView SkillEditor = new SkillEditorView();
                       SkillEditor.Show();
+
+                  }));
+            }
+        }
+
+        private RelayCommand _conditionprmEditorRunButtonCommand;
+        public RelayCommand ConditionprmEditorRunButtonCommand
+        {
+            get
+            {
+                return _conditionprmEditorRunButtonCommand ??
+                  (_conditionprmEditorRunButtonCommand = new RelayCommand(obj => {
+                      ConditionPrmEditorView conditionprmEditor = new ConditionPrmEditorView();
+                      conditionprmEditor.Show();
+
+                  }));
+            }
+        }
+
+        private RelayCommand _conditionprmManagerEditorRunButtonCommand;
+        public RelayCommand ConditionprmManagerEditorRunButtonCommand
+        {
+            get
+            {
+                return _conditionprmManagerEditorRunButtonCommand ??
+                  (_conditionprmManagerEditorRunButtonCommand = new RelayCommand(obj => {
+                      ConditionManagerEditorView conditionprmManagerEditor = new ConditionManagerEditorView();
+                      conditionprmManagerEditor.Show();
 
                   }));
             }

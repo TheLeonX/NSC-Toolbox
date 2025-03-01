@@ -9,8 +9,8 @@
     <PlatformTarget>x86</PlatformTarget>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>white_TB.ico</ApplicationIcon>
-    <AssemblyVersion>1.6.2.0</AssemblyVersion>
-    <FileVersion>1.6.2.0</FileVersion>
+    <AssemblyVersion>1.6.3.0</AssemblyVersion>
+    <FileVersion>1.6.3.0</FileVersion>
     <Authors>TheLeonX</Authors>
     <Version>1.60</Version>
   </PropertyGroup>
@@ -102,6 +102,9 @@
     <None Update="ModdingAPIFiles\moddingapi\lang\EN.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\conditionprmManager.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\Conditions.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -181,7 +184,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Update="Resources\TemplateImages\stage_icon.dds">

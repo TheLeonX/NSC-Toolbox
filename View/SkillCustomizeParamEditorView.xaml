@@ -18,7 +18,7 @@
         <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
     </Window.Background>
     <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
-        <Grid Width="1850" Height="880">
+        <Grid Width="1850" Height="880" Background="{DynamicResource Toolbox_button_background_color_1}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>
@@ -45,15 +45,15 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Characode ID: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                            <TextBlock Text="{Binding CharacodeID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                            <TextBlock Text="Characode ID: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="16"/>
+                            <TextBlock Text="{Binding CharacodeID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
             <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="3">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto" MinHeight="60"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="*"/>
@@ -69,11 +69,11 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Vertical" VerticalAlignment="Center">
 
-                    <Label HorizontalAlignment="Left" FontSize="12" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_Characode}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label HorizontalAlignment="Left" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_Characode}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <xctk:IntegerUpDown MinHeight="30" Value="{Binding CharacodeID_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
 
                 </StackPanel>
-                <Grid Grid.Row="1" Grid.Column="0"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                <Grid Grid.Row="1" Grid.Column="0"  >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
@@ -81,7 +81,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.4*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -118,8 +118,8 @@
                             </Style>
                         </Label.Style>
                     </Label>
-                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuName}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
-                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuUsage}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuName}" Foreground="{DynamicResource Toolbox_button_text_color_1}" />
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuUsage}" Foreground="{DynamicResource Toolbox_button_text_color_1}" />
                     <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsuCancel}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_prior}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <Border BorderThickness="0,0,0,1" BorderBrush="White" Grid.Row="0" Grid.ColumnSpan="5"/>
@@ -135,7 +135,7 @@
                     <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu1_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu1_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 </Grid>
-                <Grid Grid.Row="3" Grid.Column="0"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                <Grid Grid.Row="3" Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
@@ -143,7 +143,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.4*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -197,7 +197,7 @@
                     <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu2_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu2_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 </Grid>
-                <Grid Grid.Row="5" Grid.Column="0"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                <Grid Grid.Row="5" Grid.Column="0" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
@@ -205,7 +205,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.4*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -259,7 +259,7 @@
                     <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu3_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu3_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 </Grid>
-                <Grid Grid.Row="1" Grid.Column="2"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                <Grid Grid.Row="1" Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
@@ -267,7 +267,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.4*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -321,7 +321,7 @@
                     <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu4_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu4_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 </Grid>
-                <Grid Grid.Row="3" Grid.Column="2"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                <Grid Grid.Row="3" Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
@@ -329,7 +329,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.4*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -383,7 +383,7 @@
                     <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu5_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu5_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 </Grid>
-                <Grid Grid.Row="5" Grid.Column="2"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                <Grid Grid.Row="5" Grid.Column="2" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
@@ -391,7 +391,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.4*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -445,7 +445,7 @@
                     <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu6_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu6_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 </Grid>
-                <Grid Grid.Row="7" Grid.Column="0"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                <Grid Grid.Row="7" Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
@@ -453,7 +453,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.4*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -507,7 +507,7 @@
                     <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Value="{Binding Jutsu1_awa_ex_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <xctk:IntegerUpDown Grid.Row="3" Grid.Column="4" Value="{Binding Jutsu1_awa_air_prior_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 </Grid>
-                <Grid Grid.Row="7" Grid.Column="2"  Background="{DynamicResource Toolbox_button_background_color_1}" >
+                <Grid Grid.Row="7" Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
@@ -515,7 +515,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.4*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -581,13 +581,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Command="{Binding AddDupEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddDupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                <Button Command="{Binding SearchEntryCommand}" Content="{DynamicResource m_SearchEntry}" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Button Command="{Binding AddDupEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddDupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                <Button Command="{Binding SearchEntryCommand}" Content="{DynamicResource m_SearchEntry}" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                 <xctk:IntegerUpDown Grid.Row="1" Grid.Column="0" Value="{Binding SearchIndex_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
 
             </Grid>
-            <Button Command="{Binding SaveEntryCommand}"  Grid.Row="4" Grid.Column="3" Content="{DynamicResource m_SaveEntry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+            <Button Command="{Binding SaveEntryCommand}"  Grid.Row="4" Grid.Column="3" Content="{DynamicResource m_SaveEntry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
             <Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10"/>

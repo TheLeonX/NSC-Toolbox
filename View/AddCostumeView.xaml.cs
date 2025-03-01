@@ -17,7 +17,12 @@ namespace NSC_Toolbox.View {
     /// <summary>
     /// Логика взаимодействия для AddCostumeView.xaml
     /// </summary>
+    /// 
+
+
     public partial class AddCostumeView : Window {
+        private Dictionary<Label, TranslateTransform> labelTransforms = new Dictionary<Label, TranslateTransform>();
+
         public AddCostumeView() {
             InitializeComponent();
             DataContext = new AddCostumeViewModel();

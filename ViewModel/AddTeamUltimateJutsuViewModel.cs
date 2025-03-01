@@ -80,7 +80,7 @@ namespace NSC_Toolbox.ViewModel
 
                     if (!IsRootFolderExist)
                     {
-                        MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show("Some files doesn't exist! Do you want to add missing files in directory?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_12"], "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (result == MessageBoxResult.Yes)
                         {
 
@@ -101,7 +101,7 @@ namespace NSC_Toolbox.ViewModel
                                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", "cmnparam.xfbin"), Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin"));
                             } else
                             {
-                                ModernWpf.MessageBox.Show("Directory doesn't exist!");
+                                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_11"]);
                             }
                         } else
                         {
@@ -286,7 +286,7 @@ namespace NSC_Toolbox.ViewModel
 
                 if (!IsRootFolderExist)
                 {
-                    MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show("Some files doesn't exist! Do you want to add missing files in directory?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_12"], "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                     {
 
@@ -307,7 +307,7 @@ namespace NSC_Toolbox.ViewModel
                                 File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", "cmnparam.xfbin"), Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin"));
                         } else
                         {
-                            ModernWpf.MessageBox.Show("Directory doesn't exist!");
+                            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_11"]);
                         }
                     } else
                     {
@@ -487,7 +487,7 @@ namespace NSC_Toolbox.ViewModel
                 CharacodeIDList.RemoveAt(SelectedCharacodeIDIndex);
             } else
             {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
 
@@ -496,7 +496,7 @@ namespace NSC_Toolbox.ViewModel
         {
             if (CharacodeIDList.Contains(ImportCharacterItem.CharacodeIndex))
             {
-                ModernWpf.MessageBox.Show("You already added that entry.");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_15"]);
                 return;
             }
             if (CharacodeIDList.Count < 20)
@@ -504,10 +504,10 @@ namespace NSC_Toolbox.ViewModel
                 CharacodeIDList.Add(ImportCharacterItem.CharacodeIndex);
                 SelectedCharacodeIDIndex = CharacodeIDList.Count - 1;
                 CollectionViewSource.GetDefaultView(CharacodeIDList).MoveCurrentTo(CharacodeIDList[SelectedCharacodeIDIndex]);
-                ModernWpf.MessageBox.Show("Entry was added!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
             } else
             {
-                ModernWpf.MessageBox.Show("You can't add more entries!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_16"]);
             }
         }
         private RelayCommand _selectRootFolderCommand;

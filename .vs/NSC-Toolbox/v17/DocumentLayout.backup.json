@@ -7,64 +7,36 @@
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:nsc-toolbox.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\resources\\localization\\lang.ru-ru.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:resources\\localization\\lang.ru-ru.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\prmeditorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\prmeditorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\binaryreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:binaryreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\exportmodviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\exportmodviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\exportmodview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:view\\exportmodview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\model\\duelplayerparammodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:model\\duelplayerparammodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\specialinteractionmanagerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\specialinteractionmanagerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\model\\conditionprmmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:model\\conditionprmmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\specialinteractionmanagerview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:view\\specialinteractionmanagerview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\specialinteractionmanagerview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:view\\specialinteractionmanagerview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\skillindexsettingparameditorview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:view\\skillindexsettingparameditorview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\obj\\Debug\\net7.0-windows\\View\\SpecialInteractionManagerView.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:obj\\Debug\\net7.0-windows\\View\\SpecialInteractionManagerView.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\model\\specialinteractionmanagermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:model\\specialinteractionmanagermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\skillindexsettingparamviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\skillindexsettingparamviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\properties\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:properties\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\resources\\localization\\lang.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:resources\\localization\\lang.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\titleview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:view\\titleview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\titleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\titleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\skillindexsettingparameditorview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:view\\skillindexsettingparameditorview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\model\\pairspskillcombinationparammodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:model\\pairspskillcombinationparammodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\model\\playericonmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:model\\playericonmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,11 +46,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "lang.xaml",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Resources\\Localization\\lang.xaml",
               "RelativeDocumentMoniker": "Resources\\Localization\\lang.xaml",
@@ -86,199 +58,105 @@
               "RelativeToolTip": "Resources\\Localization\\lang.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-02-23T12:35:35.36Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "lang.ru-RU.xaml",
+              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Resources\\Localization\\lang.ru-RU.xaml",
+              "RelativeDocumentMoniker": "Resources\\Localization\\lang.ru-RU.xaml",
+              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Resources\\Localization\\lang.ru-RU.xaml",
+              "RelativeToolTip": "Resources\\Localization\\lang.ru-RU.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-25T13:02:16.289Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ExportModView.xaml",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\ExportModView.xaml",
-              "RelativeDocumentMoniker": "View\\ExportModView.xaml",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\ExportModView.xaml",
-              "RelativeToolTip": "View\\ExportModView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-23T13:24:53.408Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SpecialInteractionManagerView.g.cs",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\obj\\Debug\\net7.0-windows\\View\\SpecialInteractionManagerView.g.cs",
-              "RelativeDocumentMoniker": "obj\\Debug\\net7.0-windows\\View\\SpecialInteractionManagerView.g.cs",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\obj\\Debug\\net7.0-windows\\View\\SpecialInteractionManagerView.g.cs",
-              "RelativeToolTip": "obj\\Debug\\net7.0-windows\\View\\SpecialInteractionManagerView.g.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAowE8AAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T13:02:06.151Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "TitleViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\TitleViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModel\\TitleViewModel.cs",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\TitleViewModel.cs",
-              "RelativeToolTip": "ViewModel\\TitleViewModel.cs",
-              "ViewState": "AgIAACoDAAAAAAAAAAAAAEwDAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T12:40:10.819Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "TitleView.xaml",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\TitleView.xaml",
-              "RelativeDocumentMoniker": "View\\TitleView.xaml",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\TitleView.xaml",
-              "RelativeToolTip": "View\\TitleView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-23T12:38:20.876Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SkillIndexSettingParamViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\SkillIndexSettingParamViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModel\\SkillIndexSettingParamViewModel.cs",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\SkillIndexSettingParamViewModel.cs",
-              "RelativeToolTip": "ViewModel\\SkillIndexSettingParamViewModel.cs",
-              "ViewState": "AgIAAK4BAAAAAAAAAAAUwNUBAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T12:26:58.555Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SpecialInteractionManagerView.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\SpecialInteractionManagerView.xaml.cs",
-              "RelativeDocumentMoniker": "View\\SpecialInteractionManagerView.xaml.cs",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\SpecialInteractionManagerView.xaml.cs",
-              "RelativeToolTip": "View\\SpecialInteractionManagerView.xaml.cs",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAAAG0AAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T12:26:15.915Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SkillIndexSettingParamEditorView.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\SkillIndexSettingParamEditorView.xaml.cs",
-              "RelativeDocumentMoniker": "View\\SkillIndexSettingParamEditorView.xaml.cs",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\SkillIndexSettingParamEditorView.xaml.cs",
-              "RelativeToolTip": "View\\SkillIndexSettingParamEditorView.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBUAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T12:26:07.419Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "SkillIndexSettingParamEditorView.xaml",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\SkillIndexSettingParamEditorView.xaml",
-              "RelativeDocumentMoniker": "View\\SkillIndexSettingParamEditorView.xaml",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\SkillIndexSettingParamEditorView.xaml",
-              "RelativeToolTip": "View\\SkillIndexSettingParamEditorView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-23T12:26:03.723Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "PairSpSkillCombinationParamModel.cs",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Model\\PairSpSkillCombinationParamModel.cs",
-              "RelativeDocumentMoniker": "Model\\PairSpSkillCombinationParamModel.cs",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Model\\PairSpSkillCombinationParamModel.cs",
-              "RelativeToolTip": "Model\\PairSpSkillCombinationParamModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T12:23:27.641Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "PlayerIconModel.cs",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Model\\PlayerIconModel.cs",
-              "RelativeDocumentMoniker": "Model\\PlayerIconModel.cs",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Model\\PlayerIconModel.cs",
-              "RelativeToolTip": "Model\\PlayerIconModel.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T12:23:19.305Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "SpecialInteractionManagerModel.cs",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Model\\SpecialInteractionManagerModel.cs",
-              "RelativeDocumentMoniker": "Model\\SpecialInteractionManagerModel.cs",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Model\\SpecialInteractionManagerModel.cs",
-              "RelativeToolTip": "Model\\SpecialInteractionManagerModel.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAkwDMAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T12:23:10.669Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SpecialInteractionManagerView.xaml",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\SpecialInteractionManagerView.xaml",
-              "RelativeDocumentMoniker": "View\\SpecialInteractionManagerView.xaml",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\SpecialInteractionManagerView.xaml",
-              "RelativeToolTip": "View\\SpecialInteractionManagerView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-23T12:22:48.915Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SpecialInteractionManagerViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\SpecialInteractionManagerViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModel\\SpecialInteractionManagerViewModel.cs",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\SpecialInteractionManagerViewModel.cs",
-              "RelativeToolTip": "ViewModel\\SpecialInteractionManagerViewModel.cs",
-              "ViewState": "AgIAAIUAAAAAAAAAAAAowDkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T12:13:46.228Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "NSC-Toolbox.csproj",
+              "Title": "NSC-Toolbox",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeDocumentMoniker": "NSC-Toolbox.csproj",
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeToolTip": "NSC-Toolbox.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-02-19T14:50:04.35Z",
+              "WhenOpened": "2025-03-01T16:55:22.251Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "PRMEditorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\PRMEditorViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\PRMEditorViewModel.cs",
+              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\PRMEditorViewModel.cs",
+              "RelativeToolTip": "ViewModel\\PRMEditorViewModel.cs",
+              "ViewState": "AgIAADQHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T11:09:41.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BinaryReader.cs",
+              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\BinaryReader.cs",
+              "RelativeDocumentMoniker": "BinaryReader.cs",
+              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\BinaryReader.cs",
+              "RelativeToolTip": "BinaryReader.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAgwEoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T10:13:49.795Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DuelPlayerParamModel.cs",
+              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Model\\DuelPlayerParamModel.cs",
+              "RelativeDocumentMoniker": "Model\\DuelPlayerParamModel.cs",
+              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Model\\DuelPlayerParamModel.cs",
+              "RelativeToolTip": "Model\\DuelPlayerParamModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T09:54:39.593Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Properties\\Program.cs",
+              "RelativeDocumentMoniker": "Properties\\Program.cs",
+              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Properties\\Program.cs",
+              "RelativeToolTip": "Properties\\Program.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAswEoAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T09:49:18.531Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ConditionPrmModel.cs",
+              "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Model\\ConditionPrmModel.cs",
+              "RelativeDocumentMoniker": "Model\\ConditionPrmModel.cs",
+              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Model\\ConditionPrmModel.cs",
+              "RelativeToolTip": "Model\\ConditionPrmModel.cs",
+              "ViewState": "AgIAADgBAAAAAAAAAAAmwGoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T09:29:12.186Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "ExportModViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\ExportModViewModel.cs",
               "RelativeDocumentMoniker": "ViewModel\\ExportModViewModel.cs",
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\ExportModViewModel.cs",
               "RelativeToolTip": "ViewModel\\ExportModViewModel.cs",
-              "ViewState": "AgIAAKgHAAAAAAAAAAAAAMwHAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAG0FAAAAAAAAAAAAAHkFAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-18T19:24:34.287Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-01T09:23:32.917Z"
             }
           ]
         }

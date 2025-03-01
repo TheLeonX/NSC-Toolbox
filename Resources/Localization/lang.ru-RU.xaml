@@ -1,0 +1,1415 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+
+    <v:String x:Key="m_AddDupEntry">Дублировать</v:String>
+    <v:String x:Key="m_DupEntry">Дублировать</v:String>
+    <v:String x:Key="m_AddEntry">Добавить</v:String>
+    <v:String x:Key="m_DeleteEntry">Удалить</v:String>
+    <v:String x:Key="m_SaveEntry">Сохранить</v:String>
+    <v:String x:Key="m_SearchEntry">Поиск записи</v:String>
+    <v:String x:Key="m_File">Файл</v:String>
+    <v:String x:Key="m_OpenFile">Открыть</v:String>
+    <v:String x:Key="m_SaveFile">Сохранить</v:String>
+    <v:String x:Key="m_SaveAsFile">Сохранить как</v:String>
+
+    <v:String x:Key="m_language">Язык</v:String>
+    <v:String x:Key="m_language_en-US">English</v:String>
+    <v:String x:Key="m_language_ru-RU">Русский</v:String>
+
+    <v:String x:Key="m_tool_1">Запись была сохранена!</v:String>
+    <v:String x:Key="m_tool_2">Запись была добавлена!</v:String>
+    <v:String x:Key="m_tool_3">Файл сохранен </v:String>
+    <v:String x:Key="m_error_1">Вы не можете открыть этот файл с этим инструментом.</v:String>
+    <v:String x:Key="m_error_2">Выберите запись!</v:String>
+    <v:String x:Key="m_error_3">Запись с данным ID не существует.</v:String>
+    <v:String x:Key="m_error_4">Введите ID!</v:String>
+
+    <v:String x:Key="m_kyuruto">Кьюруто</v:String>
+    <v:String x:Key="m_kyuruto_1">Привет! Можешь называть меня</v:String>
+    <v:String x:Key="m_update_1">Доступна новая версия Toolbox на странице GitHub.</v:String>
+    <v:String x:Key="m_update_2">ModdingAPI установлен!</v:String>
+    <v:String x:Key="m_update_3">ModdingAPI удалён!</v:String>
+    <v:String x:Key="m_error_5">Запись с таким Characode не найдена.</v:String>
+    <v:String x:Key="m_error_6">Введите characode в поле!</v:String>
+    <v:String x:Key="m_error_7">Этот characode уже существует в игре!</v:String>
+    <v:String x:Key="m_error_8">Введите название characode в поле!</v:String>
+    <v:String x:Key="m_error_9">Некоторые изменения требуют перезапуска Toolbox!</v:String>
+    <v:String x:Key="m_error_10">Вы уверены, что хотите удалить ModdingAPI? Все моды внутри него также будут удалены.</v:String>
+    <v:String x:Key="m_error_11">Директория не существует!</v:String>
+    <v:String x:Key="m_error_12">Некоторые файлы отсутствуют! Добавить недостающие файлы в директорию?</v:String>
+    <v:String x:Key="m_error_13">Введите код костюма и код иконки!</v:String>
+    <v:String x:Key="m_error_14">Выберите код персонажа из выпадающего списка!</v:String>
+    <v:String x:Key="m_error_15">Такая запись уже добавлена.</v:String>
+    <v:String x:Key="m_error_16">Нельзя добавить больше записей!</v:String>
+    <v:String x:Key="m_error_17">Введите текст в поле!</v:String>
+    <v:String x:Key="m_error_18">Запись с таким названием не найдена.</v:String>
+    <v:String x:Key="m_error_19">Нет записей. Не удалось сохранить файл.</v:String>
+    <v:String x:Key="m_error_20">Выберите CPK для удаления.</v:String>
+    <v:String x:Key="m_error_21">Персонаж уже выбран!</v:String>
+    <v:String x:Key="m_error_22">Выберите персонажа для экспорта.</v:String>
+    <v:String x:Key="m_error_23">Выберите персонажа для удаления.</v:String>
+    <v:String x:Key="m_error_24">Модель уже выбрана!</v:String>
+    <v:String x:Key="m_error_25">Выберите модель для удаления.</v:String>
+    <v:String x:Key="m_error_26">Арена уже выбрана!</v:String>
+    <v:String x:Key="m_error_27">Выберите арену для экспорта.</v:String>
+    <v:String x:Key="m_error_28">Выберите арену для удаления.</v:String>
+    <v:String x:Key="m_error_29">Выберите арену!</v:String>
+    <v:String x:Key="m_error_30">Выберите шейдер для удаления.</v:String>
+    <v:String x:Key="m_error_31">Персонаж с characode</v:String>
+    <v:String x:Key="m_error_32">не был экспортирован, так как отсутствует запись duelPlayerParam.</v:String>
+    <v:String x:Key="m_error_33">не был экспортирован, так как отсутствует файл duelPlayerParam.</v:String>
+    <v:String x:Key="m_error_34">не был экспортирован, так как отсутствует</v:String>
+    <v:String x:Key="m_error_35">Модель с кодом PlayerSettingParam</v:String>
+    <v:String x:Key="m_error_36">Не найдена запись в pairSpSkillCombinationParam для этого группового ультимейт дзюцу.</v:String>
+    <v:String x:Key="m_error_37">Не найдена запись в cmnparam для этого группового ультимейт дзюцу.</v:String>
+    <v:String x:Key="m_error_38">Некоторые настройки заданы неверно!</v:String>
+    <v:String x:Key="m_error_39">Этот инструмент требует загрузки всех файлов messageInfo в директорию!</v:String>
+    <v:String x:Key="m_error_40">Запись с таким текстом не найдена.</v:String>
+    <v:String x:Key="m_error_41">Не найдена секция с таким ID сообщения.</v:String>
+    <v:String x:Key="m_error_42">Запись с таким ID сообщения уже существует в файле!</v:String>
+    <v:String x:Key="m_error_43">Секция с таким ID уже существует.</v:String>
+    <v:String x:Key="m_error_44">Выберите запись движения!</v:String>
+    <v:String x:Key="m_error_45">Движение сохранено!</v:String>
+    <v:String x:Key="m_error_46">Движение добавлено!</v:String>
+    <v:String x:Key="m_error_47">Выберите запись снаряда!</v:String>
+    <v:String x:Key="m_error_48">Снаряд сохранён!</v:String>
+    <v:String x:Key="m_error_49">Снаряд добавлен!</v:String>
+    <v:String x:Key="m_error_50">Выберите запись столкновения!</v:String>
+    <v:String x:Key="m_error_51">Столкновение сохранено!</v:String>
+    <v:String x:Key="m_error_52">Столкновение добавлено!</v:String>
+    <v:String x:Key="m_error_53">Выберите Ver запись!</v:String>
+    <v:String x:Key="m_error_54">Ver запись сохранена!</v:String>
+    <v:String x:Key="m_error_55">Такая Ver запись уже существует!</v:String>
+    <v:String x:Key="m_error_56">Ver запись добавлена!</v:String>
+    <v:String x:Key="m_error_57">Ver запись с таким типом уже существует в файле.</v:String>
+    <v:String x:Key="m_error_58">Выберите тип Ver записи.</v:String>
+    <v:String x:Key="m_error_59">Characode успешно изменён!</v:String>
+    <v:String x:Key="m_error_60">Нет Ver записей</v:String>
+    <v:String x:Key="m_error_61">Выберите запись PL_ANM!</v:String>
+    <v:String x:Key="m_error_62">Запись PL_ANM успешно импортирована!</v:String>
+    <v:String x:Key="m_error_63">Пустой буфер обмена или повреждённые данные!</v:String>
+    <v:String x:Key="m_error_64">Запись PL_ANM успешно скопирована!</v:String>
+    <v:String x:Key="m_error_65">Выберите функцию!</v:String>
+    <v:String x:Key="m_error_66">Функция сохранена!</v:String>
+    <v:String x:Key="m_error_67">Функция добавлена!</v:String>
+    <v:String x:Key="m_error_68">Запись функции успешно импортирована!</v:String>
+    <v:String x:Key="m_error_69">Что-то не так с данными записи функции.</v:String>
+    <v:String x:Key="m_error_70">Запись функции успешно скопирована!</v:String>
+    <v:String x:Key="m_error_71">Выберите запись функции!</v:String>
+    <v:String x:Key="m_error_72">Невозможно сохранить файл. Данные файла пусты!</v:String>
+    <v:String x:Key="m_error_73">Можно использовать максимум 3 пути для файлов!</v:String>
+    <v:String x:Key="m_error_74">Введите путь к файлу в поле!</v:String>
+    <v:String x:Key="m_error_75">Выберите запись навыка!</v:String>
+    <v:String x:Key="m_error_76">Сначала выберите запись навыка, затем путь для удаления!</v:String>
+    <v:String x:Key="m_error_77">Параметры навыка сохранены!</v:String>
+    <v:String x:Key="m_error_78">Выберите запись навыка для сохранения!</v:String>
+    <v:String x:Key="m_error_79">Можно использовать максимум 16 действий для записи навыка!</v:String>
+    <v:String x:Key="m_error_80">Выберите запись навыка для добавления нового действия!</v:String>
+    <v:String x:Key="m_error_81">Выберите запись действия для удаления!</v:String>
+    <v:String x:Key="m_error_82">Выберите запись действия для сохранения!</v:String>
+    <v:String x:Key="m_error_83">Выберите запись действия для добавления новой записи звука!</v:String>
+    <v:String x:Key="m_error_84">Выберите запись звука для удаления!</v:String>
+    <v:String x:Key="m_error_85">Выберите запись звука для сохранения!</v:String>
+    <v:String x:Key="m_error_86">Можно добавить максимум 2 эффекта для каждого события!</v:String>
+    <v:String x:Key="m_error_87">Выберите запись события для добавления новой записи эффекта!</v:String>
+    <v:String x:Key="m_error_88">Выберите запись эффекта для удаления!</v:String>
+    <v:String x:Key="m_error_89">Выберите запись эффекта для сохранения!</v:String>
+    <v:String x:Key="m_error_90">Выберите запись действия для добавления новой записи события!</v:String>
+    <v:String x:Key="m_error_91">Выберите запись события для удаления!</v:String>
+    <v:String x:Key="m_error_92">Выберите запись события для сохранения!</v:String>
+    <v:String x:Key="m_error_93">Ваш файл пуст, его нельзя сохранить!</v:String>
+    <v:String x:Key="m_error_94">Файл слишком маленький.</v:String>
+    <v:String x:Key="m_error_95">Свойства арены скопированы!</v:String>
+    <v:String x:Key="m_error_96">Свойства вставлены!</v:String>
+    <v:String x:Key="m_error_97">Путь уже существует в списке!</v:String>
+
+
+    <!--Condition Manager Tool -->
+    <v:String x:Key="m_condM_title">Менеджер состояний</v:String>
+    <v:String x:Key="m_condM_conditionAfter">Состояние дебаффа</v:String>
+    <v:String x:Key="m_condM_conditionIcon">Иконка состояния</v:String>
+    <v:String x:Key="m_condM_conditionValue">Значение состояния</v:String>
+    <v:String x:Key="m_condM_conditionStatus">Эффект статуса состояния</v:String>
+    <v:String x:Key="m_condM_conditionAura">Эффект ауры состояия</v:String>
+    <v:String x:Key="m_status_00">Нет иконки</v:String>
+    <v:String x:Key="m_status_01">Атака снижена</v:String>
+    <v:String x:Key="m_status_02">Атака повышена</v:String>
+    <v:String x:Key="m_status_03">Защита снижена</v:String>
+    <v:String x:Key="m_status_04">Защита повышена</v:String>
+    <v:String x:Key="m_status_05">Обморок</v:String>
+    <v:String x:Key="m_status_06">Прорыв защиты</v:String>
+    <v:String x:Key="m_status_07">Пробуждение снижено</v:String>
+    <v:String x:Key="m_status_08">Пробуждение</v:String>
+    <v:String x:Key="m_status_09">Автоуклонение</v:String>
+    <v:String x:Key="m_status_10">Самопожертвование</v:String>
+    <v:String x:Key="m_status_11">Усиленное самопожертвование</v:String>
+    <v:String x:Key="m_status_12">Отравление</v:String>
+    <v:String x:Key="m_status_13">Сон</v:String>
+    <v:String x:Key="m_status_14">Супер броня</v:String>
+    <v:String x:Key="m_status_15">Усиленная супер броня</v:String>
+    <v:String x:Key="m_status_16">Скорость снижена</v:String>
+    <v:String x:Key="m_status_17">Скорость повышена</v:String>
+    <v:String x:Key="m_status_18">Снаряд проходит сквозь</v:String>
+    <v:String x:Key="m_status_19">Снаряд проходит сквозь (усилено)</v:String>
+    <v:String x:Key="m_status_20">Единство</v:String>
+    <v:String x:Key="m_status_21">Усиленное единство</v:String>
+    <v:String x:Key="m_status_22">Добавить яд</v:String>
+    <v:String x:Key="m_status_23">Чакра повышена</v:String>
+    <v:String x:Key="m_status_24">Потребление чакры снижено</v:String>
+    <v:String x:Key="m_status_25">Автоматическое восстановление жизни</v:String>
+    <v:String x:Key="m_status_26">Прорыв защиты повышен</v:String>
+    <v:String x:Key="m_status_27">Автоматическое восстановление чакры</v:String>
+    <v:String x:Key="m_status_28">Скорость восстановления поддержки повышена</v:String>
+    <v:String x:Key="m_status_29">Шкала шторма повышена</v:String>
+    <v:String x:Key="m_status_30">Запечатывание чакры</v:String>
+    <v:String x:Key="m_status_31">Атака поддержки повышена</v:String>
+    <v:String x:Key="m_status_40">Шторм поддержки повышен</v:String>
+    <v:String x:Key="m_status_41">Потребление чакры повышено</v:String>
+
+
+
+    <v:String x:Key="m_modtype_0">Персонаж</v:String>
+    <v:String x:Key="m_modtype_1">Арена</v:String>
+    <v:String x:Key="m_modtype_2">Костюм</v:String>
+    <v:String x:Key="m_modtype_3">Ресурс (Экспортирует все файлы кроме файлов настроек)</v:String>
+    <v:String x:Key="m_modtype_4">Групповое ультимейт дзюцу</v:String>
+    <v:String x:Key="m_modtype_5">Аксессуар</v:String>
+
+    <v:String x:Key="m_strikeback_03">Ответный удар</v:String>
+    <v:String x:Key="m_strikeback_04">Подрезание рывка</v:String>
+    <v:String x:Key="m_strikeback_05">Подмена в ультимейт дзюцу</v:String>
+    <v:String x:Key="m_strikeback_06">Защита заряда</v:String>
+    <v:String x:Key="m_strikeback_07">Прикрытие</v:String>
+    <v:String x:Key="m_strikeback_08">Комбинированная поддержка</v:String>
+    <v:String x:Key="m_strikeback_0B">Защита пролома</v:String>
+    <v:String x:Key="m_strikeback_0C">Помощь при зарядке</v:String>
+
+    <!-- StageEntryTypeList entries -->
+    <v:String x:Key="m_stageEntryType_0">0 = Статический меш</v:String>
+    <v:String x:Key="m_stageEntryType_1">1 = Анимация</v:String>
+    <v:String x:Key="m_stageEntryType_4">4 = Объект дерева</v:String>
+    <v:String x:Key="m_stageEntryType_6">6 = Объект травы/листьев</v:String>
+    <v:String x:Key="m_stageEntryType_7">7 = Разрушаемая стена</v:String>
+    <v:String x:Key="m_stageEntryType_10">10 = Жёсткое тело</v:String>
+    <v:String x:Key="m_stageEntryType_11">11 = Анимация жёсткого тела</v:String>
+
+    <!-- DMGCOND entries -->
+    <v:String x:Key="m_dmgcond_0">0 = Нет</v:String>
+    <v:String x:Key="m_dmgcond_1">1 = Неблокируемый</v:String>
+    <v:String x:Key="m_dmgcond_2">2 = Неуклоняемый</v:String>
+    <v:String x:Key="m_dmgcond_3">3 = Не отражаемый</v:String>
+    <v:String x:Key="m_dmgcond_4">4 = Вызывает малый урон при блоке</v:String>
+    <v:String x:Key="m_dmgcond_5">5 = Продолжительный ступор (STAGGER_NORMAL)</v:String>
+    <v:String x:Key="m_dmgcond_6">6 = Нет</v:String>
+    <v:String x:Key="m_dmgcond_7">7 = Нет</v:String>
+    <v:String x:Key="m_dmgcond_14">14 = Снять эффект от урона</v:String>
+    <v:String x:Key="m_dmgcond_18">18 = Не отражаемый + условие 16</v:String>
+    <v:String x:Key="m_dmgcond_21">21 = Снять эффект от урона + условие 19</v:String>
+    <v:String x:Key="m_dmgcond_24">24 = Неуклоняемый + Не отражаемый</v:String>
+    <v:String x:Key="m_dmgcond_25">25 = Предотвращает ответный удар</v:String>
+    <v:String x:Key="m_dmgcond_26">26 = Снять эффект от урона + предотвращает ответный удар</v:String>
+    <v:String x:Key="m_dmgcond_27">27 = Неуклоняемый + снять эффект от урона + предотвращает ответный удар</v:String>
+    <v:String x:Key="m_dmgcond_28">28 = Нет</v:String>
+    <v:String x:Key="m_dmgcond_29">29 = Нет</v:String>
+
+    <!-- COND entries -->
+    <v:String x:Key="m_cond_0">0 = Нет условий</v:String>
+    <v:String x:Key="m_cond_1">1 = Нет условий</v:String>
+    <v:String x:Key="m_cond_2">2 = Если противник на земле</v:String>
+    <v:String x:Key="m_cond_3">3 = Если противник в воздухе</v:String>
+    <v:String x:Key="m_cond_4">4 = Если предыдущая атака попала (у обычных персонажей)</v:String>
+    <v:String x:Key="m_cond_5">5 = Если игрок находится слева</v:String>
+    <v:String x:Key="m_cond_6">6 = Если игрок находится справа</v:String>
+    <v:String x:Key="m_cond_7">7 = Нет условий</v:String>
+    <v:String x:Key="m_cond_8">8 = Нет условий</v:String>
+    <v:String x:Key="m_cond_9">9 = Нет условий</v:String>
+    <v:String x:Key="m_cond_10">10 = Нет условий</v:String>
+    <v:String x:Key="m_cond_11">11 = Нет условий</v:String>
+    <v:String x:Key="m_cond_12">12 = Если предыдущая атака попала при блоке</v:String>
+    <v:String x:Key="m_cond_16">16 = Если предыдущая атака попала по гигантскому персонажу</v:String>
+    <v:String x:Key="m_cond_17">17 = Если противник превращается в гиганта</v:String>
+
+    <!-- LINK_COND entries -->
+    <v:String x:Key="m_linkcond_minus1">-1 = Автосвязь, если у предыдущей атаки есть определённые условия</v:String>
+    <v:String x:Key="m_linkcond_0">0 = Связь при нажатии кнопки</v:String>
+    <v:String x:Key="m_linkcond_1">1 = Связь при нажатии кнопки для квадратных комбо</v:String>
+    <v:String x:Key="m_linkcond_4">4 = Если предыдущая атака попала (у обычных персонажей)</v:String>
+    <v:String x:Key="m_linkcond_5">5 = Нет условий</v:String>
+    <v:String x:Key="m_linkcond_6">6 = Нет условий</v:String>
+    <v:String x:Key="m_linkcond_7">7 = Нет условий</v:String>
+    <v:String x:Key="m_linkcond_8">8 = Нет условий</v:String>
+    <v:String x:Key="m_linkcond_9">9 = Связь обычного дзюцу (для добавления заряженного дзюцу)</v:String>
+    <v:String x:Key="m_linkcond_10">10 = Связь заряженного дзюцу (требуется наличие обычного дзюцу)</v:String>
+    <v:String x:Key="m_linkcond_11">11 = Автосвязь по окончании предыдущей анимации</v:String>
+    <v:String x:Key="m_linkcond_12">12 = Связь поддержки дзюцу/атаки при блоке</v:String>
+
+
+    <!--Kyuruto-->
+    <v:String x:Key="m_CharacodeEditor_Kyuruto">Это инструмент для редактирования списка персонажей, и он необходим для добавления персонажей. Если вы работаете только с существующими персонажами, этот инструмент можно пропустить.</v:String>
+    <v:String x:Key="m_DuelPlayerParamEditor_Kyuruto">Этот инструмент поможет вам изменить настройки персонажей и добавить для них дополнительные костюмы.</v:String>
+    <v:String x:Key="m_PlayerSettingParamEditor_Kyuruto">Этот инструмент поможет вам сделать записи для костюмов, которые могут быть загружены в файл characterSelectParam.</v:String>
+    <v:String x:Key="m_CharacterSelectParamEditor_Kyuruto">Этот инструмент поможет вам отредактировать список персонажей. Если вы внесли новые записи в файл playerSettingParam, вы можете загрузить свои костюмы в игру с помощью этого инструмента.</v:String>
+    <v:String x:Key="m_SkillCustomizeParamEditor_Kyuruto">Этот инструмент необходим для добавления (или изменения) ниндзюцу персонажам и изменения их настроек.</v:String>
+    <v:String x:Key="m_SpSkillCustomizeParamEditor_Kyuruto">Этот инструмент необходим для добавления (или изменения) ультимативных дзюцу персонажам и изменения их настроек.</v:String>
+    <v:String x:Key="m_AfterAttachObjectEditor_Kyuruto">Этот инструмент поможет вам прикрепить различные объекты или анимации к определенным костям модели.</v:String>
+    <v:String x:Key="m_AppearanceAnmEditor_Kyuruto">Этот инструмент поможет вам изменить свойства модели для определенных событий: скрыть или сделать видимыми сетки, изменить значение смешивания материалов и т.д.</v:String>
+    <v:String x:Key="m_PRMEditor_Kyuruto">Если вы не знакомы с редактированием hex кода, этот инструмент пригодится вам для редактирования настроек движений персонажей.</v:String>
+    <v:String x:Key="m_CostumeParamEditor_Kyuruto">Этот инструмент необходим для разблокировки костюмов (в случае, если вы добавили их для персонажей с помощью файла playerSettingParam).</v:String>
+    <v:String x:Key="m_PlayerDoubleEffectParamEditor_Kyuruto">Этот инструмент поможет вам добавить эффекты для моделей, когда они появляются/исчезают на сцене, например: добавить эффект пуфа для теневых клонов.</v:String>
+    <v:String x:Key="m_CmnParamEditor_Kyuruto">Этот инструмент необходим для создания звуков персонажей. cmnparam.xfbin загружает все звуки для всех персонажей и групповых ультимативных дзюцу (все звуки должны быть сохранены в архиве CPK и загружены с помощью ModdingAPI).</v:String>
+    <v:String x:Key="m_SupportActionParamEditor_Kyuruto">Этот инструмент использовался для изменения действий поддержки, например: защита лидера во время восстановления чакры, бросок сюрикенов, когда вы их бросаете, и т.д.</v:String>
+    <v:String x:Key="m_PlayerIconEditor_Kyuruto">Этот инструмент необходим для загрузки иконок персонажей для костюмов.</v:String>
+    <v:String x:Key="m_AwakeAuraEditor_Kyuruto">Этот инструмент использовался для загрузки аур персонажам.</v:String>
+    <v:String x:Key="m_SkillIndexSettingParamEditor_Kyuruto">Этот инструмент необходим для изменения дзютсу персонажей по умолчанию (вы можете загрузить все 6 дзютсу, но выбрать только 2 для каждого персонажа).</v:String>
+    <v:String x:Key="m_PRMLoadEditor_Kyuruto">Этот инструмент необходим для загрузки файлов персонажам. Если файл не существует в игре или в каталоге data_win32, игра будет загружаться бесконечно при выборе персонажей.</v:String>
+    <v:String x:Key="m_SpTypeSupportParamEditor_Kyuruto">Этот инструмент использовался для добавления дополнительных дзюцу (на стрелки) и их настройки.</v:String>
+    <v:String x:Key="m_PrivateCameraEditor_Kyuruto">Этот инструмент необходим для настройки камеры для пробуждения (может быть включен в файле duelPlayerParam). Если вы добавляете персонажей, этот файл будет необходим.</v:String>
+    <v:String x:Key="m_CostumeBreakParamEditor_Kyuruto">Этот инструмент использовался для изменения базовой модели на раздамаженную версию после раунда в игре.</v:String>
+    <v:String x:Key="m_CostumeBreakColorParamEditor_Kyuruto">Этот инструмент использовался для изменения цвета частиц, когда вы получали разрыв брони.</v:String>
+    <v:String x:Key="m_SupportSkillRecoverySpeedParamEditor_Kyuruto">Этот инструмент используется для изменения скорости восстановления дзюцу поддержки.</v:String>
+    <v:String x:Key="m_StageInfoEditor_Kyuruto">Этот инструмент поможет вам менять арены в игре.</v:String>
+    <v:String x:Key="m_MessageInfoEditor_Kyuruto">Этот инструмент необходим для редактирования локализации в игре (все языки, необходимые для работы инструмента).</v:String>
+    <v:String x:Key="m_DamageEffEditor_Kyuruto">Этот инструмент используется для загрузки эффектов ударов для наборов движений персонажей. Эффекты можно найти в файле effectprm.bin.xfbin</v:String>
+    <v:String x:Key="m_EffectPrmEditor_Kyuruto">Этот инструмент использовался для загрузки эффектов, которые могут быть использованы в файле damageeff.bin.xfbin.</v:String>
+    <v:String x:Key="m_SkillFileEditor_Kyuruto">Этот инструмент поможет вам редактировать файлы навыков для снарядов в игре.</v:String>
+    <v:String x:Key="m_PairSpSkillEditor_Kyuruto">Этот инструмент позволит вам добавить в игру больше групповых ультимативных дзюцу.</v:String>
+    <v:String x:Key="m_SpecialInteraction_Kyuruto">Этот инструмент позволит вам добавить особое взаимодействие в ультимативное дзюцу!</v:String>
+    <v:String x:Key="m_ConditionPrm_Kyuruto">Этот инструмент позволит вам изменять настройки для персонажей и эффекты состояния!</v:String>
+
+
+    <!-- Title Window-->
+    <v:String x:Key="m_Title">Naruto Storm Connections — Инструментарий</v:String>
+    <v:String x:Key="m_mainWindow_001">Инструменты персонажей</v:String>
+    <v:String x:Key="m_mainWindow_002">Управление аренами</v:String>
+    <v:String x:Key="m_mainWindow_003">Управление сюжетным режимом</v:String>
+    <v:String x:Key="m_mainWindow_004">Другие инструменты</v:String>
+    <v:String x:Key="m_mainWindow_005">Настройки</v:String>
+    <v:String x:Key="m_mainWindow_006">ModdingAPI</v:String>
+    <v:String x:Key="m_mainWindow_007">Discord-группа</v:String>
+    <v:String x:Key="m_mainWindow_008">Титры</v:String>
+    <v:String x:Key="m_mainWindow_009">Экспорт мода</v:String>
+    <v:String x:Key="m_mainWindow_010">Установить</v:String>
+    <v:String x:Key="m_mainWindow_011">Удалить</v:String>
+    <v:String x:Key="m_mainWindow_012">Поддержать</v:String>
+    <v:String x:Key="m_mainWindow_013">GitHub</v:String>
+
+    <v:String x:Key="m_mainWindowTool_001">Менеджер ID персонажей (characode.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_002">Редактор параметров персонажей (duelPlayerParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_003">Редактор костюмов (playerSettingParam.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_004">Менеджер списка персонажей (characterSelectParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_005">Редактор ниндзюцу (skillCustomizeParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_006">Редактор прикрепляемых объектов (afterAttachObject.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_007">Редактор движений персонажа (****prm.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_008">Редактор разблокировки костюмов (costumeParam.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_009">Редактор иконок персонажей (player_icon.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_010">Редактор ауры пробуждения (awakeAura.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_011">Редактор списка ниндзюцу (skillIndexSettingParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_012">Редактор ультимейт-дзюцу (spSkillCustomizeParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_013">Включатель фрагментов костюма (appearanceAnm.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_014">Редактор загрузки файлов персонажа (****prm_load.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_015">Редактор действий персонажа (spTypeSupportParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_016">Редактор камеры пробуждения (privateCamera.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_017">Редактор звуковых настроек (cmnparam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_018">Редактор эффектов исчезновения (playerDoubleEffectParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_019">Редактор разрушения брони (costumeBreakParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_020">Редактор цветов разрушения брони (costumeBreakColorParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_021">Редактор списка эффектов (effectprm.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_022">Редактор настроек арен (StageInfo.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_023">Редактор локализации (messageInfo.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_024">Редактор эффектов попаданий (damageEff.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_025">Редактор действий поддержки (supportActionParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_026">Настройка скорости восстановления поддержки (supportSkillRecoverySpeedParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_027">Редактор снарядов</v:String>
+    <v:String x:Key="m_mainWindowTool_028">Редактор групповых ультимейтов (pairSpSkillCombinationParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_029">Менеджер особых взаимодействий (specialInteractionManager.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_030">Редактор состояний (conditionprm.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_031">Менеджер состояний (conditionprmManager.xfbin)</v:String>
+
+
+    <v:String x:Key="m_option001">Режим растяжения</v:String>
+    <v:String x:Key="m_option002">Заполнение</v:String>
+    <v:String x:Key="m_option003">Равномерно</v:String>
+    <v:String x:Key="m_option004">Сохранить настройки</v:String>
+    <v:String x:Key="m_option005">Нет</v:String>
+    <v:String x:Key="m_option006">Цвет фона</v:String>
+    <v:String x:Key="m_option007">Цвет кнопок</v:String>
+    <v:String x:Key="m_option008">Фоновое изображение</v:String>
+    <v:String x:Key="m_option009">Сбросить настройки</v:String>
+    <v:String x:Key="m_option010">Выбрать изображение</v:String>
+    <v:String x:Key="m_option011">Цвет шрифта</v:String>
+
+
+    <!-- Редактор состояний -->
+    <v:String x:Key="m_condPrm">Редактор состояний</v:String>
+    <v:String x:Key="m_condPrm_Name">Название состояния</v:String>
+    <v:String x:Key="m_condPrm_Duration">Длительность состояния</v:String>
+    <v:String x:Key="m_condPrm_ATK">Множитель урона</v:String>
+    <v:String x:Key="m_condPrm_DEF">Защита</v:String>
+    <v:String x:Key="m_condPrm_SPD">Скорость</v:String>
+    <v:String x:Key="m_condPrm_SupportATK">Множитель урона поддержки</v:String>
+    <v:String x:Key="m_condPrm_HPRecover">Восстановление HP</v:String>
+    <v:String x:Key="m_condPrm_ChakraRecover">Восстановление чакры</v:String>
+    <v:String x:Key="m_condPrm_ChakraShave">Снятие чакры</v:String>
+    <v:String x:Key="m_condPrm_ChakraRevival">Восполнение чакры</v:String>
+    <v:String x:Key="m_condPrm_ChakraDrain">Поглощение чакры</v:String>
+    <v:String x:Key="m_condPrm_Chakra">Чакра</v:String>
+    <v:String x:Key="m_condPrm_ChakraUsage">Расход чакры</v:String>
+    <v:String x:Key="m_condPrm_ChakraUnk">Неизвестный параметр чакры</v:String>
+    <v:String x:Key="m_condPrm_Poison">Яд</v:String>
+    <v:String x:Key="m_condPrm_GuardBreak">Пробивание защиты</v:String>
+    <v:String x:Key="m_condPrm_Dodge">Уклонение</v:String>
+    <v:String x:Key="m_condPrm_Support">Поддержка</v:String>
+    <v:String x:Key="m_condPrm_Team">Команда</v:String>
+    <v:String x:Key="m_condPrm_Projectile">Сопротивление снарядам</v:String>
+    <v:String x:Key="m_condPrm_AutoDodge">Автоуворот</v:String>
+    <v:String x:Key="m_condPrm_Seal">Печать</v:String>
+    <v:String x:Key="m_condPrm_Stun">Оглушение</v:String>
+    <v:String x:Key="m_condPrm_Sleep">Сон</v:String>
+    <v:String x:Key="m_condPrm_FlashEffect">Эффект вспышки</v:String>
+    <v:String x:Key="m_condPrm_FlashInterval">Интервал вспышки</v:String>
+    <v:String x:Key="m_condPrm_FlashOpacity">Прозрачность вспышки</v:String>
+    <v:String x:Key="m_condPrm_FlashColor">Цвет вспышки</v:String>
+    <v:String x:Key="m_condPrm_FlashEffectDisable">Отключено</v:String>
+    <v:String x:Key="m_condPrm_FlashEffectEnable">Включено</v:String>
+    <v:String x:Key="m_condPrm_FlashEffectStaticColor">Статичный цвет</v:String>
+
+    <!--Special Interaction Manager-->
+
+    <v:String x:Key="m_SIM_MainCharacterID">Основной ID Персонажа</v:String>
+    <v:String x:Key="m_SIM_triggerList">Список триггеров ID Персонажей</v:String>
+    <v:String x:Key="m_SIM_triggerID">Триггер ID Персонажа</v:String>
+
+
+    <!--Add Team Ultimate Jutsu-->
+
+    <v:String x:Key="m_addTUJ">Добавление группового ультимейта</v:String>
+    <v:String x:Key="m_addTUJ_intro_title">Naruto Storm Connections — Добавление группового ультимейта</v:String>
+    <v:String x:Key="m_addTUJ_intro_desc">Этот инструмент поможет добавить групповые ультимейты в один клик (почти).</v:String>
+    <v:String xml:space="preserve" x:Key="m_addTUJ_warning">
+Перед добавлением подготовьте корневую папку игры.
+Убедитесь, что следующие файлы присутствуют:
+
+    moddingapi/mods/base_game/pairSpSkillManagerParam.xfbin
+    data_win32/spc/characode.bin.xfbin
+    data_win32/spc/pairSpSkillCombinationParam.xfbin
+    data_win32/sound/cmnparam.xfbin
+   
+Новые групповые ультимейты теперь доступны, но некоторые слоты не считываются игрой. Этот инструмент поможет добавить слоты без особых проблем.
+Эта проблема может быть исправлена в будущем.
+</v:String>
+    <v:String x:Key="m_addTUJ_page1_desc">Выбери корневую папку игры</v:String>
+    <v:String x:Key="m_addTUJ_page1_001">Корневая папка</v:String>
+    <v:String x:Key="m_addTUJ_page1_002">Выбери корневую папку</v:String>
+    <v:String x:Key="m_addTUJ_page2_desc">Установи настройки для своего группового ультимейта</v:String>
+    <v:String x:Key="m_addTUJ_page2_001">Список персонажей</v:String>
+    <v:String x:Key="m_addTUJ_page2_002">Добавить групповой ультимейт</v:String>
+    <v:String x:Key="m_addTUJ_page2_003">Код (например: 2nrt3ssk)</v:String>
+    <v:String x:Key="m_addTUJ_page2_004">Имя (код локализации)</v:String>
+
+    <!-- PairSpSkillCombinationParam Editor-->
+    <v:String x:Key="m_pairSpSkillCombinationParamEditor">Редактор групповых ультимейтов</v:String>
+    <v:String x:Key="m_pairSpSkill_characodeList">Список персонажей</v:String>
+    <v:String x:Key="m_pairSpSkill_memberCount">Количество участников</v:String>
+    <v:String x:Key="m_pairSpSkill_chakraCost1">Стоймость чакры 1 (не работает)</v:String>
+    <v:String x:Key="m_pairSpSkill_chakraCost2">Стоймость чакры 2 (не работает)</v:String>
+    <v:String x:Key="m_pairSpSkill_flag1">Флажок 1</v:String>
+    <v:String x:Key="m_pairSpSkill_flag2">Флажок 2</v:String>
+    <v:String x:Key="m_pairSpSkill_ID">ID группового ультимейта</v:String>
+    <v:String x:Key="m_pairSpSkill_Name">Имя группового ультимейта</v:String>
+
+    <!--Add Costume Tool-->
+    <v:String x:Key="m_addCostume_title">Добавить костюм</v:String>
+    <v:String x:Key="m_addCostume_intro_title">Naruto Storm Connections - Добавление костюма</v:String>
+    <v:String x:Key="m_addCostume_intro_desc">Этот инструмент поможет тебе добавить костюм в один клик.</v:String>
+
+
+    <v:String xml:space="preserve" x:Key="m_addCostume_warning">
+    Для добавления костюмных слотов, подготовь папку data_win32.
+    Убедись, что данные файлы находятся в data_win32 для корректной работы:
+        data_win32/spc/characode.bin.xfbin (не обязательно, но необходимо если нужно добавить костюм для нового персонажа)
+        data_win32/spc/playerSettingParam.bin.xfbin
+        data_win32/spc/player_icon.xfbin
+        data_win32/spc/duelPlayerParam.xfbin
+        data_win32/ui/max/select/characterSelectParam.xfbin
+        data_win32/spc/costumeBreakParam.xfbin
+        data_win32/spc/costumeBreakColorParam.xfbin
+        data_win32/rpg/param/costumeParam.bin.xfbin
+
+    Этот инструмент не поддерживает appearanceAnm и afterAttachObject файлы.
+    
+    Этот инструмент был создан для персонажей которые уже имеют хотя бы один костюм.
+        
+    Некоторые персонажи загружают больше, чем просто файл костюма. Если ты не уверен какие файлы нужно загрузить, ты можешь посмотреть все записи с &lt;codeModel&gt;. Например, &lt;codeModel&gt;bod1 обознает костюм, и &lt;codeModel&gt;spl1_bod1 является файлом который загружается вместе с ультимейт дзюцу если выбран другой костюм.
+    На крайний случай можно включить ModdingAPI и в config.ini включить режим отладки и консоль. Консоль покажет какие файлы нужно загрузить если не все файлы были загружены.
+     
+    Так же убедись какие настройки ты использоваешь для поломки брони. Если ты включишь поломку брони когда у тебя нету необходимых для этого файлов, игра не загрузится. Если у тебя нету файлов и ты не уверен какие файлы нужно загрузить, отключай поломку брони.
+    
+    Иногда проблемы возникают в командном режиме если ты выбираешь персонажей с групповым ультимейтом. Эти персонажи могут подгружать дополнительные файлы в зависимости от костюма.
+</v:String>
+
+    
+    
+    <v:String x:Key="m_addCostume_page1_desc">Выбери data_win32 папку.</v:String>
+    <v:String x:Key="m_addCostume_page2_desc">Установи настройки для своего костюма.</v:String>
+    <v:String x:Key="m_addCostume_page2_001">Код персонажа</v:String>
+    <v:String x:Key="m_addCostume_page2_002">Код базового костюма</v:String>
+    <v:String x:Key="m_addCostume_page2_003">Иконка базового костюма</v:String>
+    <v:String x:Key="m_addCostume_page2_004">Код костюма в пробуждении</v:String>
+    <v:String x:Key="m_addCostume_page2_005">Иконка костюма в пробуждении</v:String>
+    <v:String x:Key="m_addCostume_page2_006">Количество альтернативных раскрасок</v:String>
+    <v:String x:Key="m_addCostume_page2_007">Включить поломку брони</v:String>
+    <v:String x:Key="m_addCostume_page2_008">Имя костюма (Код локализации)</v:String>
+    <v:String x:Key="m_addCostume_page2_009">Описание костюма (Код локализации)</v:String>
+    <v:String x:Key="m_addCostume_page2_010">Добавить костюм</v:String>
+    <v:String x:Key="m_addCostume_page2_011">Обновить</v:String>
+
+    <v:String xml:space="preserve" x:Key="m_addCostume_page2_warning">
+    Если вы хотите добавить костюм в пробуждении на персонажа у которого его нету, убедишь что prm_load файл содержит в себе запись `&lt;codeAwake2Model&gt;bod1`.
+    Если вы хотите использовать разные костюмы для пробуждения, убедись что в prm файле есть функция которая включает смену костюма для пробуждения.
+    Необходимая функция - 229: ME_SET_SUBSTITUTION_KEY.
+    Примеры можно найти в 3ksnprm.bin.xfbin или 2rocprm.bin.xfbin файлах.
+</v:String>
+
+
+    <!--Trail Editor-->
+
+    <v:String x:Key="m_trailEditor">Редактор эффекта следа</v:String>
+    <v:String x:Key="m_trailEditor_clumpList">Список арматур</v:String>
+    <v:String x:Key="m_trailEditor_clumpName">Имя арматуры</v:String>
+    <v:String x:Key="m_trailEditor_clumpPath">Путь арматуры</v:String>
+    <v:String x:Key="m_trailEditor_clump">Арматура</v:String>
+
+    <v:String x:Key="m_trailEditor_billboardList">Список биллбордов</v:String>
+    <v:String x:Key="m_trailEditor_billboardName">Имя биллборда</v:String>
+    <v:String x:Key="m_trailEditor_billboardPath">Пуь биллборда</v:String>
+    <v:String x:Key="m_trailEditor_billboard">Биллборд (След)</v:String>
+    
+    <v:String x:Key="m_trailEditor_animationName">Имя анимации</v:String>
+    <v:String x:Key="m_trailEditor_animationPath">Путь анимации</v:String>
+    <v:String x:Key="m_trailEditor_fadeTime">Время затухания</v:String>
+    <v:String x:Key="m_trailEditor_unk1">Unknown 1</v:String>
+    <v:String x:Key="m_trailEditor_unk2">Unknown 2</v:String>
+    <v:String x:Key="m_trailEditor_unk3">Unknown 3</v:String>
+    <v:String x:Key="m_trailEditor_Color">Цвет</v:String>
+    <v:String x:Key="m_trailEditor_ColorBlend">Смешивание цветов</v:String>
+
+
+    <v:String x:Key="m_trailEditor_Width_1">Ширина 1</v:String>
+    <v:String x:Key="m_trailEditor_Width_2">Ширина 2</v:String>
+    <v:String x:Key="m_trailEditor_Width_3">Ширина 3</v:String>
+    <v:String x:Key="m_trailEditor_FirstBone">Начальная координата (кость)</v:String>
+    <v:String x:Key="m_trailEditor_SecondBone">Конечная координата (кость)</v:String>
+    <v:String x:Key="m_trailEditor_Timeline">Временной отрезок</v:String>
+    <v:String x:Key="m_trailEditor_Frame">Кадр</v:String>
+    <v:String x:Key="m_trailEditor_toggleTrailDisable">Отключенный след</v:String>
+    <v:String x:Key="m_trailEditor_toggleTrailEnable">Включенный след</v:String>
+    <v:String x:Key="m_trailEditor_toggleTrail">Переключатель</v:String>
+
+    <!--Skill Editor-->
+    <v:String x:Key="m_skillEditor_title">Редактор снарядов</v:String>
+    <v:String x:Key="m_skillEditor_001">Записи снарядов</v:String>
+    <v:String x:Key="m_skillEditor_002">Файловые пути</v:String>
+    <v:String x:Key="m_skillEditor_003">Название записи снаряда</v:String>
+    <v:String x:Key="m_skillEditor_004">Список действий</v:String>
+    <v:String x:Key="m_skillEditor_005">Имя класса (модификатор)</v:String>
+    <v:String x:Key="m_skillEditor_006">Тип снаряда</v:String>
+    <v:String x:Key="m_skillEditor_007">Включить параметры удара по умолчанию</v:String>
+    <v:String x:Key="m_skillEditor_008">Радиус удара</v:String>
+    <v:String x:Key="m_skillEditor_009">Вертикальный предел удара</v:String>
+    <v:String x:Key="m_skillEditor_010">Горизонтальный предел удара</v:String>
+    <v:String x:Key="m_skillEditor_011">Мировой радиус удара</v:String>
+    <v:String x:Key="m_skillEditor_012">Категория приоритета удара</v:String>
+    <v:String x:Key="m_skillEditor_013">Смещение приоритета удара</v:String>
+    <v:String x:Key="m_skillEditor_014">ID урона удара</v:String>
+    <v:String x:Key="m_skillEditor_015">Атрибут удара</v:String>
+    <v:String x:Key="m_skillEditor_016">Точка удара</v:String>
+    <v:String x:Key="m_skillEditor_017">Интервал удара (кадр)</v:String>
+    <v:String x:Key="m_skillEditor_018">Параметры действия</v:String>
+    <v:String x:Key="m_skillEditor_019">Параметры удара</v:String>
+    <v:String x:Key="m_skillEditor_020">Параметры звука</v:String>
+    <v:String x:Key="m_skillEditor_021">Параметры декалей</v:String>
+    <v:String x:Key="m_skillEditor_022">Параметры сотрясения камеры</v:String>
+    <v:String x:Key="m_skillEditor_023">Параметры события</v:String>
+    <v:String x:Key="m_skillEditor_024">Настройки действия</v:String>
+    <v:String x:Key="m_skillEditor_025">Комментарий</v:String>
+    <v:String x:Key="m_skillEditor_026">ID действия</v:String>
+    <v:String x:Key="m_skillEditor_027">Гравитация</v:String>
+    <v:String x:Key="m_skillEditor_028">Упругость (boundball)</v:String>
+    <v:String x:Key="m_skillEditor_029">Случайное направление (угол)</v:String>
+    <v:String x:Key="m_skillEditor_030">Случайное вращение (угол)</v:String>
+    <v:String x:Key="m_skillEditor_031">Угол обзора (угол)</v:String>
+    <v:String x:Key="m_skillEditor_032">Трение (boundball)</v:String>
+    <v:String x:Key="m_skillEditor_033">Частота X (синусоида)</v:String>
+    <v:String x:Key="m_skillEditor_034">Частота Y (синусоида)</v:String>
+    <v:String x:Key="m_skillEditor_035">Частота Z (синусоида)</v:String>
+    <v:String x:Key="m_skillEditor_036">Сильный наклон</v:String>
+    <v:String x:Key="m_skillEditor_037">Макс. угол наклона (угол)</v:String>
+    <v:String x:Key="m_skillEditor_038">Пружина наклона</v:String>
+    <v:String x:Key="m_skillEditor_039">Амплитуда X (синусоида)</v:String>
+    <v:String x:Key="m_skillEditor_040">Амплитуда Y (синусоида)</v:String>
+    <v:String x:Key="m_skillEditor_041">Амплитуда Z (синусоида)</v:String>
+    <v:String x:Key="m_skillEditor_042">Скорость</v:String>
+    <v:String x:Key="m_skillEditor_043">Случайное значение скорости</v:String>
+    <v:String x:Key="m_skillEditor_044">Индуктивность</v:String>
+    <v:String x:Key="m_skillEditor_045">Отключить удар по персонажу</v:String>
+    <v:String x:Key="m_skillEditor_046">Отключить удар по миру</v:String>
+    <v:String x:Key="m_skillEditor_047">Лимит количества</v:String>
+    <v:String x:Key="m_skillEditor_048">Включить ограничение количества</v:String>
+    <v:String x:Key="m_skillEditor_049">Привязка удара 1</v:String>
+    <v:String x:Key="m_skillEditor_050">Привязка удара 2</v:String>
+    <v:String x:Key="m_skillEditor_051">Привязка удара 3</v:String>
+    <v:String x:Key="m_skillEditor_052">Привязка удара 4</v:String>
+    <v:String x:Key="m_skillEditor_053">Привязка удара 5</v:String>
+    <v:String x:Key="m_skillEditor_054">Фиксированное направление вверх (ползун)</v:String>
+    <v:String x:Key="m_skillEditor_055">Удар скилла по себе</v:String>
+    <v:String x:Key="m_skillEditor_056">Удар атаки по себе</v:String>
+    <v:String x:Key="m_skillEditor_057">Состояние</v:String>
+    <v:String x:Key="m_skillEditor_058">Тип действия</v:String>
+    <v:String x:Key="m_skillEditor_059">Код звука</v:String>
+    <v:String x:Key="m_skillEditor_060">Задержка</v:String>
+    <v:String x:Key="m_skillEditor_061">Повтор</v:String>
+    <v:String x:Key="m_skillEditor_062">Интервал</v:String>
+    <v:String x:Key="m_skillEditor_063">Сохранить значения</v:String>
+    <v:String x:Key="m_skillEditor_064">Тип декали</v:String>
+    <v:String x:Key="m_skillEditor_065">Имя текстуры</v:String>
+    <v:String x:Key="m_skillEditor_066">Масштаб по высоте</v:String>
+    <v:String x:Key="m_skillEditor_067">Масштаб по ширине</v:String>
+    <v:String x:Key="m_skillEditor_068">Сохранить параметры декали действия</v:String>
+    <v:String x:Key="m_skillEditor_069">Высотная сила</v:String>
+    <v:String x:Key="m_skillEditor_070">Сила по ширине</v:String>
+    <v:String x:Key="m_skillEditor_071">Время сотрясения</v:String>
+    <v:String x:Key="m_skillEditor_072">Постепенное снижение</v:String>
+    <v:String x:Key="m_skillEditor_073">Сохранить параметры сотрясения камеры действия</v:String>
+    <v:String x:Key="m_skillEditor_074">Список эффектов</v:String>
+    <v:String x:Key="m_skillEditor_075">Имя эффекта</v:String>
+    <v:String x:Key="m_skillEditor_076">Тип выстрела</v:String>
+    <v:String x:Key="m_skillEditor_077">Параметр 1</v:String>
+    <v:String x:Key="m_skillEditor_078">Параметр 2</v:String>
+    <v:String x:Key="m_skillEditor_079">Координата выстрела</v:String>
+    <v:String x:Key="m_skillEditor_080">Направление цели</v:String>
+    <v:String x:Key="m_skillEditor_081">Тип события</v:String>
+    <v:String x:Key="m_skillEditor_082">Аргумент события (время)</v:String>
+    <v:String x:Key="m_skillEditor_083">Команда события</v:String>
+    <v:String x:Key="m_skillEditor_084">Параметр события (ID действия)</v:String>
+    <v:String x:Key="m_skillEditor_085">Включить количество повторов</v:String>
+    <v:String x:Key="m_skillEditor_086">Количество повторов</v:String>
+    <v:String x:Key="m_skillEditor_087">Жёсткое тело</v:String>
+    <v:String x:Key="m_skillEditor_088">Параметры самонаведения действия</v:String>
+    <v:String x:Key="m_skillEditor_089">Имя навыка самонаведения</v:String>
+    <v:String x:Key="m_skillEditor_090">Манекен самонаведения навыка</v:String>
+    <v:String x:Key="m_skillEditor_091">Номер действия самонаведения навыка</v:String>
+    <v:String x:Key="m_skillEditor_092">Манекен самонаведения игрока</v:String>
+    <v:String x:Key="m_skillEditor_093">Использовать самонаведение на врага</v:String>
+    <v:String x:Key="m_skillEditor_094">Сохранить параметры самонаведения действия</v:String>
+    <v:String x:Key="m_skillEditor_095">Направление плоскости</v:String>
+    <v:String x:Key="m_skillEditor_096">Имя анимационного фрагмента</v:String>
+    <v:String x:Key="m_skillEditor_097">Продолжить анимацию с предыдущего действия</v:String>
+    <v:String x:Key="m_skillEditor_098">Сохранить параметры удара действия</v:String>
+    <v:String x:Key="m_skillEditor_099">Сохранить запись события</v:String>
+    <v:String x:Key="m_skillEditor_100">Сохранить запись эффекта</v:String>
+    <v:String x:Key="m_skillEditor_101">Сохранить параметры навыка</v:String>
+    <v:String x:Key="m_skillEditor_102">Сохранить параметры анимационного фрагмента и действия</v:String>
+    <v:String x:Key="m_skillEditor_103">Сохранить действие</v:String>
+
+    <!--Export Mod-->
+    <v:String x:Key="m_exportMod_title">Экспортер модификаций Naruto Storm Connections</v:String>
+    <v:String x:Key="m_exportMod_page0_desc">
+        Этот экспортер поможет подготовить всё необходимое для создания модификаций, совместимых с NSC Mod Manager.
+    </v:String>
+
+
+    <v:String xml:space="preserve" x:Key="m_exportMod_page0_warning">
+    Если Ваш мод добавляет персонажа, вы должны убедиться что записи в этих файлах присутствуют для корректной работы экспортера и NSC Mod Manager.
+        characode.bin.xfbin
+        duelPlayerParam.xfbin
+        playerSettingParam.bin.xfbin
+        costumeParam.bin.xfbin
+        skillCustomizeParam.xfbin
+        skillIndexSettingParam.xfbin
+        privateCamera.bin.xfbin
+        spSkillCustomizeParam.xfbin
+        cmnparam.xfbin
+        supportActionparam.xfbin
+        supportSkillRecoverySpeedParam.xfbin
+
+    Если твой персонаж заменяет существующего персонажа, эти файлы необязательны.
+
+    Для арен:
+        StageInfo.bin.xfbin
+
+    Для моделей:
+        playerSettingParam.bin.xfbin
+        player_icon.xfbin
+        duelPlayerParam.xfbin
+        characterSelectParam.xfbin
+        costumeBreakColorParam.xfbin
+        costumeParam.bin.xfbin
+    (appearanceAnm.xfbin не поддерживается для моделей)
+
+    Модели для добавленных персонажей поддерживаются, но будут пропущены если персонаж не существует.
+</v:String>
+
+    <v:String x:Key="m_exportMod_page1_desc">Выберите все необходимые элементы для вашего мода.</v:String>
+    <v:String x:Key="m_exportMod_page1_cpkList">Список CPK (только для ресурсов)</v:String>
+    <v:String x:Key="m_exportMod_page1_cpk_select">Выбрать CPK</v:String>
+    <v:String x:Key="m_exportMod_page1_cpk_delete">Удалить CPK</v:String>
+    <v:String x:Key="m_exportMod_page1_shaderList">Шейдеры (вершинные и пиксельные шейдеры)</v:String>
+    <v:String x:Key="m_exportMod_page1_shaderInfo">Шейдеры должны быть объединены так же, как в игровых файлах. Для дополнительной информации посетите форум помощи по моддингу.</v:String>
+    <v:String x:Key="m_exportMod_page1_shader_select">Выбрать шейдер</v:String>
+    <v:String x:Key="m_exportMod_page1_shader_delete">Удалить шейдер</v:String>
+    <v:String x:Key="m_exportMod_page1_datawin32">Путь к моду (data__win32)</v:String>
+    <v:String x:Key="m_exportMod_page1_datawin32_select">Выбрать папку мода</v:String>
+    <v:String x:Key="m_exportMod_page1_datawin32_save">Сохранить папку мода</v:String>
+    <v:String x:Key="m_exportMod_page2_desc">Для экспорта мода необходимо выбрать его тип.</v:String>
+    <v:String x:Key="m_exportMod_page2_modType">Тип мода</v:String>
+    <v:String x:Key="m_exportMod_page3_desc">Измените настройки вашего мода</v:String>
+    <v:String x:Key="m_exportMod_page3_selectCharacter">Выбрать персонажей</v:String>
+    <v:String x:Key="m_exportMod_page3_selectStage">Выбрать арены</v:String>
+    <v:String x:Key="m_exportMod_page3_stageExport">Арены для экспорта</v:String>
+    <v:String x:Key="m_exportMod_page3_selectStageID">Выбрать арену</v:String>
+    <v:String x:Key="m_exportMod_page3_deleteStageID">Удалить арену</v:String>
+    <v:String x:Key="m_exportMod_page3_stagePreviewImageResolution">Предпросмотр арены - разрешение 1428x588</v:String>
+    <v:String x:Key="m_exportMod_page3_SelectStagePreview">Выбрать предпросмотр арены</v:String>
+    <v:String x:Key="m_exportMod_page3_stageIconResolution">Иконка арены - разрешение 184x104</v:String>
+    <v:String x:Key="m_exportMod_page3_SelectStageIcon">Выбрать иконку арены</v:String>
+    <v:String x:Key="m_exportMod_page3_stageBGM">ID фоновой музыки</v:String>
+    <v:String x:Key="m_exportMod_page3_saveBGM">Сохранить ID фоновой музыки для арены</v:String>
+    <v:String x:Key="m_exportMod_page3_StageMessageID">Название арены</v:String>
+    <v:String x:Key="m_exportMod_page3_saveStageMessageID">Сохранить название арены</v:String>
+    <v:String x:Key="m_exportMod_page3_importModels">Импортированные модели</v:String>
+    <v:String x:Key="m_exportMod_page3_exportModels">Модели для экспорта</v:String>
+    <v:String x:Key="m_exportMod_page3_exportModelsWarning">Рекомендуется использовать 6-7 букв в названии модели (например, sasukebod1.xfbin)</v:String>
+    <v:String x:Key="m_exportMod_page3_selectModel">Выбрать модель</v:String>
+    <v:String x:Key="m_exportMod_page3_deleteModel">Удалить модель</v:String>
+    <v:String x:Key="m_exportMod_page3_selectAccessory">Выбрать аксессуары</v:String>
+    <v:String x:Key="m_exportMod_page3_selectCharacode">Выбрать персонажа</v:String>
+    <v:String x:Key="m_exportMod_page3_deleteCharacode">Удалить персонажа</v:String>
+    <v:String x:Key="m_exportMod_page3_exportCharacter">Персонажи для экспорта</v:String>
+    <v:String x:Key="m_exportMod_page3_exportCharacter_warning">
+        Для иконок в меню выбора персонажей добавьте файл иконки для каждого файла костюма с именем иконки. Например, если у костюма базовая иконка "nrt16", необходимо добавить файл "nrt16_charicon_s.xfbin" в папку "ui/flash/OTHER/charicon_s". Используйте инструмент "XFBIN texture" или XFBIN Parser для упаковки иконки. Если иконка не добавлена, мод менеджер пропустит её.
+    </v:String>
+    <v:String x:Key="m_exportMod_page3_tuj_001">Выбрать командное ультимативное дзюцу</v:String>
+    <v:String x:Key="m_exportMod_page4_desc">Измените иконку и описание вашего мода</v:String>
+    <v:String x:Key="m_exportMod_page4_modName">Название мода</v:String>
+    <v:String x:Key="m_exportMod_page4_modDesc">Описание</v:String>
+    <v:String x:Key="m_exportMod_page4_modAuthor">Авторы</v:String>
+    <v:String x:Key="m_exportMod_page4_modIcon">Иконка мода</v:String>
+    <v:String x:Key="m_exportMod_page4_selectModIcon">Выбрать иконку мода</v:String>
+    <v:String x:Key="m_exportMod_page4_ModIconWarning">Максимальное разрешение 256x256</v:String>
+    <v:String x:Key="m_exportMod_page4_ModVersion">Версия мода</v:String>
+    <v:String x:Key="m_exportMod_pageFinish_desc">Теперь вам нужно скомпилировать мод, после чего можно закрыть это окно!</v:String>
+    <v:String x:Key="m_exportMod_pageFinish_compile">Скомпилировать мод</v:String>
+
+    <!--credits-->
+    <v:String x:Key="m_credits_001">Спасибо всем за поддержку и помощь!</v:String>
+    <v:String x:Key="m_credits_002">Ваш вклад бесценнен!</v:String>
+    <v:String x:Key="m_credits_003">Особая благодарность этим ребятам</v:String>
+    <v:String x:Key="m_credits_004">Вернуться в меню</v:String>
+
+    <!--SupportSkillRecoverySpeedParam Editor-->
+    <v:String x:Key="m_SupportSkillRecoverySpeedParamEditor">Редактор скорости восстановления поддержки навыков</v:String>
+
+    <!--SupportActionParam Editor-->
+    <v:String x:Key="m_SupportActionParam">Редактор действий поддержки</v:String>
+    <v:String x:Key="m_SupportActionParamType">Тип поддержки</v:String>
+
+    <!--DamageEff Editor-->
+    <v:String x:Key="m_damageEffEditor">Редактор словаря эффектов удара</v:String>
+    <v:String x:Key="m_damageEffEditorID">ID эффекта удара</v:String>
+    <v:String x:Key="m_damageEffEditorSoundID">ID звука</v:String>
+    <v:String x:Key="m_damageEffEditorEffectPrmID">ID параметров эффекта</v:String>
+    <v:String x:Key="m_damageEffEditorExtraID">Дополнительный ID эффекта удара</v:String>
+    <v:String x:Key="m_damageEffEditorExtraSoundID">Дополнительный ID звука</v:String>
+    <v:String x:Key="m_damageEffEditorExtraEffectPrmID">Дополнительный ID параметров эффекта</v:String>
+
+    <!--EffectPRM Editor-->
+    <v:String x:Key="m_effectPrmEditor">Редактор общего словаря эффектов</v:String>
+    <v:String x:Key="m_effectPrmEditorID">ID параметров эффекта</v:String>
+    <v:String x:Key="m_effectPrmEditorType">Тип</v:String>
+    <v:String x:Key="m_effectPrmEditorFilePath">Путь к файлу</v:String>
+    <v:String x:Key="m_effectPrmEditorChunkName">Название анимации</v:String>
+
+    <!--CostumeBreakColorParam Editor-->
+    <v:String x:Key="m_costumBreakColorParamEditor">Редактор цветов разрушения брони персонажа</v:String>
+    <v:String x:Key="m_costumBreakColorParamAltColor1">Альтернативный цвет 1</v:String>
+    <v:String x:Key="m_costumBreakColorParamAltColor2">Альтернативный цвет 2</v:String>
+    <v:String x:Key="m_costumBreakColorParamAltColor3">Альтернативный цвет 3</v:String>
+    <v:String x:Key="m_costumBreakColorParamAltColor4">Альтернативный цвет 4</v:String>
+
+    <!--CostumeBreakParam Editor-->
+    <v:String x:Key="m_costumBreakParamEditor">Редактор костюмов для разрушения брони персонажа</v:String>
+    <v:String x:Key="m_costumBreakParamEditorModelPath">Путь к модели</v:String>
+    <v:String x:Key="m_costumBreakParamEditorModelEnableInAwakening">Включить для модели пробуждения</v:String>
+    <v:String x:Key="m_costumBreakParamEditorModelEnableForClones">Включить для клонов</v:String>
+    <v:String x:Key="m_costumBreakParamEditorModelClonesCount">Количество клонов</v:String>
+
+    <!--PlayerDoubleEffectParam Editor-->
+    <v:String x:Key="m_playerDoubleEffectParamEditor">Редактор эффекта затухания персонажа</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorAttachBone">Кость</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlayAtStart">Проигрывать в начале</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlayAtEnd">Проигрывать в конце</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorEffectEntry">Запись эффекта</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlAnm1">Запись PL__ANM 1</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlAnm2">Запись PL__ANM 2</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlAnm3">Запись PL__ANM 3</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlAnm4">Запись PL__ANM 4</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorPlAnm5">Запись PL__ANM 5</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorHeightSpawn">Высота появления</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorSoundID">ID звука</v:String>
+    <v:String x:Key="m_playerDoubleEffectParamEditorNearestGroundPosition">Появляться на ближайшей земле</v:String>
+
+    <!--CostumeParam Editor-->
+    <v:String x:Key="m_costumeParamEditor">Редактор разблокировки костюмов персонажа</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryString">Строка костюма</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryIndex">Индекс записи</v:String>
+    <v:String x:Key="m_costumeParamEditorPSP_ID">ID PlayerSettingParam</v:String>
+    <v:String x:Key="m_costumeParamEditorCharacterName">Имя персонажа (Код локализации)</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType">Тип записи</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_1">Цвет 1</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_2">Цвет 2</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_3">Цвет 3</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_4">Цвет 4</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_5">Поза 1</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_6">Поза 2</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_7">Поза 3</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryUnlockCost">Стоимость разблокировки</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryUnlockCondition">Условие разблокировки</v:String>
+
+    <!--PrivateCamera Editor-->
+    <v:String x:Key="m_privateCameraEditor">Редактор камеры пробуждения персонажа</v:String>
+    <v:String x:Key="m_privateCameraDistance">Расстояние камеры</v:String>
+    <v:String x:Key="m_privateCameraSpeed">Скорость камеры</v:String>
+    <v:String x:Key="m_privateCameraMovement">Движение камеры</v:String>
+    <v:String x:Key="m_privateCameraHeight">Высота камеры</v:String>
+    <v:String x:Key="m_privateCameraAngle">Угол камеры</v:String>
+    <v:String x:Key="m_privateCameraFOV">FOV</v:String>
+    <v:String x:Key="m_privateCameraDistance2">Расстояние камеры 2 (неизвестно)</v:String>
+    <v:String x:Key="m_privateCameraHeight2">Высота камеры 2 (неизвестно)</v:String>
+    <v:String x:Key="m_privateCameraFOV2">FOV 2 (неизвестно)</v:String>
+
+    <!--AppearanceAnm Editor-->
+    <v:String x:Key="m_appearanceAnmEditor">Включатель фрагментов костюма</v:String>
+    <v:String x:Key="m_appearanceAnmEditorType_1">Меш (nuccChunkModel)</v:String>
+    <v:String x:Key="m_appearanceAnmEditorType_2">Материал (nuccChunkMaterial)</v:String>
+    <v:String x:Key="m_appearanceAnmEditorType_3">Кость (nuccChunkCoord)</v:String>
+    <v:String x:Key="m_appearanceAnmEditorBlend">Значение смешивания</v:String>
+    <v:String x:Key="m_appearanceAnmEditorToggleEntryOff">Отключённый фрагмент</v:String>
+    <v:String x:Key="m_appearanceAnmEditorToggleEntryOn">Включённый фрагмент</v:String>
+    <v:String x:Key="m_appearanceAnmEditorCostumes">Костюмы</v:String>
+    <v:String x:Key="m_appearanceAnmEditorEnableAll">Включить все</v:String>
+    <v:String x:Key="m_appearanceAnmEditorDisableAll">Отключить все</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot1">Слот 1</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot2">Слот 2</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot3">Слот 3</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot4">Слот 4</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot5">Слот 5</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot6">Слот 6</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot7">Слот 7</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot8">Слот 8</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot9">Слот 9</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot10">Слот 10</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot11">Слот 11</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot12">Слот 12</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot13">Слот 13</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot14">Слот 14</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot15">Слот 15</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot16">Слот 16</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot17">Слот 17</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot18">Слот 18</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot19">Слот 19</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSlot20">Слот 20</v:String>
+    <v:String x:Key="m_appearanceAnmEditorNormalState">Нормальное состояние</v:String>
+    <v:String x:Key="m_appearanceAnmEditorAwakeningState">Состояние пробуждения</v:String>
+    <v:String x:Key="m_appearanceAnmEditorTiming">Синхронизация в анимации пробуждения</v:String>
+    <v:String x:Key="m_appearanceAnmEditorReverse">Обратить настройки после пробуждения</v:String>
+    <v:String x:Key="m_appearanceAnmEditorEnabled">Включено</v:String>
+    <v:String x:Key="m_appearanceAnmEditorDisabled">Отключено</v:String>
+    <v:String x:Key="m_appearanceAnmEditorCutNC">Анимация SplAtk Cut NC</v:String>
+    <v:String x:Key="m_appearanceAnmEditorSplAtk">Ультимативное дзюцу</v:String>
+    <v:String x:Key="m_appearanceAnmEditorWin">Анимация победы</v:String>
+    <v:String x:Key="m_appearanceAnmEditorArmorBreak">Разрушение брони</v:String>
+
+    <!--afterAttachObject Editor-->
+    <v:String x:Key="m_afterAttachObjectEditor">Редактор присоединения объекта</v:String>
+    <v:String x:Key="m_afterAttachObjectCostume">Костюм</v:String>
+    <v:String x:Key="m_afterAttachObjectAttachBone1">Присоединить кость (модель игрока)</v:String>
+    <v:String x:Key="m_afterAttachObjectAttachBone2">Присоединить кость (модель оружия)</v:String>
+    <v:String x:Key="m_afterAttachObjectType">Тип фрагмента</v:String>
+    <v:String x:Key="m_afterAttachObjectChunkName">Название фрагмента</v:String>
+    <v:String x:Key="m_afterAttachObjectType_1">Кластер (nuccChunkClump)</v:String>
+    <v:String x:Key="m_afterAttachObjectType_2">Анимация (nuccChunkAnm)</v:String>
+    <v:String x:Key="m_afterAttachObjectCondition">Условие появления</v:String>
+    <v:String x:Key="m_afterAttachObjectCondition_1">Неизвестно</v:String>
+    <v:String x:Key="m_afterAttachObjectCondition_2">После удара</v:String>
+    <v:String x:Key="m_afterAttachObjectCondition_3">Всегда появляться</v:String>
+    <v:String x:Key="m_afterAttachObjectState">Состояние</v:String>
+    <v:String x:Key="m_afterAttachObjectState_1">Все состояния</v:String>
+    <v:String x:Key="m_afterAttachObjectState_2">Нормальное состояние</v:String>
+    <v:String x:Key="m_afterAttachObjectState_3">Состояние пробуждения</v:String>
+    <v:String x:Key="m_afterAttachObjectState_4">Состояние Upgrade01</v:String>
+    <v:String x:Key="m_afterAttachObjectState_5">Состояние Upgrade02</v:String>
+    <v:String x:Key="m_afterAttachObjectState_6">Состояние Upgrade03</v:String>
+    <v:String x:Key="m_afterAttachObjectState_7">Состояние Boss01</v:String>
+    <v:String x:Key="m_afterAttachObjectState_8">Состояние Boss02</v:String>
+    <v:String x:Key="m_afterAttachObjectState_9">Состояние Boss03</v:String>
+    <v:String x:Key="m_afterAttachObjectState_10">Состояние Boss04</v:String>
+    <v:String x:Key="m_afterAttachObjectPosition">Позиция</v:String>
+    <v:String x:Key="m_afterAttachObjectRotation">Вращение (Эйлер)</v:String>
+    <v:String x:Key="m_afterAttachObjectScale">Масштаб</v:String>
+
+    <!--SpTypeSupportParam Editor-->
+    <v:String x:Key="m_spTypeSupportParamEditor">Редактор действий персонажа</v:String>
+    <v:String x:Key="m_spTypeSupportParamState">Состояние персонажа</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_1">Нормальный режим</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_2">Режим пробуждения</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_3">Все режимы</v:String>
+    <v:String x:Key="m_spTypeSupportParamMode">Режим действия</v:String>
+    <v:String x:Key="m_spTypeSupportParamMode_1">Стрелки влево и вправо</v:String>
+    <v:String x:Key="m_spTypeSupportParamMode_2">Все стрелки</v:String>
+    <v:String x:Key="m_spTypeSupportParamEnableOnGround">Включить на земле</v:String>
+    <v:String x:Key="m_spTypeSupportParamEnableInAir">Включить в воздухе</v:String>
+    <v:String x:Key="m_spTypeSupportParamEnableSpecialCondition">Включить особое условие</v:String>
+    <v:String x:Key="m_spTypeSupportParamJutsuNameUp">Дзюцу вверх</v:String>
+    <v:String x:Key="m_spTypeSupportParamJutsuNameDown">Дзюцу вниз</v:String>
+    <v:String x:Key="m_spTypeSupportParamJutsuNameLeft">Дзюцу влево</v:String>
+    <v:String x:Key="m_spTypeSupportParamJutsuNameRight">Дзюцу вправо</v:String>
+    <v:String x:Key="m_spTypeSupportParamJutsuName">Название</v:String>
+
+    <!--AwakeAura Editor-->
+    <v:String x:Key="m_awakeAuraEditor">Редактор ауры персонажа</v:String>
+    <v:String x:Key="m_awakeAuraCharacode">Код персонажа</v:String>
+    <v:String x:Key="m_awakeAuraSkillFile">Файл навыка</v:String>
+    <v:String x:Key="m_awakeAuraSkillEntry">Запись навыка</v:String>
+    <v:String x:Key="m_awakeAuraMainBone">Основная кость</v:String>
+    <v:String x:Key="m_awakeAuraSecondaryBone">Вторичная кость</v:String>
+    <v:String x:Key="m_awakeAuraEnablePlayerModel">Использовать модель игрока</v:String>
+    <v:String x:Key="m_awakeAuraState">Состояние</v:String>
+    <v:String x:Key="m_awakeAuraState_1">Отключено</v:String>
+    <v:String x:Key="m_awakeAuraState_2">Нормальное состояние</v:String>
+    <v:String x:Key="m_awakeAuraState_3">Состояние пробуждения</v:String>
+    <v:String x:Key="m_awakeAuraCondition">Условие ауры</v:String>
+    <v:String x:Key="m_awakeAuraCondition_1">Без условий</v:String>
+    <v:String x:Key="m_awakeAuraCondition_2">Ближайшая позиция на земле</v:String>
+    <v:String x:Key="m_awakeAuraCondition_3">Неизвестно (используется для старого Susanoo)</v:String>
+
+    <!--playerIcon Editor-->
+    <v:String x:Key="m_PlayerIconEditor">Редактор иконок персонажей</v:String>
+    <v:String x:Key="m_baseIcon">Базовая иконка</v:String>
+    <v:String x:Key="m_awakeIcon">Иконка пробуждения</v:String>
+    <v:String x:Key="m_nameIcon">Иконка имени</v:String>
+    <v:String x:Key="m_subjutsuIcon">Иконка сабдзюцу</v:String>
+
+    <!--spSkillCustomizeParam Editor -->
+    <v:String x:Key="m_spSkillCustomizeParamEditor">Редактор ультимативного дзюцу</v:String>
+    <v:String x:Key="m_spSkill_ult1">Ультимативное 1</v:String>
+    <v:String x:Key="m_spSkill_ult2">Ультимативное 2</v:String>
+    <v:String x:Key="m_spSkill_ult3">Ультимативное 3</v:String>
+    <v:String x:Key="m_spSkill_ult4">Ультимативное 4</v:String>
+    <v:String x:Key="m_spSkillCustomizeParamDamageMultiplier">Множитель урона</v:String>
+
+    <!--cmnparam Editor-->
+    <v:String x:Key="m_cmnparamEditor">Редактор настроек звука игрока</v:String>
+    <v:String x:Key="m_cmnparamEditor_tab_1">Настройки звука командного ул. дзюцу (pair_spl_snd)</v:String>
+    <v:String x:Key="m_cmnparamEditor_tab_2">Настройки звука игрока (player_snd)</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairSplID">ID командного ультимативного дзюцу</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairSndEvFileName">Имя файла</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairCutInChunkName">Название фрагмента для Cut-In</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairAtkChunkName">Название фрагмента атаки</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairName1">Имя 1</v:String>
+    <v:String x:Key="m_cmnparamEditor_pairName2">Имя 2</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerCharacode">Код персонажа</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerFileName">Имя звукового файла</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerFileNameAwakening1">Имя звукового файла пробуждения 1</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerFileNameAwakening2">Имя звукового файла пробуждения 2</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSndEvFileName">Имя файла звукового события</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSplSndEvFileName">Имя файла звукового события ультимативного дзюцу</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_1_CutIn_ChunkName">Название фрагмента Cut-In для ультимативного дзюцу 1</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_1_Atk_ChunkName">Название фрагмента атаки для ультимативного дзюцу 1</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_2_CutIn_ChunkName">Название фрагмента Cut-In для ультимативного дзюцу 2</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_2_Atk_ChunkName">Название фрагмента атаки для ультимативного дзюцу 2</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_3_CutIn_ChunkName">Название фрагмента Cut-In для ультимативного дзюцу 3</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_3_Atk_ChunkName">Название фрагмента атаки для ультимативного дзюцу 3</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_alt_CutIn_ChunkName">Название альтернативного фрагмента Cut-In для ультимативного дзюцу</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerSpl_alt_Atk_ChunkName">Название альтернативного фрагмента атаки для ультимативного дзюцу</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerPartner">Код партнёра</v:String>
+    <v:String x:Key="m_cmnparamEditor_playerAwaPartner">Код партнёра пробуждения</v:String>
+
+    <!--Spcload Editor-->
+    <v:String x:Key="m_PRMloadEditor">Редактор загрузчика файлов персонажа</v:String>
+    <v:String x:Key="m_PRMloadFilePath">Путь к файлу</v:String>
+    <v:String x:Key="m_PRMloadFileName">Имя файла</v:String>
+    <v:String x:Key="m_PRMloadFileType">Тип (необходим для постэффектов)</v:String>
+    <v:String x:Key="m_PRMloadFileType_1">0 - пусто</v:String>
+    <v:String x:Key="m_PRMloadFileType_2">1 - общий файл</v:String>
+    <v:String x:Key="m_PRMloadFileType_3">2 - bod1c</v:String>
+    <v:String x:Key="m_PRMloadFileType_4">3 - bod1l</v:String>
+    <v:String x:Key="m_PRMloadFileType_5">4 - bod1s</v:String>
+    <v:String x:Key="m_PRMloadFileType_6">5 - skl</v:String>
+    <v:String x:Key="m_PRMloadFileType_7">6 - spl</v:String>
+    <v:String x:Key="m_PRMloadFileType_8">7 - awa/aws</v:String>
+    <v:String x:Key="m_PRMloadFileType_9">8 - ???</v:String>
+    <v:String x:Key="m_PRMloadFileType_10">9 - bod1</v:String>
+    <v:String x:Key="m_PRMloadFileType_11">10 - acc1</v:String>
+    <v:String x:Key="m_PRMloadFileType_12">11 - eff1</v:String>
+    <v:String x:Key="m_PRMloadFileType_13">12 - файл параметров</v:String>
+    <v:String x:Key="m_PRMloadFileType_14">13 - файл параметров</v:String>
+    <v:String x:Key="m_PRMloadFileType_15">14 - файл навыка</v:String>
+    <v:String x:Key="m_PRMloadFileType_16">15 - ???</v:String>
+    <v:String x:Key="m_PRMloadCostumeIndex">Индекс костюма (duelPlayerParam)</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition">Условие загрузки</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_1">Базовый</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_2">Поддержка</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_4">Пробуждение</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_5">Дзюцу 1</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_6">Дзюцу 2</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_7">Дзюцу 3</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_8">Дзюцу 4</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_9">Дзюцу 5</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_10">Дзюцу 6</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_11">Ультимативное дзюцу 1</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_12">Ультимативное дзюцу 2</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_13">Ультимативное дзюцу 3</v:String>
+    <v:String x:Key="m_PRMloadLoadCondition_14">Ультимативное дзюцу 4</v:String>
+
+    <!--MessageInfoEditor Window-->
+    <v:String x:Key="m_messageInfoEditor">Редактор локализации</v:String>
+    <v:String x:Key="m_lang">Язык</v:String>
+    <v:String x:Key="m_lang_1">Арабский (arae)</v:String>
+    <v:String x:Key="m_lang_2">Традиционный китайский (chi)</v:String>
+    <v:String x:Key="m_lang_3">Английский (eng)</v:String>
+    <v:String x:Key="m_lang_4">Латиноамериканский (esmx)</v:String>
+    <v:String x:Key="m_lang_5">Французский (fre)</v:String>
+    <v:String x:Key="m_lang_6">Немецкий (ger)</v:String>
+    <v:String x:Key="m_lang_7">Индонезийский (idid)</v:String>
+    <v:String x:Key="m_lang_8">Итальянский (ita)</v:String>
+    <v:String x:Key="m_lang_9">Корейский (kokr)</v:String>
+    <v:String x:Key="m_lang_10">Польский (pol)</v:String>
+    <v:String x:Key="m_lang_11">Португальский (por)</v:String>
+    <v:String x:Key="m_lang_12">Русский (rus)</v:String>
+    <v:String x:Key="m_lang_13">Испанский (spa)</v:String>
+    <v:String x:Key="m_lang_14">Тайский (thth)</v:String>
+    <v:String x:Key="m_lang_15">Упрощённый китайский (zhcn)</v:String>
+    <v:String x:Key="m_crc32_code">Код CRC32</v:String>
+    <v:String x:Key="m_cue_ID">Cue ID</v:String>
+    <v:String x:Key="m_ACBFile">ACB файл</v:String>
+    <v:String x:Key="m_MainText">Основной текст</v:String>
+    <v:String x:Key="m_additionalText">Вторичный текст</v:String>
+    <v:String x:Key="m_speaker">Говорящий</v:String>
+    <v:String x:Key="m_searchCRC32">Поиск CRC32</v:String>
+    <v:String x:Key="m_searchText">Поиск текста</v:String>
+
+
+
+    <v:String x:Key="m_ACBFile_none">Нет</v:String>
+    <v:String x:Key="m_ACBFile_0">v_etc</v:String>
+    <v:String x:Key="m_ACBFile_1">v_win</v:String>
+    <v:String x:Key="m_ACBFile_2">v_spl</v:String>
+    <v:String x:Key="m_ACBFile_3">v_ougiFinish</v:String>
+    <v:String x:Key="m_ACBFile_4">v_mainscenario</v:String>
+    <v:String x:Key="m_ACBFile_5">v_experience_ab</v:String>
+    <v:String x:Key="m_ACBFile_6">v_experience_s</v:String>
+    <v:String x:Key="m_ACBFile_7">v_boruto_Recollection</v:String>
+    <v:String x:Key="m_ACBFile_8">v_TheTale</v:String>
+    <v:String x:Key="m_ACBFile_9">v_naruto_BattleTalk</v:String>
+    <v:String x:Key="m_ACBFile_10">v_naruto_Narration</v:String>
+    <v:String x:Key="m_ACBFile_11">v_matching</v:String>
+    <v:String x:Key="m_ACBFile_12">v_boss</v:String>
+    <v:String x:Key="m_ACBFile_13">common</v:String>
+    <v:String x:Key="m_ACBFile_14">btlcmn</v:String>
+    <v:String x:Key="m_ACBFile_15">player_se_spl</v:String>
+    <v:String x:Key="m_ACBFile_16">bossSE</v:String>
+    <v:String x:Key="m_ACBFile_17">demoSE</v:String>
+    <v:String x:Key="m_DisableText">Отключить просмотр текста сообщения</v:String>
+    <v:String x:Key="m_MessageID">Код локализации</v:String>
+    <v:String x:Key="m_Test">Текст</v:String>
+    <v:String x:Key="m_saveTextAndCRC32">Сохранить текст и код CRC32</v:String>
+
+    <!--CharacodeEditor Window-->
+    <v:String x:Key="m_CharacodeEditor">Менеджер идентификаторов персонажей</v:String>
+
+    <!--PlayerSettingParam Window-->
+    <v:String x:Key="m_PlayerSettingParamEditor">Редактор костюмов</v:String>
+    <v:String x:Key="m_PresetID">PlayerSettingParam ID</v:String>
+    <v:String x:Key="m_Characode">ID Персонажа</v:String>
+    <v:String x:Key="m_CostumeID">ID Костюма</v:String>
+    <v:String x:Key="m_unknown">Неизвестное значение</v:String>
+    <v:String x:Key="m_playerSettingParamID">Код PlayerSettingParam</v:String>
+    <v:String x:Key="m_defaultJutsu">Стандартное дзюцу</v:String>
+    <v:String x:Key="m_defaultUltJutsu">Стандартное ультимативное дзюцу</v:String>
+    <v:String x:Key="m_chaCharacterName">Имя персонажа (код локализации)</v:String>
+    <v:String x:Key="m_chaDescription">Описание (код локализации)</v:String>
+    <v:String x:Key="m_dlcID">DLC ID</v:String>
+    <v:String x:Key="m_ReferencePSPID">Основной PSP ID</v:String>
+    <v:String x:Key="m_ReferenceCharacodeID">ID персонажа для уровня</v:String>
+    <v:String x:Key="m_PSP_IconCostume">ID костюма для уровня персонажа</v:String>
+
+    <!--SkillCustomizeParam Editor-->
+    <v:String x:Key="m_skillCustomizeParamEditor">Редактор ниндзюцу</v:String>
+    <v:String x:Key="m_jutsu1">Дзюцу 1</v:String>
+    <v:String x:Key="m_jutsu2">Дзюцу 2</v:String>
+    <v:String x:Key="m_jutsu3">Дзюцу 3</v:String>
+    <v:String x:Key="m_jutsu4">Дзюцу 4</v:String>
+    <v:String x:Key="m_jutsu5">Дзюцу 5</v:String>
+    <v:String x:Key="m_jutsu6">Дзюцу 6</v:String>
+    <v:String x:Key="m_awajutsu1">Пробужденное Дзюцу 1</v:String>
+    <v:String x:Key="m_awajutsu2">Пробужденное Дзюцу 2</v:String>
+    <v:String x:Key="m_prior">Приоритет</v:String>
+    <v:String x:Key="m_ninjutsu">Стандартное</v:String>
+    <v:String x:Key="m_exninjutsu">Улучшенное</v:String>
+    <v:String x:Key="m_airninjutsu">Воздушное</v:String>
+    <v:String x:Key="m_jutsuName">Название</v:String>
+    <v:String x:Key="m_jutsuUsage">Стоймость</v:String>
+    <v:String x:Key="m_jutsuCancel">Отмена</v:String>
+
+    <!-- SkillIndexSettingParam Editor-->
+    <v:String x:Key="m_skillIndexSettingParamEditor">Редактор списка ниндзюцу</v:String>
+
+    <!--DuelPlayerParamEditor Window-->
+    <v:String x:Key="m_DuelPlayerParamEditor">Редактор настроек персонажа</v:String>
+    <v:String x:Key="m_baseCostumeList">Список базовых костюмов</v:String>
+    <v:String x:Key="m_awakeningCostumeList">Список костюмов пробуждения</v:String>
+    <v:String x:Key="m_itemleft">Элемент слева</v:String>
+    <v:String x:Key="m_itemup">Элемент сверху</v:String>
+    <v:String x:Key="m_itemdown">Элемент снизу</v:String>
+    <v:String x:Key="m_itemright">Элемент справа</v:String>
+    <v:String x:Key="m_dppCharacode">Код персонажа</v:String>
+    <v:String x:Key="m_dppMotionCode">Код персонажа для анимации</v:String>
+    <v:String x:Key="m_items">Предметы</v:String>
+    <v:String x:Key="m_itemsDuration">Длительность</v:String>
+    <v:String x:Key="m_awakeCond">Условие пробуждения</v:String>
+    <v:String x:Key="m_awakeHP">Требуемое HP для пробуждения</v:String>
+    <v:String x:Key="m_awakeDebuff">Включить дебафф пробуждения</v:String>
+    <v:String x:Key="m_awakeActionSpeed">Скорость зарядки действия пробуждения</v:String>
+    <v:String x:Key="m_awakeLimitSpeed">Скорость зарядки лимита чакры</v:String>
+    <v:String x:Key="m_awakeChakraCost">Стоимость чакры пробуждения</v:String>
+    <v:String x:Key="m_awakeCondSettings">Настройки условий</v:String>
+    <v:String x:Key="m_baseState">Базовое состояние</v:String>
+    <v:String x:Key="m_awakeningState">Состояние пробуждения</v:String>
+    <v:String x:Key="m_SpeedValue">Скорость</v:String>
+    <v:String x:Key="m_ChakraDashSpeedValue">Скорость чакра-даша</v:String>
+    <v:String x:Key="m_GuardDamageMultiplier">Множитель урона при блоке</v:String>
+    <v:String x:Key="m_AirChakraDashSpeed">Скорость воздушного чакра-даша</v:String>
+    <v:String x:Key="m_AttackValue">Атака</v:String>
+    <v:String x:Key="m_DefenseValue">Защита</v:String>
+    <v:String x:Key="m_AssistDamage">Урон поддержки</v:String>
+    <v:String x:Key="m_AwakeActionRecoverySpeed">Скорость восстановления действия пробуждения</v:String>
+    <v:String x:Key="m_ChakraChargeSpeed">Скорость зарядки чакры</v:String>
+    <v:String x:Key="m_AirDashSpeed">Скорость воздушного рывка</v:String>
+    <v:String x:Key="m_AirDashDuration">Длительность воздушного рывка</v:String>
+    <v:String x:Key="m_ChakraDashDuration">Длительность чакра-даша</v:String>
+    <v:String x:Key="m_ChakraDashCondition">Условие чакра-даша</v:String>
+    <v:String x:Key="m_AwakeningCondition1">Условие пробуждения 1</v:String>
+    <v:String x:Key="m_AwakeningCondition2">Условие пробуждения 2</v:String>
+    <v:String x:Key="m_AwakeningJutsuController">Контроллер дзюцу пробуждения</v:String>
+    <v:String x:Key="m_CameraHeight">Высота камеры</v:String>
+    <v:String x:Key="m_AwaBodyPriority">Приоритет тела пробуждения</v:String>
+    <v:String x:Key="m_defaultAwaSkillIndex">Индекс навыка пробуждения</v:String>
+    <v:String x:Key="m_victoryCameraAngle">Угол камеры при победе</v:String>
+    <v:String x:Key="m_victorySettings">Настройки победы</v:String>
+    <v:String x:Key="m_assistSettings">Настройки поддержки</v:String>
+    <v:String x:Key="m_sprt1">Поддержка 1</v:String>
+    <v:String x:Key="m_sprt2">Поддержка 2</v:String>
+    <v:String x:Key="m_partner">Партнер</v:String>
+    <v:String x:Key="m_enableChakraDashPrior">Включить приоритет чакра-даша пробуждения</v:String>
+    <v:String x:Key="m_modelCode">Код модели</v:String>
+
+    <v:String x:Key="m_dpp_cond_1">Включить дзюцу пробуждения</v:String>
+    <v:String x:Key="m_dpp_cond_2">Неизвестно 1</v:String>
+    <v:String x:Key="m_dpp_cond_3">Неизвестно 2</v:String>
+    <v:String x:Key="m_dpp_cond_4">Неизвестно 3</v:String>
+    <v:String x:Key="m_dpp_cond_5">Неизвестно 4</v:String>
+    <v:String x:Key="m_dpp_cond_6">Неизвестно 5</v:String>
+    <v:String x:Key="m_dpp_cond_7">Неизвестно 6</v:String>
+    <v:String x:Key="m_dpp_cond_8">Неизвестно 7</v:String>
+    <v:String x:Key="m_dpp_cond_9">Включить условие гигантского пробуждения</v:String>
+    <v:String x:Key="m_dpp_cond_10">Включить приватную камеру</v:String>
+    <v:String x:Key="m_dpp_cond_11">Включить звук земли для гигантского пробуждения</v:String>
+    <v:String x:Key="m_dpp_cond_12">Включить эффект отметки удара (для пробуждения)</v:String>
+    <v:String x:Key="m_dpp_cond_13">Неизвестно 8</v:String>
+    <v:String x:Key="m_dpp_cond_14">Неизвестно 9</v:String>
+    <v:String x:Key="m_dpp_cond_15">Неизвестно 10</v:String>
+    <v:String x:Key="m_dpp_cond_16">Неизвестно 11</v:String>
+    <v:String x:Key="m_dpp_cond_17">Неизвестно 12</v:String>
+    <v:String x:Key="m_dpp_cond_18">Неизвестно 13</v:String>
+    <v:String x:Key="m_dpp_cond_19">Включить эффект свечения для базовой формы</v:String>
+    <v:String x:Key="m_dpp_cond_20">Включить эффект свечения для формы пробуждения</v:String>
+    <v:String x:Key="m_dpp_cond_21">Включить телепортацию для рывка пробуждения</v:String>
+    <v:String x:Key="m_dpp_cond_22">Неизвестно 14</v:String>
+    <v:String x:Key="m_dpp_cond_23">Неизвестно 15</v:String>
+    <v:String x:Key="m_dpp_cond_24">Включить набор движений пробуждения</v:String>
+    <v:String x:Key="m_dpp_cond_25">Неизвестно 16</v:String>
+    <v:String x:Key="m_dpp_cond_26">Неизвестно 17</v:String>
+    <v:String x:Key="m_dpp_cond_27">Неизвестно 18</v:String>
+    <v:String x:Key="m_dpp_cond_28">Включить условие марионетки (самоотряхивание на земле, отскок в воздухе)</v:String>
+    <v:String x:Key="m_dpp_cond_29">Включить условие пользователя марионетки (требуется марионетка)</v:String>
+    <v:String x:Key="m_dpp_cond_30">Неизвестно 19</v:String>
+    <v:String x:Key="m_dpp_cond_31">Неизвестно 20</v:String>
+    <v:String x:Key="m_dpp_cond_32">Неизвестно 21</v:String>
+
+    <!--PRM Editor-->
+    <v:String x:Key="m_PRMEDitorFormat">Формат импортируемого файла</v:String>
+    <v:String x:Key="m_PRMEDitor">Редактор движений персонажа</v:String>
+    <v:String x:Key="m_PRMEDitor_Moveset">Настройки набора движений</v:String>
+    <v:String x:Key="m_PRMEDitor_Projectile">Список снарядов</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision">Настройки столкновений</v:String>
+    <v:String x:Key="m_PRMEDitor_Etc">Настройки передвижения ниндзя</v:String>
+    <v:String x:Key="m_PRMEDitor_PLANM">Название секции PL__ANM</v:String>
+    <v:String x:Key="m_PRMEDitor_PLANM_Next">Следующий PL__ANM (опционально)</v:String>
+    <v:String x:Key="m_PRMEDitor_PLANM_Previous">Предыдущий PL__ANM</v:String>
+    <v:String x:Key="m_PRMEDitor_PLANM_DMG">PL__ANM оппонента (опционально)</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction">Направление комбо</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction_Neutral">Нейтральное</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction_All">Все направления</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction_Up">Вверх</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction_Down">Вниз</v:String>
+    <v:String x:Key="m_PRMEDitor_Direction_Side">Боковое</v:String>
+    <v:String x:Key="m_PRMEDitor_PressStart">Начало нажатия</v:String>
+    <v:String x:Key="m_PRMEDitor_PressEnd">Конец нажатия</v:String>
+    <v:String x:Key="m_PRMEDitor_Interpolation">Интерполяция</v:String>
+    <v:String x:Key="m_PRMEDitor_PLANM_Type">Тип файла (как в prm__load)</v:String>
+    <v:String x:Key="m_PRMEDitor_Animation">Анимация</v:String>
+    <v:String x:Key="m_PRMEDitor_LinkCondition">Условие связывания</v:String>
+    <v:String x:Key="m_PRMEDitor_TriggerCondition1">Условие триггера 1</v:String>
+    <v:String x:Key="m_PRMEDitor_TriggerCondition2">Условие триггера 2</v:String>
+    <v:String x:Key="m_PRMEDitor_EnableFaceAnim">Включить анимации лица</v:String>
+    <v:String x:Key="m_PRMEDitor_EnableCubeMan">Включить Cube Man</v:String>
+    <v:String x:Key="m_PRMEDitor_FixBackwardFacing">Исправить обратное направление</v:String>
+    <v:String x:Key="m_PRMEDitor_FixAnimationPos">Исправить позицию анимации</v:String>
+    <v:String x:Key="m_PRMEDitor_DisableInterpolation">Отключить интерполяцию для следующего PL__ANM</v:String>
+    <v:String x:Key="m_PRMEDitor_Function">Функция</v:String>
+    <v:String x:Key="m_PRMEDitor_StringParam">Строковый параметр</v:String>
+    <v:String x:Key="m_PRMEDitor_FuncTiming">Время функции</v:String>
+    <v:String x:Key="m_PRMEDitor_Param1">Параметр 1</v:String>
+    <v:String x:Key="m_PRMEDitor_Param2">Параметр 2</v:String>
+    <v:String x:Key="m_PRMEDitor_Param3">Параметр 3</v:String>
+    <v:String x:Key="m_PRMEDitor_Param4">Параметр 4</v:String>
+    <v:String x:Key="m_PRMEDitor_DamageCode">Код урона</v:String>
+    <v:String x:Key="m_PRMEDitor_DamageHitEffect">ID эффекта удара</v:String>
+    <v:String x:Key="m_PRMEDitor_DamageHitSound">ID звука удара (exe?)</v:String>
+    <v:String x:Key="m_PRMEDitor_DamageHitCondition">Условие удара</v:String>
+    <v:String x:Key="m_PRMEDitor_DamageAmount">Количество урона</v:String>
+    <v:String x:Key="m_PRMEDitor_HorizontalPush">Горизонтальный толчок</v:String>
+    <v:String x:Key="m_PRMEDitor_VerticalPush">Вертикальный толчок</v:String>
+    <v:String x:Key="m_PRMEDitor_GuardDamage">Урон при блоке</v:String>
+    <v:String x:Key="m_PRMEDitor_HitAmount">Количество попаданий</v:String>
+    <v:String x:Key="m_PRMEDitor_HitFrequency">Частота ударов</v:String>
+    <v:String x:Key="m_PRMEDitor_FreezeTime">Время заморозки</v:String>
+    <v:String x:Key="m_PRMEDitor_SavePL_ANM">Сохранить настройки PL__ANM</v:String>
+    <v:String x:Key="m_PRMEDitor_FunctionList">Список функций</v:String>
+    <v:String x:Key="m_PRMEDitor_Projectile_Name">Название снаряда</v:String>
+    <v:String x:Key="m_PRMEDitor_Projectile_SkillFileName">Имя файла навыка</v:String>
+    <v:String x:Key="m_PRMEDitor_Projectile_SkillEntryName">Название записи навыка</v:String>
+    <v:String x:Key="m_PRMEDitor_FunctionCopy">Скопировать в буфер</v:String>
+    <v:String x:Key="m_PRMEDitor_FunctionPaste">Вставить из буфера</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_Type">Тип записи</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_Type1">Столкновение</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_Type2">Хёртбокс</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_Type3">Трекер</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_State">Состояние (2 - базовый режим, 3 - режим пробуждения)</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_UseBone">Включить использование кости</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_BoneName">Название кости</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_HurtboxRadius">Радиус хертбокса</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_HurtboxYPos">Положение Y хертбокса</v:String>
+    <v:String x:Key="m_PRMEDitor_Collision_HurtboxZPos">Положение Z хертбокса</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_FrameActionUnlock">Разблокировка действия по кадру</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_ActionDuration">Длительность действия</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_CircleVelocity">Круговая скорость</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_CircleVelocityStrength">Сила круговой скорости</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_MovementFrequency">Частота движения</v:String>
+    <v:String x:Key="m_PRMEDitor_Movement_ForwardVelocity">Прямая скорость</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_mot">Базовые атаки</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_motcmn">Базовые анимации</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_awa">Пробуждение</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_awa2">Пробуждение 2 (не используется)</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_skl">Ниндзюцу</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_spl">Ультимативное дзюцу</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_upgrade01">Дополнительный набор движений 1</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_upgrade02">Дополнительный набор движений 2</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_upgrade03">Дополнительный набор движений 3</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_boss">Действия босса</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_boss01">Действия босса 1</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_boss02">Действия босса 2</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_boss03">Действия босса 3</v:String>
+    <v:String x:Key="m_PRMEDitor_VER_prm_boss04">Действия босса 4</v:String>
+    <v:String x:Key="m_PRMEDitor_saveCharacode">Сохранить ID персонажа</v:String>
+
+    <!--StageInfoEditor Window-->
+    <v:String x:Key="m_stageInfoEditor">Редактор настроек арены</v:String>
+    <v:String x:Key="m_stageCopyProperties">Скопировать свойства</v:String>
+    <v:String x:Key="m_stagePasteProperties">Вставить свойства</v:String>
+    <v:String x:Key="m_stageName">Название арены</v:String>
+    <v:String x:Key="m_stageMessageID">Код локализации для арены</v:String>
+    <v:String x:Key="m_stageFilter">Фильтр арены</v:String>
+    <v:String x:Key="m_stageWeather">Погода арены</v:String>
+    <v:String x:Key="m_stageWeather_0">Без погоды</v:String>
+    <v:String x:Key="m_stageWeather_1">Снег</v:String>
+    <v:String x:Key="m_stageWeather_2">Дождь</v:String>
+    <v:String x:Key="m_stageList">Список арен</v:String>
+    <v:String x:Key="m_stagePathList">Список путей арены</v:String>
+    <v:String x:Key="m_stageObjectList">Список объектов арены</v:String>
+    <v:String x:Key="m_stageFog">Туман</v:String>
+    <v:String x:Key="m_stageMonoFilter">Монофильтр</v:String>
+    <v:String x:Key="m_stageGlares">Блики</v:String>
+    <v:String x:Key="m_stageSoftFocus">Мягкая фокусировка</v:String>
+    <v:String x:Key="m_stageSunShaft">Солнечный луч</v:String>
+    <v:String x:Key="m_stageDOF">Глубина резкости</v:String>
+    <v:String x:Key="m_stageLightPoint">Точка света</v:String>
+    <v:String x:Key="m_stageColors">Цвета</v:String>
+    <v:String x:Key="m_stageLensFlare">Блик объектива</v:String>
+    <v:String x:Key="m_stageEntryType">Тип записи</v:String>
+    <v:String x:Key="m_stageObjectSettings">Настройки объекта</v:String>
+    <v:String x:Key="m_stageBreakableObjectSettings">Настройки разрушаемых объектов</v:String>
+    <v:String x:Key="m_stageBreakableWallSettings">Настройки разрушаемых стен</v:String>
+    <v:String x:Key="m_stageBrightnessAndContrast">Яркость и контрастность</v:String>
+    <v:String x:Key="m_stageFogStartDistance">Начальное расстояние тумана</v:String>
+    <v:String x:Key="m_stageFogEndDistance">Конечное расстояние тумана</v:String>
+    <v:String x:Key="m_stageFogStrength">Сила тумана</v:String>
+    <v:String x:Key="m_stageFogEnable">Включить туман</v:String>
+    <v:String x:Key="m_stageMonoBlueTone">Синий тон</v:String>
+    <v:String x:Key="m_stageMonoRedTone">Красный тон</v:String>
+    <v:String x:Key="m_stageMonoAlpha">Альфа</v:String>
+    <v:String x:Key="m_stageEnableMonoColorFilter">Включить моноцветный фильтр</v:String>
+    <v:String x:Key="m_stageGlareLuminanceThreshold">Порог яркости</v:String>
+    <v:String x:Key="m_stageGlareSubtracted">Вычитаемое значение</v:String>
+    <v:String x:Key="m_stageGlareCompositionStrength">Сила композиции бликов</v:String>
+    <v:String x:Key="m_stageEnableGlares">Включить блики</v:String>
+    <v:String x:Key="m_stageSoftFocusStrength">Сила мягкой фокусировки</v:String>
+    <v:String x:Key="m_stageEnableSoftFocus">Включить мягкую фокусировку</v:String>
+    <v:String x:Key="m_stageSunShaftStartDistance">Начальное расстояние</v:String>
+    <v:String x:Key="m_stageSunShaftEndDistance">Конечное расстояние</v:String>
+    <v:String x:Key="m_stageSunShaftAlpha">Альфа</v:String>
+    <v:String x:Key="m_stageSunShaftBlurWidth">Ширина размытия</v:String>
+    <v:String x:Key="m_stageSunShaftAttenuationCoefficient">Коэффициент затухания</v:String>
+    <v:String x:Key="m_stageSunShaftDirectionX">Направление X</v:String>
+    <v:String x:Key="m_stageSunShaftDirectionY">Направление Y</v:String>
+    <v:String x:Key="m_stageSunShaftDirectionZ">Направление Z</v:String>
+    <v:String x:Key="m_stageEnableSunShaft">Включить эффект солнечного луча</v:String>
+    <v:String x:Key="m_stageDOFFocalLength">Фокусное расстояние</v:String>
+    <v:String x:Key="m_stageDOFShortDistance">Близкое расстояние</v:String>
+    <v:String x:Key="m_stageDOFLongDistance">Дальнее расстояние</v:String>
+    <v:String x:Key="m_stageDOFAlpha">Альфа</v:String>
+    <v:String x:Key="m_stageDOFEnableBlur">Включить размытие</v:String>
+    <v:String x:Key="m_stageDOFEnableEdgeBlur">Включить размытие краев</v:String>
+    <v:String x:Key="m_stageLightPointDirectionX">Направление X</v:String>
+    <v:String x:Key="m_stageLightPointDirectionY">Направление Y</v:String>
+    <v:String x:Key="m_stageLightPointDirectionZ">Направление Z</v:String>
+    <v:String x:Key="m_stagePlayerAmbientColor">Фоновый цвет игрока</v:String>
+    <v:String x:Key="m_stageEffectAmbientColor">Фоновый цвет эффекта</v:String>
+    <v:String x:Key="m_stageParallelAmbientColor">Параллельный фоновый цвет</v:String>
+    <v:String x:Key="m_stageRayCutOffShadeColor">Цвет тени отсечения луча</v:String>
+    <v:String x:Key="m_stageRayCutOffNormalColor">Нормальный цвет отсечения луча</v:String>
+    <v:String x:Key="m_stageFogColor">Цвет тумана</v:String>
+    <v:String x:Key="m_stageRockColor">Цвет скалы</v:String>
+    <v:String x:Key="m_stageShadowColor">Цвет тени</v:String>
+    <v:String x:Key="m_stageUnknownColor">Неизвестный цвет</v:String>
+    <v:String x:Key="m_stageSunShaftColor">Цвет солнечного луча</v:String>
+    <v:String x:Key="m_stageEnableShadowColor">Включить цвет тени</v:String>
+    <v:String x:Key="m_stageLensFlare_0">Включить LensFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_1">uviolet_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_2">oprism_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_3">phalo_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_4">gpurpose_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_5">mlight_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlare_6">sunset_lenFlare</v:String>
+    <v:String x:Key="m_stageLensFlarePositionX">Позиция X</v:String>
+    <v:String x:Key="m_stageLensFlarePositionY">Позиция Y</v:String>
+    <v:String x:Key="m_stageLensFlarePositionZ">Позиция Z</v:String>
+    <v:String x:Key="m_stageLensFlareAlpha">Альфа</v:String>
+    <v:String x:Key="m_stageEnableBrightnessAndContrast">Включить регулировку яркости и контрастности</v:String>
+    <v:String x:Key="m_stageBrightness">Коррекция яркости</v:String>
+    <v:String x:Key="m_stageContrast">Коррекция контрастности</v:String>
+    <v:String x:Key="m_stageObjectPath">Путь к объекту</v:String>
+    <v:String x:Key="m_stageObjectName">Название объекта</v:String>
+    <v:String x:Key="m_stageObjectPosPath">Путь к позиции объекта</v:String>
+    <v:String x:Key="m_stageObjectPosBone">Кость позиции объекта</v:String>
+    <v:String x:Key="m_stageObjectAnimationSpeed">Скорость анимации</v:String>
+    <v:String x:Key="m_stageObjectHideCameraMesh">Скрыть меш для камеры</v:String>
+    <v:String x:Key="m_stageObjectRigidBody">Жёсткое тело</v:String>
+    <v:String x:Key="m_stageBreakableObjectPath">Путь к разрушаемому объекту</v:String>
+    <v:String x:Key="m_stageBreakableObjectEffect_1">Эффект разрушаемого объекта 1</v:String>
+    <v:String x:Key="m_stageBreakableObjectEffect_2">Эффект разрушаемого объекта 2</v:String>
+    <v:String x:Key="m_stageBreakableObjectEffect_3">Эффект разрушаемого объекта 3</v:String>
+    <v:String x:Key="m_stageBreakableObjectAnimationSpeed_1">Скорость анимации разрушаемого объекта 1</v:String>
+    <v:String x:Key="m_stageBreakableObjectAnimationSpeed_2">Скорость анимации разрушаемого объекта 2</v:String>
+    <v:String x:Key="m_stageBreakableObjectAnimationSpeed_3">Скорость анимации разрушаемого объекта 3</v:String>
+    <v:String x:Key="m_stageBreakableWallEffect_1">Эффект разрушаемой стены 1</v:String>
+    <v:String x:Key="m_stageBreakableWallEffect_2">Эффект разрушаемой стены 2</v:String>
+    <v:String x:Key="m_stageBreakableWallEffect_3">Эффект разрушаемой стены 3</v:String>
+    <v:String x:Key="m_stageBreakableWallSound">Звук разрушаемой стены</v:String>
+    <v:String x:Key="m_stageBreakableWallVolume">Громкость разрушаемой стены</v:String>
+    <v:String x:Key="m_stageBreakableWallCondition_1">Условие разрушаемой стены 1</v:String>
+    <v:String x:Key="m_stageBreakableWallCondition_2">Условие разрушаемой стены 2</v:String>
+
+    <!--CharacterSelectParamEditor Window-->
+    <v:String x:Key="m_CharacterSelectParamEditor">Менеджер списка персонажей</v:String>
+    <v:String x:Key="m_EntryCode">Код записи</v:String>
+    <v:String x:Key="m_pageIndex">Страница (начиная с 0)</v:String>
+    <v:String x:Key="m_SlotIndex">Слот (начиная с 1)</v:String>
+    <v:String x:Key="m_CostumeIndex">Костюм (начиная с 0)</v:String>
+    <v:String x:Key="m_CostumeDescription">Описание костюма (Код локализации)</v:String>
+    <v:String x:Key="m_CostumeName">Название костюма (Код локализации)</v:String>
+    <v:String x:Key="m_Accessory">Аксессуар</v:String>
+    <v:String x:Key="m_charselFile">Файл выбора персонажей (код)</v:String>
+    <v:String x:Key="m_dictionary">Словарь (Код локализации)</v:String>
+    <v:String x:Key="m_dictionaryIndex">Индекс словаря</v:String>
+    <v:String x:Key="m_CSP_SortEntries">Сортировать записи</v:String>
+    <v:String x:Key="m_csp_P1_NOT_SEL_X">P1 НЕ ВЫБРАН - X</v:String>
+    <v:String x:Key="m_csp_P1_NOT_SEL_Y">P1 НЕ ВЫБРАН - Y</v:String>
+    <v:String x:Key="m_csp_P1_NOT_SEL_Z">P1 НЕ ВЫБРАН - Z</v:String>
+    <v:String x:Key="m_csp_P2_NOT_SEL_X">P2 НЕ ВЫБРАН - X</v:String>
+    <v:String x:Key="m_csp_P2_NOT_SEL_Y">P2 НЕ ВЫБРАН - Y</v:String>
+    <v:String x:Key="m_csp_P2_NOT_SEL_Z">P2 НЕ ВЫБРАН - Z</v:String>
+    <v:String x:Key="m_csp_P1_SEL_X">P1 ВЫБРАН - X</v:String>
+    <v:String x:Key="m_csp_P1_SEL_Y">P1 ВЫБРАН - Y</v:String>
+    <v:String x:Key="m_csp_P1_SEL_Z">P1 ВЫБРАН - Z</v:String>
+    <v:String x:Key="m_csp_P2_SEL_X">P2 ВЫБРАН - X</v:String>
+    <v:String x:Key="m_csp_P2_SEL_Y">P2 ВЫБРАН - Y</v:String>
+    <v:String x:Key="m_csp_P2_SEL_Z">P2 ВЫБРАН - Z</v:String>
+    <v:String x:Key="m_csp_P1_VSLOAD_X">P1 VS LOAD - X</v:String>
+    <v:String x:Key="m_csp_P1_VSLOAD_Y">P1 VS LOAD - Y</v:String>
+    <v:String x:Key="m_csp_P1_VSLOAD_Z">P1 VS LOAD - Z</v:String>
+    <v:String x:Key="m_csp_P2_VSLOAD_X">P2 VS LOAD - X</v:String>
+    <v:String x:Key="m_csp_P2_VSLOAD_Y">P2 VS LOAD - Y</v:String>
+    <v:String x:Key="m_csp_P2_VSLOAD_Z">P2 VS LOAD - Z</v:String>
+    <v:String x:Key="m_csp_P1_NOT_SEL_ROT">P1 РОТАЦИЯ НЕ ВЫБРАНА</v:String>
+    <v:String x:Key="m_csp_P2_NOT_SEL_ROT">P2 РОТАЦИЯ НЕ ВЫБРАНА</v:String>
+    <v:String x:Key="m_csp_P1_SEL_ROT">P1 РОТАЦИЯ ВЫБРАНА</v:String>
+    <v:String x:Key="m_csp_P2_SEL_ROT">P2 РОТАЦИЯ ВЫБРАНА</v:String>
+    <v:String x:Key="m_csp_P1_VSLOAD_ROT">P1 РОТАЦИЯ VS LOAD</v:String>
+    <v:String x:Key="m_csp_P2_VSLOAD_ROT">P2 РОТАЦИЯ VS LOAD</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_NOT_SEL_X">P1 СВЕТ НЕ ВЫБРАН - X</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_NOT_SEL_Y">P1 СВЕТ НЕ ВЫБРАН - Y</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_NOT_SEL_Z">P1 СВЕТ НЕ ВЫБРАН - Z</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_NOT_SEL_X">P2 СВЕТ НЕ ВЫБРАН - X</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_NOT_SEL_Y">P2 СВЕТ НЕ ВЫБРАН - Y</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_NOT_SEL_Z">P2 СВЕТ НЕ ВЫБРАН - Z</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_SEL_X">P1 СВЕТ ВЫБРАН - X</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_SEL_Y">P1 СВЕТ ВЫБРАН - Y</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_SEL_Z">P1 СВЕТ ВЫБРАН - Z</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_SEL_X">P2 СВЕТ ВЫБРАН - X</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_SEL_Y">P2 СВЕТ ВЫБРАН - Y</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_SEL_Z">P2 СВЕТ ВЫБРАН - Z</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_VSLOAD_X">P1 СВЕТ VS LOAD - X</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_VSLOAD_Y">P1 СВЕТ VS LOAD - Y</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_VSLOAD_Z">P1 СВЕТ VS LOAD - Z</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_VSLOAD_X">P2 СВЕТ VS LOAD - X</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_VSLOAD_Y">P2 СВЕТ VS LOAD - Y</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_VSLOAD_Z">P2 СВЕТ VS LOAD - Z</v:String>
+    <v:String x:Key="m_csp_P1_CUSTOMIZATION_X">P1 КАСТОМИЗАЦИЯ - X</v:String>
+    <v:String x:Key="m_csp_P1_CUSTOMIZATION_Y">P1 КАСТОМИЗАЦИЯ - Y</v:String>
+    <v:String x:Key="m_csp_P1_CUSTOMIZATION_Z">P1 КАСТОМИЗАЦИЯ - Z</v:String>
+    <v:String x:Key="m_csp_P1_CUSTOMIZATION_ROT">Ротация кастомизации P1</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_CUSTOMIZATION_X">P1 СВЕТ КАСТОМИЗАЦИЯ - X</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_CUSTOMIZATION_Y">P1 СВЕТ КАСТОМИЗАЦИЯ - Y</v:String>
+    <v:String x:Key="m_csp_P1_LIGHT_CUSTOMIZATION_Z">P1 СВЕТ КАСТОМИЗАЦИЯ - Z</v:String>
+    <v:String x:Key="m_csp_P2_CUSTOMIZATION_X">P2 КАСТОМИЗАЦИЯ - X</v:String>
+    <v:String x:Key="m_csp_P2_CUSTOMIZATION_Y">P2 КАСТОМИЗАЦИЯ - Y</v:String>
+    <v:String x:Key="m_csp_P2_CUSTOMIZATION_Z">P2 КАСТОМИЗАЦИЯ - Z</v:String>
+    <v:String x:Key="m_csp_P2_CUSTOMIZATION_ROT">Ротация кастомизации P2</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_X">P2 СВЕТ КАСТОМИЗАЦИЯ - X</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_Y">P2 СВЕТ КАСТОМИЗАЦИЯ - Y</v:String>
+    <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_Z">P2 СВЕТ КАСТОМИЗАЦИЯ - Z</v:String>
+
+</ResourceDictionary>

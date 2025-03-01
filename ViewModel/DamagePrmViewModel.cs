@@ -73,7 +73,7 @@ namespace NSC_Toolbox.ViewModel {
                         DamagePrmList.Add(DamagePrmEntry);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
                     return;
                 }
             }
@@ -87,7 +87,7 @@ namespace NSC_Toolbox.ViewModel {
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
                 SaveFileAs();
             }
@@ -116,7 +116,7 @@ namespace NSC_Toolbox.ViewModel {
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
         public byte[] ConvertToFile() {

@@ -144,7 +144,7 @@ namespace NSC_Toolbox.ViewModel
                         EffectPrmList.Add(EffectPrmEntry);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
                     return;
                 }
             }
@@ -155,7 +155,7 @@ namespace NSC_Toolbox.ViewModel
             if (SelectedEffectPrm is not null) {
                 EffectPrmList.Remove(SelectedEffectPrm);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveEntry() {
@@ -164,9 +164,9 @@ namespace NSC_Toolbox.ViewModel
                 SelectedEffectPrm.Type = Type_field;
                 SelectedEffectPrm.FilePath = FilePath_field;
                 SelectedEffectPrm.ChunkName = ChunkName_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public int SearchByteIndex(ObservableCollection<EffectPrmModel> FunctionList, int member_index, int Selected) {
@@ -191,11 +191,11 @@ namespace NSC_Toolbox.ViewModel
                         SelectedEffectPrmIndex = SearchByteIndex(EffectPrmList, SearchIndex_field, 0);
                         CollectionViewSource.GetDefaultView(EffectPrmList).MoveCurrentTo(SelectedEffectPrm);
                     } else {
-                        ModernWpf.MessageBox.Show("There is no entry with that Characode ID.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_3"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             } else {
-                ModernWpf.MessageBox.Show("Write ID in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_4"]);
             }
         }
 
@@ -211,7 +211,7 @@ namespace NSC_Toolbox.ViewModel
                 EffectPrmEntry.ChunkName = "";
             }
             EffectPrmList.Add(EffectPrmEntry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
 
         public void SaveFile() {
@@ -222,7 +222,7 @@ namespace NSC_Toolbox.ViewModel
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
                 SaveFileAs();
             }
@@ -251,7 +251,7 @@ namespace NSC_Toolbox.ViewModel
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
         public byte[] ConvertToFile() {

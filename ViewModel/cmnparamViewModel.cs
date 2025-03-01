@@ -358,7 +358,7 @@ namespace NSC_Toolbox.ViewModel
             if (SelectedPairSpl is not null) {
                 PairSplList.Remove(SelectedPairSpl);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SavePairSplEntry() {
@@ -370,9 +370,9 @@ namespace NSC_Toolbox.ViewModel
                 SelectedPairSpl.PairSplName1 = PairSplName1_field;
                 SelectedPairSpl.PairSplName2 = PairSplName2_field;
                 SelectedPairSpl.PairSoundEvFileName = PairSoundEvFileName_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void AddDupPairSplEntry() {
@@ -389,13 +389,13 @@ namespace NSC_Toolbox.ViewModel
                 PairSplEntry.PairSoundEvFileName = "";
             }
             PairSplList.Add(PairSplEntry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
         public void RemovePlayerSndEntry() {
             if (SelectedPlayerSnd is not null) {
                 PlayerSndList.Remove(SelectedPlayerSnd);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SavePlayerSndEntry() {
@@ -416,9 +416,9 @@ namespace NSC_Toolbox.ViewModel
                 SelectedPlayerSnd.PlayerSndUJ_alt_Atk_ChunkName = PlayerSndUJ_alt_Atk_ChunkName_field;
                 SelectedPlayerSnd.PlayerPartnerCharacodeBase = PlayerPartnerCharacodeBase_field;
                 SelectedPlayerSnd.PlayerPartnerCharacodeAwake = PlayerPartnerCharacodeAwake_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void AddDupPlayerSndEntry() {
@@ -445,7 +445,7 @@ namespace NSC_Toolbox.ViewModel
 
             }
             PlayerSndList.Add(PlayerSndEntry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
         public int SearchPairSplStringIndex(ObservableCollection<pair_spl_sndModel> FunctionList, string member_name, int Selected) {
             for (int x = 0; x < FunctionList.Count; x++) {
@@ -470,11 +470,11 @@ namespace NSC_Toolbox.ViewModel
                         SelectedPairSplIndex = SearchPairSplStringIndex(PairSplList, SearchPairSpl_field, -1);
                         CollectionViewSource.GetDefaultView(PairSplList).MoveCurrentTo(SelectedPairSpl);
                     } else {
-                        ModernWpf.MessageBox.Show("There is no entry with that name.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_18"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             } else {
-                ModernWpf.MessageBox.Show("Write text in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_17"]);
             }
         }
         public int SearchPlayerSndStringIndex(ObservableCollection<player_sndModel> FunctionList, string member_name, int Selected) {
@@ -500,11 +500,11 @@ namespace NSC_Toolbox.ViewModel
                         SelectedPlayerSndIndex = SearchPlayerSndStringIndex(PlayerSndList, SearchPlayerSnd_field, -1);
                         CollectionViewSource.GetDefaultView(PlayerSndList).MoveCurrentTo(SelectedPlayerSnd);
                     } else {
-                        ModernWpf.MessageBox.Show("There is no entry with that name.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_18"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             } else {
-                ModernWpf.MessageBox.Show("Write text in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_17"]);
             }
         }
         public void SaveFile() {
@@ -516,7 +516,7 @@ namespace NSC_Toolbox.ViewModel
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
                 SaveFileAs();
             }
@@ -546,7 +546,7 @@ namespace NSC_Toolbox.ViewModel
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
         public byte[] ConvertToFile() {

@@ -1636,15 +1636,15 @@ namespace NSC_Toolbox.ViewModel {
                         SelectedFilePathIndex = SelectedSkill.FilePathList.Count - 1;
                     } else {
 
-                        ModernWpf.MessageBox.Show("You can use maximum 3 paths for files!");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_73"]);
                     }
                 }
                 else {
 
-                    ModernWpf.MessageBox.Show("Write file path in field!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_74"]);
                 }
             } else {
-                ModernWpf.MessageBox.Show("Select skill entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_75"]);
             }
         }
 
@@ -1652,7 +1652,7 @@ namespace NSC_Toolbox.ViewModel {
             if (SelectedSkill is not null && SelectedFilePath is not null) {
                 SelectedSkill.FilePathList.Remove(SelectedFilePath);
             } else {
-                ModernWpf.MessageBox.Show("Select skill entry and after that select path which you want to delete!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_76"]);
             }
         }
 
@@ -1674,7 +1674,7 @@ namespace NSC_Toolbox.ViewModel {
                 new_skill_entry.ChunkName = new_skill_entry.ChunkName + "_copy";
                 SkillList.Add(new_skill_entry);
             } else {
-                ModernWpf.MessageBox.Show("Select Skill Entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_75"]);
             }
         }
 
@@ -1706,9 +1706,9 @@ namespace NSC_Toolbox.ViewModel {
                 SelectedSkill.FilePathList = FilePathList;
                 SelectedSkill.ActionList = ActionList;
                 SelectedSkill.ClassName = ClassName_field;
-                ModernWpf.MessageBox.Show("Skill Parameters saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_77"]);
             } else {
-                ModernWpf.MessageBox.Show("Select skill entry which you want to save!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_78"]);
             }
         }
         public int SearchStringIndex(ObservableCollection<SkillEntryModel> FunctionList, string member_name, int Selected) {
@@ -1734,11 +1734,11 @@ namespace NSC_Toolbox.ViewModel {
                         SelectedSkillIndex = SearchStringIndex(SkillList, SkillTextBox_field, -1);
                         CollectionViewSource.GetDefaultView(SkillList).MoveCurrentTo(SelectedSkill);
                     } else {
-                        ModernWpf.MessageBox.Show("There is no entry with that name.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_18"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             } else {
-                ModernWpf.MessageBox.Show("Write text in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_17"]);
             }
         }
 
@@ -1789,18 +1789,18 @@ namespace NSC_Toolbox.ViewModel {
                     SelectedSkill.ActionList.Add(new_action_entry);
                 } else {
 
-                    ModernWpf.MessageBox.Show("You can use maximum 16 actions for skill entry!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_79"]);
                 }
 
             } else {
-                ModernWpf.MessageBox.Show("Select skill entry where you want to add new action!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_80"]);
             }
         }
         public void DeleteAction() {
             if (SelectedAction is not null) {
                 ActionList.Remove(SelectedAction);
             } else {
-                ModernWpf.MessageBox.Show("Select action entry which you want to delete!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_81"]);
             }
         }
         public void SaveAction() {
@@ -1872,7 +1872,7 @@ namespace NSC_Toolbox.ViewModel {
                 SelectedAction.SkillCameraQuakeEntry.QuakeTime = QuakeTime_field;
                 SelectedAction.SkillCameraQuakeEntry.PerReduction = PerReduction_field;
             } else {
-                ModernWpf.MessageBox.Show("Select action entry which you want to save!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_82"]);
             }
         }
 
@@ -1885,7 +1885,7 @@ namespace NSC_Toolbox.ViewModel {
                 new_sound_entry.Repeat = 1;
                 SelectedAction.SoundList.Add(new_sound_entry);
             } else {
-                ModernWpf.MessageBox.Show("Select action entry where you want to add new sound entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_83"]);
             }
         }
 
@@ -1893,7 +1893,7 @@ namespace NSC_Toolbox.ViewModel {
             if (SelectedSound is not null) {
                 SoundList.Remove(SelectedSound);
             } else {
-                ModernWpf.MessageBox.Show("Select sound entry which you want to delete!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_84"]);
             }
         }
 
@@ -1904,7 +1904,7 @@ namespace NSC_Toolbox.ViewModel {
                 SelectedSound.Interval = Interval_field;
                 SelectedSound.Repeat = Repeat_field;
             } else {
-                ModernWpf.MessageBox.Show("Select sound entry which you want to save!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_85"]);
             }
         }
 
@@ -1922,10 +1922,10 @@ namespace NSC_Toolbox.ViewModel {
                     SelectedEvent.EffectList.Add(new_effect_entry);
                 } else {
 
-                    ModernWpf.MessageBox.Show("You can add maximum 2 effects for per event!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_86"]);
                 }
             } else {
-                ModernWpf.MessageBox.Show("Select event entry where you want to add new effect entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_87"]);
             }
         }
 
@@ -1933,7 +1933,7 @@ namespace NSC_Toolbox.ViewModel {
             if (SelectedEffect is not null) {
                 EffectList.Remove(SelectedEffect);
             } else {
-                ModernWpf.MessageBox.Show("Select effect entry which you want to delete!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_88"]);
             }
         }
 
@@ -1947,7 +1947,7 @@ namespace NSC_Toolbox.ViewModel {
                 SelectedEffect.TargetDir = TargetDir_field;
                 SelectedEffect.PlaneDir = PlaneDir_field;
             } else {
-                ModernWpf.MessageBox.Show("Select effect entry which you want to save!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_89"]);
             }
         }
 
@@ -1963,14 +1963,14 @@ namespace NSC_Toolbox.ViewModel {
                 new_event_entry.EffectList = new ObservableCollection<SkillEffectModel>();
                 SelectedAction.EventList.Add(new_event_entry);
             } else {
-                ModernWpf.MessageBox.Show("Select action entry where you want to add new event entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_90"]);
             }
         }
         public void DeleteEvent() {
             if (SelectedEvent is not null) {
                 EventList.Remove(SelectedEvent);
             } else {
-                ModernWpf.MessageBox.Show("Select event entry which you want to delete!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_91"]);
             }
         }
         public void SaveEvent() {
@@ -1982,7 +1982,7 @@ namespace NSC_Toolbox.ViewModel {
                 SelectedEvent.EnableLoopCount = EnableLoopCount_field;
                 SelectedEvent.LoopCount = LoopCount_field;
             } else {
-                ModernWpf.MessageBox.Show("Select event entry which you want to save!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_92"]);
             }
         }
 
@@ -1996,12 +1996,12 @@ namespace NSC_Toolbox.ViewModel {
                         }
                         File.Copy(filePath, filePath + ".backup");
                         File.WriteAllBytes(filePath, ConvertToFile());
-                        ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
                     } else {
                         SaveFileAs();
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("Your file is empty, you can't save it!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_93"]);
                 }
             }
             catch (Exception ex) {
@@ -2033,9 +2033,9 @@ namespace NSC_Toolbox.ViewModel {
                 }
                 File.WriteAllBytes(filePath, ConvertToFile());
                 if (basepath == "")
-                    ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
-                ModernWpf.MessageBox.Show("Your file is empty, you can't save it!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_93"]);
             }
         }
 

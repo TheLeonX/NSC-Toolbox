@@ -3,16 +3,285 @@
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
 
-    <v:String x:Key="m_AddDupEntry">Add/Duplicate Entry</v:String>
-    <v:String x:Key="m_DupEntry">Duplicate Entry</v:String>
-    <v:String x:Key="m_AddEntry">Add Entry</v:String>
-    <v:String x:Key="m_DeleteEntry">Delete Entry</v:String>
-    <v:String x:Key="m_SaveEntry">Save Entry</v:String>
-    <v:String x:Key="m_SearchEntry">Search Entry</v:String>
+    <v:String x:Key="m_AddDupEntry">Add/Duplicate</v:String>
+    <v:String x:Key="m_DupEntry">Duplicate</v:String>
+    <v:String x:Key="m_AddEntry">Add</v:String>
+    <v:String x:Key="m_DeleteEntry">Delete</v:String>
+    <v:String x:Key="m_SaveEntry">Save</v:String>
+    <v:String x:Key="m_SearchEntry">Search</v:String>
     <v:String x:Key="m_File">File</v:String>
     <v:String x:Key="m_OpenFile">Open</v:String>
     <v:String x:Key="m_SaveFile">Save</v:String>
     <v:String x:Key="m_SaveAsFile">Save As</v:String>
+
+    <v:String x:Key="m_language">Language</v:String>
+    <v:String x:Key="m_language_en-US">English</v:String>
+    <v:String x:Key="m_language_ru-RU">Русский</v:String>
+    
+    
+    <v:String x:Key="m_tool_1">Entry was saved!</v:String>
+    <v:String x:Key="m_tool_2">Entry was added!</v:String>
+    <v:String x:Key="m_tool_3">File saved to</v:String>
+    <v:String x:Key="m_error_1">You can't open that file with that tool.</v:String>
+    <v:String x:Key="m_error_2">Select entry!</v:String>
+    <v:String x:Key="m_error_3">There is no entry with that Characode ID.</v:String>
+    <v:String x:Key="m_error_4">Write ID in field!</v:String>
+
+    <v:String x:Key="m_kyuruto">Kyuruto</v:String>
+    <v:String x:Key="m_kyuruto_1">Hello! You can call me </v:String>
+    <v:String x:Key="m_update_1">There is new version of Toolbox on GitHub page.</v:String>
+    <v:String x:Key="m_update_2">ModdingAPI was installed!</v:String>
+    <v:String x:Key="m_update_3">ModdingAPI was deleted!</v:String>
+    <v:String x:Key="m_error_5">There is no entry with that Characode.</v:String>
+    <v:String x:Key="m_error_6">Write characode in field!</v:String>
+    <v:String x:Key="m_error_7">This characode already exist in game!</v:String>
+    <v:String x:Key="m_error_8">Write characode name in field</v:String>
+    <v:String x:Key="m_error_9">Some changes requires to restart toolbox!</v:String>
+    <v:String x:Key="m_error_10">Are you sure that you want to delete ModdingAPI? All mods inside of it will be deleted as well.</v:String>
+    <v:String x:Key="m_error_11">Directory doesn't exist!</v:String>
+    <v:String x:Key="m_error_12">Some files doesn't exist! Do you want to add missing files in directory?</v:String>
+    <v:String x:Key="m_error_13">Write code of costume and code of icon!</v:String>
+    <v:String x:Key="m_error_14">Select character code in dropbox!</v:String>
+    <v:String x:Key="m_error_15">You already added that entry.</v:String>
+    <v:String x:Key="m_error_16">You can't add more entries!</v:String>
+    <v:String x:Key="m_error_17">Write text in field!</v:String>
+    <v:String x:Key="m_error_18">There is no entry with that name.</v:String>
+    <v:String x:Key="m_error_19">No entries. Failed to save file.</v:String>
+    <v:String x:Key="m_error_20">Select CPK which you want to delete</v:String>
+    <v:String x:Key="m_error_21">Character was already selected!</v:String>
+    <v:String x:Key="m_error_22">Select Character which you want to export</v:String>
+    <v:String x:Key="m_error_23">Select Character which you want to delete</v:String>
+    <v:String x:Key="m_error_24">Model was already selected!</v:String>
+    <v:String x:Key="m_error_25">Select Model which you want to delete</v:String>
+    <v:String x:Key="m_error_26">Stage was already selected!</v:String>
+    <v:String x:Key="m_error_27">Select Stage which you want to export</v:String>
+    <v:String x:Key="m_error_28">Select Stage which you want to delete</v:String>
+    <v:String x:Key="m_error_29">Select stage!</v:String>
+    <v:String x:Key="m_error_30">Select shader which you want to delete</v:String>
+    <v:String x:Key="m_error_31">Character with characode </v:String>
+    <v:String x:Key="m_error_32">wasn't exported, cuz it has missing duelPlayerParam entry."</v:String>
+    <v:String x:Key="m_error_33">wasn't exported, cuz it has missing duelPlayerParam file.</v:String>
+    <v:String x:Key="m_error_34">wasn't exported, cuz it has missing</v:String>
+    <v:String x:Key="m_error_35">Model with PlayerSettingParam code</v:String>
+    <v:String x:Key="m_error_36">Couldn't find entry in pairSpSkillCombinationParam for that Team Ultimate Jutsu.</v:String>
+    <v:String x:Key="m_error_37">Couldn't find entry in cmnparam for that Team Ultimate Jutsu.</v:String>
+    <v:String x:Key="m_error_38">Some settings were setup incorrectly!</v:String>
+    <v:String x:Key="m_error_39">This tool requires all messageInfo files to be loaded in directory!</v:String>
+    <v:String x:Key="m_error_40">There is no entry with that text.</v:String>
+    <v:String x:Key="m_error_41">Couldn't find section with that Message ID.</v:String>
+    <v:String x:Key="m_error_42">Entry with that Message ID already exist in file!</v:String>
+    <v:String x:Key="m_error_43">Section already exists with that ID</v:String>
+    <v:String x:Key="m_error_44">Select Movement Entry!</v:String>
+    <v:String x:Key="m_error_45">Movement was saved!</v:String>
+    <v:String x:Key="m_error_46">Movement was added!</v:String>
+    <v:String x:Key="m_error_47">Select Projectile entry!</v:String>
+    <v:String x:Key="m_error_48">Projectile was saved!</v:String>
+    <v:String x:Key="m_error_49">Projectile was added!</v:String>
+    <v:String x:Key="m_error_50">Select Collision entry!</v:String>
+    <v:String x:Key="m_error_51">Collision was saved!</v:String>
+    <v:String x:Key="m_error_52">Collision was added!</v:String>
+    <v:String x:Key="m_error_53">Select Ver Entry!</v:String>
+    <v:String x:Key="m_error_54">Ver Entry was saved!</v:String>
+    <v:String x:Key="m_error_55">That Ver Entry already exist!</v:String>
+    <v:String x:Key="m_error_56">Ver Entry was added!</v:String>
+    <v:String x:Key="m_error_57">Ver Entry with that type already exist in file.</v:String>
+    <v:String x:Key="m_error_58">Select Ver Entry type.</v:String>
+    <v:String x:Key="m_error_59">Characode was changed successfully!</v:String>
+    <v:String x:Key="m_error_60">No Ver Entries</v:String>
+    <v:String x:Key="m_error_61">Select PL_ANM entry!</v:String>
+    <v:String x:Key="m_error_62">PL_ANM entry was imported successfully!</v:String>
+    <v:String x:Key="m_error_63">Empty clipboard or corrupted data!</v:String>
+    <v:String x:Key="m_error_64">PL_ANM entry was copied successfully!</v:String>
+    <v:String x:Key="m_error_65">Select function!</v:String>
+    <v:String x:Key="m_error_66">Function was saved!</v:String>
+    <v:String x:Key="m_error_67">Function was added!</v:String>
+    <v:String x:Key="m_error_68">Function entry was imported successfully!</v:String>
+    <v:String x:Key="m_error_69">Something is wrong with Function entry data.</v:String>
+    <v:String x:Key="m_error_70">Function entry was copied successfully!</v:String>
+    <v:String x:Key="m_error_71">Select Function entry!</v:String>
+    <v:String x:Key="m_error_72">Unable to save file. File data is empty!</v:String>
+    <v:String x:Key="m_error_73">You can use maximum 3 paths for files!</v:String>
+    <v:String x:Key="m_error_74">Write file path in field!</v:String>
+    <v:String x:Key="m_error_75">Select skill entry!</v:String>
+    <v:String x:Key="m_error_76">Select skill entry and after that select path which you want to delete!</v:String>
+    <v:String x:Key="m_error_77">Skill Parameters saved!</v:String>
+    <v:String x:Key="m_error_78">Select skill entry which you want to save!</v:String>
+    <v:String x:Key="m_error_79">You can use maximum 16 actions for skill entry!</v:String>
+    <v:String x:Key="m_error_80">Select skill entry where you want to add new action!</v:String>
+    <v:String x:Key="m_error_81">Select action entry which you want to delete!</v:String>
+    <v:String x:Key="m_error_82">Select action entry which you want to save!</v:String>
+    <v:String x:Key="m_error_83">Select action entry where you want to add new sound entry!</v:String>
+    <v:String x:Key="m_error_84">Select sound entry which you want to delete!</v:String>
+    <v:String x:Key="m_error_85">Select sound entry which you want to save!</v:String>
+    <v:String x:Key="m_error_86">You can add maximum 2 effects for per event!</v:String>
+    <v:String x:Key="m_error_87">Select event entry where you want to add new effect entry!</v:String>
+    <v:String x:Key="m_error_88">Select effect entry which you want to delete!</v:String>
+    <v:String x:Key="m_error_89">Select effect entry which you want to save!</v:String>
+    <v:String x:Key="m_error_90">Select action entry where you want to add new event entry!</v:String>
+    <v:String x:Key="m_error_91">Select event entry which you want to delete!</v:String>
+    <v:String x:Key="m_error_92">Select event entry which you want to save!</v:String>
+    <v:String x:Key="m_error_93">Your file is empty, you can't save it!</v:String>
+    <v:String x:Key="m_error_94">File too small.</v:String>
+    <v:String x:Key="m_error_95">Stage properties were copied!</v:String>
+    <v:String x:Key="m_error_96">Properties were pasted!</v:String>
+    <v:String x:Key="m_error_97">Path already exist in list!</v:String>
+
+
+    <!--Condition Manager Tool -->
+
+    <v:String x:Key="m_condM_title">Condition Manager Editor</v:String>
+    <v:String x:Key="m_condM_conditionAfter">Debuff Condition</v:String>
+    <v:String x:Key="m_condM_conditionIcon">Condition Icon</v:String>
+    <v:String x:Key="m_condM_conditionValue">Condition Value</v:String>
+    <v:String x:Key="m_condM_conditionStatus">Condition Status Effect</v:String>
+    <v:String x:Key="m_condM_conditionAura">Condition Aura Effect</v:String>
+
+    <v:String x:Key="m_status_00">No Icon</v:String>
+    <v:String x:Key="m_status_01">Attack Down</v:String>
+    <v:String x:Key="m_status_02">Attack UP</v:String>
+    <v:String x:Key="m_status_03">Defence Down</v:String>
+    <v:String x:Key="m_status_04">Defence Up</v:String>
+    <v:String x:Key="m_status_05">Faint</v:String>
+    <v:String x:Key="m_status_06">Guard Break</v:String>
+    <v:String x:Key="m_status_07">Awake Down</v:String>
+    <v:String x:Key="m_status_08">Awake</v:String>
+    <v:String x:Key="m_status_09">Auto Dodge</v:String>
+    <v:String x:Key="m_status_10">Sacrifice</v:String>
+    <v:String x:Key="m_status_11">Sacrifice Enhanced</v:String>
+    <v:String x:Key="m_status_12">Poison</v:String>
+    <v:String x:Key="m_status_13">Sleep</v:String>
+    <v:String x:Key="m_status_14">Super Armor</v:String>
+    <v:String x:Key="m_status_15">Super Armor Enhanced</v:String>
+    <v:String x:Key="m_status_16">Speed Down</v:String>
+    <v:String x:Key="m_status_17">Speed Up</v:String>
+    <v:String x:Key="m_status_18">Projectile Through</v:String>
+    <v:String x:Key="m_status_19">Projectile Through Enhanced</v:String>
+    <v:String x:Key="m_status_20">Unity</v:String>
+    <v:String x:Key="m_status_21">Unity Enhanced</v:String>
+    <v:String x:Key="m_status_22">Add Poison</v:String>
+    <v:String x:Key="m_status_23">Chakra Up</v:String>
+    <v:String x:Key="m_status_24">Chakra Consume Down</v:String>
+    <v:String x:Key="m_status_25">Life Auto Recover</v:String>
+    <v:String x:Key="m_status_26">Guard Break Up</v:String>
+    <v:String x:Key="m_status_27">Chakra Auto Recover</v:String>
+    <v:String x:Key="m_status_28">Support Recover Speed Up</v:String>
+    <v:String x:Key="m_status_29">Storm Gauge Up</v:String>
+    <v:String x:Key="m_status_30">Chakra Seal</v:String>
+    <v:String x:Key="m_status_31">Support Attack Up</v:String>
+    <v:String x:Key="m_status_40">Support Storm Up</v:String>
+    <v:String x:Key="m_status_41">Chakra Consume Up</v:String>
+
+
+
+    <v:String x:Key="m_modtype_0">Character</v:String>
+    <v:String x:Key="m_modtype_1">Stage</v:String>
+    <v:String x:Key="m_modtype_2">Costume</v:String>
+    <v:String x:Key="m_modtype_3">Resource (export files excluding param files)</v:String>
+    <v:String x:Key="m_modtype_4">Team Ultimate JutsuCharacter</v:String>
+    <v:String x:Key="m_modtype_5">Accessory</v:String>
+
+    <v:String x:Key="m_strikeback_03">Strike Back</v:String>
+    <v:String x:Key="m_strikeback_04">Dash Cut</v:String>
+    <v:String x:Key="m_strikeback_05">Secret Technique Substitution</v:String>
+    <v:String x:Key="m_strikeback_06">Charge Guard</v:String>
+    <v:String x:Key="m_strikeback_07">Cover Fire</v:String>
+    <v:String x:Key="m_strikeback_08">Combo Support</v:String>
+    <v:String x:Key="m_strikeback_0B">Break Guard</v:String>
+    <v:String x:Key="m_strikeback_0C">Charge Assist</v:String>
+
+    <!-- StageEntryTypeList entries -->
+    <v:String x:Key="m_stageEntryType_0">0 = Static mesh</v:String>
+    <v:String x:Key="m_stageEntryType_1">1 = Animation</v:String>
+    <v:String x:Key="m_stageEntryType_4">4 = Tree Object</v:String>
+    <v:String x:Key="m_stageEntryType_6">6 = Grass/Leaf Object</v:String>
+    <v:String x:Key="m_stageEntryType_7">7 = Breakable Wall</v:String>
+    <v:String x:Key="m_stageEntryType_10">10 = Rigid Body</v:String>
+    <v:String x:Key="m_stageEntryType_11">11 = Rigid Body Animation</v:String>
+
+    <!-- DMGCOND entries -->
+    <v:String x:Key="m_dmgcond_0">0 = None</v:String>
+    <v:String x:Key="m_dmgcond_1">1 = Unguardable</v:String>
+    <v:String x:Key="m_dmgcond_2">2 = Undodgeable</v:String>
+    <v:String x:Key="m_dmgcond_3">3 = Unreboundable</v:String>
+    <v:String x:Key="m_dmgcond_4">4 = Cause Chip damage on block</v:String>
+    <v:String x:Key="m_dmgcond_5">5 = Extended stagger (STAGGER_NORMAL)</v:String>
+    <v:String x:Key="m_dmgcond_6">6 = None</v:String>
+    <v:String x:Key="m_dmgcond_7">7 = None</v:String>
+    <v:String x:Key="m_dmgcond_14">14 = Remove Effect from dmg</v:String>
+    <v:String x:Key="m_dmgcond_18">18 = Unreboundable + 16 condition</v:String>
+    <v:String x:Key="m_dmgcond_21">21 = Remove Effect from dmg + 19 condition</v:String>
+    <v:String x:Key="m_dmgcond_24">24 = Undodgeable + Unreboundable</v:String>
+    <v:String x:Key="m_dmgcond_25">25 = Prevent Strike-back</v:String>
+    <v:String x:Key="m_dmgcond_26">26 = Remove Effect from dmg + Prevent Strike-back</v:String>
+    <v:String x:Key="m_dmgcond_27">27 = Undodgeable + Remove Effect from dmg + Prevent Strike-back</v:String>
+    <v:String x:Key="m_dmgcond_28">28 = None</v:String>
+    <v:String x:Key="m_dmgcond_29">29 = None</v:String>
+
+    <!-- COND entries -->
+    <v:String x:Key="m_cond_0">0 = No condition</v:String>
+    <v:String x:Key="m_cond_1">1 = No condition</v:String>
+    <v:String x:Key="m_cond_2">2 = If enemy is on the ground</v:String>
+    <v:String x:Key="m_cond_3">3 = If enemy is on air</v:String>
+    <v:String x:Key="m_cond_4">4 = If previous attack hit (normal characters)</v:String>
+    <v:String x:Key="m_cond_5">5 = If player is on left side</v:String>
+    <v:String x:Key="m_cond_6">6 = If player is on right side</v:String>
+    <v:String x:Key="m_cond_7">7 = No condition</v:String>
+    <v:String x:Key="m_cond_8">8 = No condition</v:String>
+    <v:String x:Key="m_cond_9">9 = No condition</v:String>
+    <v:String x:Key="m_cond_10">10 = No condition</v:String>
+    <v:String x:Key="m_cond_11">11 = No condition</v:String>
+    <v:String x:Key="m_cond_12">12 = If previous attack hit while enemy was guarding</v:String>
+    <v:String x:Key="m_cond_16">16 = If previous attack hit giant character</v:String>
+    <v:String x:Key="m_cond_17">17 = If enemy awakens into giant character</v:String>
+
+    <!-- LINK_COND entries -->
+    <v:String x:Key="m_linkcond_minus1">-1 = Autolink if the previous attack has specific conditions</v:String>
+    <v:String x:Key="m_linkcond_0">0 = Link by pressing a button</v:String>
+    <v:String x:Key="m_linkcond_1">1 = Link by pressing a button for square combos</v:String>
+    <v:String x:Key="m_linkcond_4">4 = If previous attack hit (normal characters)</v:String>
+    <v:String x:Key="m_linkcond_5">5 = No condition</v:String>
+    <v:String x:Key="m_linkcond_6">6 = No condition</v:String>
+    <v:String x:Key="m_linkcond_7">7 = No condition</v:String>
+    <v:String x:Key="m_linkcond_8">8 = No condition</v:String>
+    <v:String x:Key="m_linkcond_9">9 = Link normal Jutsu (for adding Charged Jutsu)</v:String>
+    <v:String x:Key="m_linkcond_10">10 = Link charged Jutsu (must have Normal Jutsu)</v:String>
+    <v:String x:Key="m_linkcond_11">11 = Autolink when previous animation ends</v:String>
+    <v:String x:Key="m_linkcond_12">12 = Support Jutsu/Guard hit link</v:String>
+
+
+
+
+    <!--Kyuruto-->
+    <v:String x:Key="m_CharacodeEditor_Kyuruto">This is tool for editing character list and it's required for adding characters. If you work only with exist characters, you can skip this tool.</v:String>
+    <v:String x:Key="m_DuelPlayerParamEditor_Kyuruto">This tool will help you to edit character settings and add more costumes for them.</v:String>
+    <v:String x:Key="m_PlayerSettingParamEditor_Kyuruto">This tool will help you to make entries for costumes, which can be loaded with characterSelectParam file.</v:String>
+    <v:String x:Key="m_CharacterSelectParamEditor_Kyuruto">This tool will help you to edit character roster. If you made new entries in playerSettingParam file, you can load your costumes in game with that tool.</v:String>
+    <v:String x:Key="m_SkillCustomizeParamEditor_Kyuruto">This tool is required for adding (or changing) Ninjutsus to characters and change their settings.</v:String>
+    <v:String x:Key="m_SpSkillCustomizeParamEditor_Kyuruto">This tool is required for adding (or changing) Ultimate Jutsus to characters and change their settings.</v:String>
+    <v:String x:Key="m_AfterAttachObjectEditor_Kyuruto">This tool will help you to attach different objects or animations to specific bones on models.</v:String>
+    <v:String x:Key="m_AppearanceAnmEditor_Kyuruto">This tool will help you to change model properties for specific events: hide or make visible meshes, change blend value of materials and etc.</v:String>
+    <v:String x:Key="m_PRMEditor_Kyuruto">If you aren't familiar with hex editing, this tool will be great for you to edit moveset settings of characters.</v:String>
+    <v:String x:Key="m_CostumeParamEditor_Kyuruto">This tool is required for unlocking costumes (in case if you add them for characters with playerSettingParam file).</v:String>
+    <v:String x:Key="m_PlayerDoubleEffectParamEditor_Kyuruto">This tool will help you to add start/end effects for models when they appear on scene, for example: adding poof effect for shadow clones.</v:String>
+    <v:String x:Key="m_CmnParamEditor_Kyuruto">This tool is requried for character sounds. cmnparam.xfbin loads all sounds for all characters and Team Ultimate Jutsus (all sounds have to be stored in CPK archive and loaded with ModdingAPI).</v:String>
+    <v:String x:Key="m_SupportActionParamEditor_Kyuruto">This tool was used for changing support action, such as: protecting leader while you recovering chakra, throw syurikens when you throw them and etc.</v:String>
+    <v:String x:Key="m_PlayerIconEditor_Kyuruto">This tool is required for loading character icons for costumes.</v:String>
+    <v:String x:Key="m_AwakeAuraEditor_Kyuruto">This tool was used for loading auras to characters.</v:String>
+    <v:String x:Key="m_SkillIndexSettingParamEditor_Kyuruto">This tool is required for changing default jutsus of characters (you can load all 6 jutsus, but pick only 2 for per character).</v:String>
+    <v:String x:Key="m_PRMLoadEditor_Kyuruto">This tool is required for loading files to character. If file doesn't exist in game or data_win32 directory, game will get infinite loading when you will select characters.</v:String>
+    <v:String x:Key="m_SpTypeSupportParamEditor_Kyuruto">This tool was used for adding extra jutsus (on D-pad) and setting them up.</v:String>
+    <v:String x:Key="m_PrivateCameraEditor_Kyuruto">This tool is required for setting up camera for giant awakenings (can be enabled in duelPlayerParam file). If you adding characters, this file will be required.</v:String>
+    <v:String x:Key="m_CostumeBreakParamEditor_Kyuruto">This tool was used for changing base model on dmg model after rounds in game (Armor Break).</v:String>
+    <v:String x:Key="m_CostumeBreakColorParamEditor_Kyuruto">This tool was used for changing particle color when you get armor break.</v:String>
+    <v:String x:Key="m_SupportSkillRecoverySpeedParamEditor_Kyuruto">This tool was used for changing recovery speed for supports.</v:String>
+    <v:String x:Key="m_StageInfoEditor_Kyuruto">This tool will help you to change stages in game.</v:String>
+    <v:String x:Key="m_MessageInfoEditor_Kyuruto">This tool is required for editing localization in game (all languages required for working tool).</v:String>
+    <v:String x:Key="m_DamageEffEditor_Kyuruto">This tool was used for loading hit effects for character movesets. Effects can be found in effectprm.bin.xfbin file</v:String>
+    <v:String x:Key="m_EffectPrmEditor_Kyuruto">This tool was used for loading effects, which can be used in damageeff.bin.xfbin file.</v:String>
+    <v:String x:Key="m_SkillFileEditor_Kyuruto">This tool will help you to edit skill files for projectiles in game.</v:String>
+    <v:String x:Key="m_PairSpSkillEditor_Kyuruto">This tool will let you add more Team Ultimate Jutsus in game!</v:String>
+    <v:String x:Key="m_SpecialInteraction_Kyuruto">This tool will let you add special interaction in ultimate jutsus!</v:String>
+    <v:String x:Key="m_ConditionPrm_Kyuruto">This tool will let you change conditions for characters and status effects!</v:String>
 
     <!-- Title Window-->
     <v:String x:Key="m_Title">Naruto Storm Connections - Toolbox</v:String>
@@ -30,6 +299,84 @@
     <v:String x:Key="m_mainWindow_012">Support Me</v:String>
     <v:String x:Key="m_mainWindow_013">GitHub Page</v:String>
 
+    <v:String x:Key="m_mainWindowTool_001">Character ID Manager (characode.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_002">Character Setting Editor (duelPlayerParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_003">Costume Editor (playerSettingParam.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_004">Character Roster Manager (characterSelectParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_005">Ninjutsu Editor (skillCustomizeParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_006">Attach Object Editor (afterAttachObject.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_007">Character Moveset Editor (****prm.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_008">Character Costume Unlock Editor (costumeParam.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_009">Character Icon Editor (player_icon.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_010">Character Aura Editor (awakeAura.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_011">Ninjutsu List Editor (skillIndexSettingParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_012">Ultimate Jutsu Editor (spSkillCustomizeParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_013">Costume Chunk Enabler (appearanceAnm.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_014">Character File Loader Editor (****prm_load.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_015">Character Action Editor (spTypeSupportParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_016">Character Awakening Camera Editor (privateCamera.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_017">Player Sound Setting Editor (cmnparam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_018">Character Fade Effect Editor (playerDoubleEffectParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_019">Character Armor Break Costume Editor (costumeBreakParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_020">Character Armor Break Color Editor (costumeBreakColorParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_021">Common Effect Dictionary Editor (effectprm.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_022">Stage Setting Editor (StageInfo.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_023">Localization Editor (messageInfo.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_024">Hit Effect Dictionary Editor (damageEff.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_025">Support Action Editor (supportActionParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_026">Support Skill Recovery Speed Editor (supportSkillRecoverySpeedParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_027">Projectile Editor</v:String>
+    <v:String x:Key="m_mainWindowTool_028">Team Ultimate Jutsu Param Editor (pairSpSkillCombinationParam.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_029">UJ Special Interaction Manager (specialInteractionManager.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_030">Condition Editor (conditionprm.bin.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_031">Condition Manager Editor (conditionprmManager.xfbin)</v:String>
+    <v:String x:Key="m_option001">Stretch Mode</v:String>
+    <v:String x:Key="m_option002">Fill</v:String>
+    <v:String x:Key="m_option003">Uniform</v:String>
+    <v:String x:Key="m_option004">Save Settings</v:String>
+    <v:String x:Key="m_option005">None</v:String>
+    <v:String x:Key="m_option006">Background Color</v:String>
+    <v:String x:Key="m_option007">Button Color</v:String>
+    <v:String x:Key="m_option008">Background Image</v:String>
+    <v:String x:Key="m_option009">Reset Settings</v:String>
+    <v:String x:Key="m_option010">Select Image</v:String>
+    <v:String x:Key="m_option011">Font Color</v:String>
+
+    <!--conditionprm editor-->
+    <v:String x:Key="m_condPrm">Condition PRM Editor</v:String>
+    <v:String x:Key="m_condPrm_Name">Condition Name</v:String>
+    <v:String x:Key="m_condPrm_Duration">Condition Duration</v:String>
+    <v:String x:Key="m_condPrm_ATK">Damage Multiplier</v:String>
+    <v:String x:Key="m_condPrm_DEF">Defence</v:String>
+    <v:String x:Key="m_condPrm_SPD">Speed</v:String>
+    <v:String x:Key="m_condPrm_SupportATK">Support Damage Multiplier</v:String>
+    <v:String x:Key="m_condPrm_HPRecover">HP Recover</v:String>
+    <v:String x:Key="m_condPrm_ChakraRecover">Chakra Recover</v:String>
+    <v:String x:Key="m_condPrm_ChakraShave">Chakra Shave</v:String>
+    <v:String x:Key="m_condPrm_ChakraRevival">Chakra Revival</v:String>
+    <v:String x:Key="m_condPrm_ChakraDrain">Chakra Drain</v:String>
+    <v:String x:Key="m_condPrm_Chakra">Chakra</v:String>
+    <v:String x:Key="m_condPrm_ChakraUsage">Chakra Usage</v:String>
+    <v:String x:Key="m_condPrm_ChakraUnk">Chakra Unknown</v:String>
+    <v:String x:Key="m_condPrm_Poison">Poison</v:String>
+    <v:String x:Key="m_condPrm_GuardBreak">Guard Break</v:String>
+    <v:String x:Key="m_condPrm_Dodge">Dodge</v:String>
+    <v:String x:Key="m_condPrm_Support">Support</v:String>
+    <v:String x:Key="m_condPrm_Team">Team</v:String>
+    <v:String x:Key="m_condPrm_Projectile">Projectile Resistance</v:String>
+    <v:String x:Key="m_condPrm_AutoDodge">Auto Dodge</v:String>
+    <v:String x:Key="m_condPrm_Seal">Seal</v:String>
+    <v:String x:Key="m_condPrm_Stun">Stun</v:String>
+    <v:String x:Key="m_condPrm_Sleep">Sleep</v:String>
+    <v:String x:Key="m_condPrm_FlashEffect">Flash Effect</v:String>
+    <v:String x:Key="m_condPrm_FlashInterval">Flash Interval</v:String>
+    <v:String x:Key="m_condPrm_FlashOpacity">Flash Opacity</v:String>
+    <v:String x:Key="m_condPrm_FlashColor">Flash Color</v:String>
+    <v:String x:Key="m_condPrm_FlashEffectDisable">Disable</v:String>
+    <v:String x:Key="m_condPrm_FlashEffectEnable">Enable</v:String>
+    <v:String x:Key="m_condPrm_FlashEffectStaticColor">Static Color</v:String>
+
+
     <!--Special Interaction Manager-->
 
     <v:String x:Key="m_SIM_MainCharacterID">Main Character ID</v:String>
@@ -43,15 +390,17 @@
     <v:String x:Key="m_addTUJ_intro_title">Naruto Storm Connections - Add Team Ultimate Jutsu</v:String>
     <v:String x:Key="m_addTUJ_intro_desc">This tool will help you to add team ultimate jutsu in one click (almost).</v:String>
     <v:String  xml:space="preserve" x:Key="m_addTUJ_warning">
-For adding team utlimate jutsu, you need to prepare your root folder.
-Make sure you have following files in root folder for correct work of this tool:
-    
+To add team ultimate jutsu, prepare your root folder.
+Make sure the following files are in the root folder for the tool to work properly:
+
     moddingapi/mods/base_game/pairSpSkillManagerParam.xfbin
     data_win32/spc/characode.bin.xfbin
     data_win32/spc/pairSpSkillCombinationParam.xfbin
     data_win32/sound/cmnparam.xfbin
-
-New Team Ultimate Jutsus are a thing now, but there are few slots which game doesn't want to read, this tool will add Team Ultimate Jutsus on slots which game can load. Might be fixed in future.
+        
+New Team Ultimate Jutsus are now available, but there are a few slots that the game does not recognize.
+This tool will add Team Ultimate Jutsus only to the slots that the game can load.
+This issue may be fixed in a future update.
 
 </v:String>
     <v:String x:Key="m_addTUJ_page1_desc">Select root folder of game.</v:String>
@@ -78,11 +427,13 @@ New Team Ultimate Jutsus are a thing now, but there are few slots which game doe
     <v:String x:Key="m_addCostume_title">Add Costume</v:String>
     <v:String x:Key="m_addCostume_intro_title">Naruto Storm Connections - Add Costume</v:String>
     <v:String x:Key="m_addCostume_intro_desc">This tool will help you to add costumes in most easiest way.</v:String>
-    <v:String  xml:space="preserve" x:Key="m_addCostume_warning">
-    For adding costume slots, you need to prepare your data_win32 folder.
-    Make sure you have following files in data_win32 folder for correct work of this tool:
-        
-        data_win32/spc/characode.bin.xfbin (optional, but if you want to add costume for new character, it will be required)
+
+
+    <v:String xml:space="preserve" x:Key="m_addCostume_warning">
+    To add costume slots, prepare your data_win32 folder.
+    Ensure the following files are in the data_win32 folder for the tool to work correctly:
+
+        data_win32/spc/characode.bin.xfbin (optional, but required if adding a costume for a new character)
         data_win32/spc/playerSettingParam.bin.xfbin
         data_win32/spc/player_icon.xfbin
         data_win32/spc/duelPlayerParam.xfbin
@@ -90,18 +441,20 @@ New Team Ultimate Jutsus are a thing now, but there are few slots which game doe
         data_win32/spc/costumeBreakParam.xfbin
         data_win32/spc/costumeBreakColorParam.xfbin
         data_win32/rpg/param/costumeParam.bin.xfbin
-        
-    This tool doesn't support appearanceAnm and afterAttachObject files!
-    This tool was made specifically for characters, which already have at least 1 model.
-        
-        Some characters load more than just costume file. If you aren't sure what to load, you need to get prm_load file of your character and check all entries with &lt;codeModel&gt;,
-        for example: &lt;codeModel&gt;bod1 - that's costume, &lt;codeModel&gt;spl1_bod1 - that's file which loads assets for Ultimate Jutsu in case if costume is different.
-        
-    Also, don't forget to check if you enabled armor break or no, cuz if you enable it but won't load files for it, you will get infinity loading. If you don't have files and aren't sure about that - just disable armor break.
+
+    This tool does not support appearanceAnm and afterAttachObject files.
+    It is designed for characters that already have at least one model.
+
+    Some characters load more than just the costume file. If you are unsure which files to load, obtain your character's prm_load file and check all entries with &lt;codeModel&gt;. For example, &lt;codeModel&gt;bod1 represents the costume, and &lt;codeModel&gt;spl1_bod1 is the file that loads assets for Ultimate Jutsu if the costume is different.
+
+    Also, check whether armor break is enabled. If you enable it without loading the necessary files, the game will enter an infinite loading state. If you do not have the files and are unsure, disable armor break.
+
+    Sometimes issues may occur in team mode if you select characters with Team Ultimate Jutsu. These characters may load extra assets depending on the costume.
+    If you are unsure which files to load, search for all references to the costume that already exists in the game for your character.
+</v:String>
+
     
-    Sometimes issue can happen in team mode - that's cuz you probably picking characters which have Team Ultimate Jutsu. Sometimes they load extra assets as well, depending on costume.
-    If you aren't sure what files you should load - look for all mentions of costume which is already exist in game for your character!
-    </v:String>
+    
     <v:String x:Key="m_addCostume_page1_desc">Select data_win32 folder.</v:String>
     <v:String x:Key="m_addCostume_page2_desc">Set settings for adding costume.</v:String>
     <v:String x:Key="m_addCostume_page2_001">Character Code</v:String>
@@ -115,10 +468,15 @@ New Team Ultimate Jutsus are a thing now, but there are few slots which game doe
     <v:String x:Key="m_addCostume_page2_009">Costume Description (message ID)</v:String>
     <v:String x:Key="m_addCostume_page2_010">Add Costume</v:String>
     <v:String x:Key="m_addCostume_page2_011">Refresh</v:String>
-    
-    <v:String  xml:space="preserve" x:Key="m_addCostume_page2_warning">
-If you want to add awakening model to character which doesn't have it, make sure character have &lt;codeAwake2Model&gt;bod1 entry in prm_load! If you want to make different costume for awakening, make sure character has enabled function in prm file for switching awakening model on costume! Required function is - 229: ME_SET_SUBSTITUTION_KEY. Examples you can find 3ksnprm.bin.xfbin or 2rocprm.bin.xfbin. Highly not recommended to add this changes!
-    </v:String>
+
+    <v:String xml:space="preserve" x:Key="m_addCostume_page2_warning">
+    If you want to add an awakening model to a character that does not have one, ensure that the prm_load file includes a `&lt;codeAwake2Model&gt;bod1` entry.
+    If you want to use a different costume for the awakening, make sure the character's prm file has the function enabled for switching the awakening model on the costume.
+    The required function is 229: ME_SET_SUBSTITUTION_KEY.
+    Examples can be found in 3ksnprm.bin.xfbin or 2rocprm.bin.xfbin.
+    It is highly discouraged to apply these changes.
+</v:String>
+
 
     <!--Trail Editor-->
 
@@ -263,9 +621,12 @@ If you want to add awakening model to character which doesn't have it, make sure
 
     <!--Export Mod-->
     <v:String x:Key="m_exportMod_title">Naruto Storm Connections Mod Exporter</v:String>
-    <v:String x:Key="m_exportMod_page0_desc">This exporter will help you to prepare all stuff required for making mod, which can be compatible with NSC Mod Manager.</v:String>
-    <v:String  xml:space="preserve" x:Key="m_exportMod_page0_warning">
-    If your mod adding character, you need to add required files and entries for it:
+    <v:String x:Key="m_exportMod_page0_desc">
+        This exporter helps you prepare everything needed to create mods compatible with NSC Mod Manager.
+    </v:String>
+
+    <v:String xml:space="preserve" x:Key="m_exportMod_page0_warning">
+    If your mod adds a character, you must include the following required files and entries:
         characode.bin.xfbin
         duelPlayerParam.xfbin
         playerSettingParam.bin.xfbin
@@ -277,11 +638,12 @@ If you want to add awakening model to character which doesn't have it, make sure
         cmnparam.xfbin
         supportActionparam.xfbin
         supportSkillRecoverySpeedParam.xfbin
-    Character which doesn't replace anyone doesn't need to have any of this files for export.
-        
+
+    If a character does replace an existing one, these files are not required for export.
+
     For stages:
         StageInfo.bin.xfbin
-        
+
     For models:
         playerSettingParam.bin.xfbin
         player_icon.xfbin
@@ -289,9 +651,11 @@ If you want to add awakening model to character which doesn't have it, make sure
         characterSelectParam.xfbin
         costumeBreakColorParam.xfbin
         costumeParam.bin.xfbin
-    (appearanceAnm.xfbin isn't supported for models)
-    Models for added characters are supported, but will be skipped if character doesn't exist.
-    </v:String>
+    (appearanceAnm.xfbin is not supported for models)
+
+    Models for added characters are supported but will be skipped if the character does not exist.
+</v:String>
+
     <v:String x:Key="m_exportMod_page1_desc">Select all required stuff for your mod.</v:String>
     <v:String x:Key="m_exportMod_page1_cpkList">Cpk List (only for resources)</v:String>
     <v:String x:Key="m_exportMod_page1_cpk_select">Select CPK</v:String>
@@ -328,7 +692,9 @@ If you want to add awakening model to character which doesn't have it, make sure
     <v:String x:Key="m_exportMod_page3_selectCharacode">Select Character</v:String>
     <v:String x:Key="m_exportMod_page3_deleteCharacode">Delete Character</v:String>
     <v:String x:Key="m_exportMod_page3_exportCharacter">Characters for export</v:String>
-    <v:String x:Key="m_exportMod_page3_exportCharacter_warning">For icons in character select menu, add for every costume file with icon name, for example, if costume has base icon - "nrt16", it means you have to add icon "nrt16_charicon_s.xfbin" in "ui/flash/OTHER/charicon_s" folder. To pack icon, you can use "XFBIN texture" tool or XFBIN Parser. If you will not add that icon, mod manager will skip that icon and won't load it.</v:String>
+    <v:String x:Key="m_exportMod_page3_exportCharacter_warning">
+        For icons in the character select menu, add an icon file for each costume file with an icon name. For example, if a costume has a base icon "nrt16", you must add "nrt16_charicon_s.xfbin" in the "ui/flash/OTHER/charicon_s" folder. Use the "XFBIN texture" tool or XFBIN Parser to pack the icon. If you do not add the icon, the mod manager will skip it.
+    </v:String>
 
 
     <v:String x:Key="m_exportMod_page3_tuj_001">Select Team Ultimate Jutsu</v:String>
@@ -345,46 +711,7 @@ If you want to add awakening model to character which doesn't have it, make sure
     <v:String x:Key="m_exportMod_pageFinish_desc">Now you have to compile your mod and then you can close this window!</v:String>
     <v:String x:Key="m_exportMod_pageFinish_compile">Compile Mod</v:String>
 
-    <v:String x:Key="m_mainWindowTool_001">Character ID Manager (characode.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_002">Character Setting Editor (duelPlayerParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_003">Costume Editor (playerSettingParam.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_004">Character Roster Manager (characterSelectParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_005">Ninjutsu Editor (skillCustomizeParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_006">Attach Object Editor (afterAttachObject.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_007">Character Moveset Editor (****prm.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_008">Character Costume Unlock Editor (costumeParam.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_009">Character Icon Editor (player_icon.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_010">Character Aura Editor (awakeAura.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_011">Ninjutsu List Editor (skillIndexSettingParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_012">Ultimate Jutsu Editor (spSkillCustomizeParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_013">Costume Chunk Enabler (appearanceAnm.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_014">Character File Loader Editor (****prm_load.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_015">Character Action Editor (spTypeSupportParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_016">Character Awakening Camera Editor (privateCamera.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_017">Player Sound Setting Editor (cmnparam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_018">Character Fade Effect Editor (playerDoubleEffectParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_019">Character Armor Break Costume Editor (costumeBreakParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_020">Character Armor Break Color Editor (costumeBreakColorParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_021">Common Effect Dictionary Editor (effectprm.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_022">Stage Setting Editor (StageInfo.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_023">Localization Editor (messageInfo.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_024">Hit Effect Dictionary Editor (damageEff.bin.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_025">Support Action Editor (supportActionParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_026">Support Skill Recovery Speed Editor (supportSkillRecoverySpeedParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_027">Projectile Editor</v:String>
-    <v:String x:Key="m_mainWindowTool_028">Team Ultimate Jutsu Param Editor (pairSpSkillCombinationParam.xfbin)</v:String>
-    <v:String x:Key="m_mainWindowTool_029">UJ Special Interaction Manager (specialInteractionManager.xfbin)</v:String>
-    <v:String x:Key="m_option001">Stretch Mode</v:String>
-    <v:String x:Key="m_option002">Fill</v:String>
-    <v:String x:Key="m_option003">Uniform</v:String>
-    <v:String x:Key="m_option004">Save Settings</v:String>
-    <v:String x:Key="m_option005">None</v:String>
-    <v:String x:Key="m_option006">Background Color</v:String>
-    <v:String x:Key="m_option007">Button Color</v:String>
-    <v:String x:Key="m_option008">Background Image</v:String>
-    <v:String x:Key="m_option009">Reset Settings</v:String>
-    <v:String x:Key="m_option010">Select Image</v:String>
-    <v:String x:Key="m_option011">Font Color</v:String>
+    
 
     <!--credits-->
     <v:String x:Key="m_credits_001">Thank you all for support and help!</v:String>

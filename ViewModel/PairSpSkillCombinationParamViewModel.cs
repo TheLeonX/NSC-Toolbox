@@ -273,7 +273,7 @@ namespace NSC_Toolbox.ViewModel
                     }
                 } else
                 {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
                     return;
                 }
             }
@@ -287,21 +287,21 @@ namespace NSC_Toolbox.ViewModel
                 pairSpSkillList.Remove(SelectedPairSpSkill);
             } else
             {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveEntry()
         {
             if (SelectedPairSpSkill is null)
             {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
                 return;
             }
 
             // Check if any other entry already has the same TUJ_ID_field.
             if (pairSpSkillList.Any(x => x.TUJ_ID == TUJ_ID_field && x != SelectedPairSpSkill))
             {
-                ModernWpf.MessageBox.Show("Section already exists with that ID");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_43"]);
                 return;
             }
 
@@ -312,7 +312,7 @@ namespace NSC_Toolbox.ViewModel
             SelectedPairSpSkill.MemberCount = MemberCount_field;
             SelectedPairSpSkill.Condition1 = Condition1_field;
             SelectedPairSpSkill.Condition2 = Condition2_field;
-            ModernWpf.MessageBox.Show("Entry was saved!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
         }
 
         public int SearchByteIndex(ObservableCollection<PairSpSkillCombinationParamModel> FunctionList, int tuj_index, int Selected)
@@ -347,12 +347,12 @@ namespace NSC_Toolbox.ViewModel
                         CollectionViewSource.GetDefaultView(pairSpSkillList).MoveCurrentTo(SelectedPairSpSkill);
                     } else
                     {
-                        ModernWpf.MessageBox.Show("There is no entry with that Characode ID.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_3"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             } else
             {
-                ModernWpf.MessageBox.Show("Write ID in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_4"]);
             }
         }
 
@@ -377,7 +377,7 @@ namespace NSC_Toolbox.ViewModel
             pairSpSkillList.Add(pairSpSkillEntry);
             SelectedPairSpSkillIndex = pairSpSkillList.Count - 1;
             CollectionViewSource.GetDefaultView(pairSpSkillList).MoveCurrentTo(pairSpSkillList[SelectedPairSpSkillIndex]);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
         public void RemoveCharacodeEntry()
         {
@@ -386,24 +386,24 @@ namespace NSC_Toolbox.ViewModel
                 CharacodeIDList.RemoveAt(SelectedCharacodeIDIndex);
             } else
             {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveCharacodeEntry()
         {
             if (CharacodeIDList.Contains(SelectedCharacodeID_field) && SelectedCharacodeID_field != CharacodeIDList[SelectedCharacodeIDIndex])
             {
-                ModernWpf.MessageBox.Show("You already added that entry.");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_15"]);
                 return;
             }
 
             if (SelectedCharacodeIDIndex != -1)
             {
                 CharacodeIDList[SelectedCharacodeIDIndex] = SelectedCharacodeID_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else
             {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
 
@@ -413,7 +413,7 @@ namespace NSC_Toolbox.ViewModel
         {
             if (CharacodeIDList.Contains(SelectedCharacodeID_field))
             {
-                ModernWpf.MessageBox.Show("You already added that entry.");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_15"]);
                 return;
             }
             if (CharacodeIDList.Count < 20)
@@ -421,10 +421,10 @@ namespace NSC_Toolbox.ViewModel
                 CharacodeIDList.Add(SelectedCharacodeID_field);
                 SelectedCharacodeIDIndex = CharacodeIDList.Count - 1;
                 CollectionViewSource.GetDefaultView(CharacodeIDList).MoveCurrentTo(CharacodeIDList[SelectedCharacodeIDIndex]);
-                ModernWpf.MessageBox.Show("Entry was added!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
             } else
             {
-                ModernWpf.MessageBox.Show("You can't add more entries!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_16"]);
             }
         }
 
@@ -439,7 +439,7 @@ namespace NSC_Toolbox.ViewModel
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else
             {
                 SaveFileAs();
@@ -474,7 +474,7 @@ namespace NSC_Toolbox.ViewModel
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
         public byte[] ConvertToFile()

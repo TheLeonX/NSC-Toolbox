@@ -98,7 +98,7 @@ namespace NSC_Toolbox.ViewModel {
                         charEditor.OpenFile(characodePath);
                         ImportCharacterList = charEditor.CharacodeList;
                     } else {
-                        MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show("Some files doesn't exist! Do you want to add missing files in directory?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_12"], "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (result == MessageBoxResult.Yes) {
 
                             IsDataWin32Exist = Directory.Exists(DataWin32Path_field);
@@ -135,7 +135,7 @@ namespace NSC_Toolbox.ViewModel {
                                 charEditor.OpenFile(characodePath);
                                 ImportCharacterList = charEditor.CharacodeList;
                             } else {
-                                ModernWpf.MessageBox.Show("Directory doesn't exist!");
+                                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_11"]);
                             }
                         } else {
                             MissingFiles_field = "Missing files:\n\n";
@@ -283,7 +283,7 @@ namespace NSC_Toolbox.ViewModel {
                         ImportCharacterList = charEditor.CharacodeList;
                     }
                 } else {
-                    MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show("Some files doesn't exist! Do you want to add missing files in directory?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_12"], "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes) {
                         
                         IsDataWin32Exist = Directory.Exists(DataWin32Path_field);
@@ -320,7 +320,7 @@ namespace NSC_Toolbox.ViewModel {
                             charEditor.OpenFile(characodePath);
                             ImportCharacterList = charEditor.CharacodeList;
                         } else {
-                            ModernWpf.MessageBox.Show("Directory doesn't exist!");
+                            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_11"]);
                         }
                     } else {
                         MissingFiles_field = "Missing files:\n\n";
@@ -443,10 +443,10 @@ namespace NSC_Toolbox.ViewModel {
 
 
                     } else {
-                        ModernWpf.MessageBox.Show("Write code of costume and code of icon!");
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_13"]);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("Select character code in dropbox!");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_14"]);
                 }
 
 

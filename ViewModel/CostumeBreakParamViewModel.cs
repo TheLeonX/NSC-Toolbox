@@ -165,7 +165,7 @@ namespace NSC_Toolbox.ViewModel
                         CostumeBreakParamList.Add(CostumeBreakParamEntry);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
                     return;
                 }
             }
@@ -205,7 +205,7 @@ namespace NSC_Toolbox.ViewModel
             if (SelectedCostumeBreakParam is not null) {
                 CostumeBreakParamList.Remove(SelectedCostumeBreakParam);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveEntry() {
@@ -216,9 +216,9 @@ namespace NSC_Toolbox.ViewModel
                 SelectedCostumeBreakParam.EnableInAwakening = EnableInAwakening_field;
                 SelectedCostumeBreakParam.EnableForClones = EnableForClones_field;
                 SelectedCostumeBreakParam.CloneCount = CloneCount_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public int SearchByteIndex(ObservableCollection<CostumeBreakParamModel> FunctionList, int member_index, int Selected) {
@@ -243,11 +243,11 @@ namespace NSC_Toolbox.ViewModel
                         SelectedCostumeBreakParamIndex = SearchByteIndex(CostumeBreakParamList, SearchIndex_field, 0);
                         CollectionViewSource.GetDefaultView(CostumeBreakParamList).MoveCurrentTo(SelectedCostumeBreakParam);
                     } else {
-                        ModernWpf.MessageBox.Show("There is no entry with that Characode ID.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_3"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             } else {
-                ModernWpf.MessageBox.Show("Write ID in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_4"]);
             }
         }
 
@@ -265,7 +265,7 @@ namespace NSC_Toolbox.ViewModel
                 CostumeBreakParamEntry.CloneCount = 0;
             }
             CostumeBreakParamList.Add(CostumeBreakParamEntry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
 
         public void SaveFile() {
@@ -276,7 +276,7 @@ namespace NSC_Toolbox.ViewModel
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
                 SaveFileAs();
             }
@@ -305,7 +305,7 @@ namespace NSC_Toolbox.ViewModel
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
         public byte[] ConvertToFile() {

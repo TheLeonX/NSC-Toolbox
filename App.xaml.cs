@@ -260,6 +260,38 @@ namespace NSC_Toolbox {
         private void App_Startup(object sender, StartupEventArgs e) {
             NNViewRegistrar.RegisterSplat();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+
+            // Get the saved language (e.g., "en-US" or "ru-RU")
+            string lang = NSC_Toolbox.Properties.Settings.Default.Language;
+
+            // Get the merged dictionaries collection
+            var mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+
+            // Find and remove the existing localization dictionary
+            ResourceDictionary localizationDictionary = null;
+            foreach (var dict in mergedDictionaries)
+            {
+                if (dict.Source != null && dict.Source.OriginalString.Contains("Resources/Localization/lang.xaml"))
+                {
+                    localizationDictionary = dict;
+                    break;
+                }
+            }
+            if (localizationDictionary != null)
+            {
+                mergedDictionaries.Remove(localizationDictionary);
+            }
+
+            // Load the appropriate localization dictionary based on the language
+            var newDict = new ResourceDictionary();
+            if (lang == "ru-RU")
+                newDict.Source = new Uri("Resources/Localization/lang.ru-RU.xaml", UriKind.Relative);
+            else
+                newDict.Source = new Uri("Resources/Localization/lang.xaml", UriKind.Relative);
+
+            // Add the new dictionary to the merged dictionaries
+            mergedDictionaries.Add(newDict);
         }
     }
 }

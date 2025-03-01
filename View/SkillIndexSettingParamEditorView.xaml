@@ -22,7 +22,7 @@
         <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
     </Window.Background>
     <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
-        <Grid Width="550" Height="480">
+        <Grid Width="550" Height="480" Background="{DynamicResource Toolbox_button_background_color_1}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="2*"/>
@@ -49,12 +49,12 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Characode ID: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                            <TextBlock Text="{Binding CharacodeID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                            <TextBlock Text=" Jutsu 1: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                            <TextBlock Text="{Binding JutsuIndex1, Converter={StaticResource PageIndexConverter},StringFormat={}SKL0{0}}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                            <TextBlock Text=" Jutsu 2: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                            <TextBlock Text="{Binding JutsuIndex2, Converter={StaticResource PageIndexConverter},StringFormat={}SKL0{0}}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                            <TextBlock Text="Characode ID: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="16"/>
+                            <TextBlock Text="{Binding CharacodeID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                            <TextBlock Text=" Jutsu 1: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="16"/>
+                            <TextBlock Text="{Binding JutsuIndex1, Converter={StaticResource PageIndexConverter},StringFormat={}SKL0{0}}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                            <TextBlock Text=" Jutsu 2: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="16"/>
+                            <TextBlock Text="{Binding JutsuIndex2, Converter={StaticResource PageIndexConverter},StringFormat={}SKL0{0}}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
 
                         </StackPanel>
                     </DataTemplate>
@@ -71,11 +71,11 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" HorizontalAlignment="Right" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_Characode}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <Label Grid.Row="0" HorizontalAlignment="Right" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_Characode}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14"/>
                 <xctk:IntegerUpDown MinHeight="30" Value="{Binding CharacodeID_field}" FontFamily="{StaticResource NarutoFont}" Watermark="{DynamicResource m_Characode}" Grid.Row="1" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
-                <Label  Grid.Row="3" HorizontalAlignment="Right" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsu1}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <Label  Grid.Row="3" HorizontalAlignment="Right" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsu1}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14"/>
                 <xctk:IntegerUpDown MinHeight="30" Value="{Binding JutsuIndex1_field}" Grid.Row="4" FontFamily="{StaticResource NarutoFont}" Watermark="{DynamicResource m_jutsu1}"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="5" Minimum="-1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
-                <Label Grid.Row="6" HorizontalAlignment="Right" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsu2}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="10"/>
+                <Label Grid.Row="6" HorizontalAlignment="Right" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_jutsu2}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14"/>
                 <xctk:IntegerUpDown MinHeight="30" Value="{Binding JutsuIndex2_field}" FontFamily="{StaticResource NarutoFont}" Watermark="{DynamicResource m_jutsu2}" Grid.Row="7" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="5" Minimum="-1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
 
             </Grid>
@@ -88,13 +88,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Command="{Binding AddDupEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddDupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                <Button Command="{Binding SearchEntryCommand}" Content="{DynamicResource m_SearchEntry}" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Button Command="{Binding AddDupEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddDupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                <Button Command="{Binding SearchEntryCommand}" Content="{DynamicResource m_SearchEntry}" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                 <xctk:IntegerUpDown Grid.Row="1" Grid.Column="0" Value="{Binding SearchIndex_field}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
 
             </Grid>
-            <Button Command="{Binding SaveEntryCommand}"  Grid.Row="4" Grid.Column="3" Content="{DynamicResource m_SaveEntry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+            <Button Command="{Binding SaveEntryCommand}"  Grid.Row="4" Grid.Column="3" Content="{DynamicResource m_SaveEntry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
             <Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10"/>

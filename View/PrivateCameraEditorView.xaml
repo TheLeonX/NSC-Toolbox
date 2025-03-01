@@ -12,16 +12,16 @@
         mc:Ignorable="d"
         xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
         
-        ui:WindowHelper.UseModernWindowStyle="True"  Width="850" Height="420"
+        ui:WindowHelper.UseModernWindowStyle="True"  Width="1000" Height="470"
         Title="{DynamicResource m_privateCameraEditor}">
     <Window.Background>
         <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
     </Window.Background>
     <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
-        <Grid Width="850" Height="420">
+        <Grid Width="1000" Height="470" Background="{DynamicResource Toolbox_button_background_color_1}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="2.3*"/>
+                <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="5"/>
@@ -45,8 +45,8 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Characode ID:" FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="12"/>
-                            <TextBlock Text="{Binding CharacodeIndex, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                            <TextBlock Text="Characode ID:" FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="16"/>
+                            <TextBlock Text="{Binding CharacodeIndex, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -54,22 +54,22 @@
             <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -77,27 +77,27 @@
                     <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource m_privateCameraDistance}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource m_privateCameraDistance}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="0" Grid.Row="1" Value="{Binding CameraDistance_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource m_privateCameraSpeed}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource m_privateCameraSpeed}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="0" Grid.Row="4" Value="{Binding CameraSpeed_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource m_privateCameraMovement}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource m_privateCameraMovement}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="0" Grid.Row="7" Value="{Binding CameraMovement_field}" Minimum="0" Maximum="1" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                <Label Grid.Row="9" Grid.Column="0" Content="{DynamicResource m_privateCameraHeight}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="9" Grid.Column="0" Content="{DynamicResource m_privateCameraHeight}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="0" Grid.Row="10" Value="{Binding CameraHeight_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                <Label Grid.Row="12" Grid.Column="0" Content="{DynamicResource m_privateCameraAngle}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="12" Grid.Column="0" Content="{DynamicResource m_privateCameraAngle}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="0" Grid.Row="13" Value="{Binding CameraAngle_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                <Label Grid.Row="15" Grid.Column="0" Content="{DynamicResource m_privateCameraFOV}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="15" Grid.Column="0" Content="{DynamicResource m_privateCameraFOV}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="0" Grid.Row="16" Value="{Binding FOV_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource m_privateCameraDistance2}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource m_privateCameraDistance2}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="2" Grid.Row="1" Value="{Binding CameraDistance2_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                <Label Grid.Row="3" Grid.Column="2" Content="{DynamicResource m_unknown}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="3" Grid.Column="2" Content="{DynamicResource m_unknown}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="2" Grid.Row="4" Value="{Binding Unk1_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                <Label Grid.Row="6" Grid.Column="2" Content="{DynamicResource m_unknown}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="6" Grid.Column="2" Content="{DynamicResource m_unknown}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="2" Grid.Row="7" Value="{Binding Unk2_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                <Label Grid.Row="9" Grid.Column="2" Content="{DynamicResource m_privateCameraHeight2}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="9" Grid.Column="2" Content="{DynamicResource m_privateCameraHeight2}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="2" Grid.Row="10" Value="{Binding CameraHeight2_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                <Label Grid.Row="15" Grid.Column="2" Content="{DynamicResource m_privateCameraFOV2}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                <Label Grid.Row="15" Grid.Column="2" Content="{DynamicResource m_privateCameraFOV2}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                 <xctk:DoubleUpDown Grid.Column="2" Grid.Row="16" Value="{Binding FOV2_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" MinHeight="30" Increment="1" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
 
             </Grid>
@@ -110,13 +110,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Command="{Binding AddDupEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddDupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
-                <Button Command="{Binding SearchEntryCommand}" Content="{DynamicResource m_SearchEntry}" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+                <Button Command="{Binding AddDupEntryCommand}" Grid.Column="0" Content="{DynamicResource m_AddDupEntry}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                <Button Command="{Binding DeleteEntryCommand}" Content="{DynamicResource m_DeleteEntry}"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                <Button Command="{Binding SearchEntryCommand}" Content="{DynamicResource m_SearchEntry}" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                 <xctk:IntegerUpDown Grid.Row="1" MinHeight="30" Value="{Binding SearchIndex_field}" FontFamily="{StaticResource NarutoFont}"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
 
             </Grid>
-            <Button Command="{Binding SaveEntryCommand}"  Grid.Row="4" Grid.Column="3" Content="{DynamicResource m_SaveEntry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="12"/>
+            <Button Command="{Binding SaveEntryCommand}"  Grid.Row="4" Grid.Column="3" Content="{DynamicResource m_SaveEntry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
             <Grid Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="{Binding LoadingStatePlay}" Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10"/>

@@ -37,6 +37,12 @@
     <Compile Update="View\cmnparamEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\ConditionManagerEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ConditionPrmEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\CostumeBreakColorParamEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -117,6 +123,9 @@
     <Page Update="Controls\LoadingControl.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Resources\Localization\lang.ru-RU.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Resources\Localization\lang.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -145,6 +154,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\cmnparamEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ConditionManagerEditorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ConditionPrmEditorView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CostumeBreakColorParamEditorView.xaml">

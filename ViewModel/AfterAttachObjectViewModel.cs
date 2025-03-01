@@ -282,7 +282,7 @@ namespace NSC_Toolbox.ViewModel {
                         AfterAttachObjectList.Add(AfterAttachObjectEntry);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
                     return;
                 }
             }
@@ -293,7 +293,7 @@ namespace NSC_Toolbox.ViewModel {
             if (SelectedAfterAttachObject is not null) {
                 AfterAttachObjectList.Remove(SelectedAfterAttachObject);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveEntry() {
@@ -316,9 +316,9 @@ namespace NSC_Toolbox.ViewModel {
                 SelectedAfterAttachObject.ScaleZ = ScaleZ_field;
                 SelectedAfterAttachObject.Condition = Condition_field;
                 SelectedAfterAttachObject.State = State_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public int SearchStringIndex(ObservableCollection<AfterAttachObjectModel> FunctionList, string member_name, int Selected) {
@@ -344,11 +344,11 @@ namespace NSC_Toolbox.ViewModel {
                         SelectedAfterAttachObjectIndex = SearchStringIndex(AfterAttachObjectList, SearchTextBox_field, -1);
                         CollectionViewSource.GetDefaultView(AfterAttachObjectList).MoveCurrentTo(SelectedAfterAttachObject);
                     } else {
-                        ModernWpf.MessageBox.Show("There is no entry with that characode.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_5"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             } else {
-                ModernWpf.MessageBox.Show("Write text in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_17"]);
             }
         }
 
@@ -378,7 +378,7 @@ namespace NSC_Toolbox.ViewModel {
                 AfterAttachEntry.State = 0;
             }
             AfterAttachObjectList.Add(AfterAttachEntry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
 
         public void SaveFile() {
@@ -389,7 +389,7 @@ namespace NSC_Toolbox.ViewModel {
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
                 SaveFileAs();
             }
@@ -418,7 +418,7 @@ namespace NSC_Toolbox.ViewModel {
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
         public byte[] ConvertToFile() {

@@ -104,7 +104,7 @@ namespace NSC_Toolbox.ViewModel {
                         CharacodeList.Add(char_id);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
                     return;
                 }
             }
@@ -118,14 +118,14 @@ namespace NSC_Toolbox.ViewModel {
                 }
                 CharacodeList.Remove(SelectedCharacode);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveEntry() {
             if (SelectedCharacode is not null) {
                 CharacodeList[SelectedCharacode.CharacodeIndex - 1].CharacodeName = CharacodeTextBoxString;
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
 
@@ -138,9 +138,9 @@ namespace NSC_Toolbox.ViewModel {
                         return;
                     }
                 }
-                ModernWpf.MessageBox.Show("There is no characode with that name.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_5"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
-                ModernWpf.MessageBox.Show("Write characode in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_6"]);
             }
         }
 
@@ -149,7 +149,7 @@ namespace NSC_Toolbox.ViewModel {
                 for (int c = 0; c < CharacodeList.Count; c++) {
                     if (CharacodeList[c].CharacodeName == CharacodeTextBoxString) {
 
-                        ModernWpf.MessageBox.Show("This characode already exist in game!", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_7"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                 }
@@ -158,7 +158,7 @@ namespace NSC_Toolbox.ViewModel {
                 char_id.CharacodeName = CharacodeTextBoxString;
                 CharacodeList.Add(char_id);
             } else {
-                ModernWpf.MessageBox.Show("Write characode name in field");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_8"]);
             }
         }
 
@@ -170,7 +170,7 @@ namespace NSC_Toolbox.ViewModel {
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
                 SaveFileAs();
             }
@@ -199,7 +199,7 @@ namespace NSC_Toolbox.ViewModel {
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
 
 

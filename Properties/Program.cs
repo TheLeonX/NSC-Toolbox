@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace NSC_Toolbox.Properties
 {
@@ -71,6 +72,7 @@ namespace NSC_Toolbox.Properties
                 if (!newPath.Contains("characode") &&
                     !newPath.Contains("damageprm") &&
                     !newPath.Contains("duelPlayerParam") &&
+                    !newPath.Contains("conditionprm") &&
                     !newPath.Contains("playerSettingParam") &&
                     !newPath.Contains("skillCustomizeParam") &&
                     !newPath.Contains("spSkillCustomizeParam") &&
@@ -109,16 +111,7 @@ namespace NSC_Toolbox.Properties
                     File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
             }
         }
-        public static string[] ModType =
-        {
-            "Character",
-            "Stage",
-            "Costume",
-            "Resource (export files excluding param files)",
-            "Team Ultimate Jutsu",
-            //"Accessory"
-
-        };
+        
 
         public static string[] langList =
         {
@@ -140,117 +133,167 @@ namespace NSC_Toolbox.Properties
 
 
         };
+        public static string[] ModType =
+        {
+            (string)System.Windows.Application.Current.Resources["m_modtype_0"],   //"Character",
+            (string)System.Windows.Application.Current.Resources["m_modtype_1"],   //"Stage",
+            (string)System.Windows.Application.Current.Resources["m_modtype_2"],   //"Costume",
+            (string)System.Windows.Application.Current.Resources["m_modtype_3"],   //"Resource (export files excluding param files)",
+            (string)System.Windows.Application.Current.Resources["m_modtype_4"],   //"Team Ultimate Jutsu",
+            //(string)System.Windows.Application.Current.Resources["m_modtype_5"],   //"Accessory"
+
+        };
+
+        public static string[] conditionIconList =
+        {
+            (string)System.Windows.Application.Current.Resources["m_status_00"],
+            (string)System.Windows.Application.Current.Resources["m_status_01"],
+            (string)System.Windows.Application.Current.Resources["m_status_02"],
+            (string)System.Windows.Application.Current.Resources["m_status_03"],
+            (string)System.Windows.Application.Current.Resources["m_status_04"],
+            (string)System.Windows.Application.Current.Resources["m_status_05"],
+            (string)System.Windows.Application.Current.Resources["m_status_06"],
+            (string)System.Windows.Application.Current.Resources["m_status_07"],
+            (string)System.Windows.Application.Current.Resources["m_status_08"],
+            (string)System.Windows.Application.Current.Resources["m_status_09"],
+            (string)System.Windows.Application.Current.Resources["m_status_10"],
+            (string)System.Windows.Application.Current.Resources["m_status_11"],
+            (string)System.Windows.Application.Current.Resources["m_status_12"],
+            (string)System.Windows.Application.Current.Resources["m_status_13"],
+            (string)System.Windows.Application.Current.Resources["m_status_14"],
+            (string)System.Windows.Application.Current.Resources["m_status_15"],
+            (string)System.Windows.Application.Current.Resources["m_status_16"],
+            (string)System.Windows.Application.Current.Resources["m_status_17"],
+            (string)System.Windows.Application.Current.Resources["m_status_18"],
+            (string)System.Windows.Application.Current.Resources["m_status_19"],
+            (string)System.Windows.Application.Current.Resources["m_status_20"],
+            (string)System.Windows.Application.Current.Resources["m_status_21"],
+            (string)System.Windows.Application.Current.Resources["m_status_22"],
+            (string)System.Windows.Application.Current.Resources["m_status_23"],
+            (string)System.Windows.Application.Current.Resources["m_status_24"],
+            (string)System.Windows.Application.Current.Resources["m_status_25"],
+            (string)System.Windows.Application.Current.Resources["m_status_26"],
+            (string)System.Windows.Application.Current.Resources["m_status_27"],
+            (string)System.Windows.Application.Current.Resources["m_status_28"],
+            (string)System.Windows.Application.Current.Resources["m_status_29"],
+            (string)System.Windows.Application.Current.Resources["m_status_30"],
+            (string)System.Windows.Application.Current.Resources["m_status_31"],
+            (string)System.Windows.Application.Current.Resources["m_status_40"],
+            (string)System.Windows.Application.Current.Resources["m_status_41"],
+
+
+        };
         public static string[] supportTypeList =
         {
-            "Strike Back", //03
-            "Dash Cut", //04
-            "Secret Technique Substitution", //05
-            "Charge Guard", //06
-            "Cover Fire", //07
-            "Combo Support", //08
-            "Break Guard", //0B
-            "Charge Assist" //0C
+            (string)System.Windows.Application.Current.Resources["m_strikeback_03"],   //"Strike Back", //03
+            (string)System.Windows.Application.Current.Resources["m_strikeback_04"], //"Dash Cut", //04
+            (string)System.Windows.Application.Current.Resources["m_strikeback_05"],//"Secret Technique Substitution", //05
+            (string)System.Windows.Application.Current.Resources["m_strikeback_06"],//"Charge Guard", //06
+            (string)System.Windows.Application.Current.Resources["m_strikeback_07"],//"Cover Fire", //07
+            (string)System.Windows.Application.Current.Resources["m_strikeback_08"],//"Combo Support", //08
+            (string)System.Windows.Application.Current.Resources["m_strikeback_0B"],//"Break Guard", //0B
+            (string)System.Windows.Application.Current.Resources["m_strikeback_0C"],//"Charge Assist" //0C
 
 
         };
         public static string[] StageEntryTypeList =
         {
-            "0 = Static mesh",
-            "1 = Animation",
+            (string)Application.Current.Resources["m_stageEntryType_0"],
+            (string)Application.Current.Resources["m_stageEntryType_1"],
             "2 = ???",
             "3 = ???",
-            "4 = Tree Object",
+            (string)Application.Current.Resources["m_stageEntryType_4"],
             "5 = ???",
-            "6 = Grass/Leaf Object",
-            "7 = Breakable Wall",
+            (string)Application.Current.Resources["m_stageEntryType_6"],
+            (string)Application.Current.Resources["m_stageEntryType_7"],
             "8 = ???",
             "9 = ???",
-            "10 = Rigid Body",
-            "11 = Rigid Body Animation"
+            (string)Application.Current.Resources["m_stageEntryType_10"],
+            (string)Application.Current.Resources["m_stageEntryType_11"]
 
 
         };
         public static string[] DMGCOND =
         {
-            "0 = None",
-            "1 = Unguardable",
-            "2 = Undodgeable",
-            "3 = Unreboundable",
-            "4 = Cause Chip damage on block",
-            "5 = Extended stagger(STAGGER_NORMAL)",
-            "6 = None",
-            "7 = None",
+            (string)Application.Current.Resources["m_dmgcond_0"],
+            (string)Application.Current.Resources["m_dmgcond_1"],
+            (string)Application.Current.Resources["m_dmgcond_2"],
+            (string)Application.Current.Resources["m_dmgcond_3"],
+            (string)Application.Current.Resources["m_dmgcond_4"],
+            (string)Application.Current.Resources["m_dmgcond_5"],
+            (string)Application.Current.Resources["m_dmgcond_6"],
+            (string)Application.Current.Resources["m_dmgcond_7"],
             "8 = ???",
             "9 = ???",
             "10 = ???",
             "11 = ???",
             "12 = ???",
             "13 = ???",
-            "14 = Remove Effect from dmg",
+            (string)Application.Current.Resources["m_dmgcond_14"],
             "15 = ???",
             "16 = ???",
             "17 = ???",
-            "18 = Unreboundable + 16 condition",
+            (string)Application.Current.Resources["m_dmgcond_18"],
             "19 = ???",
             "20 = ???",
-            "21 = Remove Effect from dmg + 19 condition",
+            (string)Application.Current.Resources["m_dmgcond_21"],
             "22 = ???",
             "23 = ???",
-            "24 = Undodgeable + Unreboundable",
-            "25 = Prevent Strike-back",
-            "26 = Remove Effect from dmg + Prevent Strike-back",
-            "27 = Undodgeable + Remove Effect from dmg + Prevent Strike-back",
-            "28 = None",
-            "29 = None",
+            (string)Application.Current.Resources["m_dmgcond_24"],
+            (string)Application.Current.Resources["m_dmgcond_25"],
+            (string)Application.Current.Resources["m_dmgcond_26"],
+            (string)Application.Current.Resources["m_dmgcond_27"],
+            (string)Application.Current.Resources["m_dmgcond_28"],
+            (string)Application.Current.Resources["m_dmgcond_29"]
         };
 
         public static string[] COND =
         {
-            "0 = No condition",
-            "1 = No condition",
-            "2 = If enemy is on the ground",
-            "3 = If enemy is on air",
-            "4 = If previous attack hit (normal characters)",
-            "5 = If player is on left side",
-            "6 = If player is on right side",
-            "7 = No condition",
-            "8 = No condition",
-            "9 = No condition",
-            "10 = No condition",
-            "11 = No condition",
-            "12 = If previous attack hit while enemy was guarding",
+            (string)Application.Current.Resources["m_cond_0"],
+            (string)Application.Current.Resources["m_cond_1"],
+            (string)Application.Current.Resources["m_cond_2"],
+            (string)Application.Current.Resources["m_cond_3"],
+            (string)Application.Current.Resources["m_cond_4"],
+            (string)Application.Current.Resources["m_cond_5"],
+            (string)Application.Current.Resources["m_cond_6"],
+            (string)Application.Current.Resources["m_cond_7"],
+            (string)Application.Current.Resources["m_cond_8"],
+            (string)Application.Current.Resources["m_cond_9"],
+            (string)Application.Current.Resources["m_cond_10"],
+            (string)Application.Current.Resources["m_cond_11"],
+            (string)Application.Current.Resources["m_cond_12"],
             "13 = ???",
             "14 = ???",
             "15 = ???",
-            "16 = If previous attack hit giant character",
-            "17 = If enemy awakens into giant character",
+            (string)Application.Current.Resources["m_cond_16"],
+            (string)Application.Current.Resources["m_cond_17"],
             "18 = ???",
             "19 = ???",
             "20 = ???",
             "21 = ???",
             "22 = ???",
-            "23 = ???",
+            "23 = ???"
         };
         public static string[] LINK_COND =
         {
-            "-1 = Autolink if the previous attack has some specific conditions.",
-            "0 = Link by pressing a button",
-            "1 = Link by pressing a button for square combos",
+            (string)Application.Current.Resources["m_linkcond_minus1"],
+            (string)Application.Current.Resources["m_linkcond_0"],
+            (string)Application.Current.Resources["m_linkcond_1"],
             "2 = ???",
             "3 = ???",
-            "4 = If previous attack hit (normal characters)",
-            "5 = No condition",
-            "6 = No condition",
-            "7 = No condition",
-            "8 = No condition",
-            "9 = Link normal Jutsu (for adding Charged Jutsu)",
-            "10 = Link charged Jutsu (must have Normal Jutsu)",
-            "11 = Autolink when the previous animation ends",
-            "12 = Support Jutsu/Guard hit link",
+            (string)Application.Current.Resources["m_linkcond_4"],
+            (string)Application.Current.Resources["m_linkcond_5"],
+            (string)Application.Current.Resources["m_linkcond_6"],
+            (string)Application.Current.Resources["m_linkcond_7"],
+            (string)Application.Current.Resources["m_linkcond_8"],
+            (string)Application.Current.Resources["m_linkcond_9"],
+            (string)Application.Current.Resources["m_linkcond_10"],
+            (string)Application.Current.Resources["m_linkcond_11"],
+            (string)Application.Current.Resources["m_linkcond_12"],
             "13 = ???",
             "14 = ???",
             "15 = ???",
-            "16 = ???",
+            "16 = ???"
         };
         public static string[] S1_DAMAGE_NAMES =
         {

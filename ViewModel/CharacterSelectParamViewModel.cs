@@ -793,7 +793,7 @@ namespace NSC_Toolbox.ViewModel {
                         CharacterSelectParamList.Add(CSP_entry);
                     }
                 } else {
-                    ModernWpf.MessageBox.Show("You can't open that file with that tool. ");
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_1"]);
                     return;
                 }
             }
@@ -840,7 +840,7 @@ namespace NSC_Toolbox.ViewModel {
             if (SelectedCSP is not null) {
                 CharacterSelectParamList.Remove(SelectedCSP);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public void SaveEntry() {
@@ -912,9 +912,9 @@ namespace NSC_Toolbox.ViewModel {
                 SelectedCSP.CharselValues.P2_customization_light_z = P2_customization_light_z_field;
                 SelectedCSP.DictionaryCode = DictionaryCode_field;
                 SelectedCSP.DictionaryIndex = DictionaryIndex_field;
-                ModernWpf.MessageBox.Show("Entry was saved!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
-                ModernWpf.MessageBox.Show("Select entry!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
         public int SearchStringIndex(ObservableCollection<CharacterSelectParamModel> FunctionList, string member_name, int Selected) {
@@ -940,11 +940,11 @@ namespace NSC_Toolbox.ViewModel {
                         SelectedCSPIndex = SearchStringIndex(CharacterSelectParamList, SearchTextBox_field, -1);
                         CollectionViewSource.GetDefaultView(CharacterSelectParamList).MoveCurrentTo(SelectedCSP);
                     } else {
-                        ModernWpf.MessageBox.Show("There is no entry with that name.", "No result", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_18"], "No result", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             } else {
-                ModernWpf.MessageBox.Show("Write text in field!");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_17"]);
             }
         }
 
@@ -1027,7 +1027,7 @@ namespace NSC_Toolbox.ViewModel {
 
             }
             CharacterSelectParamList.Add(CSP_entry);
-            ModernWpf.MessageBox.Show("Entry was added!");
+            ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_2"]);
         }
 
         public void SortEntries() {
@@ -1048,7 +1048,7 @@ namespace NSC_Toolbox.ViewModel {
                 }
                 File.Copy(filePath, filePath + ".backup");
                 File.WriteAllBytes(filePath, ConvertToFile());
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
             } else {
                 SaveFileAs();
             }
@@ -1077,7 +1077,7 @@ namespace NSC_Toolbox.ViewModel {
             }
             File.WriteAllBytes(filePath, ConvertToFile());
             if (basepath == "")
-                ModernWpf.MessageBox.Show("File saved to " + filePath + ".");
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_3"] + filePath + ".");
         }
         public byte[] ConvertToFile() {
 
