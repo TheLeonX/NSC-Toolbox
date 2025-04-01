@@ -12,6 +12,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Media;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,15 +22,27 @@ namespace NSC_Toolbox.ViewModel
 {
     public static class BitmapConversion
     {
+        [DllImport("gdi32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DeleteObject(IntPtr hObject);
+
         public static BitmapSource BitmapToBitmapSource(Bitmap source)
         {
-            return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                          source.GetHbitmap(),
-                          IntPtr.Zero,
-                          Int32Rect.Empty,
-                          BitmapSizeOptions.FromEmptyOptions());
+            IntPtr hBitmap = source.GetHbitmap();
+            try
+            {
+                return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                    hBitmap,
+                    IntPtr.Zero,
+                    Int32Rect.Empty,
+                    BitmapSizeOptions.FromEmptyOptions());
+            } finally
+            {
+                DeleteObject(hBitmap);
+            }
         }
     }
+
     public class ExportModViewModel : INotifyPropertyChanged
     {
 
@@ -570,6 +583,10 @@ namespace NSC_Toolbox.ViewModel
             set
             {
                 _stageBGM_ID = value;
+                if (SelectedExportStageIndex != -1)
+                {
+                    StageBGMIDList[SelectedExportStageIndex] = _stageBGM_ID;
+                }
                 OnPropertyChanged("StageBGM_ID");
             }
         }
@@ -580,6 +597,10 @@ namespace NSC_Toolbox.ViewModel
             set
             {
                 _stageMessageID = value;
+                if (SelectedExportStageIndex > -1)
+                {
+                    StageMessageIDList[SelectedExportStageIndex] = StageMessageID;
+                }
                 OnPropertyChanged("StageMessageID");
             }
         }
@@ -988,947 +1009,939 @@ namespace NSC_Toolbox.ViewModel
 
         public void CompileModProcess(string output_folder)
         {
-            //Create Mode Folder
-            string mod_path = Path.Combine(output_folder, ModName_field);
-            Directory.CreateDirectory(mod_path);
-
-            //Check param files in data_win32
-            string characodePath = Path.Combine(DataWin32Path_field, "spc", "characode.bin.xfbin");
-            bool characodeExist = File.Exists(characodePath);
-
-            string duelPlayerParamPath = Path.Combine(DataWin32Path_field, "spc", "duelPlayerParam.xfbin");
-            bool duelPlayerParamExist = File.Exists(duelPlayerParamPath);
-
-            string playerSettingParamPath = Path.Combine(DataWin32Path_field, "spc", "playerSettingParam.bin.xfbin");
-            bool playerSettingParamExist = File.Exists(playerSettingParamPath);
-
-            string skillCustomizeParamPath = Path.Combine(DataWin32Path_field, "spc", "skillCustomizeParam.xfbin");
-            bool skillCustomizeParamExist = File.Exists(skillCustomizeParamPath);
-
-            string spSkillCustomizeParamPath = Path.Combine(DataWin32Path_field, "spc", "spSkillCustomizeParam.xfbin");
-            bool SpSkillCustomizeParamExist = File.Exists(spSkillCustomizeParamPath);
-
-            string skillIndexSettingParamPath = Path.Combine(DataWin32Path_field, "spc", "skillIndexSettingParam.xfbin");
-            bool skillIndexSettingParamExist = File.Exists(skillIndexSettingParamPath);
-
-            string supportSkillRecoverySpeedParamPath = Path.Combine(DataWin32Path_field, "spc", "supportSkillRecoverySpeedParam.xfbin");
-            bool supportSkillRecoverySpeedParamExist = File.Exists(supportSkillRecoverySpeedParamPath);
-
-            string privateCameraPath = Path.Combine(DataWin32Path_field, "spc", "privateCamera.bin.xfbin");
-            bool privateCameraExist = File.Exists(privateCameraPath);
-
-            string characterSelectParamPath = Path.Combine(DataWin32Path_field, "ui", "max", "select", "characterSelectParam.xfbin");
-            bool characterSelectParamExist = File.Exists(characterSelectParamPath);
-
-            string costumeBreakColorParamPath = Path.Combine(DataWin32Path_field, "spc", "costumeBreakColorParam.xfbin");
-            bool costumeBreakColorParamExist = File.Exists(costumeBreakColorParamPath);
-
-            string costumeParamPath = Path.Combine(DataWin32Path_field, "rpg", "param", "costumeParam.bin.xfbin");
-            bool costumeParamExist = File.Exists(costumeParamPath);
-
-            string playerIconPath = Path.Combine(DataWin32Path_field, "spc", "player_icon.xfbin");
-            bool playerIconExist = File.Exists(playerIconPath);
-
-            string cmnparamPath = Path.Combine(DataWin32Path_field, "sound", "cmnparam.xfbin");
-            bool cmnparamExist = File.Exists(cmnparamPath);
-
-            string supportActionParamPath = Path.Combine(DataWin32Path_field, "spc", "supportActionParam.xfbin");
-            bool supportActionParamExist = File.Exists(supportActionParamPath);
-
-            string awakeAuraPath = Path.Combine(DataWin32Path_field, "spc", "awakeAura.xfbin");
-            bool awakeAuraExist = File.Exists(awakeAuraPath);
-
-            string appearanceAnmPath = Path.Combine(DataWin32Path_field, "spc", "appearanceAnm.xfbin");
-            bool appearanceAnmExist = File.Exists(appearanceAnmPath);
-
-            string afterAttachObjectPath = Path.Combine(DataWin32Path_field, "spc", "afterAttachObject.xfbin");
-            bool afterAttachObjectExist = File.Exists(afterAttachObjectPath);
-
-            string playerDoubleEffectParamPath = Path.Combine(DataWin32Path_field, "spc", "playerDoubleEffectParam.xfbin");
-            bool playerDoubleEffectParamExist = File.Exists(playerDoubleEffectParamPath);
-
-            string spTypeSupportParamPath = Path.Combine(DataWin32Path_field, "spc", "spTypeSupportParam.xfbin");
-            bool spTypeSupportParamExist = File.Exists(spTypeSupportParamPath);
-
-            string costumeBreakParamPath = Path.Combine(DataWin32Path_field, "spc", "costumeBreakParam.xfbin");
-            bool costumeBreakParamExist = File.Exists(costumeBreakParamPath);
-
-            string messageInfoPath = Path.Combine(DataWin32Path_field, "message");
-            bool messageInfoExist = Directory.Exists(messageInfoPath);
-
-            string damageeffPath = Path.Combine(DataWin32Path_field, "spc", "damageeff.bin.xfbin");
-            bool damageeffExist = File.Exists(damageeffPath);
-
-            string effectprmPath = Path.Combine(DataWin32Path_field, "spc", "effectprm.bin.xfbin");
-            bool effectprmExist = File.Exists(effectprmPath);
-
-            string damageprmPath = Path.Combine(DataWin32Path_field, "spc", "damageprm.bin.xfbin");
-            bool damageprmExist = File.Exists(damageprmPath);
-
-            string pairSpSkillCombinePath = Path.Combine(DataWin32Path_field, "spc", "pairSpSkillCombinationParam.xfbin");
-            bool pairSpSkillCombineExist = File.Exists(pairSpSkillCombinePath);
-
-            string pairSpSkillManagerPath = Path.Combine(Path.GetDirectoryName(DataWin32Path_field), "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin");
-            bool pairSpSkillManagerExist = File.Exists(pairSpSkillManagerPath);
-
-
-            string specialInteractionManagerPath = Path.Combine(Path.GetDirectoryName(DataWin32Path_field), "moddingapi", "mods", "base_game", "specialInteractionManager.xfbin");
-            bool specialInteractionManagerExist = File.Exists(specialInteractionManagerPath);
-
-
-            string conditionprmPath = Path.Combine(DataWin32Path_field, "spc", "conditionprm.bin.xfbin");
-            bool conditionprmExist = File.Exists(conditionprmPath);
-            string conditionprmManagerPath = Path.Combine(Path.GetDirectoryName(DataWin32Path_field), "moddingapi", "mods", "base_game", "conditionprmManager.xfbin");
-            bool conditionprmManagerExist = File.Exists(conditionprmManagerPath);
-
-            // Create config file
-            var MyIni = new IniFile(Path.Combine(mod_path, "mod_config.ini"));
-            MyIni.Write("ModName", ModName_field, "ModManager");
-            MyIni.Write("Description", ModDesc_field, "ModManager");
-            MyIni.Write("Author", ModAuthor_field, "ModManager");
-            MyIni.Write("LastUpdate", DateTime.Today.ToString("dd/MM/yyyy"), "ModManager");
-            MyIni.Write("Version", ModVersion_field, "ModManager");
-            MyIni.Write("EnableMod", "true", "ModManager");
-
-            // Copy Icon
-            File.Copy(ModIconPath_field, Path.Combine(mod_path, "mod_icon.png"), true);
-
-            // Copy all resources from mod folder
-            Program.CopyFilesRecursivelyModManager(DataWin32Path_field, Path.Combine(mod_path, "Resources", "Files", "data"));
-
-            // Copy all CPKs
-            Directory.CreateDirectory(Path.Combine(mod_path, "Resources", "CPKs"));
-            foreach (string file in CPKList)
+            try
             {
-                string cpk_name = Path.GetFileName(file);
-                File.Copy(file, Path.Combine(mod_path, "Resources", "CPKs", cpk_name), true);
-            }
+                //Create Mode Folder
+                string mod_path = Path.Combine(output_folder, ModName_field);
+                Directory.CreateDirectory(mod_path);
 
-            // Copy all shaders
-            Directory.CreateDirectory(Path.Combine(mod_path, "Resources", "Shaders"));
-            foreach (string file in ShadersList)
-            {
-                string shader_name = Path.GetFileName(file);
-                File.Copy(file, Path.Combine(mod_path, "Resources", "Shaders", shader_name), true);
-            }
+                //Check param files in data_win32
+                string characodePath = Path.Combine(DataWin32Path_field, "spc", "characode.bin.xfbin");
+                bool characodeExist = File.Exists(characodePath);
 
-            // characode.bin.xfbin
-            CharacodeEditorViewModel Characode = new CharacodeEditorViewModel();
-            Characode.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "characode.bin.xfbin"));
+                string duelPlayerParamPath = Path.Combine(DataWin32Path_field, "spc", "duelPlayerParam.xfbin");
+                bool duelPlayerParamExist = File.Exists(duelPlayerParamPath);
+
+                string playerSettingParamPath = Path.Combine(DataWin32Path_field, "spc", "playerSettingParam.bin.xfbin");
+                bool playerSettingParamExist = File.Exists(playerSettingParamPath);
+
+                string skillCustomizeParamPath = Path.Combine(DataWin32Path_field, "spc", "skillCustomizeParam.xfbin");
+                bool skillCustomizeParamExist = File.Exists(skillCustomizeParamPath);
+
+                string spSkillCustomizeParamPath = Path.Combine(DataWin32Path_field, "spc", "spSkillCustomizeParam.xfbin");
+                bool SpSkillCustomizeParamExist = File.Exists(spSkillCustomizeParamPath);
+
+                string skillIndexSettingParamPath = Path.Combine(DataWin32Path_field, "spc", "skillIndexSettingParam.xfbin");
+                bool skillIndexSettingParamExist = File.Exists(skillIndexSettingParamPath);
+
+                string supportSkillRecoverySpeedParamPath = Path.Combine(DataWin32Path_field, "spc", "supportSkillRecoverySpeedParam.xfbin");
+                bool supportSkillRecoverySpeedParamExist = File.Exists(supportSkillRecoverySpeedParamPath);
+
+                string privateCameraPath = Path.Combine(DataWin32Path_field, "spc", "privateCamera.bin.xfbin");
+                bool privateCameraExist = File.Exists(privateCameraPath);
+
+                string characterSelectParamPath = Path.Combine(DataWin32Path_field, "ui", "max", "select", "characterSelectParam.xfbin");
+                bool characterSelectParamExist = File.Exists(characterSelectParamPath);
+
+                string costumeBreakColorParamPath = Path.Combine(DataWin32Path_field, "spc", "costumeBreakColorParam.xfbin");
+                bool costumeBreakColorParamExist = File.Exists(costumeBreakColorParamPath);
+
+                string costumeParamPath = Path.Combine(DataWin32Path_field, "rpg", "param", "costumeParam.bin.xfbin");
+                bool costumeParamExist = File.Exists(costumeParamPath);
+
+                string playerIconPath = Path.Combine(DataWin32Path_field, "spc", "player_icon.xfbin");
+                bool playerIconExist = File.Exists(playerIconPath);
+
+                string cmnparamPath = Path.Combine(DataWin32Path_field, "sound", "cmnparam.xfbin");
+                bool cmnparamExist = File.Exists(cmnparamPath);
+
+                string supportActionParamPath = Path.Combine(DataWin32Path_field, "spc", "supportActionParam.xfbin");
+                bool supportActionParamExist = File.Exists(supportActionParamPath);
+
+                string awakeAuraPath = Path.Combine(DataWin32Path_field, "spc", "awakeAura.xfbin");
+                bool awakeAuraExist = File.Exists(awakeAuraPath);
+
+                string appearanceAnmPath = Path.Combine(DataWin32Path_field, "spc", "appearanceAnm.xfbin");
+                bool appearanceAnmExist = File.Exists(appearanceAnmPath);
+
+                string afterAttachObjectPath = Path.Combine(DataWin32Path_field, "spc", "afterAttachObject.xfbin");
+                bool afterAttachObjectExist = File.Exists(afterAttachObjectPath);
+
+                string playerDoubleEffectParamPath = Path.Combine(DataWin32Path_field, "spc", "playerDoubleEffectParam.xfbin");
+                bool playerDoubleEffectParamExist = File.Exists(playerDoubleEffectParamPath);
+
+                string spTypeSupportParamPath = Path.Combine(DataWin32Path_field, "spc", "spTypeSupportParam.xfbin");
+                bool spTypeSupportParamExist = File.Exists(spTypeSupportParamPath);
+
+                string costumeBreakParamPath = Path.Combine(DataWin32Path_field, "spc", "costumeBreakParam.xfbin");
+                bool costumeBreakParamExist = File.Exists(costumeBreakParamPath);
+
+                string messageInfoPath = Path.Combine(DataWin32Path_field, "message");
+                bool messageInfoExist = Directory.Exists(messageInfoPath);
+
+                string damageeffPath = Path.Combine(DataWin32Path_field, "spc", "damageeff.bin.xfbin");
+                bool damageeffExist = File.Exists(damageeffPath);
+
+                string effectprmPath = Path.Combine(DataWin32Path_field, "spc", "effectprm.bin.xfbin");
+                bool effectprmExist = File.Exists(effectprmPath);
+
+                string damageprmPath = Path.Combine(DataWin32Path_field, "spc", "damageprm.bin.xfbin");
+                bool damageprmExist = File.Exists(damageprmPath);
+
+                string pairSpSkillCombinePath = Path.Combine(DataWin32Path_field, "spc", "pairSpSkillCombinationParam.xfbin");
+                bool pairSpSkillCombineExist = File.Exists(pairSpSkillCombinePath);
+
+                string pairSpSkillManagerPath = Path.Combine(Path.GetDirectoryName(DataWin32Path_field), "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin");
+                bool pairSpSkillManagerExist = File.Exists(pairSpSkillManagerPath);
 
 
-            ObservableCollection<string> ExportMessageNameList = new ObservableCollection<string>();
-            if (DataWin32Path_field != null && DataWin32Path_field != "" &&
-                ModName_field != null && ModName_field != "" && ModType_field > -1
-                && Directory.Exists(output_folder))
-            {
-                switch (ModType_field)
+                string specialInteractionManagerPath = Path.Combine(Path.GetDirectoryName(DataWin32Path_field), "moddingapi", "mods", "base_game", "specialInteractionManager.xfbin");
+                bool specialInteractionManagerExist = File.Exists(specialInteractionManagerPath);
+
+
+                string conditionprmPath = Path.Combine(DataWin32Path_field, "spc", "conditionprm.bin.xfbin");
+                bool conditionprmExist = File.Exists(conditionprmPath);
+                string conditionprmManagerPath = Path.Combine(Path.GetDirectoryName(DataWin32Path_field), "moddingapi", "mods", "base_game", "conditionprmManager.xfbin");
+                bool conditionprmManagerExist = File.Exists(conditionprmManagerPath);
+
+                // Create config file
+                var MyIni = new IniFile(Path.Combine(mod_path, "mod_config.ini"));
+                MyIni.Write("ModName", ModName_field, "ModManager");
+                MyIni.Write("Description", ModDesc_field, "ModManager");
+                MyIni.Write("Author", ModAuthor_field, "ModManager");
+                MyIni.Write("LastUpdate", DateTime.Today.ToString("dd/MM/yyyy"), "ModManager");
+                MyIni.Write("Version", ModVersion_field, "ModManager");
+                MyIni.Write("EnableMod", "true", "ModManager");
+
+                // Copy Icon
+                File.Copy(ModIconPath_field, Path.Combine(mod_path, "mod_icon.png"), true);
+
+                // Copy all resources from mod folder
+                Program.CopyFilesRecursivelyModManager(DataWin32Path_field, Path.Combine(mod_path, "Resources", "Files", "data"));
+
+                // Copy all CPKs
+                Directory.CreateDirectory(Path.Combine(mod_path, "Resources", "CPKs"));
+                foreach (string file in CPKList)
                 {
-                    //Compile Character Mod
-                    case 0:
-                        List<string> awakeningModels = new List<string>();
-                        List<string> baseModels = new List<string>();
+                    string cpk_name = Path.GetFileName(file);
+                    File.Copy(file, Path.Combine(mod_path, "Resources", "CPKs", cpk_name), true);
+                }
 
-                        DuelPlayerParamEditorViewModel ImportDuelPlayerParam = new DuelPlayerParamEditorViewModel();
-                        PlayerSettingParamViewModel ImportPlayerSettingParam = new PlayerSettingParamViewModel();
-                        SkillCustomizeParamViewModel ImportSkillCustomizeParam = new SkillCustomizeParamViewModel();
-                        SpSkillCustomizeParamViewModel ImportSpSkillCustomizeParam = new SpSkillCustomizeParamViewModel();
-                        SkillIndexSettingParamViewModel ImportSkillIndexParam = new SkillIndexSettingParamViewModel();
-                        SupportSkillRecoverySpeedParamViewModel ImportSupportSkillRecoverySpeed = new SupportSkillRecoverySpeedParamViewModel();
-                        PrivateCameraViewModel ImportPrivateCamera = new PrivateCameraViewModel();
-                        CharacterSelectParamViewModel ImportCharacterSelectParam = new CharacterSelectParamViewModel();
-                        CostumeBreakColorParamViewModel ImportCostumeBreakColorParam = new CostumeBreakColorParamViewModel();
-                        CostumeParamViewModel ImportCostumeParam = new CostumeParamViewModel();
-                        PlayerIconViewModel ImportPlayerIcon = new PlayerIconViewModel();
-                        cmnparamViewModel ImportCmnParam = new cmnparamViewModel();
-                        SupportActionParamViewModel ImportSupportActionParam = new SupportActionParamViewModel();
-                        AwakeAuraViewModel ImportAwakeAura = new AwakeAuraViewModel();
-                        AppearanceAnmViewModel ImportAppearanceAnm = new AppearanceAnmViewModel();
-                        AfterAttachObjectViewModel ImportAfterAttachObject = new AfterAttachObjectViewModel();
-                        PlayerDoubleEffectParamViewModel ImportPlayerDoubleEffectParam = new PlayerDoubleEffectParamViewModel();
-                        SpTypeSupportParamViewModel ImportSpTypeSupportParam = new SpTypeSupportParamViewModel();
-                        CostumeBreakParamViewModel ImportCostumeBreakParam = new CostumeBreakParamViewModel();
-                        MessageInfoViewModel ImportMessageInfo = new MessageInfoViewModel();
-                        DamageEffViewModel OriginalDamageEff = new DamageEffViewModel();
-                        DamageEffViewModel ImportDamageEff = new DamageEffViewModel();
-                        EffectPrmViewModel OriginalEffectPrm = new EffectPrmViewModel();
-                        EffectPrmViewModel ImportEffectPrm = new EffectPrmViewModel();
-                        DamagePrmViewModel ImportDamagePrm = new DamagePrmViewModel();
-                        DamagePrmViewModel OriginalDamagePrm = new DamagePrmViewModel();
-                        SpecialInteractionManagerViewModel ImportSpecialInteraction = new SpecialInteractionManagerViewModel();
-                        ConditionPrmViewModel ImportConditionPrm = new ConditionPrmViewModel();
-                        ConditionManagerViewModel ImportConditionPrmManager = new ConditionManagerViewModel();
+                // Copy all shaders
+                Directory.CreateDirectory(Path.Combine(mod_path, "Resources", "Shaders"));
+                foreach (string file in ShadersList)
+                {
+                    string shader_name = Path.GetFileName(file);
+                    File.Copy(file, Path.Combine(mod_path, "Resources", "Shaders", shader_name), true);
+                }
 
-                        if (duelPlayerParamExist)
-                            ImportDuelPlayerParam.OpenFile(duelPlayerParamPath);
-
-                        if (playerSettingParamExist)
-                            ImportPlayerSettingParam.OpenFile(playerSettingParamPath);
-                        else
-                            ImportPlayerSettingParam.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "playerSettingParam.bin.xfbin"));
-
-                        if (skillCustomizeParamExist)
-                            ImportSkillCustomizeParam.OpenFile(skillCustomizeParamPath);
-
-                        if (SpSkillCustomizeParamExist)
-                            ImportSpSkillCustomizeParam.OpenFile(spSkillCustomizeParamPath);
-
-                        if (skillIndexSettingParamExist)
-                            ImportSkillIndexParam.OpenFile(skillIndexSettingParamPath);
-
-                        if (supportSkillRecoverySpeedParamExist)
-                            ImportSupportSkillRecoverySpeed.OpenFile(supportSkillRecoverySpeedParamPath);
-
-                        if (privateCameraExist)
-                            ImportPrivateCamera.OpenFile(privateCameraPath);
-
-                        if (characterSelectParamExist)
-                            ImportCharacterSelectParam.OpenFile(characterSelectParamPath);
-
-                        if (costumeBreakColorParamExist)
-                            ImportCostumeBreakColorParam.OpenFile(costumeBreakColorParamPath);
-
-                        if (costumeParamExist)
-                            ImportCostumeParam.OpenFile(costumeParamPath);
-                        else
-                            ImportCostumeParam.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "costumeParam.bin.xfbin"));
-
-                        if (playerIconExist)
-                            ImportPlayerIcon.OpenFile(playerIconPath);
-
-                        if (cmnparamExist)
-                            ImportCmnParam.OpenFile(cmnparamPath);
-
-                        if (supportActionParamExist)
-                            ImportSupportActionParam.OpenFile(supportActionParamPath);
-
-                        if (awakeAuraExist)
-                            ImportAwakeAura.OpenFile(awakeAuraPath);
-
-                        if (appearanceAnmExist)
-                            ImportAppearanceAnm.OpenFile(appearanceAnmPath);
-
-                        if (afterAttachObjectExist)
-                            ImportAfterAttachObject.OpenFile(afterAttachObjectPath);
-
-                        if (playerDoubleEffectParamExist)
-                            ImportPlayerDoubleEffectParam.OpenFile(playerDoubleEffectParamPath);
-
-                        if (spTypeSupportParamExist)
-                            ImportSpTypeSupportParam.OpenFile(spTypeSupportParamPath);
-
-                        if (costumeBreakParamExist)
-                            ImportCostumeBreakParam.OpenFile(costumeBreakParamPath);
-
-                        if (messageInfoExist)
-                            ImportMessageInfo.OpenFiles(messageInfoPath);
-
-                        if (damageeffExist)
-                            ImportDamageEff.OpenFile(damageeffPath);
-
-                        if (effectprmExist)
-                            ImportEffectPrm.OpenFile(effectprmPath);
-
-                        if (specialInteractionManagerExist)
-                            ImportSpecialInteraction.OpenFile(specialInteractionManagerPath);
-
-                        if (conditionprmExist)
-                            ImportConditionPrm.OpenFile(conditionprmPath);
-
-                        if (conditionprmManagerExist)
-                            ImportConditionPrmManager.OpenFile(conditionprmManagerPath);
-
-                        OriginalDamageEff.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "damageeff.bin.xfbin"));
-                        OriginalEffectPrm.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "effectprm.bin.xfbin"));
-                        OriginalDamagePrm.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "damageprm.bin.xfbin"));
+                // characode.bin.xfbin
+                CharacodeEditorViewModel Characode = new CharacodeEditorViewModel();
+                Characode.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "characode.bin.xfbin"));
 
 
-                        if (damageprmExist)
-                            ImportDamagePrm.OpenFile(damageprmPath);
+                ObservableCollection<string> ExportMessageNameList = new ObservableCollection<string>();
+                if (DataWin32Path_field != null && DataWin32Path_field != "" &&
+                    ModName_field != null && ModName_field != "" && ModType_field > -1
+                    && Directory.Exists(output_folder))
+                {
+                    switch (ModType_field)
+                    {
+                        //Compile Character Mod
+                        case 0:
+                            List<string> awakeningModels = new List<string>();
+                            List<string> baseModels = new List<string>();
 
-                        foreach (CharacodeEditorModel character in ExportCharacterList)
-                        {
-                            bool ReplaceCharacter = false;
-                            for (int i = 0; i < Characode.CharacodeList.Count; i++)
-                            {
-                                if (Characode.CharacodeList[i].CharacodeName == character.CharacodeName)
-                                {
-                                    ReplaceCharacter = true;
-                                    break;
-                                }
-                            }
-                            bool partner = false;
+                            DuelPlayerParamEditorViewModel ImportDuelPlayerParam = new DuelPlayerParamEditorViewModel();
+                            PlayerSettingParamViewModel ImportPlayerSettingParam = new PlayerSettingParamViewModel();
+                            SkillCustomizeParamViewModel ImportSkillCustomizeParam = new SkillCustomizeParamViewModel();
+                            SpSkillCustomizeParamViewModel ImportSpSkillCustomizeParam = new SpSkillCustomizeParamViewModel();
+                            SkillIndexSettingParamViewModel ImportSkillIndexParam = new SkillIndexSettingParamViewModel();
+                            SupportSkillRecoverySpeedParamViewModel ImportSupportSkillRecoverySpeed = new SupportSkillRecoverySpeedParamViewModel();
+                            PrivateCameraViewModel ImportPrivateCamera = new PrivateCameraViewModel();
+                            CharacterSelectParamViewModel ImportCharacterSelectParam = new CharacterSelectParamViewModel();
+                            CostumeBreakColorParamViewModel ImportCostumeBreakColorParam = new CostumeBreakColorParamViewModel();
+                            CostumeParamViewModel ImportCostumeParam = new CostumeParamViewModel();
+                            PlayerIconViewModel ImportPlayerIcon = new PlayerIconViewModel();
+                            cmnparamViewModel ImportCmnParam = new cmnparamViewModel();
+                            SupportActionParamViewModel ImportSupportActionParam = new SupportActionParamViewModel();
+                            AwakeAuraViewModel ImportAwakeAura = new AwakeAuraViewModel();
+                            AppearanceAnmViewModel ImportAppearanceAnm = new AppearanceAnmViewModel();
+                            AfterAttachObjectViewModel ImportAfterAttachObject = new AfterAttachObjectViewModel();
+                            PlayerDoubleEffectParamViewModel ImportPlayerDoubleEffectParam = new PlayerDoubleEffectParamViewModel();
+                            SpTypeSupportParamViewModel ImportSpTypeSupportParam = new SpTypeSupportParamViewModel();
+                            CostumeBreakParamViewModel ImportCostumeBreakParam = new CostumeBreakParamViewModel();
+                            MessageInfoViewModel ImportMessageInfo = new MessageInfoViewModel();
+                            DamageEffViewModel OriginalDamageEff = new DamageEffViewModel();
+                            DamageEffViewModel ImportDamageEff = new DamageEffViewModel();
+                            EffectPrmViewModel OriginalEffectPrm = new EffectPrmViewModel();
+                            EffectPrmViewModel ImportEffectPrm = new EffectPrmViewModel();
+                            DamagePrmViewModel ImportDamagePrm = new DamagePrmViewModel();
+                            DamagePrmViewModel OriginalDamagePrm = new DamagePrmViewModel();
+                            SpecialInteractionManagerViewModel ImportSpecialInteraction = new SpecialInteractionManagerViewModel();
+                            ConditionPrmViewModel ImportConditionPrm = new ConditionPrmViewModel();
+                            ConditionManagerViewModel ImportConditionPrmManager = new ConditionManagerViewModel();
 
-
-                            string character_path = Path.Combine(mod_path, "Characters", character.CharacodeName, "data");
-
-                            Directory.CreateDirectory(Path.Combine(character_path, "spc"));
-                            Directory.CreateDirectory(Path.Combine(character_path, "rpg", "param"));
-                            Directory.CreateDirectory(Path.Combine(character_path, "ui", "max", "select"));
-                            Directory.CreateDirectory(Path.Combine(character_path, "sound"));
-
-                            var MyCharacterIni = new IniFile(Path.Combine(mod_path, "Characters", character.CharacodeName, "character_config.ini"));
-
-                            //Save Character Config
-                            MyCharacterIni.Write("Partner", "false", "ModManager");
-                            MyCharacterIni.Write("Page", "-1", "ModManager");
-                            MyCharacterIni.Write("Slot", "-1", "ModManager");
-                            DuelPlayerParamEditorViewModel ExportDuelPlayerParam = new DuelPlayerParamEditorViewModel();
-                            PlayerSettingParamViewModel ExportPlayerSettingParam = new PlayerSettingParamViewModel();
-                            SkillCustomizeParamViewModel ExportSkillCustomizeParam = new SkillCustomizeParamViewModel();
-                            SpSkillCustomizeParamViewModel ExportSpSkillCustomizeParam = new SpSkillCustomizeParamViewModel();
-                            SkillIndexSettingParamViewModel ExportSkillIndexParam = new SkillIndexSettingParamViewModel();
-                            SupportSkillRecoverySpeedParamViewModel ExportSupportSkillRecoverySpeed = new SupportSkillRecoverySpeedParamViewModel();
-                            PrivateCameraViewModel ExportPrivateCamera = new PrivateCameraViewModel();
-                            CharacterSelectParamViewModel ExportCharacterSelectParam = new CharacterSelectParamViewModel();
-                            CostumeBreakColorParamViewModel ExportCostumeBreakColorParam = new CostumeBreakColorParamViewModel();
-                            CostumeParamViewModel ExportCostumeParam = new CostumeParamViewModel();
-                            PlayerIconViewModel ExportPlayerIcon = new PlayerIconViewModel();
-                            cmnparamViewModel ExportCmnParam = new cmnparamViewModel();
-                            SupportActionParamViewModel ExportSupportActionParam = new SupportActionParamViewModel();
-                            AwakeAuraViewModel ExportAwakeAura = new AwakeAuraViewModel();
-                            AppearanceAnmViewModel ExportAppearanceAnm = new AppearanceAnmViewModel();
-                            AfterAttachObjectViewModel ExportAfterAttachObject = new AfterAttachObjectViewModel();
-                            PlayerDoubleEffectParamViewModel ExportPlayerDoubleEffectParam = new PlayerDoubleEffectParamViewModel();
-                            SpTypeSupportParamViewModel ExportSpTypeSupportParam = new SpTypeSupportParamViewModel();
-                            CostumeBreakParamViewModel ExportCostumeBreakParam = new CostumeBreakParamViewModel();
-                            MessageInfoViewModel ExportMessageInfo = new MessageInfoViewModel();
-                            DamageEffViewModel ExportDamageEff = new DamageEffViewModel();
-                            EffectPrmViewModel ExportEffectPrm = new EffectPrmViewModel();
-                            DamagePrmViewModel ExportDamagePrm = new DamagePrmViewModel();
-                            ConditionPrmViewModel ExportConditionPrm = new ConditionPrmViewModel();
-                            ConditionManagerViewModel ExportConditionPrmManager = new ConditionManagerViewModel();
-                            /*----------------------------------------REQUIRED FILES--------------------------------------*/
-                            string moddingAPIPath = Path.Combine(Path.GetDirectoryName(DataWin32Path_field), "moddingapi", "mods", "base_game");
-                            string character_moddingAPI_path = Path.Combine(mod_path, "Characters", character.CharacodeName, "moddingapi", "mods", "base_game");
-
-                            Directory.CreateDirectory(character_moddingAPI_path);
-                            if (Directory.Exists(moddingAPIPath))
-                            {
-                                //Special Conditions
-                                string specialCondParamPath = moddingAPIPath + "\\specialCondParam.xfbin";
-                                if (File.Exists(specialCondParamPath))
-                                {
-                                    byte[] FileBytes = File.ReadAllBytes(specialCondParamPath);
-                                    int EntryCount = FileBytes.Length / 0x20;
-
-                                    for (int z = 0; z < EntryCount; z++)
-                                    {
-                                        int ptr = 0x20 * z;
-                                        string ConditionName = BinaryReader.b_ReadString(FileBytes, ptr);
-                                        int CondCharacodeID = BinaryReader.b_ReadIntFromTwoBytes(FileBytes, ptr + 0x17);
-                                        if (CondCharacodeID == character.CharacodeIndex)
-                                        {
-                                            byte[] Section = new byte[0x20];
-                                            Section = BinaryReader.b_ReplaceString(Section, ConditionName, 0);
-                                            Section = BinaryReader.b_ReplaceBytes(Section, BitConverter.GetBytes(CondCharacodeID), 0x17);
-                                            File.WriteAllBytes(character_moddingAPI_path + "\\specialCondParam.xfbin", Section);
-                                            break;
-                                        }
-                                    }
-                                }
-                                //Partners
-                                string partnerSlotParamPath = moddingAPIPath + "\\partnerSlotParam.xfbin";
-                                if (File.Exists(partnerSlotParamPath))
-                                {
-                                    byte[] FileBytes = File.ReadAllBytes(partnerSlotParamPath);
-                                    int EntryCount = FileBytes.Length / 0x20;
-
-                                    for (int z = 0; z < EntryCount; z++)
-                                    {
-                                        int ptr = 0x20 * z;
-                                        string ConditionName = BinaryReader.b_ReadString(FileBytes, ptr);
-                                        int CondCharacodeID = BinaryReader.b_ReadIntFromTwoBytes(FileBytes, ptr + 0x17);
-                                        if (CondCharacodeID == character.CharacodeIndex)
-                                        {
-                                            byte[] Section = new byte[0x20];
-                                            Section = BinaryReader.b_ReplaceString(Section, ConditionName, 0);
-                                            Section = BinaryReader.b_ReplaceBytes(Section, BitConverter.GetBytes(CondCharacodeID), 0x17);
-                                            File.WriteAllBytes(character_moddingAPI_path + "\\partnerSlotParam.xfbin", Section);
-
-                                            //Save Character Config
-                                            MyCharacterIni.Write("Partner", "true", "ModManager");
-                                            MyCharacterIni.Write("Page", "0", "ModManager");
-                                            MyCharacterIni.Write("Slot", "0", "ModManager");
-                                            partner = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                //Susanoo Fix
-                                string susanooCondParamPath = moddingAPIPath + "\\susanooCondParam.xfbin";
-                                if (File.Exists(susanooCondParamPath))
-                                {
-                                    byte[] FileBytes = File.ReadAllBytes(susanooCondParamPath);
-                                    int EntryCount = FileBytes.Length / 0x20;
-
-                                    for (int z = 0; z < EntryCount; z++)
-                                    {
-                                        int ptr = 0x20 * z;
-                                        string ConditionName = BinaryReader.b_ReadString(FileBytes, ptr);
-                                        int CondCharacodeID = BinaryReader.b_ReadIntFromTwoBytes(FileBytes, ptr + 0x17);
-                                        if (CondCharacodeID == character.CharacodeIndex)
-                                        {
-                                            byte[] Section = new byte[0x20];
-                                            Section = BinaryReader.b_ReplaceString(Section, ConditionName, 0);
-                                            Section = BinaryReader.b_ReplaceBytes(Section, BitConverter.GetBytes(CondCharacodeID), 0x17);
-                                            File.WriteAllBytes(character_moddingAPI_path + "\\susanooCondParam.xfbin", Section);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-
-                            //duelPlayerParam
                             if (duelPlayerParamExist)
-                            {
+                                ImportDuelPlayerParam.OpenFile(duelPlayerParamPath);
 
-                                foreach (DuelPlayerParamModel duelEntry in ImportDuelPlayerParam.DuelPlayerParamList)
-                                {
-                                    if (duelEntry.BinName.Contains(character.CharacodeName))
-                                    {
-                                        ExportDuelPlayerParam.DuelPlayerParamList.Add((DuelPlayerParamModel)duelEntry.Clone());
+                            if (playerSettingParamExist)
+                                ImportPlayerSettingParam.OpenFile(playerSettingParamPath);
+                            else
+                                ImportPlayerSettingParam.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "playerSettingParam.bin.xfbin"));
 
-                                        for (int i = 0; i < 20; i++)
-                                        {
-                                            if (!awakeningModels.Contains(duelEntry.AwakeCostumes[i].CostumeName))
-                                                awakeningModels.Add(duelEntry.AwakeCostumes[i].CostumeName);
-                                            if (!baseModels.Contains(duelEntry.BaseCostumes[i].CostumeName))
-                                                baseModels.Add(duelEntry.BaseCostumes[i].CostumeName);
-                                        }
-                                        //conditionprm and conditionprm manager
-                                        if (conditionprmExist && conditionprmManagerExist)
-                                        {
-                                            ConditionPrmModel selectedConditionPRM = ImportConditionPrm.ConditionList.FirstOrDefault(c => c.ConditionName == duelEntry.AwakeningCondition);
-                                            ConditionManagerModel selectedConditionManager = ImportConditionPrmManager.ConditionList.FirstOrDefault(c => c.ConditionName == duelEntry.AwakeningCondition);
-
-                                            if (selectedConditionPRM != null && selectedConditionManager != null)
-                                            {
-                                                // Add the main condition
-                                                ExportConditionPrm.ConditionList.Add((ConditionPrmModel)selectedConditionPRM.Clone());
-                                                ExportConditionPrmManager.ConditionList.Add((ConditionManagerModel)selectedConditionManager.Clone());
-
-                                                string currentConditionName = selectedConditionManager.AfterConditionName;
-
-                                                // Loop to add debuff conditions recursively until AfterConditionName is null or empty
-                                                while (!string.IsNullOrEmpty(currentConditionName))
-                                                {
-                                                    // Find the next condition (debuff)
-                                                    ConditionPrmModel nextConditionPRM = ImportConditionPrm.ConditionList.FirstOrDefault(c => c.ConditionName == currentConditionName);
-                                                    ConditionManagerModel nextConditionManager = ImportConditionPrmManager.ConditionList.FirstOrDefault(c => c.ConditionName == currentConditionName);
-
-                                                    if (nextConditionPRM != null && nextConditionManager != null)
-                                                    {
-                                                        // Add the debuff condition
-                                                        ExportConditionPrm.ConditionList.Add((ConditionPrmModel)nextConditionPRM.Clone());
-                                                        ExportConditionPrmManager.ConditionList.Add((ConditionManagerModel)nextConditionManager.Clone());
-
-                                                        // Set the next condition to be the AfterConditionName of the current debuff
-                                                        currentConditionName = nextConditionManager.AfterConditionName;
-                                                    } else
-                                                    {
-                                                        // Exit the loop if no matching condition is found
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        break;
-
-                                        
-
-
-                                    }
-                                }
-                                if (ExportDuelPlayerParam.DuelPlayerParamList.Count < 1 && !ReplaceCharacter)
-                                {
-                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_32"]);
-                                    continue;
-                                }
-                            } else if (!duelPlayerParamExist && !ReplaceCharacter)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_33"]);
-                                continue;
-                            }
-                            //playerSettingParam
-                            foreach (PlayerSettingParamModel PSPEntry in ImportPlayerSettingParam.PlayerSettingParamList)
-                            {
-                                if (PSPEntry.CharacodeID == character.CharacodeIndex)
-                                {
-                                    ExportPlayerSettingParam.PlayerSettingParamList.Add((PlayerSettingParamModel)PSPEntry.Clone());
-                                    if (!ExportMessageNameList.Contains(PSPEntry.CharacterNameMessageID))
-                                        ExportMessageNameList.Add(PSPEntry.CharacterNameMessageID);
-                                    if (!ExportMessageNameList.Contains(PSPEntry.CostumeDescriptionMessageID))
-                                        ExportMessageNameList.Add(PSPEntry.CostumeDescriptionMessageID);
-                                }
-                            }
-                            //skillCustomizeParam
                             if (skillCustomizeParamExist)
-                            {
+                                ImportSkillCustomizeParam.OpenFile(skillCustomizeParamPath);
 
-                                foreach (SkillCustomizeParamModel SkillEntry in ImportSkillCustomizeParam.SkillCustomizeParamList)
-                                {
-                                    if (SkillEntry.CharacodeID == character.CharacodeIndex)
-                                    {
-                                        ExportSkillCustomizeParam.SkillCustomizeParamList.Add((SkillCustomizeParamModel)SkillEntry.Clone());
-                                        if (messageInfoExist)
-                                        {
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_air_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu1_air_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_air_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu2_air_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu3_air_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu3_air_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu4_air_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu4_air_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu5_air_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu5_air_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu6_air_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu6_air_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_awa_air_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu1_awa_air_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_awa_air_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu2_awa_air_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_normal_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu1_normal_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_normal_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu2_normal_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu3_normal_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu3_normal_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu4_normal_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu4_normal_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu5_normal_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu5_normal_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu6_normal_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu6_normal_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_awa_normal_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu1_awa_normal_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_awa_normal_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu2_awa_normal_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_ex_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu1_ex_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_ex_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu2_ex_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu3_ex_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu3_ex_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu4_ex_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu4_ex_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu5_ex_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu5_ex_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu6_ex_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu6_ex_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_awa_ex_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu1_awa_ex_name);
-                                            if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_awa_ex_name))
-                                                ExportMessageNameList.Add(SkillEntry.Jutsu2_awa_ex_name);
-                                        }
-                                        break;
-                                    }
-                                }
-                                if (ExportSkillCustomizeParam.SkillCustomizeParamList.Count < 1 && !ReplaceCharacter && !partner)
-                                {
-                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " skillCustomizeParam entry.");
-                                    continue;
-                                }
-                            } else if (!playerSettingParamExist && !ReplaceCharacter && !partner)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " skillCustomizeParam file.");
-                                continue;
-                            }
-                            //spSkillCustomizeParam
                             if (SpSkillCustomizeParamExist)
-                            {
+                                ImportSpSkillCustomizeParam.OpenFile(spSkillCustomizeParamPath);
 
-                                foreach (SpSkillCustomizeParamModel SpSkillEntry in ImportSpSkillCustomizeParam.SpSkillCustomizeParamList)
-                                {
-                                    if (SpSkillEntry.CharacodeID == character.CharacodeIndex)
-                                    {
-                                        ExportSpSkillCustomizeParam.SpSkillCustomizeParamList.Add((SpSkillCustomizeParamModel)SpSkillEntry.Clone());
-                                        if (messageInfoExist)
-                                        {
-                                            if (!ExportMessageNameList.Contains(SpSkillEntry.Ultimate1name))
-                                                ExportMessageNameList.Add(SpSkillEntry.Ultimate1name);
-                                            if (!ExportMessageNameList.Contains(SpSkillEntry.Ultimate2name))
-                                                ExportMessageNameList.Add(SpSkillEntry.Ultimate2name);
-                                            if (!ExportMessageNameList.Contains(SpSkillEntry.Ultimate3name))
-                                                ExportMessageNameList.Add(SpSkillEntry.Ultimate3name);
-                                            if (!ExportMessageNameList.Contains(SpSkillEntry.Ultimate4name))
-                                                ExportMessageNameList.Add(SpSkillEntry.Ultimate4name);
-                                        }
-                                        break;
-                                    }
-                                }
-                                if (ExportSpSkillCustomizeParam.SpSkillCustomizeParamList.Count < 1 && !ReplaceCharacter && !partner)
-                                {
-                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "spSkillCustomizeParam entry.");
-                                    continue;
-                                }
-                            } else if (!SpSkillCustomizeParamExist && !ReplaceCharacter && !partner)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " spSkillCustomizeParam file.");
-                                continue;
-                            }
-                            //skillIndexSettingParam
                             if (skillIndexSettingParamExist)
-                            {
+                                ImportSkillIndexParam.OpenFile(skillIndexSettingParamPath);
 
-                                foreach (SkillIndexSettingParamModel SkillIndexEntry in ImportSkillIndexParam.SkillIndexSettingParamList)
-                                {
-                                    if (SkillIndexEntry.CharacodeID == character.CharacodeIndex)
-                                    {
-                                        ExportSkillIndexParam.SkillIndexSettingParamList.Add((SkillIndexSettingParamModel)SkillIndexEntry.Clone());
-                                        break;
-                                    }
-                                }
-                                if (ExportSkillIndexParam.SkillIndexSettingParamList.Count < 1 && !ReplaceCharacter && !partner)
-                                {
-                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " skillIndexSettingParam entry.");
-                                    continue;
-                                }
-                            } else if (!SpSkillCustomizeParamExist && !ReplaceCharacter && !partner)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " skillIndexSettingParam file.");
-                                continue;
-                            }
-
-                            //supportSkillRecoverySpeedParam
                             if (supportSkillRecoverySpeedParamExist)
-                            {
+                                ImportSupportSkillRecoverySpeed.OpenFile(supportSkillRecoverySpeedParamPath);
 
-                                foreach (SupportSkillRecoverySpeedParamModel supportSkillRecoveryEntry in ImportSupportSkillRecoverySpeed.SupportSkillRecoverySpeedParamList)
-                                {
-                                    if (supportSkillRecoveryEntry.CharacodeID == character.CharacodeIndex)
-                                    {
-                                        ExportSupportSkillRecoverySpeed.SupportSkillRecoverySpeedParamList.Add((SupportSkillRecoverySpeedParamModel)supportSkillRecoveryEntry.Clone());
-                                        break;
-                                    }
-                                }
-                                if (ExportSupportSkillRecoverySpeed.SupportSkillRecoverySpeedParamList.Count < 1 && !ReplaceCharacter && !partner)
-                                {
-                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " supportSkillRecoverySpeedParam entry.");
-                                    continue;
-                                }
-                            } else if (!supportSkillRecoverySpeedParamExist && !ReplaceCharacter && !partner)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " supportSkillRecoverySpeedParam file.");
-                                continue;
-                            }
-                            //privateCamera
                             if (privateCameraExist)
-                            {
+                                ImportPrivateCamera.OpenFile(privateCameraPath);
 
-                                foreach (PrivateCameraModel PrivateCameraEntry in ImportPrivateCamera.PrivateCameraList)
-                                {
-                                    if (PrivateCameraEntry.CharacodeIndex == character.CharacodeIndex)
-                                    {
-                                        ExportPrivateCamera.PrivateCameraList.Add((PrivateCameraModel)PrivateCameraEntry.Clone());
-                                        break;
-                                    }
-                                }
-                                if (ExportPrivateCamera.PrivateCameraList.Count < 1 && !ReplaceCharacter)
-                                {
-                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " privateCamera entry.");
-                                    continue;
-                                }
-                            } else if (!privateCameraExist && !ReplaceCharacter)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " privateCamera file.");
-                                continue;
-                            }
-
-
-                            //characterSelectParam
                             if (characterSelectParamExist)
-                            {
+                                ImportCharacterSelectParam.OpenFile(characterSelectParamPath);
 
-                                foreach (CharacterSelectParamModel CharacterSelectParamEntry in ImportCharacterSelectParam.CharacterSelectParamList)
-                                {
-                                    for (int i = 0; i < ExportPlayerSettingParam.PlayerSettingParamList.Count; i++)
-                                    {
-                                        if (CharacterSelectParamEntry.CSP_code == ExportPlayerSettingParam.PlayerSettingParamList[i].PSP_code)
-                                        {
-                                            ExportCharacterSelectParam.CharacterSelectParamList.Add((CharacterSelectParamModel)CharacterSelectParamEntry.Clone());
-                                            if (messageInfoExist)
-                                            {
-                                                if (!ExportMessageNameList.Contains(CharacterSelectParamEntry.CostumeName))
-                                                    ExportMessageNameList.Add(CharacterSelectParamEntry.CostumeName);
-                                                if (!ExportMessageNameList.Contains(CharacterSelectParamEntry.CostumeDescription))
-                                                    ExportMessageNameList.Add(CharacterSelectParamEntry.CostumeDescription);
-                                            }
-                                            break;
-                                        }
-                                    }
-
-                                }
-                                if (ExportCharacterSelectParam.CharacterSelectParamList.Count < 1 && !ReplaceCharacter && !partner)
-                                {
-                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " characterSelectParam entry.");
-                                    continue;
-                                }
-                            } else if (!characterSelectParamExist && !ReplaceCharacter && !partner)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " characterSelectParam file.");
-                                continue;
-                            }
-                            //costumeBreakColorParam
                             if (costumeBreakColorParamExist)
-                            {
+                                ImportCostumeBreakColorParam.OpenFile(costumeBreakColorParamPath);
 
-                                foreach (CostumeBreakColorParamModel CostumeBreakColorEntry in ImportCostumeBreakColorParam.CostumeBreakColorParamList)
-                                {
-                                    for (int i = 0; i < ExportPlayerSettingParam.PlayerSettingParamList.Count; i++)
-                                    {
-                                        if (CostumeBreakColorEntry.PlayerSettingParamID == ExportPlayerSettingParam.PlayerSettingParamList[i].PSP_ID)
-                                        {
-                                            ExportCostumeBreakColorParam.CostumeBreakColorParamList.Add((CostumeBreakColorParamModel)CostumeBreakColorEntry.Clone());
-                                            break;
-                                        }
-                                    }
+                            if (costumeParamExist)
+                                ImportCostumeParam.OpenFile(costumeParamPath);
+                            else
+                                ImportCostumeParam.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "costumeParam.bin.xfbin"));
 
-                                }
-                                //if (ExportCostumeBreakColorParam.CostumeBreakColorParamList.Count < 1 && !ReplaceCharacter && !partner) {
-                                //    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] +" " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "costumeBreakColorParam entry.");
-                                //    continue;
-                                //}
-                            }
-                            //else if (!characterSelectParamExist && !ReplaceCharacter && !partner) {
-                            //    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] +" " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "costumeBreakColorParam file.");
-                            //    continue;
-                            //}
-                            //costumeParam
-                            // if (costumeParamExist) {
-
-                            foreach (CostumeParamModel CostumeEntry in ImportCostumeParam.CostumeParamList)
-                            {
-                                for (int i = 0; i < ExportPlayerSettingParam.PlayerSettingParamList.Count; i++)
-                                {
-                                    if (CostumeEntry.PlayerSettingParamID == ExportPlayerSettingParam.PlayerSettingParamList[i].PSP_ID)
-                                    {
-                                        ExportCostumeParam.CostumeParamList.Add((CostumeParamModel)CostumeEntry.Clone());
-                                        if (messageInfoExist)
-                                        {
-                                            if (!ExportMessageNameList.Contains(CostumeEntry.CharacterName))
-                                                ExportMessageNameList.Add(CostumeEntry.CharacterName);
-                                        }
-                                    }
-                                }
-
-                            }
-                            if (ExportCostumeParam.CostumeParamList.Count < 1 && !ReplaceCharacter && !partner)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " costumeParam entry.");
-                                continue;
-                            }
-                            //} else if (!costumeParamExist && !ReplaceCharacter && !partner) {
-                            //    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] +" " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "costumeParam file.");
-                            //    continue;
-                            //}
-                            //player_icon
                             if (playerIconExist)
-                            {
+                                ImportPlayerIcon.OpenFile(playerIconPath);
 
-                                foreach (PlayerIconModel PlayerIconEntry in ImportPlayerIcon.playerIconList)
-                                {
-                                    if (PlayerIconEntry.CharacodeID == character.CharacodeIndex)
-                                    {
-                                        ExportPlayerIcon.playerIconList.Add((PlayerIconModel)PlayerIconEntry.Clone());
-                                    }
-                                }
-                                if (ExportPlayerIcon.playerIconList.Count < 1 && !ReplaceCharacter && !partner)
-                                {
-                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " player_icon entry.");
-                                    continue;
-                                }
-                            } else if (!playerIconExist && !ReplaceCharacter && !partner)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " player_icon file.");
-                                continue;
-                            }
-                            //cmnparam
                             if (cmnparamExist)
-                            {
+                                ImportCmnParam.OpenFile(cmnparamPath);
 
-                                foreach (player_sndModel playerSndEntry in ImportCmnParam.PlayerSndList)
-                                {
-                                    if (playerSndEntry.PlayerCharacode == character.CharacodeName)
-                                    {
-                                        ExportCmnParam.PlayerSndList.Add((player_sndModel)playerSndEntry.Clone());
-                                        break;
-                                    }
-                                }
-                                if (ExportCmnParam.PlayerSndList.Count < 1 && !ReplaceCharacter)
-                                {
-                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " cmnparam player_snd entry.");
-                                    continue;
-                                }
-                            } else if (!cmnparamExist && !ReplaceCharacter)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " cmnparam player_snd file.");
-                                continue;
-                            }
-                            //supportActionParam
                             if (supportActionParamExist)
-                            {
+                                ImportSupportActionParam.OpenFile(supportActionParamPath);
 
-                                foreach (SupportActionParamModel supportActionEntry in ImportSupportActionParam.SupportActionParamList)
-                                {
-                                    if (supportActionEntry.CharacodeID == character.CharacodeIndex)
-                                    {
-                                        ExportSupportActionParam.SupportActionParamList.Add((SupportActionParamModel)supportActionEntry.Clone());
-                                        break;
-                                    }
-                                }
-                                if (ExportSupportActionParam.SupportActionParamList.Count < 1 && !ReplaceCharacter && !partner)
-                                {
-                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " supportActionParam entry.");
-                                    continue;
-                                }
-                            } else if (!playerSettingParamExist && !ReplaceCharacter && !partner)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " supportActionParam file.");
-                                continue;
-                            }
-                            /*----------------------------------------NOT REQUIRED FILES--------------------------------------*/
-                            //awakeAura
                             if (awakeAuraExist)
-                            {
+                                ImportAwakeAura.OpenFile(awakeAuraPath);
 
-                                foreach (AwakeAuraModel awakeAuraEntry in ImportAwakeAura.AwakeAuraList)
-                                {
-                                    if (awakeAuraEntry.Characode == character.CharacodeName)
-                                    {
-                                        ExportAwakeAura.AwakeAuraList.Add((AwakeAuraModel)awakeAuraEntry.Clone());
-                                    }
-                                }
-                            }
-                            //appearanceAnm
                             if (appearanceAnmExist)
-                            {
+                                ImportAppearanceAnm.OpenFile(appearanceAnmPath);
 
-                                foreach (AppearanceAnmModel appearanceEntry in ImportAppearanceAnm.AppearanceAnmList)
-                                {
-                                    if (appearanceEntry.CharacodeID == character.CharacodeIndex)
-                                    {
-                                        ExportAppearanceAnm.AppearanceAnmList.Add((AppearanceAnmModel)appearanceEntry.Clone());
-                                    }
-                                }
-                            }
-                            //afterAttachObject
                             if (afterAttachObjectExist)
-                            {
+                                ImportAfterAttachObject.OpenFile(afterAttachObjectPath);
 
-                                foreach (AfterAttachObjectModel afterAttachEntry in ImportAfterAttachObject.AfterAttachObjectList)
-                                {
-                                    if (afterAttachEntry.Costume == character.CharacodeName || awakeningModels.Contains(afterAttachEntry.Characode) || baseModels.Contains(afterAttachEntry.Characode))
-                                    {
-                                        ExportAfterAttachObject.AfterAttachObjectList.Add((AfterAttachObjectModel)afterAttachEntry.Clone());
-                                    }
-                                }
-                            }
-                            //playerDoubleEffectParam
                             if (playerDoubleEffectParamExist)
-                            {
+                                ImportPlayerDoubleEffectParam.OpenFile(playerDoubleEffectParamPath);
 
-                                foreach (PlayerDoubleEffectParamModel playerDoubleEffectEntry in ImportPlayerDoubleEffectParam.PlayerDoubleEffectParamList)
-                                {
-                                    if (playerDoubleEffectEntry.CharacodeID == character.CharacodeIndex)
-                                    {
-                                        ExportPlayerDoubleEffectParam.PlayerDoubleEffectParamList.Add((PlayerDoubleEffectParamModel)playerDoubleEffectEntry.Clone());
-                                    }
-                                }
-                            }
-                            //spTypeSupportParam
                             if (spTypeSupportParamExist)
-                            {
+                                ImportSpTypeSupportParam.OpenFile(spTypeSupportParamPath);
 
-                                foreach (SpTypeSupportParamModel spTypeSupportEntry in ImportSpTypeSupportParam.SpTypeSupportParamList)
-                                {
-                                    if (spTypeSupportEntry.CharacodeID == character.CharacodeIndex)
-                                    {
-                                        ExportSpTypeSupportParam.SpTypeSupportParamList.Add((SpTypeSupportParamModel)spTypeSupportEntry.Clone());
-                                        if (!ExportMessageNameList.Contains(spTypeSupportEntry.DownJutsuName))
-                                            ExportMessageNameList.Add(spTypeSupportEntry.DownJutsuName);
-                                        if (!ExportMessageNameList.Contains(spTypeSupportEntry.UpJutsuName))
-                                            ExportMessageNameList.Add(spTypeSupportEntry.UpJutsuName);
-                                        if (!ExportMessageNameList.Contains(spTypeSupportEntry.LeftJutsuName))
-                                            ExportMessageNameList.Add(spTypeSupportEntry.LeftJutsuName);
-                                        if (!ExportMessageNameList.Contains(spTypeSupportEntry.RightJutsuName))
-                                            ExportMessageNameList.Add(spTypeSupportEntry.RightJutsuName);
-                                        break;
-                                    }
-                                }
-                            }
-
-                            //costumeBreakParam
                             if (costumeBreakParamExist)
-                            {
+                                ImportCostumeBreakParam.OpenFile(costumeBreakParamPath);
 
-                                foreach (CostumeBreakParamModel costumeBreakEntry in ImportCostumeBreakParam.CostumeBreakParamList)
-                                {
-                                    if (costumeBreakEntry.CharacodeID == character.CharacodeIndex)
-                                    {
-                                        ExportCostumeBreakParam.CostumeBreakParamList.Add((CostumeBreakParamModel)costumeBreakEntry.Clone());
-                                    }
-                                }
-                            }
-                            //damageprm
+                            if (messageInfoExist)
+                                ImportMessageInfo.OpenFiles(messageInfoPath);
+
+                            if (damageeffExist)
+                                ImportDamageEff.OpenFile(damageeffPath);
+
+                            if (effectprmExist)
+                                ImportEffectPrm.OpenFile(effectprmPath);
+
+                            if (specialInteractionManagerExist)
+                                ImportSpecialInteraction.OpenFile(specialInteractionManagerPath);
+
+                            if (conditionprmExist)
+                                ImportConditionPrm.OpenFile(conditionprmPath);
+
+                            if (conditionprmManagerExist)
+                                ImportConditionPrmManager.OpenFile(conditionprmManagerPath);
+
+                            OriginalDamageEff.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "damageeff.bin.xfbin"));
+                            OriginalEffectPrm.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "effectprm.bin.xfbin"));
+                            OriginalDamagePrm.OpenFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ParamFiles", "damageprm.bin.xfbin"));
+
+
                             if (damageprmExist)
+                                ImportDamagePrm.OpenFile(damageprmPath);
+
+                            foreach (CharacodeEditorModel character in ExportCharacterList)
                             {
-                                for (int i = OriginalDamagePrm.DamagePrmList.Count; i < ImportDamagePrm.DamagePrmList.Count; i++)
+                                bool ReplaceCharacter = false;
+                                for (int i = 0; i < Characode.CharacodeList.Count; i++)
                                 {
-                                    if (ImportDamagePrm.DamagePrmList[i].Data[0] != 0)
+                                    if (Characode.CharacodeList[i].CharacodeName == character.CharacodeName)
                                     {
-                                        ExportDamagePrm.DamagePrmList.Add((DamagePrmModel)ImportDamagePrm.DamagePrmList[i].Clone());
-                                    }
-                                }
-
-                            }
-
-                            //prm_load
-                            string prm_load_path = Path.Combine(DataWin32Path_field, "spcload", character.CharacodeName + "prm_load.bin.xfbin");
-                            string prm_path = "";
-                            if (File.Exists(prm_load_path))
-                            {
-                                PRMLoadEditorViewModel ImportPRMLoad = new PRMLoadEditorViewModel();
-                                ImportPRMLoad.OpenFile(prm_load_path);
-
-                                //look for prm file in data_win32
-                                foreach (PRMLoad_Model PRM_Load_Entry in ImportPRMLoad.PRMLoadList)
-                                {
-                                    if (PRM_Load_Entry.FileName.Contains("prm") && PRM_Load_Entry.FileName.Contains("<code>"))
-                                    {
-                                        prm_path = Path.Combine(DataWin32Path_field, PRM_Load_Entry.FilePath, PRM_Load_Entry.FileName.Replace("<code>", character.CharacodeName) + ".xfbin");
+                                        ReplaceCharacter = true;
                                         break;
                                     }
                                 }
-                                //prm
-                                prm_path = prm_path.Replace("/", "\\");
-                                if (File.Exists(prm_path))
-                                {
-                                    PRMEditorViewModel ImportPRM = new PRMEditorViewModel();
-                                    ImportPRM.OpenFile(prm_path);
+                                bool partner = false;
 
-                                    for (int ver = 0; ver < ImportPRM.VerList.Count; ver++)
+
+                                string character_path = Path.Combine(mod_path, "Characters", character.CharacodeName, "data");
+
+                                Directory.CreateDirectory(Path.Combine(character_path, "spc"));
+                                Directory.CreateDirectory(Path.Combine(character_path, "rpg", "param"));
+                                Directory.CreateDirectory(Path.Combine(character_path, "ui", "max", "select"));
+                                Directory.CreateDirectory(Path.Combine(character_path, "sound"));
+
+                                var MyCharacterIni = new IniFile(Path.Combine(mod_path, "Characters", character.CharacodeName, "character_config.ini"));
+
+                                //Save Character Config
+                                MyCharacterIni.Write("Partner", "false", "ModManager");
+                                MyCharacterIni.Write("Page", "-1", "ModManager");
+                                MyCharacterIni.Write("Slot", "-1", "ModManager");
+                                DuelPlayerParamEditorViewModel ExportDuelPlayerParam = new DuelPlayerParamEditorViewModel();
+                                PlayerSettingParamViewModel ExportPlayerSettingParam = new PlayerSettingParamViewModel();
+                                SkillCustomizeParamViewModel ExportSkillCustomizeParam = new SkillCustomizeParamViewModel();
+                                SpSkillCustomizeParamViewModel ExportSpSkillCustomizeParam = new SpSkillCustomizeParamViewModel();
+                                SkillIndexSettingParamViewModel ExportSkillIndexParam = new SkillIndexSettingParamViewModel();
+                                SupportSkillRecoverySpeedParamViewModel ExportSupportSkillRecoverySpeed = new SupportSkillRecoverySpeedParamViewModel();
+                                PrivateCameraViewModel ExportPrivateCamera = new PrivateCameraViewModel();
+                                CharacterSelectParamViewModel ExportCharacterSelectParam = new CharacterSelectParamViewModel();
+                                CostumeBreakColorParamViewModel ExportCostumeBreakColorParam = new CostumeBreakColorParamViewModel();
+                                CostumeParamViewModel ExportCostumeParam = new CostumeParamViewModel();
+                                PlayerIconViewModel ExportPlayerIcon = new PlayerIconViewModel();
+                                cmnparamViewModel ExportCmnParam = new cmnparamViewModel();
+                                SupportActionParamViewModel ExportSupportActionParam = new SupportActionParamViewModel();
+                                AwakeAuraViewModel ExportAwakeAura = new AwakeAuraViewModel();
+                                AppearanceAnmViewModel ExportAppearanceAnm = new AppearanceAnmViewModel();
+                                AfterAttachObjectViewModel ExportAfterAttachObject = new AfterAttachObjectViewModel();
+                                PlayerDoubleEffectParamViewModel ExportPlayerDoubleEffectParam = new PlayerDoubleEffectParamViewModel();
+                                SpTypeSupportParamViewModel ExportSpTypeSupportParam = new SpTypeSupportParamViewModel();
+                                CostumeBreakParamViewModel ExportCostumeBreakParam = new CostumeBreakParamViewModel();
+                                MessageInfoViewModel ExportMessageInfo = new MessageInfoViewModel();
+                                DamageEffViewModel ExportDamageEff = new DamageEffViewModel();
+                                EffectPrmViewModel ExportEffectPrm = new EffectPrmViewModel();
+                                DamagePrmViewModel ExportDamagePrm = new DamagePrmViewModel();
+                                ConditionPrmViewModel ExportConditionPrm = new ConditionPrmViewModel();
+                                ConditionManagerViewModel ExportConditionPrmManager = new ConditionManagerViewModel();
+                                /*----------------------------------------REQUIRED FILES--------------------------------------*/
+                                string moddingAPIPath = Path.Combine(Path.GetDirectoryName(DataWin32Path_field), "moddingapi", "mods", "base_game");
+                                string character_moddingAPI_path = Path.Combine(mod_path, "Characters", character.CharacodeName, "moddingapi", "mods", "base_game");
+
+                                Directory.CreateDirectory(character_moddingAPI_path);
+                                if (Directory.Exists(moddingAPIPath))
+                                {
+                                    //Special Conditions
+                                    string specialCondParamPath = moddingAPIPath + "\\specialCondParam.xfbin";
+                                    if (File.Exists(specialCondParamPath))
                                     {
-                                        for (int pl_anm = 0; pl_anm < ImportPRM.VerList[ver].PL_ANM_Sections.Count; pl_anm++)
+                                        byte[] FileBytes = File.ReadAllBytes(specialCondParamPath);
+                                        int EntryCount = FileBytes.Length / 0x20;
+
+                                        for (int z = 0; z < EntryCount; z++)
                                         {
-                                            for (int function = 0; function < ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList.Count; function++)
+                                            int ptr = 0x20 * z;
+                                            string ConditionName = BinaryReader.b_ReadString(FileBytes, ptr);
+                                            int CondCharacodeID = BinaryReader.b_ReadIntFromTwoBytes(FileBytes, ptr + 0x17);
+                                            if (CondCharacodeID == character.CharacodeIndex)
                                             {
-                                                //damageeff
-                                                if (damageeffExist)
+                                                byte[] Section = new byte[0x20];
+                                                Section = BinaryReader.b_ReplaceString(Section, ConditionName, 0);
+                                                Section = BinaryReader.b_ReplaceBytes(Section, BitConverter.GetBytes(CondCharacodeID), 0x17);
+                                                File.WriteAllBytes(character_moddingAPI_path + "\\specialCondParam.xfbin", Section);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    //Partners
+                                    string partnerSlotParamPath = moddingAPIPath + "\\partnerSlotParam.xfbin";
+                                    if (File.Exists(partnerSlotParamPath))
+                                    {
+                                        byte[] FileBytes = File.ReadAllBytes(partnerSlotParamPath);
+                                        int EntryCount = FileBytes.Length / 0x20;
+
+                                        for (int z = 0; z < EntryCount; z++)
+                                        {
+                                            int ptr = 0x20 * z;
+                                            string ConditionName = BinaryReader.b_ReadString(FileBytes, ptr);
+                                            int CondCharacodeID = BinaryReader.b_ReadIntFromTwoBytes(FileBytes, ptr + 0x17);
+                                            if (CondCharacodeID == character.CharacodeIndex)
+                                            {
+                                                byte[] Section = new byte[0x20];
+                                                Section = BinaryReader.b_ReplaceString(Section, ConditionName, 0);
+                                                Section = BinaryReader.b_ReplaceBytes(Section, BitConverter.GetBytes(CondCharacodeID), 0x17);
+                                                File.WriteAllBytes(character_moddingAPI_path + "\\partnerSlotParam.xfbin", Section);
+
+                                                //Save Character Config
+                                                MyCharacterIni.Write("Partner", "true", "ModManager");
+                                                MyCharacterIni.Write("Page", "0", "ModManager");
+                                                MyCharacterIni.Write("Slot", "0", "ModManager");
+                                                partner = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    //Susanoo Fix
+                                    string susanooCondParamPath = moddingAPIPath + "\\susanooCondParam.xfbin";
+                                    if (File.Exists(susanooCondParamPath))
+                                    {
+                                        byte[] FileBytes = File.ReadAllBytes(susanooCondParamPath);
+                                        int EntryCount = FileBytes.Length / 0x20;
+
+                                        for (int z = 0; z < EntryCount; z++)
+                                        {
+                                            int ptr = 0x20 * z;
+                                            string ConditionName = BinaryReader.b_ReadString(FileBytes, ptr);
+                                            int CondCharacodeID = BinaryReader.b_ReadIntFromTwoBytes(FileBytes, ptr + 0x17);
+                                            if (CondCharacodeID == character.CharacodeIndex)
+                                            {
+                                                byte[] Section = new byte[0x20];
+                                                Section = BinaryReader.b_ReplaceString(Section, ConditionName, 0);
+                                                Section = BinaryReader.b_ReplaceBytes(Section, BitConverter.GetBytes(CondCharacodeID), 0x17);
+                                                File.WriteAllBytes(character_moddingAPI_path + "\\susanooCondParam.xfbin", Section);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                //duelPlayerParam
+                                if (duelPlayerParamExist)
+                                {
+
+                                    foreach (DuelPlayerParamModel duelEntry in ImportDuelPlayerParam.DuelPlayerParamList)
+                                    {
+                                        if (duelEntry.BinName.Contains(character.CharacodeName))
+                                        {
+                                            ExportDuelPlayerParam.DuelPlayerParamList.Add((DuelPlayerParamModel)duelEntry.Clone());
+
+                                            for (int i = 0; i < 20; i++)
+                                            {
+                                                if (!awakeningModels.Contains(duelEntry.AwakeCostumes[i].CostumeName))
+                                                    awakeningModels.Add(duelEntry.AwakeCostumes[i].CostumeName);
+                                                if (!baseModels.Contains(duelEntry.BaseCostumes[i].CostumeName))
+                                                    baseModels.Add(duelEntry.BaseCostumes[i].CostumeName);
+                                            }
+                                            //conditionprm and conditionprm manager
+                                            if (conditionprmExist && conditionprmManagerExist)
+                                            {
+                                                ConditionPrmModel selectedConditionPRM = ImportConditionPrm.ConditionList.FirstOrDefault(c => c.ConditionName == duelEntry.AwakeningCondition);
+                                                ConditionManagerModel selectedConditionManager = ImportConditionPrmManager.ConditionList.FirstOrDefault(c => c.ConditionName == duelEntry.AwakeningCondition);
+
+                                                if (selectedConditionPRM != null && selectedConditionManager != null)
                                                 {
-                                                    bool DamageEffExistInVanila = false;
-                                                    foreach (DamageEffModel damageEffEntry in OriginalDamageEff.DamageEffList)
+                                                    // Add the main condition
+                                                    ExportConditionPrm.ConditionList.Add((ConditionPrmModel)selectedConditionPRM.Clone());
+                                                    ExportConditionPrmManager.ConditionList.Add((ConditionManagerModel)selectedConditionManager.Clone());
+
+                                                    string currentConditionName = selectedConditionManager.AfterConditionName;
+
+                                                    // Loop to add debuff conditions recursively until AfterConditionName is null or empty
+                                                    while (!string.IsNullOrEmpty(currentConditionName))
                                                     {
-                                                        if (damageEffEntry.DamageEffID == ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].DamageHitEffectID)
+                                                        // Find the next condition (debuff)
+                                                        ConditionPrmModel nextConditionPRM = ImportConditionPrm.ConditionList.FirstOrDefault(c => c.ConditionName == currentConditionName);
+                                                        ConditionManagerModel nextConditionManager = ImportConditionPrmManager.ConditionList.FirstOrDefault(c => c.ConditionName == currentConditionName);
+
+                                                        if (nextConditionPRM != null && nextConditionManager != null)
                                                         {
-                                                            DamageEffExistInVanila = true;
+                                                            // Add the debuff condition
+                                                            ExportConditionPrm.ConditionList.Add((ConditionPrmModel)nextConditionPRM.Clone());
+                                                            ExportConditionPrmManager.ConditionList.Add((ConditionManagerModel)nextConditionManager.Clone());
+
+                                                            // Set the next condition to be the AfterConditionName of the current debuff
+                                                            currentConditionName = nextConditionManager.AfterConditionName;
+                                                        } else
+                                                        {
+                                                            // Exit the loop if no matching condition is found
                                                             break;
                                                         }
                                                     }
-                                                    if (!DamageEffExistInVanila)
+                                                }
+                                            }
+                                            break;
+
+
+
+
+                                        }
+                                    }
+                                    if (ExportDuelPlayerParam.DuelPlayerParamList.Count < 1 && !ReplaceCharacter)
+                                    {
+                                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_32"]);
+                                        continue;
+                                    }
+                                } else if (!duelPlayerParamExist && !ReplaceCharacter)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_33"]);
+                                    continue;
+                                }
+                                //playerSettingParam
+                                foreach (PlayerSettingParamModel PSPEntry in ImportPlayerSettingParam.PlayerSettingParamList)
+                                {
+                                    if (PSPEntry.CharacodeID == character.CharacodeIndex)
+                                    {
+                                        ExportPlayerSettingParam.PlayerSettingParamList.Add((PlayerSettingParamModel)PSPEntry.Clone());
+                                        if (!ExportMessageNameList.Contains(PSPEntry.CharacterNameMessageID))
+                                            ExportMessageNameList.Add(PSPEntry.CharacterNameMessageID);
+                                        if (!ExportMessageNameList.Contains(PSPEntry.CostumeDescriptionMessageID))
+                                            ExportMessageNameList.Add(PSPEntry.CostumeDescriptionMessageID);
+                                    }
+                                }
+                                //skillCustomizeParam
+                                if (skillCustomizeParamExist)
+                                {
+
+                                    foreach (SkillCustomizeParamModel SkillEntry in ImportSkillCustomizeParam.SkillCustomizeParamList)
+                                    {
+                                        if (SkillEntry.CharacodeID == character.CharacodeIndex)
+                                        {
+                                            ExportSkillCustomizeParam.SkillCustomizeParamList.Add((SkillCustomizeParamModel)SkillEntry.Clone());
+                                            if (messageInfoExist)
+                                            {
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_air_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu1_air_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_air_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu2_air_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu3_air_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu3_air_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu4_air_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu4_air_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu5_air_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu5_air_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu6_air_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu6_air_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_awa_air_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu1_awa_air_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_awa_air_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu2_awa_air_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_normal_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu1_normal_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_normal_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu2_normal_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu3_normal_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu3_normal_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu4_normal_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu4_normal_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu5_normal_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu5_normal_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu6_normal_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu6_normal_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_awa_normal_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu1_awa_normal_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_awa_normal_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu2_awa_normal_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_ex_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu1_ex_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_ex_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu2_ex_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu3_ex_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu3_ex_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu4_ex_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu4_ex_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu5_ex_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu5_ex_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu6_ex_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu6_ex_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu1_awa_ex_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu1_awa_ex_name);
+                                                if (!ExportMessageNameList.Contains(SkillEntry.Jutsu2_awa_ex_name))
+                                                    ExportMessageNameList.Add(SkillEntry.Jutsu2_awa_ex_name);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    if (ExportSkillCustomizeParam.SkillCustomizeParamList.Count < 1 && !ReplaceCharacter && !partner)
+                                    {
+                                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " skillCustomizeParam entry.");
+                                        continue;
+                                    }
+                                } else if (!playerSettingParamExist && !ReplaceCharacter && !partner)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " skillCustomizeParam file.");
+                                    continue;
+                                }
+                                //spSkillCustomizeParam
+                                if (SpSkillCustomizeParamExist)
+                                {
+
+                                    foreach (SpSkillCustomizeParamModel SpSkillEntry in ImportSpSkillCustomizeParam.SpSkillCustomizeParamList)
+                                    {
+                                        if (SpSkillEntry.CharacodeID == character.CharacodeIndex)
+                                        {
+                                            ExportSpSkillCustomizeParam.SpSkillCustomizeParamList.Add((SpSkillCustomizeParamModel)SpSkillEntry.Clone());
+                                            if (messageInfoExist)
+                                            {
+                                                if (!ExportMessageNameList.Contains(SpSkillEntry.Ultimate1name))
+                                                    ExportMessageNameList.Add(SpSkillEntry.Ultimate1name);
+                                                if (!ExportMessageNameList.Contains(SpSkillEntry.Ultimate2name))
+                                                    ExportMessageNameList.Add(SpSkillEntry.Ultimate2name);
+                                                if (!ExportMessageNameList.Contains(SpSkillEntry.Ultimate3name))
+                                                    ExportMessageNameList.Add(SpSkillEntry.Ultimate3name);
+                                                if (!ExportMessageNameList.Contains(SpSkillEntry.Ultimate4name))
+                                                    ExportMessageNameList.Add(SpSkillEntry.Ultimate4name);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    if (ExportSpSkillCustomizeParam.SpSkillCustomizeParamList.Count < 1 && !ReplaceCharacter && !partner)
+                                    {
+                                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "spSkillCustomizeParam entry.");
+                                        continue;
+                                    }
+                                } else if (!SpSkillCustomizeParamExist && !ReplaceCharacter && !partner)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " spSkillCustomizeParam file.");
+                                    continue;
+                                }
+                                //skillIndexSettingParam
+                                if (skillIndexSettingParamExist)
+                                {
+
+                                    foreach (SkillIndexSettingParamModel SkillIndexEntry in ImportSkillIndexParam.SkillIndexSettingParamList)
+                                    {
+                                        if (SkillIndexEntry.CharacodeID == character.CharacodeIndex)
+                                        {
+                                            ExportSkillIndexParam.SkillIndexSettingParamList.Add((SkillIndexSettingParamModel)SkillIndexEntry.Clone());
+                                            break;
+                                        }
+                                    }
+                                    if (ExportSkillIndexParam.SkillIndexSettingParamList.Count < 1 && !ReplaceCharacter && !partner)
+                                    {
+                                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " skillIndexSettingParam entry.");
+                                        continue;
+                                    }
+                                } else if (!SpSkillCustomizeParamExist && !ReplaceCharacter && !partner)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " skillIndexSettingParam file.");
+                                    continue;
+                                }
+
+                                //supportSkillRecoverySpeedParam
+                                if (supportSkillRecoverySpeedParamExist)
+                                {
+
+                                    foreach (SupportSkillRecoverySpeedParamModel supportSkillRecoveryEntry in ImportSupportSkillRecoverySpeed.SupportSkillRecoverySpeedParamList)
+                                    {
+                                        if (supportSkillRecoveryEntry.CharacodeID == character.CharacodeIndex)
+                                        {
+                                            ExportSupportSkillRecoverySpeed.SupportSkillRecoverySpeedParamList.Add((SupportSkillRecoverySpeedParamModel)supportSkillRecoveryEntry.Clone());
+                                            break;
+                                        }
+                                    }
+                                    if (ExportSupportSkillRecoverySpeed.SupportSkillRecoverySpeedParamList.Count < 1 && !ReplaceCharacter && !partner)
+                                    {
+                                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " supportSkillRecoverySpeedParam entry.");
+                                        continue;
+                                    }
+                                } else if (!supportSkillRecoverySpeedParamExist && !ReplaceCharacter && !partner)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " supportSkillRecoverySpeedParam file.");
+                                    continue;
+                                }
+                                //privateCamera
+                                if (privateCameraExist)
+                                {
+
+                                    foreach (PrivateCameraModel PrivateCameraEntry in ImportPrivateCamera.PrivateCameraList)
+                                    {
+                                        if (PrivateCameraEntry.CharacodeIndex == character.CharacodeIndex)
+                                        {
+                                            ExportPrivateCamera.PrivateCameraList.Add((PrivateCameraModel)PrivateCameraEntry.Clone());
+                                            break;
+                                        }
+                                    }
+                                    if (ExportPrivateCamera.PrivateCameraList.Count < 1 && !ReplaceCharacter)
+                                    {
+                                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " privateCamera entry.");
+                                        continue;
+                                    }
+                                } else if (!privateCameraExist && !ReplaceCharacter)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " privateCamera file.");
+                                    continue;
+                                }
+
+
+                                //characterSelectParam
+                                if (characterSelectParamExist)
+                                {
+
+                                    foreach (CharacterSelectParamModel CharacterSelectParamEntry in ImportCharacterSelectParam.CharacterSelectParamList)
+                                    {
+                                        for (int i = 0; i < ExportPlayerSettingParam.PlayerSettingParamList.Count; i++)
+                                        {
+                                            if (CharacterSelectParamEntry.CSP_code == ExportPlayerSettingParam.PlayerSettingParamList[i].PSP_code)
+                                            {
+                                                ExportCharacterSelectParam.CharacterSelectParamList.Add((CharacterSelectParamModel)CharacterSelectParamEntry.Clone());
+                                                if (messageInfoExist)
+                                                {
+                                                    if (!ExportMessageNameList.Contains(CharacterSelectParamEntry.CostumeName))
+                                                        ExportMessageNameList.Add(CharacterSelectParamEntry.CostumeName);
+                                                    if (!ExportMessageNameList.Contains(CharacterSelectParamEntry.CostumeDescription))
+                                                        ExportMessageNameList.Add(CharacterSelectParamEntry.CostumeDescription);
+                                                }
+                                                break;
+                                            }
+                                        }
+
+                                    }
+                                    if (ExportCharacterSelectParam.CharacterSelectParamList.Count < 1 && !ReplaceCharacter && !partner)
+                                    {
+                                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " characterSelectParam entry.");
+                                        continue;
+                                    }
+                                } else if (!characterSelectParamExist && !ReplaceCharacter && !partner)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " characterSelectParam file.");
+                                    continue;
+                                }
+                                //costumeBreakColorParam
+                                if (costumeBreakColorParamExist)
+                                {
+
+                                    foreach (CostumeBreakColorParamModel CostumeBreakColorEntry in ImportCostumeBreakColorParam.CostumeBreakColorParamList)
+                                    {
+                                        for (int i = 0; i < ExportPlayerSettingParam.PlayerSettingParamList.Count; i++)
+                                        {
+                                            if (CostumeBreakColorEntry.PlayerSettingParamID == ExportPlayerSettingParam.PlayerSettingParamList[i].PSP_ID)
+                                            {
+                                                ExportCostumeBreakColorParam.CostumeBreakColorParamList.Add((CostumeBreakColorParamModel)CostumeBreakColorEntry.Clone());
+                                                break;
+                                            }
+                                        }
+
+                                    }
+                                    //if (ExportCostumeBreakColorParam.CostumeBreakColorParamList.Count < 1 && !ReplaceCharacter && !partner) {
+                                    //    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] +" " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "costumeBreakColorParam entry.");
+                                    //    continue;
+                                    //}
+                                }
+                                //else if (!characterSelectParamExist && !ReplaceCharacter && !partner) {
+                                //    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] +" " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "costumeBreakColorParam file.");
+                                //    continue;
+                                //}
+                                //costumeParam
+                                // if (costumeParamExist) {
+
+                                foreach (CostumeParamModel CostumeEntry in ImportCostumeParam.CostumeParamList)
+                                {
+                                    for (int i = 0; i < ExportPlayerSettingParam.PlayerSettingParamList.Count; i++)
+                                    {
+                                        if (CostumeEntry.PlayerSettingParamID == ExportPlayerSettingParam.PlayerSettingParamList[i].PSP_ID)
+                                        {
+                                            ExportCostumeParam.CostumeParamList.Add((CostumeParamModel)CostumeEntry.Clone());
+                                            if (messageInfoExist)
+                                            {
+                                                if (!ExportMessageNameList.Contains(CostumeEntry.CharacterName))
+                                                    ExportMessageNameList.Add(CostumeEntry.CharacterName);
+                                            }
+                                        }
+                                    }
+
+                                }
+                                if (ExportCostumeParam.CostumeParamList.Count < 1 && !ReplaceCharacter && !partner)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " costumeParam entry.");
+                                    continue;
+                                }
+                                //} else if (!costumeParamExist && !ReplaceCharacter && !partner) {
+                                //    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] +" " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "costumeParam file.");
+                                //    continue;
+                                //}
+                                //player_icon
+                                if (playerIconExist)
+                                {
+
+                                    foreach (PlayerIconModel PlayerIconEntry in ImportPlayerIcon.playerIconList)
+                                    {
+                                        if (PlayerIconEntry.CharacodeID == character.CharacodeIndex)
+                                        {
+                                            ExportPlayerIcon.playerIconList.Add((PlayerIconModel)PlayerIconEntry.Clone());
+                                        }
+                                    }
+                                    if (ExportPlayerIcon.playerIconList.Count < 1 && !ReplaceCharacter && !partner)
+                                    {
+                                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " player_icon entry.");
+                                        continue;
+                                    }
+                                } else if (!playerIconExist && !ReplaceCharacter && !partner)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " player_icon file.");
+                                    continue;
+                                }
+                                //cmnparam
+                                if (cmnparamExist)
+                                {
+
+                                    foreach (player_sndModel playerSndEntry in ImportCmnParam.PlayerSndList)
+                                    {
+                                        if (playerSndEntry.PlayerCharacode == character.CharacodeName)
+                                        {
+                                            ExportCmnParam.PlayerSndList.Add((player_sndModel)playerSndEntry.Clone());
+                                            break;
+                                        }
+                                    }
+                                    if (ExportCmnParam.PlayerSndList.Count < 1 && !ReplaceCharacter)
+                                    {
+                                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " cmnparam player_snd entry.");
+                                        continue;
+                                    }
+                                } else if (!cmnparamExist && !ReplaceCharacter)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " cmnparam player_snd file.");
+                                    continue;
+                                }
+                                //supportActionParam
+                                if (supportActionParamExist)
+                                {
+
+                                    foreach (SupportActionParamModel supportActionEntry in ImportSupportActionParam.SupportActionParamList)
+                                    {
+                                        if (supportActionEntry.CharacodeID == character.CharacodeIndex)
+                                        {
+                                            ExportSupportActionParam.SupportActionParamList.Add((SupportActionParamModel)supportActionEntry.Clone());
+                                            break;
+                                        }
+                                    }
+                                    if (ExportSupportActionParam.SupportActionParamList.Count < 1 && !ReplaceCharacter && !partner)
+                                    {
+                                        MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " supportActionParam entry.");
+                                        continue;
+                                    }
+                                } else if (!playerSettingParamExist && !ReplaceCharacter && !partner)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_31"] + " " + character.CharacodeName + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + " supportActionParam file.");
+                                    continue;
+                                }
+                                /*----------------------------------------NOT REQUIRED FILES--------------------------------------*/
+                                //awakeAura
+                                if (awakeAuraExist)
+                                {
+
+                                    foreach (AwakeAuraModel awakeAuraEntry in ImportAwakeAura.AwakeAuraList)
+                                    {
+                                        if (awakeAuraEntry.Characode == character.CharacodeName)
+                                        {
+                                            ExportAwakeAura.AwakeAuraList.Add((AwakeAuraModel)awakeAuraEntry.Clone());
+                                        }
+                                    }
+                                }
+                                //appearanceAnm
+                                if (appearanceAnmExist)
+                                {
+
+                                    foreach (AppearanceAnmModel appearanceEntry in ImportAppearanceAnm.AppearanceAnmList)
+                                    {
+                                        if (appearanceEntry.CharacodeID == character.CharacodeIndex)
+                                        {
+                                            ExportAppearanceAnm.AppearanceAnmList.Add((AppearanceAnmModel)appearanceEntry.Clone());
+                                        }
+                                    }
+                                }
+                                //afterAttachObject
+                                if (afterAttachObjectExist)
+                                {
+
+                                    foreach (AfterAttachObjectModel afterAttachEntry in ImportAfterAttachObject.AfterAttachObjectList)
+                                    {
+                                        if (afterAttachEntry.Costume == character.CharacodeName || awakeningModels.Contains(afterAttachEntry.Characode) || baseModels.Contains(afterAttachEntry.Characode))
+                                        {
+                                            ExportAfterAttachObject.AfterAttachObjectList.Add((AfterAttachObjectModel)afterAttachEntry.Clone());
+                                        }
+                                    }
+                                }
+                                //playerDoubleEffectParam
+                                if (playerDoubleEffectParamExist)
+                                {
+
+                                    foreach (PlayerDoubleEffectParamModel playerDoubleEffectEntry in ImportPlayerDoubleEffectParam.PlayerDoubleEffectParamList)
+                                    {
+                                        if (playerDoubleEffectEntry.CharacodeID == character.CharacodeIndex)
+                                        {
+                                            ExportPlayerDoubleEffectParam.PlayerDoubleEffectParamList.Add((PlayerDoubleEffectParamModel)playerDoubleEffectEntry.Clone());
+                                        }
+                                    }
+                                }
+                                //spTypeSupportParam
+                                if (spTypeSupportParamExist)
+                                {
+
+                                    foreach (SpTypeSupportParamModel spTypeSupportEntry in ImportSpTypeSupportParam.SpTypeSupportParamList)
+                                    {
+                                        if (spTypeSupportEntry.CharacodeID == character.CharacodeIndex)
+                                        {
+                                            ExportSpTypeSupportParam.SpTypeSupportParamList.Add((SpTypeSupportParamModel)spTypeSupportEntry.Clone());
+                                            if (!ExportMessageNameList.Contains(spTypeSupportEntry.DownJutsuName))
+                                                ExportMessageNameList.Add(spTypeSupportEntry.DownJutsuName);
+                                            if (!ExportMessageNameList.Contains(spTypeSupportEntry.UpJutsuName))
+                                                ExportMessageNameList.Add(spTypeSupportEntry.UpJutsuName);
+                                            if (!ExportMessageNameList.Contains(spTypeSupportEntry.LeftJutsuName))
+                                                ExportMessageNameList.Add(spTypeSupportEntry.LeftJutsuName);
+                                            if (!ExportMessageNameList.Contains(spTypeSupportEntry.RightJutsuName))
+                                                ExportMessageNameList.Add(spTypeSupportEntry.RightJutsuName);
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                //costumeBreakParam
+                                if (costumeBreakParamExist)
+                                {
+
+                                    foreach (CostumeBreakParamModel costumeBreakEntry in ImportCostumeBreakParam.CostumeBreakParamList)
+                                    {
+                                        if (costumeBreakEntry.CharacodeID == character.CharacodeIndex)
+                                        {
+                                            ExportCostumeBreakParam.CostumeBreakParamList.Add((CostumeBreakParamModel)costumeBreakEntry.Clone());
+                                        }
+                                    }
+                                }
+                                //damageprm
+                                if (damageprmExist)
+                                {
+                                    for (int i = OriginalDamagePrm.DamagePrmList.Count; i < ImportDamagePrm.DamagePrmList.Count; i++)
+                                    {
+                                        if (ImportDamagePrm.DamagePrmList[i].Data[0] != 0)
+                                        {
+                                            ExportDamagePrm.DamagePrmList.Add((DamagePrmModel)ImportDamagePrm.DamagePrmList[i].Clone());
+                                        }
+                                    }
+
+                                }
+
+                                //prm_load
+                                string prm_load_path = Path.Combine(DataWin32Path_field, "spcload", character.CharacodeName + "prm_load.bin.xfbin");
+                                string prm_path = "";
+                                if (File.Exists(prm_load_path))
+                                {
+                                    PRMLoadEditorViewModel ImportPRMLoad = new PRMLoadEditorViewModel();
+                                    ImportPRMLoad.OpenFile(prm_load_path);
+
+                                    //look for prm file in data_win32
+                                    foreach (PRMLoad_Model PRM_Load_Entry in ImportPRMLoad.PRMLoadList)
+                                    {
+                                        if (PRM_Load_Entry.FileName.Contains("prm") && PRM_Load_Entry.FileName.Contains("<code>"))
+                                        {
+                                            prm_path = Path.Combine(DataWin32Path_field, PRM_Load_Entry.FilePath, PRM_Load_Entry.FileName.Replace("<code>", character.CharacodeName) + ".xfbin");
+                                            break;
+                                        }
+                                    }
+                                    //prm
+                                    prm_path = prm_path.Replace("/", "\\");
+                                    if (File.Exists(prm_path))
+                                    {
+                                        PRMEditorViewModel ImportPRM = new PRMEditorViewModel();
+                                        ImportPRM.OpenFile(prm_path);
+
+                                        for (int ver = 0; ver < ImportPRM.VerList.Count; ver++)
+                                        {
+                                            for (int pl_anm = 0; pl_anm < ImportPRM.VerList[ver].PL_ANM_Sections.Count; pl_anm++)
+                                            {
+                                                for (int function = 0; function < ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList.Count; function++)
+                                                {
+                                                    //damageeff
+                                                    if (damageeffExist)
                                                     {
-                                                        foreach (DamageEffModel damageEffEntry in ExportDamageEff.DamageEffList)
+                                                        bool DamageEffExistInVanila = false;
+                                                        foreach (DamageEffModel damageEffEntry in OriginalDamageEff.DamageEffList)
                                                         {
                                                             if (damageEffEntry.DamageEffID == ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].DamageHitEffectID)
                                                             {
@@ -1936,660 +1949,674 @@ namespace NSC_Toolbox.ViewModel
                                                                 break;
                                                             }
                                                         }
-                                                    }
-                                                    if (!DamageEffExistInVanila)
-                                                    {
-                                                        foreach (DamageEffModel damageEffEntry in ImportDamageEff.DamageEffList)
+                                                        if (!DamageEffExistInVanila)
                                                         {
-                                                            if (damageEffEntry.DamageEffID == ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].DamageHitEffectID)
+                                                            foreach (DamageEffModel damageEffEntry in ExportDamageEff.DamageEffList)
                                                             {
-                                                                DamageEffModel new_entry = (DamageEffModel)damageEffEntry.Clone();
-
-                                                                bool ExtraDamageEffExistInVanila = false;
-                                                                foreach (DamageEffModel ExtraDamageEffEntry in OriginalDamageEff.DamageEffList)
+                                                                if (damageEffEntry.DamageEffID == ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].DamageHitEffectID)
                                                                 {
-                                                                    if (ExtraDamageEffEntry.DamageEffID == new_entry.ExtraDamageEffID)
-                                                                    {
-                                                                        ExtraDamageEffExistInVanila = true;
-                                                                        break;
-                                                                    }
+                                                                    DamageEffExistInVanila = true;
+                                                                    break;
                                                                 }
-                                                                if (!ExtraDamageEffExistInVanila)
-                                                                    new_entry.ExtraDamageEffID = 0;
-                                                                new_entry.ExtraEffectPrmID = 0;
-                                                                ExportDamageEff.DamageEffList.Add(new_entry);
-                                                                //effectprm
-                                                                if (effectprmExist)
+                                                            }
+                                                        }
+                                                        if (!DamageEffExistInVanila)
+                                                        {
+                                                            foreach (DamageEffModel damageEffEntry in ImportDamageEff.DamageEffList)
+                                                            {
+                                                                if (damageEffEntry.DamageEffID == ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].DamageHitEffectID)
                                                                 {
-                                                                    bool EffectPrmExistInVanila = false;
-                                                                    foreach (EffectPrmModel EffectPrmEntry in OriginalEffectPrm.EffectPrmList)
+                                                                    DamageEffModel new_entry = (DamageEffModel)damageEffEntry.Clone();
+
+                                                                    bool ExtraDamageEffExistInVanila = false;
+                                                                    foreach (DamageEffModel ExtraDamageEffEntry in OriginalDamageEff.DamageEffList)
                                                                     {
-                                                                        if (EffectPrmEntry.EffectPrmID == new_entry.EffectPrmID)
+                                                                        if (ExtraDamageEffEntry.DamageEffID == new_entry.ExtraDamageEffID)
                                                                         {
-                                                                            EffectPrmExistInVanila = true;
+                                                                            ExtraDamageEffExistInVanila = true;
                                                                             break;
                                                                         }
                                                                     }
-                                                                    if (!EffectPrmExistInVanila)
+                                                                    if (!ExtraDamageEffExistInVanila)
+                                                                        new_entry.ExtraDamageEffID = 0;
+                                                                    new_entry.ExtraEffectPrmID = 0;
+                                                                    ExportDamageEff.DamageEffList.Add(new_entry);
+                                                                    //effectprm
+                                                                    if (effectprmExist)
                                                                     {
-                                                                        foreach (EffectPrmModel EffectPrmEntry in ImportEffectPrm.EffectPrmList)
+                                                                        bool EffectPrmExistInVanila = false;
+                                                                        foreach (EffectPrmModel EffectPrmEntry in OriginalEffectPrm.EffectPrmList)
                                                                         {
                                                                             if (EffectPrmEntry.EffectPrmID == new_entry.EffectPrmID)
                                                                             {
-                                                                                ExportEffectPrm.EffectPrmList.Add(EffectPrmEntry);
+                                                                                EffectPrmExistInVanila = true;
                                                                                 break;
                                                                             }
                                                                         }
+                                                                        if (!EffectPrmExistInVanila)
+                                                                        {
+                                                                            foreach (EffectPrmModel EffectPrmEntry in ImportEffectPrm.EffectPrmList)
+                                                                            {
+                                                                                if (EffectPrmEntry.EffectPrmID == new_entry.EffectPrmID)
+                                                                                {
+                                                                                    ExportEffectPrm.EffectPrmList.Add(EffectPrmEntry);
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                        }
                                                                     }
+                                                                    break;
                                                                 }
-                                                                break;
                                                             }
                                                         }
                                                     }
-                                                }
 
 
-                                                //check all message entries in prm
-                                                if (ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].FunctionID == 0x96 && messageInfoExist)
-                                                {
-                                                    if (!ExportMessageNameList.Contains(ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].StringParam))
-                                                        ExportMessageNameList.Add(ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].StringParam);
+                                                    //check all message entries in prm
+                                                    if (ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].FunctionID == 0x96 && messageInfoExist)
+                                                    {
+                                                        if (!ExportMessageNameList.Contains(ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].StringParam))
+                                                            ExportMessageNameList.Add(ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].StringParam);
+                                                    }
                                                 }
                                             }
                                         }
                                     }
+
                                 }
+
+                                //messageInfo
+                                if (messageInfoExist)
+                                {
+                                    for (int i = 1; i < 20; i++)
+                                    {
+                                        ExportMessageNameList.Add(character.CharacodeName + "_bd_" + i.ToString("D2"));
+                                    }
+                                    if (ExportMessageNameList.IndexOf("") != -1)
+                                        ExportMessageNameList.RemoveAt(ExportMessageNameList.IndexOf(""));
+                                    for (int i = 0; i < ExportMessageNameList.Count; i++)
+                                    {
+                                        ImportMessageInfo.MessageInfo_preview_List = ImportMessageInfo.MessageInfo_List[0];
+                                        for (int message = 0; message < ImportMessageInfo.MessageInfo_preview_List.Count; message++)
+                                        {
+                                            if (BitConverter.ToString(ImportMessageInfo.MessageInfo_preview_List[message].CRC32Code) == BitConverter.ToString(BinaryReader.crc32(ExportMessageNameList[i])))
+                                            {
+
+                                                for (int l = 0; l < Program.langList.Length; l++)
+                                                {
+                                                    MessageInfoModel copy_entry = (MessageInfoModel)ImportMessageInfo.MessageInfo_List[l][message].Clone();
+                                                    ExportMessageInfo.MessageInfo_List[l].Add(copy_entry);
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    }
+
+
+                                }
+
+                                if (specialInteractionManagerExist)
+                                {
+                                    SpecialInteractionManagerModel specialInteractionEntry = ImportSpecialInteraction.SpecialInteractionList.FirstOrDefault(item => item.MainCharacodeID == character.CharacodeIndex);
+
+                                    if (specialInteractionEntry != null && specialInteractionEntry.TriggerList != null && specialInteractionEntry.TriggerList.Count > 0)
+                                    {
+                                        //specialInteractionManager
+                                        string characodeNamesString = string.Join(",",
+                                           specialInteractionEntry.TriggerList
+                                           .Select(id =>
+                                           {
+                                               // Find the character entry in ImportCharacterList
+                                               var character = ImportCharacterList.FirstOrDefault(c => c.CharacodeIndex == id);
+                                               if (character == null)
+                                               {
+                                                   // If we can't find the character, log a message and return
+                                                   MessageBox.Show($"Character with characode index {id} not found in characode.bin.xfbin file.");
+                                                   return null; // This will be handled by the Where clause below
+                                               }
+                                               return character.CharacodeName;
+                                           })
+                                           .Where(name => name != null) // Only include non-null CharacodeNames
+                                           .ToArray());
+                                        //if (characodeNamesString.Split(',').Length != specialInteractionEntry.TriggerList.Count)
+                                        //{
+                                        //    return;
+                                        //}
+                                        if (specialInteractionEntry.TriggerList.Count > 0)
+                                        {
+                                            var specialInteractionIni = new IniFile(Path.Combine(mod_path, "Characters", character.CharacodeName, "specialInteraction_config.ini"));
+
+
+                                            //specialInteractionIni.Write("MainCharacode", character.CharacodeName, "ModManager");
+                                            specialInteractionIni.Write("TriggerList", characodeNamesString, "ModManager");
+                                        }
+                                    }
+
+
+                                }
+
+
+
+                                //Save All Params
+
+                                if (ExportDuelPlayerParam.DuelPlayerParamList.Count > 0)
+                                    ExportDuelPlayerParam.SaveFileAs(Path.Combine(character_path, "spc", "duelPlayerParam.xfbin"));
+                                if (ExportPlayerSettingParam.PlayerSettingParamList.Count > 0)
+                                    ExportPlayerSettingParam.SaveFileAs(Path.Combine(character_path, "spc", "playerSettingParam.bin.xfbin"));
+                                if (ExportSkillCustomizeParam.SkillCustomizeParamList.Count > 0)
+                                    ExportSkillCustomizeParam.SaveFileAs(Path.Combine(character_path, "spc", "skillCustomizeParam.xfbin"));
+                                if (ExportSpSkillCustomizeParam.SpSkillCustomizeParamList.Count > 0)
+                                    ExportSpSkillCustomizeParam.SaveFileAs(Path.Combine(character_path, "spc", "spSkillCustomizeParam.xfbin"));
+                                if (ExportSkillIndexParam.SkillIndexSettingParamList.Count > 0)
+                                    ExportSkillIndexParam.SaveFileAs(Path.Combine(character_path, "spc", "skillIndexSettingParam.xfbin"));
+                                if (ExportSupportSkillRecoverySpeed.SupportSkillRecoverySpeedParamList.Count > 0)
+                                    ExportSupportSkillRecoverySpeed.SaveFileAs(Path.Combine(character_path, "spc", "supportSkillRecoverySpeedParam.xfbin"));
+                                if (ExportPlayerIcon.playerIconList.Count > 0)
+                                    ExportPlayerIcon.SaveFileAs(Path.Combine(character_path, "spc", "player_icon.xfbin"));
+                                if (ExportAwakeAura.AwakeAuraList.Count > 0)
+                                    ExportAwakeAura.SaveFileAs(Path.Combine(character_path, "spc", "awakeAura.xfbin"));
+                                if (ExportAppearanceAnm.AppearanceAnmList.Count > 0)
+                                    ExportAppearanceAnm.SaveFileAs(Path.Combine(character_path, "spc", "appearanceAnm.xfbin"));
+                                if (ExportCharacterSelectParam.CharacterSelectParamList.Count > 0)
+                                    ExportCharacterSelectParam.SaveFileAs(Path.Combine(character_path, "ui", "max", "select", "characterSelectParam.xfbin"));
+                                if (ExportAfterAttachObject.AfterAttachObjectList.Count > 0)
+                                    ExportAfterAttachObject.SaveFileAs(Path.Combine(character_path, "spc", "afterAttachObject.xfbin"));
+                                if (ExportSpTypeSupportParam.SpTypeSupportParamList.Count > 0)
+                                    ExportSpTypeSupportParam.SaveFileAs(Path.Combine(character_path, "spc", "spTypeSupportParam.xfbin"));
+                                if (ExportCostumeBreakParam.CostumeBreakParamList.Count > 0)
+                                    ExportCostumeBreakParam.SaveFileAs(Path.Combine(character_path, "spc", "costumeBreakParam.xfbin"));
+                                if (ExportCostumeBreakColorParam.CostumeBreakColorParamList.Count > 0)
+                                    ExportCostumeBreakColorParam.SaveFileAs(Path.Combine(character_path, "spc", "costumeBreakColorParam.xfbin"));
+                                if (ExportCostumeParam.CostumeParamList.Count > 0)
+                                    ExportCostumeParam.SaveFileAs(Path.Combine(character_path, "rpg", "param", "costumeParam.bin.xfbin"));
+                                if (ExportPrivateCamera.PrivateCameraList.Count > 0)
+                                    ExportPrivateCamera.SaveFileAs(Path.Combine(character_path, "spc", "privateCamera.bin.xfbin"));
+                                if (ExportPlayerDoubleEffectParam.PlayerDoubleEffectParamList.Count > 0)
+                                    ExportPlayerDoubleEffectParam.SaveFileAs(Path.Combine(character_path, "spc", "playerDoubleEffectParam.xfbin"));
+                                if (ExportSupportActionParam.SupportActionParamList.Count > 0)
+                                    ExportSupportActionParam.SaveFileAs(Path.Combine(character_path, "spc", "supportActionParam.xfbin"));
+                                if (ExportCmnParam.PlayerSndList.Count > 0)
+                                    ExportCmnParam.SaveFileAs(Path.Combine(character_path, "sound", "cmnparam.xfbin"));
+                                if (ExportDamageEff.DamageEffList.Count > 0)
+                                    ExportDamageEff.SaveFileAs(Path.Combine(character_path, "spc", "damageeff.bin.xfbin"));
+                                if (ExportEffectPrm.EffectPrmList.Count > 0)
+                                    ExportEffectPrm.SaveFileAs(Path.Combine(character_path, "spc", "effectprm.bin.xfbin"));
+                                if (ExportMessageInfo.MessageInfo_List[0].Count > 0)
+                                    ExportMessageInfo.SaveFileAs(character_path);
+                                if (ExportDamagePrm.DamagePrmList.Count > 0)
+                                    ExportDamagePrm.SaveFileAs(Path.Combine(character_path, "spc", "damageprm.bin.xfbin"));
+                                if (ExportConditionPrm.ConditionList.Count > 0)
+                                    ExportConditionPrm.SaveFileAs(Path.Combine(character_path, "spc", "conditionprm.bin.xfbin"));
+                                if (ExportConditionPrmManager.ConditionList.Count > 0)
+                                    ExportConditionPrmManager.SaveFileAs(Path.Combine(character_moddingAPI_path, "conditionprmManager.xfbin"));
+
+
+
 
                             }
 
-                            //messageInfo
+
+                            break;
+                        //Compile Stage Mod
+                        case 1:
+
+                            MessageInfoViewModel ImportStageMessageInfo = new MessageInfoViewModel();
                             if (messageInfoExist)
+                                ImportStageMessageInfo.OpenFiles(messageInfoPath);
+                            int StageIndex = 0;
+                            foreach (StageInfoModel stage in ExportStageList)
                             {
-                                for (int i = 1; i < 20; i++)
+
+                                StageInfoViewModel ExportStage = new StageInfoViewModel();
+                                MessageInfoViewModel ExportStageMessageInfo = new MessageInfoViewModel();
+
+                                ExportStage.StageInfoList.Add((StageInfoModel)stage.Clone());
+                                //MessageInfo
+                                if (messageInfoExist)
                                 {
-                                    ExportMessageNameList.Add(character.CharacodeName + "_bd_" + i.ToString("D2"));
-                                }
-                                if (ExportMessageNameList.IndexOf("") != -1)
-                                    ExportMessageNameList.RemoveAt(ExportMessageNameList.IndexOf(""));
-                                for (int i = 0; i < ExportMessageNameList.Count; i++)
-                                {
-                                    ImportMessageInfo.MessageInfo_preview_List = ImportMessageInfo.MessageInfo_List[0];
-                                    for (int message = 0; message < ImportMessageInfo.MessageInfo_preview_List.Count; message++)
+                                    ImportStageMessageInfo.MessageInfo_preview_List = ImportStageMessageInfo.MessageInfo_List[0];
+                                    for (int message = 0; message < ImportStageMessageInfo.MessageInfo_preview_List.Count; message++)
                                     {
-                                        if (BitConverter.ToString(ImportMessageInfo.MessageInfo_preview_List[message].CRC32Code) == BitConverter.ToString(BinaryReader.crc32(ExportMessageNameList[i])))
+                                        if (BitConverter.ToString(ImportStageMessageInfo.MessageInfo_preview_List[message].CRC32Code) == BitConverter.ToString(BinaryReader.crc32(StageMessageIDList[StageIndex])))
                                         {
 
                                             for (int l = 0; l < Program.langList.Length; l++)
                                             {
-                                                MessageInfoModel copy_entry = (MessageInfoModel)ImportMessageInfo.MessageInfo_List[l][message].Clone();
-                                                ExportMessageInfo.MessageInfo_List[l].Add(copy_entry);
+                                                MessageInfoModel copy_entry = (MessageInfoModel)ImportStageMessageInfo.MessageInfo_List[l][message].Clone();
+                                                ExportStageMessageInfo.MessageInfo_List[l].Add(copy_entry);
                                             }
                                             break;
                                         }
                                     }
                                 }
+                                //Save All Params
+                                string stagePath = Path.Combine(mod_path, "Stages", stage.StageName, "data");
+                                Directory.CreateDirectory(Path.Combine(stagePath, "stage"));
 
+                                ExportStage.SaveFileAs(Path.Combine(stagePath, "stage", "StageInfo.bin.xfbin"), true);
 
+                                if (ExportStageMessageInfo.MessageInfo_List[0].Count > 0)
+                                    ExportStageMessageInfo.SaveFileAs(stagePath);
+
+                                bool hellExist = stage.FilePaths.Any(file => file.FilePath.Contains("wall"));
+
+                                // Save Stage Config
+                                var MyStageIni = new IniFile(Path.Combine(mod_path, "Stages", stage.StageName, "stage_config.ini"));
+                                MyStageIni.Write("BGM_ID", StageBGMIDList[StageIndex].ToString(), "ModManager");
+                                MyStageIni.Write("MessageID", StageMessageIDList[StageIndex], "ModManager");
+                                MyStageIni.Write("Hell", hellExist.ToString().ToLower(), "ModManager");
+
+                                // Save Stage Icon
+                                File.Copy(StageIconPathList[StageIndex], Path.Combine(mod_path, "Stages", stage.StageName, "stage_icon.dds"), true);
+
+                                // Save Stage Preview
+                                File.Copy(StageImagePreviewPathList[StageIndex], Path.Combine(mod_path, "Stages", stage.StageName, "stage_preview.png"), true);
+
+                                StageIndex++;
                             }
 
-                            if (specialInteractionManagerExist)
-                            {
-                                SpecialInteractionManagerModel specialInteractionEntry = ImportSpecialInteraction.SpecialInteractionList.FirstOrDefault(item => item.MainCharacodeID == character.CharacodeIndex);
+                            break;
+                        //Compile Character Model Mod
+                        case 2:
+                            CharacodeEditorViewModel ImportModelCharacode = new CharacodeEditorViewModel();
+                            DuelPlayerParamEditorViewModel ImportModelDuelPlayerParam = new DuelPlayerParamEditorViewModel();
+                            CharacterSelectParamViewModel ImportModelCharacterSelectParam = new CharacterSelectParamViewModel();
+                            CostumeParamViewModel ImportModelCostumeParam = new CostumeParamViewModel();
+                            PlayerIconViewModel ImportModelPlayerIcon = new PlayerIconViewModel();
+                            CostumeBreakColorParamViewModel ImportModelCostumeBreakColorParam = new CostumeBreakColorParamViewModel();
+                            CostumeBreakParamViewModel ImportModelCostumeBreakParam = new CostumeBreakParamViewModel();
+                            MessageInfoViewModel ImportModelMessageInfo = new MessageInfoViewModel();
 
-                                if (specialInteractionEntry != null && specialInteractionEntry.TriggerList != null && specialInteractionEntry.TriggerList.Count > 0)
-                                {
-                                    //specialInteractionManager
-                                    string characodeNamesString = string.Join(",",
-                                       specialInteractionEntry.TriggerList
-                                       .Select(id =>
-                                       {
-                                           // Find the character entry in ImportCharacterList
-                                           var character = ImportCharacterList.FirstOrDefault(c => c.CharacodeIndex == id);
-                                           if (character == null)
-                                           {
-                                               // If we can't find the character, log a message and return
-                                               MessageBox.Show($"Character with characode index {id} not found in characode.bin.xfbin file.");
-                                               return null; // This will be handled by the Where clause below
-                                           }
-                                           return character.CharacodeName;
-                                       })
-                                       .Where(name => name != null) // Only include non-null CharacodeNames
-                                       .ToArray());
-                                    //if (characodeNamesString.Split(',').Length != specialInteractionEntry.TriggerList.Count)
-                                    //{
-                                    //    return;
-                                    //}
-                                    if (specialInteractionEntry.TriggerList.Count > 0)
-                                    {
-                                        var specialInteractionIni = new IniFile(Path.Combine(mod_path, "Characters", character.CharacodeName, "specialInteraction_config.ini"));
+                            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                            string paramFilesPath = Path.Combine(baseDirectory, "ParamFiles");
 
+                            if (duelPlayerParamExist)
+                                ImportModelDuelPlayerParam.OpenFile(duelPlayerParamPath);
+                            else
+                                ImportModelDuelPlayerParam.OpenFile(Path.Combine(paramFilesPath, "duelPlayerParam.xfbin"));
 
-                                        //specialInteractionIni.Write("MainCharacode", character.CharacodeName, "ModManager");
-                                        specialInteractionIni.Write("TriggerList", characodeNamesString, "ModManager");
-                                    }
-                                }
+                            if (characterSelectParamExist)
+                                ImportModelCharacterSelectParam.OpenFile(characterSelectParamPath);
+                            else
+                                ImportModelCharacterSelectParam.OpenFile(Path.Combine(paramFilesPath, "characterSelectParam.xfbin"));
 
-                               
-                            }
+                            if (costumeParamExist)
+                                ImportModelCostumeParam.OpenFile(costumeParamPath);
+                            else
+                                ImportModelCostumeParam.OpenFile(Path.Combine(paramFilesPath, "costumeParam.bin.xfbin"));
 
+                            if (playerIconExist)
+                                ImportModelPlayerIcon.OpenFile(playerIconPath);
+                            else
+                                ImportModelPlayerIcon.OpenFile(Path.Combine(paramFilesPath, "player_icon.xfbin"));
 
+                            if (costumeBreakColorParamExist)
+                                ImportModelCostumeBreakColorParam.OpenFile(costumeBreakColorParamPath);
+                            else
+                                ImportModelCostumeBreakColorParam.OpenFile(Path.Combine(paramFilesPath, "costumeBreakColorParam.xfbin"));
 
-                            //Save All Params
+                            if (characodeExist)
+                                ImportModelCharacode.OpenFile(characodePath);
+                            else
+                                ImportModelCharacode.OpenFile(Path.Combine(paramFilesPath, "characode.bin.xfbin"));
 
-                            if (ExportDuelPlayerParam.DuelPlayerParamList.Count > 0)
-                                ExportDuelPlayerParam.SaveFileAs(Path.Combine(character_path, "spc", "duelPlayerParam.xfbin"));
-                            if (ExportPlayerSettingParam.PlayerSettingParamList.Count > 0)
-                                ExportPlayerSettingParam.SaveFileAs(Path.Combine(character_path, "spc", "playerSettingParam.bin.xfbin"));
-                            if (ExportSkillCustomizeParam.SkillCustomizeParamList.Count > 0)
-                                ExportSkillCustomizeParam.SaveFileAs(Path.Combine(character_path, "spc", "skillCustomizeParam.xfbin"));
-                            if (ExportSpSkillCustomizeParam.SpSkillCustomizeParamList.Count > 0)
-                                ExportSpSkillCustomizeParam.SaveFileAs(Path.Combine(character_path, "spc", "spSkillCustomizeParam.xfbin"));
-                            if (ExportSkillIndexParam.SkillIndexSettingParamList.Count > 0)
-                                ExportSkillIndexParam.SaveFileAs(Path.Combine(character_path, "spc", "skillIndexSettingParam.xfbin"));
-                            if (ExportSupportSkillRecoverySpeed.SupportSkillRecoverySpeedParamList.Count > 0)
-                                ExportSupportSkillRecoverySpeed.SaveFileAs(Path.Combine(character_path, "spc", "supportSkillRecoverySpeedParam.xfbin"));
-                            if (ExportPlayerIcon.playerIconList.Count > 0)
-                                ExportPlayerIcon.SaveFileAs(Path.Combine(character_path, "spc", "player_icon.xfbin"));
-                            if (ExportAwakeAura.AwakeAuraList.Count > 0)
-                                ExportAwakeAura.SaveFileAs(Path.Combine(character_path, "spc", "awakeAura.xfbin"));
-                            if (ExportAppearanceAnm.AppearanceAnmList.Count > 0)
-                                ExportAppearanceAnm.SaveFileAs(Path.Combine(character_path, "spc", "appearanceAnm.xfbin"));
-                            if (ExportCharacterSelectParam.CharacterSelectParamList.Count > 0)
-                                ExportCharacterSelectParam.SaveFileAs(Path.Combine(character_path, "ui", "max", "select", "characterSelectParam.xfbin"));
-                            if (ExportAfterAttachObject.AfterAttachObjectList.Count > 0)
-                                ExportAfterAttachObject.SaveFileAs(Path.Combine(character_path, "spc", "afterAttachObject.xfbin"));
-                            if (ExportSpTypeSupportParam.SpTypeSupportParamList.Count > 0)
-                                ExportSpTypeSupportParam.SaveFileAs(Path.Combine(character_path, "spc", "spTypeSupportParam.xfbin"));
-                            if (ExportCostumeBreakParam.CostumeBreakParamList.Count > 0)
-                                ExportCostumeBreakParam.SaveFileAs(Path.Combine(character_path, "spc", "costumeBreakParam.xfbin"));
-                            if (ExportCostumeBreakColorParam.CostumeBreakColorParamList.Count > 0)
-                                ExportCostumeBreakColorParam.SaveFileAs(Path.Combine(character_path, "spc", "costumeBreakColorParam.xfbin"));
-                            if (ExportCostumeParam.CostumeParamList.Count > 0)
-                                ExportCostumeParam.SaveFileAs(Path.Combine(character_path, "rpg", "param", "costumeParam.bin.xfbin"));
-                            if (ExportPrivateCamera.PrivateCameraList.Count > 0)
-                                ExportPrivateCamera.SaveFileAs(Path.Combine(character_path, "spc", "privateCamera.bin.xfbin"));
-                            if (ExportPlayerDoubleEffectParam.PlayerDoubleEffectParamList.Count > 0)
-                                ExportPlayerDoubleEffectParam.SaveFileAs(Path.Combine(character_path, "spc", "playerDoubleEffectParam.xfbin"));
-                            if (ExportSupportActionParam.SupportActionParamList.Count > 0)
-                                ExportSupportActionParam.SaveFileAs(Path.Combine(character_path, "spc", "supportActionParam.xfbin"));
-                            if (ExportCmnParam.PlayerSndList.Count > 0)
-                                ExportCmnParam.SaveFileAs(Path.Combine(character_path, "sound", "cmnparam.xfbin"));
-                            if (ExportDamageEff.DamageEffList.Count > 0)
-                                ExportDamageEff.SaveFileAs(Path.Combine(character_path, "spc", "damageeff.bin.xfbin"));
-                            if (ExportEffectPrm.EffectPrmList.Count > 0)
-                                ExportEffectPrm.SaveFileAs(Path.Combine(character_path, "spc", "effectprm.bin.xfbin"));
-                            if (ExportMessageInfo.MessageInfo_List[0].Count > 0)
-                                ExportMessageInfo.SaveFileAs(character_path);
-                            if (ExportDamagePrm.DamagePrmList.Count > 0)
-                                ExportDamagePrm.SaveFileAs(Path.Combine(character_path, "spc", "damageprm.bin.xfbin"));
-                            if (ExportConditionPrm.ConditionList.Count > 0)
-                                ExportConditionPrm.SaveFileAs(Path.Combine(character_path, "spc", "conditionprm.bin.xfbin"));
-                            if (ExportConditionPrmManager.ConditionList.Count > 0)
-                                ExportConditionPrmManager.SaveFileAs(Path.Combine(character_moddingAPI_path, "conditionprmManager.xfbin"));
+                            if (costumeBreakParamExist)
+                                ImportModelCostumeBreakParam.OpenFile(costumeBreakParamPath);
 
-
-
-
-                        }
-
-
-                        break;
-                    //Compile Stage Mod
-                    case 1:
-
-                        MessageInfoViewModel ImportStageMessageInfo = new MessageInfoViewModel();
-                        if (messageInfoExist)
-                            ImportStageMessageInfo.OpenFiles(messageInfoPath);
-
-                        int StageIndex = 0;
-                        foreach (StageInfoModel stage in ExportStageList)
-                        {
-
-                            StageInfoViewModel ExportStage = new StageInfoViewModel();
-                            MessageInfoViewModel ExportStageMessageInfo = new MessageInfoViewModel();
-
-                            ExportStage.StageInfoList.Add((StageInfoModel)stage.Clone());
-                            //MessageInfo
                             if (messageInfoExist)
-                            {
-                                ImportStageMessageInfo.MessageInfo_preview_List = ImportStageMessageInfo.MessageInfo_List[0];
-                                for (int message = 0; message < ImportStageMessageInfo.MessageInfo_preview_List.Count; message++)
-                                {
-                                    if (BitConverter.ToString(ImportStageMessageInfo.MessageInfo_preview_List[message].CRC32Code) == BitConverter.ToString(BinaryReader.crc32(StageMessageIDList[StageIndex])))
-                                    {
+                                ImportModelMessageInfo.OpenFiles(messageInfoPath);
 
-                                        for (int l = 0; l < Program.langList.Length; l++)
-                                        {
-                                            MessageInfoModel copy_entry = (MessageInfoModel)ImportStageMessageInfo.MessageInfo_List[l][message].Clone();
-                                            ExportStageMessageInfo.MessageInfo_List[l].Add(copy_entry);
-                                        }
+
+                            foreach (PlayerSettingParamModel model in ExportModelList)
+                            {
+
+                                PlayerSettingParamViewModel ExportModelPlayerSettingParam = new PlayerSettingParamViewModel();
+                                CharacterSelectParamViewModel ExportModelCharacterSelectParam = new CharacterSelectParamViewModel();
+                                CostumeParamViewModel ExportModelCostumeParam = new CostumeParamViewModel();
+                                PlayerIconViewModel ExportModelPlayerIcon = new PlayerIconViewModel();
+                                CostumeBreakColorParamViewModel ExportModelCostumeBreakColorParam = new CostumeBreakColorParamViewModel();
+                                CostumeBreakParamViewModel ExportModelCostumeBreakParam = new CostumeBreakParamViewModel();
+                                ObservableCollection<string> ExportModelMessageNameList = new ObservableCollection<string>();
+                                MessageInfoViewModel ExportModelMessageInfo = new MessageInfoViewModel();
+
+                                string characode = ImportModelCharacode.CharacodeList[model.CharacodeID - 1].CharacodeName;
+                                int model_index = model.CostumeID;
+                                string basemodel_code = "";
+                                string awakemodel_code = "";
+
+                                /*----------------------------------------REQUIRED FILES--------------------------------------*/
+
+                                //playerSettingParam
+                                ExportModelPlayerSettingParam.PlayerSettingParamList.Add((PlayerSettingParamModel)model.Clone());
+                                if (!ExportModelMessageNameList.Contains(model.CharacterNameMessageID))
+                                    ExportModelMessageNameList.Add(model.CharacterNameMessageID);
+                                if (!ExportModelMessageNameList.Contains(model.CostumeDescriptionMessageID))
+                                    ExportModelMessageNameList.Add(model.CostumeDescriptionMessageID);
+
+                                //duelPlayerParam
+                                foreach (DuelPlayerParamModel duelEntry in ImportModelDuelPlayerParam.DuelPlayerParamList)
+                                {
+                                    if (duelEntry.BinName.Contains(characode))
+                                    {
+                                        basemodel_code = duelEntry.BaseCostumes[model_index].CostumeName;
+                                        awakemodel_code = duelEntry.AwakeCostumes[model_index].CostumeName;
                                         break;
                                     }
                                 }
-                            }
-                            //Save All Params
-                            string stagePath = Path.Combine(mod_path, "Stages", stage.StageName, "data");
-                            Directory.CreateDirectory(Path.Combine(stagePath, "stage"));
-
-                            ExportStage.SaveFileAs(Path.Combine(stagePath, "stage", "StageInfo.bin.xfbin"), true);
-
-                            if (ExportStageMessageInfo.MessageInfo_List[0].Count > 0)
-                                ExportStageMessageInfo.SaveFileAs(stagePath);
-
-                            bool hellExist = stage.FilePaths.Any(file => file.FilePath.Contains("wall"));
-
-                            // Save Stage Config
-                            var MyStageIni = new IniFile(Path.Combine(mod_path, "Stages", stage.StageName, "stage_config.ini"));
-                            MyStageIni.Write("BGM_ID", StageBGMIDList[StageIndex].ToString(), "ModManager");
-                            MyStageIni.Write("MessageID", StageMessageIDList[StageIndex], "ModManager");
-                            MyStageIni.Write("Hell", hellExist.ToString().ToLower(), "ModManager");
-
-                            // Save Stage Icon
-                            File.Copy(StageIconPathList[StageIndex], Path.Combine(mod_path, "Stages", stage.StageName, "stage_icon.dds"), true);
-
-                            // Save Stage Preview
-                            File.Copy(StageImagePreviewPathList[StageIndex], Path.Combine(mod_path, "Stages", stage.StageName, "stage_preview.png"), true);
-
-                            StageIndex++;
-                        }
-
-                        break;
-                    //Compile Character Model Mod
-                    case 2:
-                        CharacodeEditorViewModel ImportModelCharacode = new CharacodeEditorViewModel();
-                        DuelPlayerParamEditorViewModel ImportModelDuelPlayerParam = new DuelPlayerParamEditorViewModel();
-                        CharacterSelectParamViewModel ImportModelCharacterSelectParam = new CharacterSelectParamViewModel();
-                        CostumeParamViewModel ImportModelCostumeParam = new CostumeParamViewModel();
-                        PlayerIconViewModel ImportModelPlayerIcon = new PlayerIconViewModel();
-                        CostumeBreakColorParamViewModel ImportModelCostumeBreakColorParam = new CostumeBreakColorParamViewModel();
-                        CostumeBreakParamViewModel ImportModelCostumeBreakParam = new CostumeBreakParamViewModel();
-                        MessageInfoViewModel ImportModelMessageInfo = new MessageInfoViewModel();
-
-                        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory.ToString();
-                        string paramFilesPath = Path.Combine(baseDirectory, "ParamFiles");
-
-                        if (duelPlayerParamExist)
-                            ImportModelDuelPlayerParam.OpenFile(duelPlayerParamPath);
-                        else
-                            ImportModelDuelPlayerParam.OpenFile(Path.Combine(paramFilesPath, "duelPlayerParam.xfbin"));
-
-                        if (characterSelectParamExist)
-                            ImportModelCharacterSelectParam.OpenFile(characterSelectParamPath);
-                        else
-                            ImportModelCharacterSelectParam.OpenFile(Path.Combine(paramFilesPath, "characterSelectParam.xfbin"));
-
-                        if (costumeParamExist)
-                            ImportModelCostumeParam.OpenFile(costumeParamPath);
-                        else
-                            ImportModelCostumeParam.OpenFile(Path.Combine(paramFilesPath, "costumeParam.bin.xfbin"));
-
-                        if (playerIconExist)
-                            ImportModelPlayerIcon.OpenFile(playerIconPath);
-                        else
-                            ImportModelPlayerIcon.OpenFile(Path.Combine(paramFilesPath, "player_icon.xfbin"));
-
-                        if (costumeBreakColorParamExist)
-                            ImportModelCostumeBreakColorParam.OpenFile(costumeBreakColorParamPath);
-                        else
-                            ImportModelCostumeBreakColorParam.OpenFile(Path.Combine(paramFilesPath, "costumeBreakColorParam.xfbin"));
-
-                        if (characodeExist)
-                            ImportModelCharacode.OpenFile(characodePath);
-                        else
-                            ImportModelCharacode.OpenFile(Path.Combine(paramFilesPath, "characode.bin.xfbin"));
-
-                        if (costumeBreakParamExist)
-                            ImportModelCostumeBreakParam.OpenFile(costumeBreakParamPath);
-
-                        if (messageInfoExist)
-                            ImportModelMessageInfo.OpenFiles(messageInfoPath);
-
-
-                        foreach (PlayerSettingParamModel model in ExportModelList)
-                        {
-
-                            PlayerSettingParamViewModel ExportModelPlayerSettingParam = new PlayerSettingParamViewModel();
-                            CharacterSelectParamViewModel ExportModelCharacterSelectParam = new CharacterSelectParamViewModel();
-                            CostumeParamViewModel ExportModelCostumeParam = new CostumeParamViewModel();
-                            PlayerIconViewModel ExportModelPlayerIcon = new PlayerIconViewModel();
-                            CostumeBreakColorParamViewModel ExportModelCostumeBreakColorParam = new CostumeBreakColorParamViewModel();
-                            CostumeBreakParamViewModel ExportModelCostumeBreakParam = new CostumeBreakParamViewModel();
-                            ObservableCollection<string> ExportModelMessageNameList = new ObservableCollection<string>();
-                            MessageInfoViewModel ExportModelMessageInfo = new MessageInfoViewModel();
-
-                            string characode = ImportModelCharacode.CharacodeList[model.CharacodeID - 1].CharacodeName;
-                            int model_index = model.CostumeID;
-                            string basemodel_code = "";
-                            string awakemodel_code = "";
-
-                            /*----------------------------------------REQUIRED FILES--------------------------------------*/
-
-                            //playerSettingParam
-                            ExportModelPlayerSettingParam.PlayerSettingParamList.Add((PlayerSettingParamModel)model.Clone());
-                            if (!ExportModelMessageNameList.Contains(model.CharacterNameMessageID))
-                                ExportModelMessageNameList.Add(model.CharacterNameMessageID);
-                            if (!ExportModelMessageNameList.Contains(model.CostumeDescriptionMessageID))
-                                ExportModelMessageNameList.Add(model.CostumeDescriptionMessageID);
-
-                            //duelPlayerParam
-                            foreach (DuelPlayerParamModel duelEntry in ImportModelDuelPlayerParam.DuelPlayerParamList)
-                            {
-                                if (duelEntry.BinName.Contains(characode))
+                                if (basemodel_code == "")
                                 {
-                                    basemodel_code = duelEntry.BaseCostumes[model_index].CostumeName;
-                                    awakemodel_code = duelEntry.AwakeCostumes[model_index].CostumeName;
-                                    break;
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_35"] + " " + model.PSP_code + (string)System.Windows.Application.Current.Resources["m_error_32"]);
+                                    continue;
                                 }
-                            }
-                            if (basemodel_code == "")
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_35"] + " " + model.PSP_code + (string)System.Windows.Application.Current.Resources["m_error_32"]);
-                                continue;
-                            }
-                            //player_icon
-                            foreach (PlayerIconModel PlayerIconEntry in ImportModelPlayerIcon.playerIconList)
-                            {
-                                if (PlayerIconEntry.CharacodeID == model.CharacodeID && PlayerIconEntry.CostumeID == model_index)
+                                //player_icon
+                                foreach (PlayerIconModel PlayerIconEntry in ImportModelPlayerIcon.playerIconList)
                                 {
-                                    ExportModelPlayerIcon.playerIconList.Add((PlayerIconModel)PlayerIconEntry.Clone());
-                                    break;
-                                }
-                            }
-                            if (ExportModelPlayerIcon.playerIconList.Count < 1)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_35"] + " " + model.PSP_code + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "player_icon entry.");
-                                continue;
-                            }
-                            //characterSelectParam
-                            foreach (CharacterSelectParamModel CharacterSelectParamEntry in ImportModelCharacterSelectParam.CharacterSelectParamList)
-                            {
-                                if (CharacterSelectParamEntry.CSP_code == model.PSP_code)
-                                {
-                                    ExportModelCharacterSelectParam.CharacterSelectParamList.Add((CharacterSelectParamModel)CharacterSelectParamEntry.Clone());
-                                    if (!ExportModelMessageNameList.Contains(CharacterSelectParamEntry.CostumeDescription))
-                                        ExportModelMessageNameList.Add(CharacterSelectParamEntry.CostumeDescription);
-                                    if (!ExportModelMessageNameList.Contains(CharacterSelectParamEntry.CostumeName))
-                                        ExportModelMessageNameList.Add(CharacterSelectParamEntry.CostumeName);
-                                    break;
-                                }
-                            }
-                            if (ExportModelCharacterSelectParam.CharacterSelectParamList.Count < 1)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_35"] + " " + model.PSP_code + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "characterSelectParam entry.");
-                                continue;
-                            }
-                            //costumeParam
-                            foreach (CostumeParamModel CostumeParamEntry in ImportModelCostumeParam.CostumeParamList)
-                            {
-                                if (CostumeParamEntry.PlayerSettingParamID == model.PSP_ID)
-                                {
-                                    ExportModelCostumeParam.CostumeParamList.Add((CostumeParamModel)CostumeParamEntry.Clone());
-                                    if (!ExportModelMessageNameList.Contains(CostumeParamEntry.CharacterName))
+                                    if (PlayerIconEntry.CharacodeID == model.CharacodeID && PlayerIconEntry.CostumeID == model_index)
                                     {
-                                        ExportModelMessageNameList.Add(CostumeParamEntry.CharacterName);
-
+                                        ExportModelPlayerIcon.playerIconList.Add((PlayerIconModel)PlayerIconEntry.Clone());
+                                        break;
                                     }
                                 }
-                            }
-                            if (ExportModelCostumeParam.CostumeParamList.Count < 1)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_35"] + " " + model.PSP_code + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "costumeParam entry.");
-                                continue;
-                            }
-                            //costumeBreakColorParam
-                            foreach (CostumeBreakColorParamModel CostumeBreakColorParamEntry in ImportModelCostumeBreakColorParam.CostumeBreakColorParamList)
-                            {
-                                if (CostumeBreakColorParamEntry.PlayerSettingParamID == model.PSP_ID)
+                                if (ExportModelPlayerIcon.playerIconList.Count < 1)
                                 {
-                                    ExportModelCostumeBreakColorParam.CostumeBreakColorParamList.Add((CostumeBreakColorParamModel)CostumeBreakColorParamEntry.Clone());
-                                    break;
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_35"] + " " + model.PSP_code + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "player_icon entry.");
+                                    continue;
                                 }
-                            }
-                            if (ExportModelCostumeBreakColorParam.CostumeBreakColorParamList.Count < 1)
-                            {
-                                CostumeBreakColorParamModel cbcp_entry = new CostumeBreakColorParamModel();
-                                cbcp_entry.PlayerSettingParamID = model.PSP_ID;
-                                cbcp_entry.AltColor1 = Color.FromArgb(255, 255, 255, 1);
-                                cbcp_entry.AltColor2 = Color.FromArgb(255, 255, 255, 1);
-                                cbcp_entry.AltColor3 = Color.FromArgb(255, 255, 255, 1);
-                                cbcp_entry.AltColor4 = Color.FromArgb(255, 255, 255, 1);
-                                ExportModelCostumeBreakColorParam.CostumeBreakColorParamList.Add(cbcp_entry);
-
-                            }
-                            //costumeBreakParam
-                            if (costumeBreakParamExist)
-                            {
-
-                                foreach (CostumeBreakParamModel costumeBreakEntry in ImportModelCostumeBreakParam.CostumeBreakParamList)
+                                //characterSelectParam
+                                foreach (CharacterSelectParamModel CharacterSelectParamEntry in ImportModelCharacterSelectParam.CharacterSelectParamList)
                                 {
-                                    if (costumeBreakEntry.CharacodeID == model.CharacodeID && costumeBreakEntry.CostumeID == model_index)
+                                    if (CharacterSelectParamEntry.CSP_code == model.PSP_code)
                                     {
-                                        ExportModelCostumeBreakParam.CostumeBreakParamList.Add((CostumeBreakParamModel)costumeBreakEntry.Clone());
+                                        ExportModelCharacterSelectParam.CharacterSelectParamList.Add((CharacterSelectParamModel)CharacterSelectParamEntry.Clone());
+                                        if (!ExportModelMessageNameList.Contains(CharacterSelectParamEntry.CostumeDescription))
+                                            ExportModelMessageNameList.Add(CharacterSelectParamEntry.CostumeDescription);
+                                        if (!ExportModelMessageNameList.Contains(CharacterSelectParamEntry.CostumeName))
+                                            ExportModelMessageNameList.Add(CharacterSelectParamEntry.CostumeName);
+                                        break;
                                     }
                                 }
-                            }
-                            //messageInfo
-                            if (messageInfoExist)
-                            {
-                                if (ExportModelMessageNameList.Contains("practice_normal"))
-                                    ExportModelMessageNameList.RemoveAt(ExportModelMessageNameList.IndexOf("practice_normal"));
-                                for (int i = 0; i < ExportModelMessageNameList.Count; i++)
+                                if (ExportModelCharacterSelectParam.CharacterSelectParamList.Count < 1)
                                 {
-                                    ImportModelMessageInfo.MessageInfo_preview_List = ImportModelMessageInfo.MessageInfo_List[0];
-                                    for (int message = 0; message < ImportModelMessageInfo.MessageInfo_preview_List.Count; message++)
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_35"] + " " + model.PSP_code + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "characterSelectParam entry.");
+                                    continue;
+                                }
+                                //costumeParam
+                                foreach (CostumeParamModel CostumeParamEntry in ImportModelCostumeParam.CostumeParamList)
+                                {
+                                    if (CostumeParamEntry.PlayerSettingParamID == model.PSP_ID)
                                     {
-                                        if (BitConverter.ToString(ImportModelMessageInfo.MessageInfo_preview_List[message].CRC32Code) == BitConverter.ToString(BinaryReader.crc32(ExportModelMessageNameList[i])))
+                                        ExportModelCostumeParam.CostumeParamList.Add((CostumeParamModel)CostumeParamEntry.Clone());
+                                        if (!ExportModelMessageNameList.Contains(CostumeParamEntry.CharacterName))
                                         {
+                                            ExportModelMessageNameList.Add(CostumeParamEntry.CharacterName);
 
-                                            for (int l = 0; l < Program.langList.Length; l++)
-                                            {
-                                                MessageInfoModel copy_entry = (MessageInfoModel)ImportModelMessageInfo.MessageInfo_List[l][message].Clone();
-                                                ExportModelMessageInfo.MessageInfo_List[l].Add(copy_entry);
-                                            }
-                                            break;
                                         }
                                     }
                                 }
-
-
-                            }
-                            string modelPath = Path.Combine(mod_path, "Models", model.PSP_code, "data");
-                            Directory.CreateDirectory(Path.Combine(modelPath, "spc"));
-                            Directory.CreateDirectory(Path.Combine(modelPath, "rpg", "param"));
-                            Directory.CreateDirectory(Path.Combine(modelPath, "ui", "max", "select"));
-
-                            ExportModelPlayerSettingParam.SaveFileAs(Path.Combine(modelPath, "spc", "playerSettingParam.bin.xfbin"));
-                            ExportModelPlayerIcon.SaveFileAs(Path.Combine(modelPath, "spc", "player_icon.xfbin"));
-                            ExportModelCharacterSelectParam.SaveFileAs(Path.Combine(modelPath, "ui", "max", "select", "characterSelectParam.xfbin"));
-
-                            if (ExportModelCostumeBreakParam.CostumeBreakParamList.Count > 0)
-                                ExportModelCostumeBreakParam.SaveFileAs(Path.Combine(modelPath, "spc", "costumeBreakParam.xfbin"));
-
-                            if (ExportModelCostumeBreakColorParam.CostumeBreakColorParamList.Count > 0)
-                                ExportModelCostumeBreakColorParam.SaveFileAs(Path.Combine(modelPath, "spc", "costumeBreakColorParam.xfbin"));
-
-                            ExportModelCostumeParam.SaveFileAs(Path.Combine(modelPath, "rpg", "param", "costumeParam.bin.xfbin"));
-
-                            if (ExportModelMessageInfo.MessageInfo_List[0].Count > 0)
-                                ExportModelMessageInfo.SaveFileAs(modelPath);
-
-                            // Save Model Config
-                            var MyModelIni = new IniFile(Path.Combine(mod_path, "Models", model.PSP_code, "model_config.ini"));
-                            MyModelIni.Write("Characode", characode, "ModManager");
-                            MyModelIni.Write("BaseModel", basemodel_code, "ModManager");
-                            MyModelIni.Write("AwakeModel", awakemodel_code, "ModManager");
-
-                        }
-
-                        break;
-                    //Compile Resource Mod
-                    case 3:
-                        break;
-                    //Team Ultimate Jutsu Mod
-                    case 4:
-                        List<string> missingFiles = new List<string>();
-                        if (!pairSpSkillCombineExist)
-                            missingFiles.Add(Path.GetFileName(pairSpSkillCombinePath));
-
-                        if (!pairSpSkillManagerExist)
-                            missingFiles.Add(Path.GetFileName(pairSpSkillManagerPath));
-
-                        if (!cmnparamExist)
-                            missingFiles.Add(Path.GetFileName(cmnparamPath));
-
-                        //if (!messageInfoExist)
-                        //missingFiles.Add(Path.GetFileName(messageInfoPath));
-
-                        if (missingFiles.Any())
-                        {
-                            string message = "Some files are missing required for export:\n" +
-                                             string.Join("\n", missingFiles);
-                            ModernWpf.MessageBox.Show(message);
-                            return;
-                        } else
-                        {
-                            MessageInfoViewModel ImportTUJMessageInfo = new MessageInfoViewModel();
-                            PairSpSkillCombinationParamViewModel ImportTeamUltimateJutsu = new PairSpSkillCombinationParamViewModel();
-                            cmnparamViewModel ImportTUJCmnparam = new cmnparamViewModel();
-
-                            ImportTUJMessageInfo.OpenFiles(messageInfoPath);
-                            ImportTeamUltimateJutsu.OpenFile(pairSpSkillCombinePath);
-                            ImportTUJCmnparam.OpenFile(cmnparamPath);
-
-                            MessageInfoViewModel ExportTUJMessageInfo = new MessageInfoViewModel();
-                            cmnparamViewModel ExportTUJCmnparam = new cmnparamViewModel();
-
-                            PairSpSkillCombinationParamModel pairSpSkillEntry = ImportTeamUltimateJutsu.pairSpSkillList.FirstOrDefault(item => item.TUJ_ID == SelectedTeamUltimateJutsuIndex);
-                            pair_spl_sndModel cmnTUJParamEntry = ImportTUJCmnparam.PairSplList.FirstOrDefault(item => item.PairSplID == SelectedTeamUltimateJutsuIndex);
-
-                            if (pairSpSkillEntry is null)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_36"]);
-                                return;
-                            }
-                            if (cmnTUJParamEntry is null)
-                            {
-                                MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_37"]);
-                                return;
-                            }
-
-
-                            // Get all prm files in the DataWin32Path_field directory (searching recursively)
-                            string[] prmFiles = Directory.GetFiles(DataWin32Path_field, "*prm*.xfbin", SearchOption.AllDirectories);
-
-                            foreach (string prmFilePath in prmFiles)
-                            {
-                                string fixedPath = prmFilePath.Replace("/", "\\");
-                                if (File.Exists(fixedPath))
+                                if (ExportModelCostumeParam.CostumeParamList.Count < 1)
                                 {
-                                    PRMEditorViewModel ImportPRM = new PRMEditorViewModel();
-                                    ImportPRM.OpenFile(fixedPath);
-
-                                    for (int ver = 0; ver < ImportPRM.VerList.Count; ver++)
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_35"] + " " + model.PSP_code + " " + (string)System.Windows.Application.Current.Resources["m_error_34"] + "costumeParam entry.");
+                                    continue;
+                                }
+                                //costumeBreakColorParam
+                                foreach (CostumeBreakColorParamModel CostumeBreakColorParamEntry in ImportModelCostumeBreakColorParam.CostumeBreakColorParamList)
+                                {
+                                    if (CostumeBreakColorParamEntry.PlayerSettingParamID == model.PSP_ID)
                                     {
-                                        for (int pl_anm = 0; pl_anm < ImportPRM.VerList[ver].PL_ANM_Sections.Count; pl_anm++)
+                                        ExportModelCostumeBreakColorParam.CostumeBreakColorParamList.Add((CostumeBreakColorParamModel)CostumeBreakColorParamEntry.Clone());
+                                        break;
+                                    }
+                                }
+                                if (ExportModelCostumeBreakColorParam.CostumeBreakColorParamList.Count < 1)
+                                {
+                                    CostumeBreakColorParamModel cbcp_entry = new CostumeBreakColorParamModel();
+                                    cbcp_entry.PlayerSettingParamID = model.PSP_ID;
+                                    cbcp_entry.AltColor1 = Color.FromArgb(255, 255, 255, 1);
+                                    cbcp_entry.AltColor2 = Color.FromArgb(255, 255, 255, 1);
+                                    cbcp_entry.AltColor3 = Color.FromArgb(255, 255, 255, 1);
+                                    cbcp_entry.AltColor4 = Color.FromArgb(255, 255, 255, 1);
+                                    ExportModelCostumeBreakColorParam.CostumeBreakColorParamList.Add(cbcp_entry);
+
+                                }
+                                //costumeBreakParam
+                                if (costumeBreakParamExist)
+                                {
+
+                                    foreach (CostumeBreakParamModel costumeBreakEntry in ImportModelCostumeBreakParam.CostumeBreakParamList)
+                                    {
+                                        if (costumeBreakEntry.CharacodeID == model.CharacodeID && costumeBreakEntry.CostumeID == model_index)
                                         {
-                                            for (int function = 0; function < ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList.Count; function++)
+                                            ExportModelCostumeBreakParam.CostumeBreakParamList.Add((CostumeBreakParamModel)costumeBreakEntry.Clone());
+                                        }
+                                    }
+                                }
+                                //messageInfo
+                                if (messageInfoExist)
+                                {
+                                    if (ExportModelMessageNameList.Contains("practice_normal"))
+                                        ExportModelMessageNameList.RemoveAt(ExportModelMessageNameList.IndexOf("practice_normal"));
+                                    for (int i = 0; i < ExportModelMessageNameList.Count; i++)
+                                    {
+                                        ImportModelMessageInfo.MessageInfo_preview_List = ImportModelMessageInfo.MessageInfo_List[0];
+                                        for (int message = 0; message < ImportModelMessageInfo.MessageInfo_preview_List.Count; message++)
+                                        {
+                                            if (BitConverter.ToString(ImportModelMessageInfo.MessageInfo_preview_List[message].CRC32Code) == BitConverter.ToString(BinaryReader.crc32(ExportModelMessageNameList[i])))
                                             {
-                                                if (ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].FunctionID == 0x96
-                                                    && messageInfoExist)
+
+                                                for (int l = 0; l < Program.langList.Length; l++)
                                                 {
-                                                    string message = ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].StringParam;
-                                                    if (!ExportMessageNameList.Contains(message))
+                                                    MessageInfoModel copy_entry = (MessageInfoModel)ImportModelMessageInfo.MessageInfo_List[l][message].Clone();
+                                                    ExportModelMessageInfo.MessageInfo_List[l].Add(copy_entry);
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    }
+
+
+                                }
+                                string modelPath = Path.Combine(mod_path, "Models", model.PSP_code, "data");
+                                Directory.CreateDirectory(Path.Combine(modelPath, "spc"));
+                                Directory.CreateDirectory(Path.Combine(modelPath, "rpg", "param"));
+                                Directory.CreateDirectory(Path.Combine(modelPath, "ui", "max", "select"));
+
+                                ExportModelPlayerSettingParam.SaveFileAs(Path.Combine(modelPath, "spc", "playerSettingParam.bin.xfbin"));
+                                ExportModelPlayerIcon.SaveFileAs(Path.Combine(modelPath, "spc", "player_icon.xfbin"));
+                                ExportModelCharacterSelectParam.SaveFileAs(Path.Combine(modelPath, "ui", "max", "select", "characterSelectParam.xfbin"));
+
+                                if (ExportModelCostumeBreakParam.CostumeBreakParamList.Count > 0)
+                                    ExportModelCostumeBreakParam.SaveFileAs(Path.Combine(modelPath, "spc", "costumeBreakParam.xfbin"));
+
+                                if (ExportModelCostumeBreakColorParam.CostumeBreakColorParamList.Count > 0)
+                                    ExportModelCostumeBreakColorParam.SaveFileAs(Path.Combine(modelPath, "spc", "costumeBreakColorParam.xfbin"));
+
+                                ExportModelCostumeParam.SaveFileAs(Path.Combine(modelPath, "rpg", "param", "costumeParam.bin.xfbin"));
+
+                                if (ExportModelMessageInfo.MessageInfo_List[0].Count > 0)
+                                    ExportModelMessageInfo.SaveFileAs(modelPath);
+
+                                // Save Model Config
+                                var MyModelIni = new IniFile(Path.Combine(mod_path, "Models", model.PSP_code, "model_config.ini"));
+                                MyModelIni.Write("Characode", characode, "ModManager");
+                                MyModelIni.Write("BaseModel", basemodel_code, "ModManager");
+                                MyModelIni.Write("AwakeModel", awakemodel_code, "ModManager");
+
+                            }
+
+                            break;
+                        //Compile Resource Mod
+                        case 3:
+                            break;
+                        //Team Ultimate Jutsu Mod
+                        case 4:
+                            List<string> missingFiles = new List<string>();
+                            if (!pairSpSkillCombineExist)
+                                missingFiles.Add(Path.GetFileName(pairSpSkillCombinePath));
+
+                            if (!pairSpSkillManagerExist)
+                                missingFiles.Add(Path.GetFileName(pairSpSkillManagerPath));
+
+                            if (!cmnparamExist)
+                                missingFiles.Add(Path.GetFileName(cmnparamPath));
+
+                            //if (!messageInfoExist)
+                            //missingFiles.Add(Path.GetFileName(messageInfoPath));
+
+                            if (missingFiles.Any())
+                            {
+                                string message = "Some files are missing required for export:\n" +
+                                                 string.Join("\n", missingFiles);
+                                ModernWpf.MessageBox.Show(message);
+                                return;
+                            } else
+                            {
+                                MessageInfoViewModel ImportTUJMessageInfo = new MessageInfoViewModel();
+                                PairSpSkillCombinationParamViewModel ImportTeamUltimateJutsu = new PairSpSkillCombinationParamViewModel();
+                                cmnparamViewModel ImportTUJCmnparam = new cmnparamViewModel();
+
+                                ImportTUJMessageInfo.OpenFiles(messageInfoPath);
+                                ImportTeamUltimateJutsu.OpenFile(pairSpSkillCombinePath);
+                                ImportTUJCmnparam.OpenFile(cmnparamPath);
+
+                                MessageInfoViewModel ExportTUJMessageInfo = new MessageInfoViewModel();
+                                cmnparamViewModel ExportTUJCmnparam = new cmnparamViewModel();
+
+                                PairSpSkillCombinationParamModel pairSpSkillEntry = ImportTeamUltimateJutsu.pairSpSkillList.FirstOrDefault(item => item.TUJ_ID == SelectedTeamUltimateJutsuIndex);
+                                pair_spl_sndModel cmnTUJParamEntry = ImportTUJCmnparam.PairSplList.FirstOrDefault(item => item.PairSplID == SelectedTeamUltimateJutsuIndex);
+
+                                if (pairSpSkillEntry is null)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_36"]);
+                                    return;
+                                }
+                                if (cmnTUJParamEntry is null)
+                                {
+                                    MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_37"]);
+                                    return;
+                                }
+
+
+                                // Get all prm files in the DataWin32Path_field directory (searching recursively)
+                                string[] prmFiles = Directory.GetFiles(DataWin32Path_field, "*prm*.xfbin", SearchOption.AllDirectories);
+
+                                foreach (string prmFilePath in prmFiles)
+                                {
+                                    string fixedPath = prmFilePath.Replace("/", "\\");
+                                    if (File.Exists(fixedPath))
+                                    {
+                                        PRMEditorViewModel ImportPRM = new PRMEditorViewModel();
+                                        ImportPRM.OpenFile(fixedPath);
+
+                                        for (int ver = 0; ver < ImportPRM.VerList.Count; ver++)
+                                        {
+                                            for (int pl_anm = 0; pl_anm < ImportPRM.VerList[ver].PL_ANM_Sections.Count; pl_anm++)
+                                            {
+                                                for (int function = 0; function < ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList.Count; function++)
+                                                {
+                                                    if (ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].FunctionID == 0x96
+                                                        && messageInfoExist)
                                                     {
-                                                        ExportMessageNameList.Add(message);
+                                                        string message = ImportPRM.VerList[ver].PL_ANM_Sections[pl_anm].FunctionList[function].StringParam;
+                                                        if (!ExportMessageNameList.Contains(message))
+                                                        {
+                                                            ExportMessageNameList.Add(message);
+                                                        }
                                                     }
                                                 }
                                             }
                                         }
                                     }
                                 }
-                            }
 
-                            ExportMessageNameList.Add(pairSpSkillEntry.TUJ_Name);
-                            //MessageInfo
-                            if (messageInfoExist)
-                            {
-                                ImportTUJMessageInfo.MessageInfo_preview_List = ImportTUJMessageInfo.MessageInfo_List[0];
-                                for (int message = 0; message < ImportTUJMessageInfo.MessageInfo_preview_List.Count; message++)
+                                ExportMessageNameList.Add(pairSpSkillEntry.TUJ_Name);
+                                //MessageInfo
+                                if (messageInfoExist)
                                 {
-                                    bool matchFound = false;
-                                    foreach (string exportMessageName in ExportMessageNameList)
+                                    ImportTUJMessageInfo.MessageInfo_preview_List = ImportTUJMessageInfo.MessageInfo_List[0];
+                                    for (int message = 0; message < ImportTUJMessageInfo.MessageInfo_preview_List.Count; message++)
                                     {
-                                        if (BitConverter.ToString(ImportTUJMessageInfo.MessageInfo_preview_List[message].CRC32Code) ==
-                                            BitConverter.ToString(BinaryReader.crc32(exportMessageName)))
+                                        bool matchFound = false;
+                                        foreach (string exportMessageName in ExportMessageNameList)
                                         {
-                                            matchFound = true;
-                                            break;
+                                            if (BitConverter.ToString(ImportTUJMessageInfo.MessageInfo_preview_List[message].CRC32Code) ==
+                                                BitConverter.ToString(BinaryReader.crc32(exportMessageName)))
+                                            {
+                                                matchFound = true;
+                                                break;
+                                            }
                                         }
-                                    }
-                                    if (matchFound)
-                                    {
-                                        for (int l = 0; l < Program.langList.Length; l++)
+                                        if (matchFound)
                                         {
-                                            MessageInfoModel copy_entry = (MessageInfoModel)ImportTUJMessageInfo.MessageInfo_List[l][message].Clone();
-                                            ExportTUJMessageInfo.MessageInfo_List[l].Add(copy_entry);
+                                            for (int l = 0; l < Program.langList.Length; l++)
+                                            {
+                                                MessageInfoModel copy_entry = (MessageInfoModel)ImportTUJMessageInfo.MessageInfo_List[l][message].Clone();
+                                                ExportTUJMessageInfo.MessageInfo_List[l].Add(copy_entry);
+                                            }
                                         }
                                     }
                                 }
-                            }
 
-                            //cmnparam
-                            ExportTUJCmnparam.PairSplList.Add((pair_spl_sndModel)cmnTUJParamEntry.Clone());
+                                //cmnparam
+                                ExportTUJCmnparam.PairSplList.Add((pair_spl_sndModel)cmnTUJParamEntry.Clone());
 
 
-                            string characodeNamesString = string.Join(",",
-                                pairSpSkillEntry.CharacodeList
-                                .Select(id =>
-                                {
-                                    // Find the character entry in ImportCharacterList
-                                    var character = ImportCharacterList.FirstOrDefault(c => c.CharacodeIndex == id);
-                                    if (character == null)
+                                string characodeNamesString = string.Join(",",
+                                    pairSpSkillEntry.CharacodeList
+                                    .Select(id =>
                                     {
-                                        // If we can't find the character, log a message and return
-                                        MessageBox.Show($"Character with characode index {id} not found in characode.bin.xfbin file.");
-                                        return null; // This will be handled by the Where clause below
-                                    }
-                                    return character.CharacodeName;
-                                })
-                                .Where(name => name != null) // Only include non-null CharacodeNames
-                                .ToArray());
-                            if (characodeNamesString.Split(',').Length != pairSpSkillEntry.CharacodeList.Count)
-                            {
-                                return;
+                                        // Find the character entry in ImportCharacterList
+                                        var character = ImportCharacterList.FirstOrDefault(c => c.CharacodeIndex == id);
+                                        if (character == null)
+                                        {
+                                            // If we can't find the character, log a message and return
+                                            MessageBox.Show($"Character with characode index {id} not found in characode.bin.xfbin file.");
+                                            return null; // This will be handled by the Where clause below
+                                        }
+                                        return character.CharacodeName;
+                                    })
+                                    .Where(name => name != null) // Only include non-null CharacodeNames
+                                    .ToArray());
+                                if (characodeNamesString.Split(',').Length != pairSpSkillEntry.CharacodeList.Count)
+                                {
+                                    return;
+                                }
+
+                                //Create TUJ Directory
+                                string tuj_path = Path.Combine(mod_path, "TUJ", SelectedTeamUltimateJutsu, "data");
+                                Directory.CreateDirectory(Path.Combine(tuj_path, "sound"));
+
+
+                                //Save TUJ Config
+                                var MyTUJIni = new IniFile(Path.Combine(mod_path, "TUJ", SelectedTeamUltimateJutsu, "TUJ_config.ini"));
+                                MyTUJIni.Write("Label", SelectedTeamUltimateJutsu, "ModManager");
+                                MyTUJIni.Write("Name", pairSpSkillEntry.TUJ_Name, "ModManager");
+                                MyTUJIni.Write("Flag1", pairSpSkillEntry.Condition1.ToString(), "ModManager");
+                                MyTUJIni.Write("Flag2", pairSpSkillEntry.Condition2.ToString(), "ModManager");
+                                MyTUJIni.Write("MemberCount", pairSpSkillEntry.MemberCount.ToString(), "ModManager");
+                                MyTUJIni.Write("Characodes", characodeNamesString, "ModManager");
+
+                                //SaveParamFiles
+                                if (ExportTUJMessageInfo.MessageInfo_List[0].Count > 0)
+                                    ExportTUJMessageInfo.SaveFileAs(tuj_path);
+                                if (ExportTUJCmnparam.PairSplList.Count > 0)
+                                    ExportTUJCmnparam.SaveFileAs(Path.Combine(tuj_path, "sound", "cmnparam.xfbin"));
                             }
-
-                            //Create TUJ Directory
-                            string tuj_path = Path.Combine(mod_path, "TUJ", SelectedTeamUltimateJutsu, "data");
-                            Directory.CreateDirectory(Path.Combine(tuj_path, "sound"));
-
-
-                            //Save TUJ Config
-                            var MyTUJIni = new IniFile(Path.Combine(mod_path, "TUJ", SelectedTeamUltimateJutsu, "TUJ_config.ini"));
-                            MyTUJIni.Write("Label", SelectedTeamUltimateJutsu, "ModManager");
-                            MyTUJIni.Write("Name", pairSpSkillEntry.TUJ_Name, "ModManager");
-                            MyTUJIni.Write("Flag1", pairSpSkillEntry.Condition1.ToString(), "ModManager");
-                            MyTUJIni.Write("Flag2", pairSpSkillEntry.Condition2.ToString(), "ModManager");
-                            MyTUJIni.Write("MemberCount", pairSpSkillEntry.MemberCount.ToString(), "ModManager");
-                            MyTUJIni.Write("Characodes", characodeNamesString, "ModManager");
-
-                            //SaveParamFiles
-                            if (ExportTUJMessageInfo.MessageInfo_List[0].Count > 0)
-                                ExportTUJMessageInfo.SaveFileAs(tuj_path);
-                            if (ExportTUJCmnparam.PairSplList.Count > 0)
-                                ExportTUJCmnparam.SaveFileAs(Path.Combine(tuj_path, "sound", "cmnparam.xfbin"));
-                        }
-                        break;
-                    //Compile Accessory Mod
-                    case 5:
-                        break;
+                            break;
+                        //Compile Accessory Mod
+                        case 5:
+                            break;
+                    }
+                    IsModCompiled = true;
+                    if (File.Exists(mod_path + ".nsc"))
+                        File.Delete(mod_path + ".nsc");
+                    ZipFile.CreateFromDirectory(mod_path, mod_path + ".nsc");
+                    Directory.Delete(mod_path, true);
                 }
-                IsModCompiled = true;
-                if (File.Exists(mod_path + ".nsc"))
-                    File.Delete(mod_path + ".nsc");
-                ZipFile.CreateFromDirectory(mod_path, mod_path + ".nsc");
-                Directory.Delete(mod_path, true);
+            } catch (Exception ex) {
+
+                    ModernWpf.MessageBox.Show($"Error: {ex.Message}\n\n{ex.StackTrace}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
         }
 
 

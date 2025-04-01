@@ -598,6 +598,7 @@ namespace NSC_Toolbox.ViewModel {
             get { return _filePathList; }
             set {
                 _filePathList = value;
+
                 OnPropertyChanged("FilePathList");
             }
         }
@@ -1235,6 +1236,7 @@ namespace NSC_Toolbox.ViewModel {
                     }
                 }
                 SelectedStage.FilePaths = newFilePathList;
+                StagePathComboBoxList = new ObservableCollection<string>(new[] { "" }.Concat(newFilePathList.Select(stage => stage.FilePath)));
                 FilePathList = SelectedStage.FilePaths;
                 ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
             } else {
@@ -1458,6 +1460,8 @@ namespace NSC_Toolbox.ViewModel {
                 }
                 SelectedStage.FilePaths = newFilePathList;
 
+                StagePathComboBoxList = new ObservableCollection<string>(new[] { "" }.Concat(newFilePathList.Select(stage => stage.FilePath)));
+
                 StageName_field = SelectedStage.StageName;
                 StageMessageID_field = SelectedStage.StageMessageID;
                 StageFilter_field = SelectedStage.StageFilter;
@@ -1549,15 +1553,74 @@ namespace NSC_Toolbox.ViewModel {
                 ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
-        public void SavePathEntry() {
-            if (SelectedStage is not null && SelectedFilePath is not null) {
-                SelectedFilePath.FilePath = FilePathTextBox_field;
-                StagePathComboBoxList[StagePathComboBoxList.IndexOf(SelectedFilePath.FilePath) + 1] = FilePathTextBox_field;
+        public void SavePathEntry()
+        {
+            if (SelectedStage is not null && SelectedFilePath is not null)
+            {
+                string oldPath = SelectedFilePath.FilePath;
+                string newPath = FilePathTextBox_field;
+
+                // If there's no change, exit early.
+                if (oldPath == newPath)
+                {
+                    ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
+                    return;
+                }
+
+                // Replace the old path with the new one in the combo if it exists.
+                int mainIndex = StagePathComboBoxList.IndexOf(oldPath);
+                if (mainIndex != -1)
+                {
+                    StagePathComboBoxList[mainIndex] = newPath;
+                }
+
+                // Update each object's file paths if they match the old value.
+                foreach (var obj in SelectedStage.Objects)
+                {
+                    if (obj.ObjectFilePath == oldPath)
+                    {
+                        obj.ObjectFilePath = newPath;
+                        int idx = StagePathComboBoxList.IndexOf(newPath);
+                        if (idx != -1)
+                            ObjectPathComboBoxIndex = idx;
+                    }
+
+                    if (obj.PositionFilePath == oldPath)
+                    {
+                        obj.PositionFilePath = newPath;
+                        int idx = StagePathComboBoxList.IndexOf(newPath);
+                        if (idx != -1)
+                            ObjectPositionPathComboBoxIndex = idx;
+                    }
+
+                    if (obj.BreakableObjectPath == oldPath)
+                    {
+                        obj.BreakableObjectPath = newPath;
+                        int idx = StagePathComboBoxList.IndexOf(newPath);
+                        if (idx != -1)
+                            BreakableObjectPathComboBoxIndex = idx;
+                    }
+                }
+
+                // Update the file path in the SelectedStage's FilePaths list.
+                var target = SelectedStage.FilePaths.FirstOrDefault(item => item.FilePath == oldPath);
+                if (target != null)
+                    target.FilePath = newPath;
+
+                // Finally, update the SelectedFilePath.
+                SelectedFilePath.FilePath = newPath;
+
                 ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_tool_1"]);
-            } else {
+            } else
+            {
                 ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
+
+
+
+
+
         public void AddPathEntry() {
             if (SelectedStage is not null && FilePathTextBox_field is not null) {
                 if (!StagePathComboBoxList.Contains(FilePathTextBox_field) && FilePathTextBox_field.Length > 0) {

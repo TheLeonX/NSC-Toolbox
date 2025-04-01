@@ -11,7 +11,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com" xmlns:Controls="clr-namespace:NSC_Toolbox.Controls"
         mc:Ignorable="d"
         xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
-        Width="1200" Height="800"
+        Width="1400" Height="800"
         ui:WindowHelper.UseModernWindowStyle="True"
         Title="{DynamicResource m_messageInfoEditor}">
     <Window.Background>
@@ -22,7 +22,7 @@
         <converter:ByteToStringUTF8Converter x:Key="ByteToStringUTF8Converter" />
     </Window.Resources>
     <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
-        <Grid Width="1200" Height="800" Background="{DynamicResource Toolbox_button_background_color_1}">
+        <Grid Width="1400" Height="800" Background="{DynamicResource Toolbox_button_background_color_1}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="1*"/>

@@ -64,8 +64,6 @@
                                 <TextBlock Text="{Binding TUJ_ID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                                 <TextBlock Text=" Name: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="16"/>
                                 <TextBlock Text="{Binding TUJ_Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
-                                <TextBlock Text=" Member Count: " FontFamily="{StaticResource NarutoFont}" Foreground="Orange" FontSize="16"/>
-                                <TextBlock Text="{Binding MemberCount, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                                 </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

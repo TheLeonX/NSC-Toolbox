@@ -11,14 +11,14 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com" xmlns:Controls="clr-namespace:NSC_Toolbox.Controls"
         mc:Ignorable="d"
         xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
-        Width="650" Height="550"
+        Width="800" Height="550"
         ui:WindowHelper.UseModernWindowStyle="True"
         Title="{DynamicResource m_PlayerIconEditor}">
     <Window.Background>
         <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
     </Window.Background>
     <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
-        <Grid Width="650" Height="550">
+        <Grid Width="800" Height="550">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>

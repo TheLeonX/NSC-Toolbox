@@ -35,7 +35,7 @@
         <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
     </Window.Background>
     <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
-        <Grid Width="1550" Height="1050" Background="{DynamicResource Toolbox_button_background_color_1}" >
+        <Grid x:Name="RootGrid" Width="1550" Height="1050" Background="{DynamicResource Toolbox_button_background_color_1}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>
@@ -726,6 +726,6 @@
                 <Controls:LoadingControl Grid.Row="2" Grid.Column="2" LoadingState="{Binding LoadingStatePlay}"/>
             </Grid>
         </Grid>
-        
+
     </Viewbox>
 </Window>

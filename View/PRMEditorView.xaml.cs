@@ -1,5 +1,6 @@
 ﻿using NSC_Toolbox.Model;
 using NSC_Toolbox.ViewModel;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -11,6 +12,17 @@ namespace NSC_Toolbox.View {
     /// Логика взаимодействия для PRMEditorView.xaml
     /// </summary>
     public partial class PRMEditorView : Window {
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            var dpi = VisualTreeHelper.GetDpi(this);
+            double scaleX = 1 / dpi.DpiScaleX;
+            double scaleY = 1 / dpi.DpiScaleY;
+            RootGrid.LayoutTransform = new ScaleTransform(scaleX, scaleY);
+        }
+
+
         public PRMEditorView() {
             InitializeComponent();
             DataContext = new PRMEditorViewModel();

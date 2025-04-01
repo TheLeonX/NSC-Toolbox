@@ -465,11 +465,11 @@
     <v:String x:Key="m_addCostume_page2_010">Добавить костюм</v:String>
     <v:String x:Key="m_addCostume_page2_011">Обновить</v:String>
 
-    <v:String xml:space="preserve" x:Key="m_addCostume_page2_warning">
-    Если вы хотите добавить костюм в пробуждении на персонажа у которого его нету, убедишь что prm_load файл содержит в себе запись `&lt;codeAwake2Model&gt;bod1`.
+    <v:String xml:space="preserve" x:Key="m_addCostume_page2_warning">-
+    <!-- Если вы хотите добавить костюм в пробуждении на персонажа у которого его нету, убедишь что prm_load файл содержит в себе запись `&lt;codeAwake2Model&gt;bod1`.
     Если вы хотите использовать разные костюмы для пробуждения, убедись что в prm файле есть функция которая включает смену костюма для пробуждения.
     Необходимая функция - 229: ME_SET_SUBSTITUTION_KEY.
-    Примеры можно найти в 3ksnprm.bin.xfbin или 2rocprm.bin.xfbin файлах.
+    Примеры можно найти в 3ksnprm.bin.xfbin или 2rocprm.bin.xfbin файлах.-->
 </v:String>
 
 
@@ -670,7 +670,7 @@
     <v:String x:Key="m_exportMod_page3_stageExport">Арены для экспорта</v:String>
     <v:String x:Key="m_exportMod_page3_selectStageID">Выбрать арену</v:String>
     <v:String x:Key="m_exportMod_page3_deleteStageID">Удалить арену</v:String>
-    <v:String x:Key="m_exportMod_page3_stagePreviewImageResolution">Предпросмотр арены - разрешение 1428x588</v:String>
+    <v:String x:Key="m_exportMod_page3_stagePreviewImageResolution">Предпросмотр арены - разрешение 1728x500</v:String>
     <v:String x:Key="m_exportMod_page3_SelectStagePreview">Выбрать предпросмотр арены</v:String>
     <v:String x:Key="m_exportMod_page3_stageIconResolution">Иконка арены - разрешение 184x104</v:String>
     <v:String x:Key="m_exportMod_page3_SelectStageIcon">Выбрать иконку арены</v:String>
