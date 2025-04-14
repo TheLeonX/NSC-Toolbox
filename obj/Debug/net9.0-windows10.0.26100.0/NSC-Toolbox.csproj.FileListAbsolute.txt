@@ -301,3 +301,7 @@ C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.2610
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.pdb
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.genruntimeconfig.cache
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\ref\NSC-Toolbox.dll
+C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\ModdingAPIFiles\moddingapi\mods\base_game\bgmManagerParam.xfbin
+C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\ModdingAPIFiles\moddingapi\mods\base_game\plAnmExpanderParam.xfbin
+C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\ModdingAPIFiles\moddingapi\mods\base_game\teamJutsuParam.xfbin
+C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\ModdingAPIFiles\moddingapi\mods\base_game\defaultJutsuList.xfbin

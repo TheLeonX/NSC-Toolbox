@@ -9,8 +9,8 @@
     <PlatformTarget>x86</PlatformTarget>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>white_TB.ico</ApplicationIcon>
-    <AssemblyVersion>1.6.4.0</AssemblyVersion>
-    <FileVersion>1.6.4.0</FileVersion>
+    <AssemblyVersion>1.6.4.1</AssemblyVersion>
+    <FileVersion>1.6.4.1</FileVersion>
     <Authors>TheLeonX</Authors>
     <Version>1.60</Version>
   </PropertyGroup>
@@ -102,6 +102,9 @@
     <None Update="ModdingAPIFiles\moddingapi\lang\EN.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\bgmManagerParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\conditionprmManager.xfbin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -111,6 +114,9 @@
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\CPKLoader.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\defaultJutsuList.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\info.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -118,6 +124,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\partnerSlotParam.xfbin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\plAnmExpanderParam.xfbin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\skip_intro.dll">
@@ -133,6 +142,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ModdingAPIFiles\moddingapi\mods\base_game\SusanooJumpFix.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ModdingAPIFiles\moddingapi\mods\base_game\teamJutsuParam.xfbin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ModdingAPIFiles\xinput9_1_0.dll">
