@@ -341,6 +341,7 @@
     <v:String x:Key="m_option009">Reset Settings</v:String>
     <v:String x:Key="m_option010">Select Image</v:String>
     <v:String x:Key="m_option011">Font Color</v:String>
+    <v:String x:Key="m_option012">Encrypt Files</v:String>
 
     <!--conditionprm editor-->
     <v:String x:Key="m_condPrm">Condition PRM Editor</v:String>

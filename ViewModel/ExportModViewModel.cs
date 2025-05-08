@@ -56,6 +56,16 @@ namespace NSC_Toolbox.ViewModel
                 OnPropertyChanged("LoadingStatePlay");
             }
         }
+        private bool _encryptFiles_field;
+        public bool EncryptFiles_field
+        {
+            get { return _encryptFiles_field; }
+            set
+            {
+                _encryptFiles_field = value;
+                OnPropertyChanged("EncryptFiles_field");
+            }
+        }
         private Visibility _pageModType_character_visibility;
         public Visibility PageModType_character_visibility
         {
@@ -765,6 +775,7 @@ namespace NSC_Toolbox.ViewModel
             IsDataWin32Exist = false;
             IsExportModsExist = false;
             IsModCompiled = false;
+            EncryptFiles_field = false;
             for (int x = 0; x < Program.ModType.Length; x++) ModType_List.Add(Program.ModType[x]);
         }
 
@@ -1116,8 +1127,15 @@ namespace NSC_Toolbox.ViewModel
                 // Copy Icon
                 File.Copy(ModIconPath_field, Path.Combine(mod_path, "mod_icon.png"), true);
 
-                // Copy all resources from mod folder
-                Program.CopyFilesRecursivelyModManager(DataWin32Path_field, Path.Combine(mod_path, "Resources", "Files", "data"));
+
+                if (!EncryptFiles_field)
+                {
+                    // Copy all resources from mod folder
+                    Program.CopyFilesRecursivelyModManager(DataWin32Path_field, Path.Combine(mod_path, "Resources", "Files", "data"));
+                } else
+                {
+                    FileEncryptor.CopyFilesWithEncryption(DataWin32Path_field, Path.Combine(mod_path, "Resources", "Files", "data"));
+                }
 
                 // Copy all CPKs
                 Directory.CreateDirectory(Path.Combine(mod_path, "Resources", "CPKs"));
@@ -2607,9 +2625,15 @@ namespace NSC_Toolbox.ViewModel
                             break;
                     }
                     IsModCompiled = true;
-                    if (File.Exists(mod_path + ".nsc"))
-                        File.Delete(mod_path + ".nsc");
-                    ZipFile.CreateFromDirectory(mod_path, mod_path + ".nsc");
+
+                    string ModExt = ".nsc";
+                    if (EncryptFiles_field)
+                        ModExt = ".ensc";
+
+
+                    if (File.Exists(mod_path + ModExt))
+                        File.Delete(mod_path + ModExt);
+                    ZipFile.CreateFromDirectory(mod_path, mod_path + ModExt);
                     Directory.Delete(mod_path, true);
                 }
             } catch (Exception ex) {

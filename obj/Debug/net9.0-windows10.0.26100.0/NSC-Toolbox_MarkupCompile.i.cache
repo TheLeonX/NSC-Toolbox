@@ -1,5 +1,5 @@
 ﻿NSC-Toolbox
-1.6.4.1
+1.6.5.0
 
 winexe
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET9_0;NETCOREAPP
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\App.xaml
 40-689356831
 1-854401585
-135-968242199
+136-507218065
 2381301274687
 Controls\KuramaControl.xaml;Controls\LoadingControl.xaml;Resources\Localization\lang.ru-RU.xaml;Resources\Localization\lang.xaml;Resources\Styles\LightStyle.xaml;View\AddCostumeView.xaml;View\AddTeamUltimateJutsuView.xaml;View\AfterAttachObjectEditorView.xaml;View\AppearanceAnmEditorView.xaml;View\AwakeAuraEditorView.xaml;View\CharacodeEditorView.xaml;View\CharacterSelectParamEditorView.xaml;View\cmnparamEditorView.xaml;View\ConditionManagerEditorView.xaml;View\ConditionPrmEditorView.xaml;View\CostumeBreakColorParamEditorView.xaml;View\CostumeBreakParamEditorView.xaml;View\CostumeParamEditorView.xaml;View\DamageEffEditorView.xaml;View\DuelPlayerParamEditorView.xaml;View\EffectPrmEditorView.xaml;View\ExportModView.xaml;View\MessageInfoEditorView.xaml;View\PairSpSkillCombinationParamEditorView.xaml;View\PlayerDoubleEffectParamEditorView.xaml;View\PlayerIconEditorView.xaml;View\PlayerSettingParamEditorView.xaml;View\PrivateCameraEditorView.xaml;View\PRMEditorView.xaml;View\PRMLoadEditorView.xaml;View\SkillCustomizeParamEditorView.xaml;View\SkillEditorView.xaml;View\SkillIndexSettingParamEditorView.xaml;View\SpecialInteractionManagerView.xaml;View\SpSkillCustomizeParamEditorView.xaml;View\SpTypeSupportParamEditorView.xaml;View\StageInfoEditorView.xaml;View\SupportActionParamEditorView.xaml;View\SupportSkillRecoverySpeedParamEditorView.xaml;View\TitleView.xaml;
 
-True
+False
 

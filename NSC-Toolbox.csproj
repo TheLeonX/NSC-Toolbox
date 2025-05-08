@@ -9,10 +9,18 @@
     <PlatformTarget>x86</PlatformTarget>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>white_TB.ico</ApplicationIcon>
-    <AssemblyVersion>1.6.4.1</AssemblyVersion>
-    <FileVersion>1.6.4.1</FileVersion>
+    <AssemblyVersion>1.6.5.0</AssemblyVersion>
+    <FileVersion>1.6.5.0</FileVersion>
     <Authors>TheLeonX</Authors>
     <Version>1.60</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
   </PropertyGroup>
 
   <ItemGroup>

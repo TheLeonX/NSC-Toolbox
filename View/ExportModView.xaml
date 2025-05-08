@@ -278,7 +278,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="5"/>
-                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -329,6 +329,8 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
@@ -356,7 +358,11 @@
                                 <Button Grid.Row="2" Grid.Column="0" Command="{Binding SelectModIconCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page4_selectModIcon}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
 
                             </Grid>
-                            <Button IsEnabled="{Binding IsModReady}" Grid.Row="17" Grid.Column="0" Command="{Binding CompileModCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_pageFinish_compile}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                            <CheckBox Grid.Row="17"  VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding EncryptFiles_field}">
+                                <TextBlock Text="{StaticResource m_option012}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="14"/>
+                            </CheckBox>
+
+                            <Button IsEnabled="{Binding IsModReady}" Grid.Row="19" Grid.Column="0" Command="{Binding CompileModCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_pageFinish_compile}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
 
                         </Grid>
                         <Grid Visibility="{Binding PageModType_tuj_visibility}">
@@ -440,6 +446,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -466,9 +473,13 @@
                             <TextBox Grid.Row="0" MaxHeight="30" Grid.Column="0" Text="{Binding ModIconPath_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Top" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
                             <Button Grid.Row="2" Grid.Column="0" Command="{Binding SelectModIconCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page4_selectModIcon}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                         </Grid>
-                        <Button IsEnabled="{Binding IsModReady}"  Grid.Row="17" Grid.Column="0" Command="{Binding CompileModCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_pageFinish_compile}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                        <CheckBox Grid.Row="17"  VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding EncryptFiles_field}">
+                            <TextBlock Text="{StaticResource m_option012}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="14"/>
+                        </CheckBox>
+                        <Button IsEnabled="{Binding IsModReady}"  Grid.Row="19" Grid.Column="0" Command="{Binding CompileModCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_pageFinish_compile}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
 
                     </Grid>
+                    
                 </xctk:WizardPage>
                 <xctk:WizardPage x:Name="PageFinish"
                                         Foreground="White"

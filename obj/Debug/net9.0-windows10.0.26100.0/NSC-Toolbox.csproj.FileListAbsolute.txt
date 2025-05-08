@@ -35,7 +35,6 @@ C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.2610
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.deps.json
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.runtimeconfig.json
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.dll
-C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.pdb
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\DynamicData.dll
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\Xceed.Wpf.AvalonDock.NET5.dll
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\Xceed.Wpf.AvalonDock.Themes.Aero.NET5.dll
@@ -294,11 +293,9 @@ C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.2610
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.AssemblyInfoInputs.cache
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.AssemblyInfo.cs
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.csproj.CoreCompileInputs.cache
-C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.sourcelink.json
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\NSC-Tool.8369BC5B.Up2Date
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.dll
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\refint\NSC-Toolbox.dll
-C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.pdb
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\NSC-Toolbox.genruntimeconfig.cache
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\obj\Debug\net9.0-windows10.0.26100.0\ref\NSC-Toolbox.dll
 C:\Users\ARDOR\Desktop\C# Projects\NSC-Toolbox\bin\Debug\net9.0-windows10.0.26100.0\ModdingAPIFiles\moddingapi\mods\base_game\bgmManagerParam.xfbin
