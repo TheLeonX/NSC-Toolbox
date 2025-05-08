@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\fileencryptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:fileencryptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\properties\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:properties\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\exportmodviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\exportmodviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\titleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\titleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\nsc-toolbox.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:nsc-toolbox.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\nsc-toolbox.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:nsc-toolbox.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\fileencryptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:fileencryptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\titleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\titleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\resources\\localization\\lang.ru-ru.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -27,20 +35,12 @@
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:resources\\localization\\lang.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\exportmodviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\exportmodviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\exportmodview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:view\\exportmodview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\stageinfoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\stageinfoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\properties\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:properties\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\prmeditorview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -73,11 +73,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "lang.xaml",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Resources\\Localization\\lang.xaml",
               "RelativeDocumentMoniker": "Resources\\Localization\\lang.xaml",
@@ -89,7 +89,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "lang.ru-RU.xaml",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Resources\\Localization\\lang.ru-RU.xaml",
               "RelativeDocumentMoniker": "Resources\\Localization\\lang.ru-RU.xaml",
@@ -109,17 +109,18 @@
               "RelativeToolTip": "ViewModel\\TitleViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T08:14:19.994Z"
+              "WhenOpened": "2025-05-08T08:14:19.994Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "FileEncryptor.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\FileEncryptor.cs",
               "RelativeDocumentMoniker": "FileEncryptor.cs",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\FileEncryptor.cs",
-              "RelativeToolTip": "FileEncryptor.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAAADsAAAAsAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\FileEncryptor.cs*",
+              "RelativeToolTip": "FileEncryptor.cs*",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAADsAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-25T22:19:30.867Z",
               "EditorCaption": ""
@@ -137,7 +138,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "NSC-Toolbox",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeDocumentMoniker": "NSC-Toolbox.csproj",
@@ -149,28 +150,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "NSC-Toolbox.csproj",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeDocumentMoniker": "NSC-Toolbox.csproj",
-              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj*",
-              "RelativeToolTip": "NSC-Toolbox.csproj*",
+              "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
+              "RelativeToolTip": "NSC-Toolbox.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-01T12:25:53.002Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T12:25:53.002Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Properties\\Program.cs",
               "RelativeDocumentMoniker": "Properties\\Program.cs",
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\Properties\\Program.cs",
               "RelativeToolTip": "Properties\\Program.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAswHAAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAswHAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T23:32:55.095Z"
+              "WhenOpened": "2025-03-28T23:32:55.095Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -233,7 +234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "StageInfoViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\StageInfoViewModel.cs",
               "RelativeDocumentMoniker": "ViewModel\\StageInfoViewModel.cs",
@@ -245,19 +246,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "ExportModViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\ExportModViewModel.cs",
               "RelativeDocumentMoniker": "ViewModel\\ExportModViewModel.cs",
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\ExportModViewModel.cs",
               "RelativeToolTip": "ViewModel\\ExportModViewModel.cs",
-              "ViewState": "AgIAADQKAAAAAAAAAAAAAEwKAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAABYKAAAAAAAAAAAAAEwKAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T22:11:46.736Z"
+              "WhenOpened": "2025-03-27T22:11:46.736Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ExportModView.xaml",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\ExportModView.xaml",
               "RelativeDocumentMoniker": "View\\ExportModView.xaml",
