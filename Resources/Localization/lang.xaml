@@ -192,9 +192,14 @@
     <!-- StageEntryTypeList entries -->
     <v:String x:Key="m_stageEntryType_0">0 = Static mesh</v:String>
     <v:String x:Key="m_stageEntryType_1">1 = Animation</v:String>
+    <v:String x:Key="m_stageEntryType_2">2 = Static mesh</v:String>
+    <v:String x:Key="m_stageEntryType_3">3 = Animation</v:String>
     <v:String x:Key="m_stageEntryType_4">4 = Tree Object</v:String>
-    <v:String x:Key="m_stageEntryType_6">6 = Grass/Leaf Object</v:String>
-    <v:String x:Key="m_stageEntryType_7">7 = Breakable Wall</v:String>
+    <v:String x:Key="m_stageEntryType_5">5 = Grass Low Object</v:String>
+    <v:String x:Key="m_stageEntryType_6">6 = Grass High Object</v:String>
+    <v:String x:Key="m_stageEntryType_7">7 = Break Gimmick</v:String>
+    <v:String x:Key="m_stageEntryType_8">8 = Action Gimmick</v:String>
+    <v:String x:Key="m_stageEntryType_9">9 = Contact Gimmick</v:String>
     <v:String x:Key="m_stageEntryType_10">10 = Rigid Body</v:String>
     <v:String x:Key="m_stageEntryType_11">11 = Rigid Body Animation</v:String>
 
@@ -330,6 +335,7 @@
     <v:String x:Key="m_mainWindowTool_029">UJ Special Interaction Manager (specialInteractionManager.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_030">Condition Editor (conditionprm.bin.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_031">Condition Manager Editor (conditionprmManager.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_032">Guard Effect Param Editor (guardEffectParam.xfbin)</v:String>
     <v:String x:Key="m_option001">Stretch Mode</v:String>
     <v:String x:Key="m_option002">Fill</v:String>
     <v:String x:Key="m_option003">Uniform</v:String>
@@ -665,6 +671,9 @@ This issue may be fixed in a future update.
     <v:String x:Key="m_exportMod_page1_shaderInfo">Shaders must be merged like in game files. For more info visit modding help forum.</v:String>
     <v:String x:Key="m_exportMod_page1_shader_select">Select Shader</v:String>
     <v:String x:Key="m_exportMod_page1_shader_delete">Delete Shader</v:String>
+    <v:String x:Key="m_exportMod_page1_game">Select Game</v:String>
+    <v:String x:Key="m_exportMod_page1_game_1">Storm Connections</v:String>
+    <v:String x:Key="m_exportMod_page1_game_2">Storm 4</v:String>
     <v:String x:Key="m_exportMod_page1_datawin32">Mod Folder (data__win32)</v:String>
     <v:String x:Key="m_exportMod_page1_datawin32_select">Select Mod Folder</v:String>
     <v:String x:Key="m_exportMod_page1_datawin32_save">Save Mod Folder</v:String>
@@ -678,9 +687,11 @@ This issue may be fixed in a future update.
     <v:String x:Key="m_exportMod_page3_deleteStageID">Delete Stage</v:String>
     <v:String x:Key="m_exportMod_page3_stagePreviewImageResolution">Stage Preview - Resolution 1728x500</v:String>
     <v:String x:Key="m_exportMod_page3_SelectStagePreview">Select Stage Preview</v:String>
-    <v:String x:Key="m_exportMod_page3_stageIconResolution">Stage Icon - Resolution 184x104</v:String>
+    <v:String x:Key="m_exportMod_page3_stageIconResolution">StormC Icon - Resolution 184x104</v:String>
+    <v:String x:Key="m_exportMod_page3_stageIconResolution2">Storm4 Stage Icon - Resolution 168x76</v:String>
     <v:String x:Key="m_exportMod_page3_SelectStageIcon">Select Stage Icon</v:String>
-    <v:String x:Key="m_exportMod_page3_stageBGM">BGM ID</v:String>
+    <v:String x:Key="m_exportMod_page3_stageBGM">BGM ID Storm C</v:String>
+    <v:String x:Key="m_exportMod_page3_stageBGM_NS4">BGM ID Storm 4</v:String>
     <v:String x:Key="m_exportMod_page3_saveBGM">Save BGM ID for Stage</v:String>
     <v:String x:Key="m_exportMod_page3_StageMessageID">Stage Name</v:String>
     <v:String x:Key="m_exportMod_page3_saveStageMessageID">Save Stage Name</v:String>
@@ -712,6 +723,8 @@ This issue may be fixed in a future update.
     <v:String x:Key="m_exportMod_pageFinish_desc">Now you have to compile your mod and then you can close this window!</v:String>
     <v:String x:Key="m_exportMod_pageFinish_compile">Compile Mod</v:String>
 
+    <v:String x:Key="m_exportMod_page4_Screenshots">Screenshots</v:String>
+    <v:String x:Key="m_exportMod_page4_selectScreenshots">Select Screenshots</v:String>
     
 
     <!--credits-->
@@ -883,9 +896,13 @@ This issue may be fixed in a future update.
     <!--SpTypeSupportParam Editor-->
     <v:String x:Key="m_spTypeSupportParamEditor">Character Action Editor</v:String>
     <v:String x:Key="m_spTypeSupportParamState">Character State</v:String>
-    <v:String x:Key="m_spTypeSupportParamState_1">Normal Mode</v:String>
-    <v:String x:Key="m_spTypeSupportParamState_2">Awakening Mode</v:String>
-    <v:String x:Key="m_spTypeSupportParamState_3">All Modes</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_1">Base Mode</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_2">True Awakening Mode</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_3">Base and True Awakening</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_4">Instant Awakening (evo only)</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_5">Base and Instant Awakening (evo only)</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_6">Instant and True Awakening (evo only)</v:String>
+    <v:String x:Key="m_spTypeSupportParamState_7">All Modes (evo only)</v:String>
     <v:String x:Key="m_spTypeSupportParamMode">Action Mode</v:String>
     <v:String x:Key="m_spTypeSupportParamMode_1">Left and Right Arrows</v:String>
     <v:String x:Key="m_spTypeSupportParamMode_2">All Arrows</v:String>
@@ -1047,7 +1064,20 @@ This issue may be fixed in a future update.
     <v:String x:Key="m_MessageID">Message ID</v:String>
     <v:String x:Key="m_Test">Text</v:String>
     <v:String x:Key="m_saveTextAndCRC32">Save Text and CRC32 Code</v:String>
-
+     
+    <v:String x:Key="m_ACBS4File_0">v_etc</v:String>
+    <v:String x:Key="m_ACBS4File_1">v_win</v:String>
+    <v:String x:Key="m_ACBS4File_2">v_spl</v:String>
+    <v:String x:Key="m_ACBS4File_3">v_main00</v:String>
+    <v:String x:Key="m_ACBS4File_4">v_main01</v:String>
+    <v:String x:Key="m_ACBS4File_5">v_main02</v:String>
+    <v:String x:Key="m_ACBS4File_6">v_main03</v:String>
+    <v:String x:Key="m_ACBS4File_7">v_main04</v:String>
+    <v:String x:Key="m_ACBS4File_8">v_main04</v:String>
+    <v:String x:Key="m_ACBS4File_9">v_oneWord</v:String>
+    <v:String x:Key="m_ACBS4File_10">v_ogiFinish</v:String>
+    <v:String x:Key="m_ACBS4File_11">v_matching</v:String>
+    <v:String x:Key="m_ACBS4File_12">v_main06</v:String>
 
     <!--CharacodeEditor Window-->
     <v:String x:Key="m_CharacodeEditor">Character ID Manager</v:String>
@@ -1457,4 +1487,51 @@ This issue may be fixed in a future update.
     <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_X">P2 LIGHT CUSTOMIZATION - X</v:String>
     <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_Y">P2 LIGHT CUSTOMIZATION - Y</v:String>
     <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_Z">P2 LIGHT CUSTOMIZATION - Z</v:String>
+
+
+    <v:String x:Key="m_unk">???</v:String>
+    <v:String x:Key="m_nus3bankEditor">NUS3BANK Editor</v:String>
+    <v:String x:Key="m_nus3bankEditor_tools">Tools</v:String>
+    <v:String x:Key="m_nus3bankEditor_extract_raw">Extract All (raw)</v:String>
+    <v:String x:Key="m_nus3bankEditor_extract_wav">Extract All (wav)</v:String>
+    <v:String x:Key="m_nus3bankEditor_extract_raw2">Extract All With Index (raw)</v:String>
+    <v:String x:Key="m_nus3bankEditor_extract_wav2">Extract All With Index (wav)</v:String>
+    <v:String x:Key="m_nus3bankEditor_import_raw">Batch Import (Raw)</v:String>
+    <v:String x:Key="m_nus3bankEditor_import_bnsf">Batch Import (BNSF)</v:String>
+    <v:String x:Key="m_nus3bankEditor_fileid">File ID</v:String>
+    <v:String x:Key="m_nus3bankEditor_filename">File Name</v:String>
+    <v:String x:Key="m_nus3bankEditor_addSoundData">Add Raw Sound Data</v:String>
+    <v:String x:Key="m_nus3bankEditor_replaceSoundData">Add BNSF Sound Data</v:String>
+    <v:String x:Key="m_nus3bankEditor_deleteSoundData">Delete Sound Data</v:String>
+
+
+    <v:String x:Key="m_nus3bankEditor_soundType">Entry Type</v:String>
+    <v:String x:Key="m_nus3bankEditor_soundType_1">Empty Slot</v:String>
+    <v:String x:Key="m_nus3bankEditor_soundType_2">Randomizer</v:String>
+    <v:String x:Key="m_nus3bankEditor_soundType_3">Regular Slot</v:String>
+    <v:String x:Key="m_nus3bankEditor_error_1">Wrong nuccChunkNub Format. Chunk must contain NUS3BANK.</v:String>
+    <v:String x:Key="m_nus3bankEditor_group_name">Name</v:String>
+    <v:String x:Key="m_nus3bankEditor_enable">Enable</v:String>
+    <v:String x:Key="m_nus3bankEditor_enable_sample_rate">Enable Sample Rate</v:String>
+    <v:String x:Key="m_nus3bankEditor_enable_total_samples_1">Enable Total Samples 1</v:String>
+    <v:String x:Key="m_nus3bankEditor_enable_total_samples_2">Enable Total Samples 2</v:String>
+    <v:String x:Key="m_nus3bankEditor_enable_channel_type">Enable Channel Type</v:String>
+    <v:String x:Key="m_nus3bankEditor_warning">Open NUS3BANK Xfbin file first!</v:String>
+
+
+    <v:String x:Key="m_nus3bankEditor_copy">Copy Properties</v:String>
+    <v:String x:Key="m_nus3bankEditor_paste">Paste Properties</v:String>
+     
+     
+    <v:String x:Key="m_guardEffectParamEditor">Guard Effect Param Editor</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_characodeID">Characode ID</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_state">State</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_state_1">Normal State</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_state_2">Awakening State</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_state_3">All States</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_effectPath">Effect Path</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_startEffect">Start Effect</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_loopEffect">Loop Effect</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_endEffect">End Effect</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_attachBone">Attach to Bone</v:String>
 </ResourceDictionary>

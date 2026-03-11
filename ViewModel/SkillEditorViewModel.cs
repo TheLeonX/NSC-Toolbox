@@ -2456,9 +2456,10 @@ namespace NSC_Toolbox.ViewModel {
                                     EffectElement.Add(new XAttribute("shotParam1", SkillList[x].ActionList[i].EventList[s].EffectList[e].ShotParam1));
                                 if (SkillList[x].ActionList[i].EventList[s].EffectList[e].ShotParam2 != 0)
                                     EffectElement.Add(new XAttribute("shotParam2", SkillList[x].ActionList[i].EventList[s].EffectList[e].ShotParam2));
-                                if (SkillList[x].ActionList[i].EventList[s].EffectList[e].Coord != "" && (SkillList[x].ActionList[i].EventList[s].EffectList[e].Coord) is not null)
-                                    EffectElement.Add(new XAttribute("coord", SkillList[x].ActionList[i].EventList[s].EffectList[e].Coord ?? ""));
                             }
+
+                            if (SkillList[x].ActionList[i].EventList[s].EffectList[e].Coord != "" && (SkillList[x].ActionList[i].EventList[s].EffectList[e].Coord) is not null)
+                                EffectElement.Add(new XAttribute("coord", SkillList[x].ActionList[i].EventList[s].EffectList[e].Coord ?? ""));
                             if (SkillList[x].ActionList[i].EventList[s].EffectList[e].TargetDir)
                                 EffectElement.Add(new XAttribute("targetDir", SkillList[x].ActionList[i].EventList[s].EffectList[e].TargetDir));
                             if (SkillList[x].ActionList[i].EventList[s].EffectList[e].PlaneDir)

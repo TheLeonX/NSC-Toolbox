@@ -105,14 +105,31 @@ namespace NSC_Toolbox.Properties
                     !newPath.Contains("situationVoice") &&
                     !newPath.Contains("playerDecalSetting") &&
                     !newPath.Contains("pairSpSkillCombinationParam") &&
+                    !newPath.Contains("btlcmn") &&
                     !newPath.Contains("1cmnbod1") &&
                     !newPath.Contains("1cmnprm")
                     )
                     File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
             }
         }
-        
 
+        public static string[] langS4List =
+        {
+            "arae",
+            "chi",
+            "eng",
+            "esmx",
+            "fre",
+            "ger",
+            "ita",
+            "kokr",
+            "pol",
+            "por",
+            "rus",
+            "spa",
+
+
+        };
         public static string[] langList =
         {
             "arae",
@@ -200,14 +217,14 @@ namespace NSC_Toolbox.Properties
         {
             (string)Application.Current.Resources["m_stageEntryType_0"],
             (string)Application.Current.Resources["m_stageEntryType_1"],
-            "2 = ???",
-            "3 = ???",
+            (string)Application.Current.Resources["m_stageEntryType_2"],
+            (string)Application.Current.Resources["m_stageEntryType_3"],
             (string)Application.Current.Resources["m_stageEntryType_4"],
-            "5 = ???",
+            (string)Application.Current.Resources["m_stageEntryType_5"],
             (string)Application.Current.Resources["m_stageEntryType_6"],
             (string)Application.Current.Resources["m_stageEntryType_7"],
-            "8 = ???",
-            "9 = ???",
+            (string)Application.Current.Resources["m_stageEntryType_8"],
+            (string)Application.Current.Resources["m_stageEntryType_9"],
             (string)Application.Current.Resources["m_stageEntryType_10"],
             (string)Application.Current.Resources["m_stageEntryType_11"]
 
@@ -2674,6 +2691,8 @@ namespace NSC_Toolbox.Properties
             "ME_THROUGH_NORMAL_ATTACK_OFF",
             "ME_KAWARIMI_DISTANCE_SET",
             "ME_KAWARIMI_DISTANCE_RESET",
+            "", //A7 used for 1hnt and 1nej
+            "", //A8 used for 1hnt and 1nej
 
         };
         public static string[] ME_HACK_VERSUS_LIST =

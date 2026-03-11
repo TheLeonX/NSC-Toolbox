@@ -50,8 +50,11 @@
                     <xctk:WizardPage.ExteriorPanelBackground>
                         <ImageBrush ImageSource="/Resources/Styles/UI/background/wizard_background_1.png" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
                     </xctk:WizardPage.ExteriorPanelBackground>
-                    <Grid>
+                    <Grid   >
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="5"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="35"/>
                             <RowDefinition Height="5"/>
@@ -62,7 +65,9 @@
                             <ColumnDefinition Width="5"/>
                             <ColumnDefinition Width="1.4*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Row="1" Grid.Column="3" >
+                        
+                        
+                        <Grid Grid.Row="4" Grid.Column="3" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="5"/>
@@ -72,9 +77,30 @@
                             <Button Command="{Binding SelectRootFolderCommand}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_addTUJ_page1_002}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                             <Button Command="{Binding RefreshRootFolderCommand}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_addCostume_page2_011}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                         </Grid>
-                        <Label Grid.Row="0"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_addTUJ_page1_001}"  FontSize="16"/>
-                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding RootFolderPath_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
-                        <TextBlock Grid.Row="3"  Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="Red" Text="{Binding MissingFiles_field}" TextAlignment="Left" FontSize="14"/>
+                        <Label Grid.Row="0"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page1_game}"  FontSize="16"/>
+                        <ComboBox
+Grid.Row="1"
+Grid.Column="0"
+                            Grid.ColumnSpan="3"
+SelectedIndex="{Binding SelectedGameIndex}"
+HorizontalAlignment="Stretch"
+HorizontalContentAlignment="Left"
+Foreground="{DynamicResource Toolbox_button_text_color_1}"
+VerticalAlignment="Stretch"
+FontFamily="{StaticResource NarutoFont}"
+Background="{DynamicResource Toolbox_button_background_color_1}"
+BorderBrush="{DynamicResource Toolbox_button_border_color_1}"
+BorderThickness="1">
+                            <ComboBoxItem>
+                                <TextBlock Text="{DynamicResource m_exportMod_page1_game_1}" TextAlignment="Left" />
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock Text="{DynamicResource m_exportMod_page1_game_2}" TextAlignment="Left" />
+                            </ComboBoxItem>
+                        </ComboBox>
+                        <Label Grid.Row="3"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_addTUJ_page1_001}"  FontSize="16"/>
+                        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding RootFolderPath_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <TextBlock Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Foreground="Red" Text="{Binding MissingFiles_field}" TextAlignment="Left" FontSize="14"/>
 
                     </Grid>
                 </xctk:WizardPage>

@@ -1762,315 +1762,260 @@ namespace NSC_Toolbox.ViewModel {
                 OnPropertyChanged("ConvertedFile");
             }
         }
-
-        public void ConvertToFile() {
+        
+        public void ConvertToFile()
+        {
             LoadingStatePlay = Visibility.Visible;
-            // Build the header
-            int totalLength4 = 0;
 
-            byte[] fileBytes36 = new byte[127] { 0x4E, 0x55, 0x43, 0x43, 0x00, 0x00, 0x00, 0x79, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xBC, 0x00, 0x00, 0x00, 0x03, 0x00, 0x79, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x3B, 0x00, 0x00, 0x01, 0x49, 0x00, 0x00, 0x4C, 0xE3, 0x00, 0x00, 0x01, 0x4B, 0x00, 0x00, 0x0F, 0x6F, 0x00, 0x00, 0x01, 0x4B, 0x00, 0x00, 0x0F, 0x84, 0x00, 0x00, 0x05, 0x20, 0x00, 0x00, 0x00, 0x00, 0x6E, 0x75, 0x63, 0x63, 0x43, 0x68, 0x75, 0x6E, 0x6B, 0x4E, 0x75, 0x6C, 0x6C, 0x00, 0x6E, 0x75, 0x63, 0x63, 0x43, 0x68, 0x75, 0x6E, 0x6B, 0x42, 0x69, 0x6E, 0x61, 0x72, 0x79, 0x00, 0x6E, 0x75, 0x63, 0x63, 0x43, 0x68, 0x75, 0x6E, 0x6B, 0x50, 0x61, 0x67, 0x65, 0x00, 0x6E, 0x75, 0x63, 0x63, 0x43, 0x68, 0x75, 0x6E, 0x6B, 0x49, 0x6E, 0x64, 0x65, 0x78, 0x00 };
-            int PtrNucc = fileBytes36.Length;
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-            if (FileBinName != "")
-                fileBytes36 = BinaryReader.b_AddString(fileBytes36, "bin_le/x64/" + FileBinName + ".bin");
-            else
-                fileBytes36 = BinaryReader.b_AddString(fileBytes36, "bin_le/x64/stageInfo.bin");
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+            string binName = !string.IsNullOrEmpty(FileBinName) ? FileBinName : "stageInfo";
+            string binPath = "bin_le/x64/" + binName + ".bin";
 
-            int PtrPath = fileBytes36.Length;
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-            if (FileBinName != "" && FileBinName is not null)
-                fileBytes36 = BinaryReader.b_AddString(fileBytes36, FileBinName);
-            else
-                fileBytes36 = BinaryReader.b_AddString(fileBytes36, "stageInfo");
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-            fileBytes36 = BinaryReader.b_AddString(fileBytes36, "Page0");
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-            fileBytes36 = BinaryReader.b_AddString(fileBytes36, "index");
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+            var w = new FastBytes(8192);
 
-            int PtrName = fileBytes36.Length;
-            totalLength4 = PtrName;
-            int AddedBytes = 0;
+            // 127-байтный заголовок — без изменений
+            w.Write(new byte[127] {
+        0x4E,0x55,0x43,0x43,0x00,0x00,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+        0x00,0x00,0x80,0xBC,0x00,0x00,0x00,0x03,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x04,
+        0x00,0x00,0x00,0x3B,0x00,0x00,0x01,0x49,0x00,0x00,0x4C,0xE3,0x00,0x00,0x01,0x4B,
+        0x00,0x00,0x0F,0x6F,0x00,0x00,0x01,0x4B,0x00,0x00,0x0F,0x84,0x00,0x00,0x05,0x20,
+        0x00,0x00,0x00,0x00,0x6E,0x75,0x63,0x63,0x43,0x68,0x75,0x6E,0x6B,0x4E,0x75,0x6C,
+        0x6C,0x00,0x6E,0x75,0x63,0x63,0x43,0x68,0x75,0x6E,0x6B,0x42,0x69,0x6E,0x61,0x72,
+        0x79,0x00,0x6E,0x75,0x63,0x63,0x43,0x68,0x75,0x6E,0x6B,0x50,0x61,0x67,0x65,0x00,
+        0x6E,0x75,0x63,0x63,0x43,0x68,0x75,0x6E,0x6B,0x49,0x6E,0x64,0x65,0x78,0x00
+    });
 
-            while (fileBytes36.Length % 4 != 0) {
-                AddedBytes++;
-                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-            }
+            w.WriteByte(0);
+            w.WriteCStringUtf8(binPath);
 
-            // Build bin1
-            totalLength4 = fileBytes36.Length;
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[48]
-            {
-                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x03
-            });
+            int PtrPath = w.Length;
+            w.WriteByte(0);
+            w.WriteCStringUtf8(binName);
+            w.WriteCStringUtf8("Page0");
+            w.WriteCStringUtf8("index");
 
-            int PtrSection = fileBytes36.Length;
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[16]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                2,
-                0,
-                0,
-                0,
-                3
-            });
+            int PtrName = w.Length;
+            int beforeAlign = w.Length;
+            w.Align4();
+            int AddedBytes = w.Length - beforeAlign;
 
-            totalLength4 = fileBytes36.Length;
+            // bin1 + section
+            w.Write(new byte[48]{
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,2, 0,0,0,0,
+        0,0,0,2, 0,0,0,3, 0,0,0,0, 0,0,0,3
+    });
+            int PtrSection = w.Length;
+            w.Write(new byte[16] { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3 });
 
+            int totalLength4 = w.Length;
             int PathLength = PtrPath - 127;
             int NameLength = PtrName - PtrPath;
             int Section1Length = PtrSection - PtrName - AddedBytes;
             int FullLength = totalLength4 - 68 + 40;
-            int ReplaceIndex8 = 16;
-            byte[] buffer8 = BitConverter.GetBytes(FullLength);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 36;
-            buffer8 = BitConverter.GetBytes(2);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 40;
-            buffer8 = BitConverter.GetBytes(PathLength);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 44;
-            buffer8 = BitConverter.GetBytes(4);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 48;
-            buffer8 = BitConverter.GetBytes(NameLength);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 52;
-            buffer8 = BitConverter.GetBytes(4);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 56;
-            buffer8 = BitConverter.GetBytes(Section1Length);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
-            ReplaceIndex8 = 60;
-            buffer8 = BitConverter.GetBytes(4);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, buffer8, ReplaceIndex8, 1);
 
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[40]
-                {
-                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x79,0x00,0x00,0x00,0x00,0x00,0x00
-                });
+            // big-endian патчи
+            w.WriteBE32At(16, FullLength);
+            w.WriteBE32At(36, 2);
+            w.WriteBE32At(40, PathLength);
+            w.WriteBE32At(44, 4);
+            w.WriteBE32At(48, NameLength);
+            w.WriteBE32At(52, 4);
+            w.WriteBE32At(56, Section1Length);
+            w.WriteBE32At(60, 4);
 
-            int size1_index = fileBytes36.Length - 0x10;
-            int size2_index = fileBytes36.Length - 0x4;
-            int count_index = fileBytes36.Length + 0x4;
+            w.Write(new byte[40]{
+        0,0,0,0, 0,0,0,0, 0,0x79,0,0, 0,0,0,0,
+        0,0,0,0, 0,0x79,0,0, 0,0,0,0, 0,0,0,1,
+        0,0x79,0,0, 0,0,0,0
+    });
 
+            int size1_index = w.Length - 0x10;
+            int size2_index = w.Length - 0x04;
+            int count_index = w.Length + 0x04;
 
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[0x10] { 0xF2, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });
+            w.Write(new byte[0x10] { 0xF2, 0x03, 0, 0, 0, 0, 0, 0, 0x08, 0, 0, 0, 0, 0, 0, 0 });
 
-            int startPtr = fileBytes36.Length;
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[StageInfoList.Count * 0x130]);
-            List<int> FilePathEntry_pointer = new List<int>();
-            List<int> ObjectEntry_pointer = new List<int>();
-            List<int> StageName_pointer = new List<int>();
-            List<int> StageMessageID_pointer = new List<int>();
-            List<int> StageFilter_pointer = new List<int>();
+            int startPtr = w.Length;
+            int stageCount = StageInfoList.Count;
+            w.WriteZeros(stageCount * 0x130);
 
-            for (int x = 0; x < StageInfoList.Count; x++)
+            var filePathBase = new int[stageCount];
+            var objectBase = new int[stageCount];
+
+            for (int x = 0; x < stageCount; x++)
             {
-                // StageName
-                StageName_pointer.Add(fileBytes36.Length);
-                fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].StageName);
-                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+                var st = StageInfoList[x];
 
-                // StageMessageID
-                StageMessageID_pointer.Add(fileBytes36.Length);
-                fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].StageMessageID);
-                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+                int stageNamePos = w.Length; w.WriteCStringUtf8(st.StageName);
+                int stageMsgPos = w.Length; w.WriteCStringUtf8(st.StageMessageID);
+                int stageFiltPos = w.Length; w.WriteCStringUtf8(st.StageFilter);
 
-                // StageFilter
-                StageFilter_pointer.Add(fileBytes36.Length);
-                fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].StageFilter);
-                fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+                filePathBase[x] = w.Length; w.WriteZeros(st.FilePaths.Count * 0x08);
+                objectBase[x] = w.Length; w.WriteZeros(st.Objects.Count * 0xB0);
 
-                // FilePaths
-                FilePathEntry_pointer.Add(fileBytes36.Length);
-                for (int i = 0; i < StageInfoList[x].FilePaths.Count; i++)
+                int entry = startPtr + x * 0x130;
+
+                // pointers
+                w.WriteLE32At(entry + 0x00, stageNamePos - startPtr - (0x130 * x));
+                w.WriteLE32At(entry + 0x08, stageMsgPos - startPtr - (0x130 * x) - 0x08);
+                w.WriteLE32At(entry + 0x10, stageFiltPos - startPtr - (0x130 * x) - 0x10);
+
+                w.WriteLE32At(entry + 0x18, st.FilePaths.Count);
+                w.WriteLE32At(entry + 0x20, filePathBase[x] - startPtr - (0x130 * x) - 0x20);
+
+                w.WriteLE32At(entry + 0x28, st.Objects.Count);
+                w.WriteLE32At(entry + 0x30, objectBase[x] - startPtr - (0x130 * x) - 0x30);
+
+                // Weather (int)
+                w.WriteLE32At(entry + 0x38, st.Weather);
+
+                // Colors (ARGB bytes)
+                w.WriteAt(entry + 0x3C, new byte[] { st.PlayerAmbientColor.A, st.PlayerAmbientColor.R, st.PlayerAmbientColor.G, st.PlayerAmbientColor.B });
+                w.WriteAt(entry + 0x40, new byte[] { st.RayCutOffShadeColor.A, st.RayCutOffShadeColor.R, st.RayCutOffShadeColor.G, st.RayCutOffShadeColor.B });
+                w.WriteAt(entry + 0x44, new byte[] { st.EffectAmbientColor.A, st.EffectAmbientColor.R, st.EffectAmbientColor.G, st.EffectAmbientColor.B });
+                w.WriteAt(entry + 0x48, new byte[] { st.UnknownColor.A, st.UnknownColor.R, st.UnknownColor.G, st.UnknownColor.B });
+
+                // bool (1 byte) + floats
+                w.WriteBool8At(entry + 0x4C, st.EnableBrightnessAdjustment);
+                w.WriteF32At(entry + 0x50, st.Brightness);
+                w.WriteF32At(entry + 0x54, st.Contrast);
+                w.WriteBool8At(entry + 0x58, st.EnableLensFlare);
+                w.WriteLE32At(entry + 0x5C, st.LensFlare);
+                w.WriteF32At(entry + 0x60, st.LensFlarePositionX);
+                w.WriteF32At(entry + 0x64, st.LensFlarePositionY);
+                w.WriteF32At(entry + 0x68, st.LensFlarePositionZ);
+                w.WriteF32At(entry + 0x6C, st.LensFlareAlpha);
+
+                w.WriteAt(entry + 0x70, new byte[] { st.ParallelAmbientColor.A, st.ParallelAmbientColor.R, st.ParallelAmbientColor.G, st.ParallelAmbientColor.B });
+                w.WriteAt(entry + 0x74, new byte[] { st.RayCutOffNormalColor.A, st.RayCutOffNormalColor.R, st.RayCutOffNormalColor.G, st.RayCutOffNormalColor.B });
+
+                w.WriteF32At(entry + 0x78, st.LightPointDirectionX);
+                w.WriteF32At(entry + 0x7C, st.LightPointDirectionY);
+                w.WriteF32At(entry + 0x80, st.LightPointDirectionZ);
+
+                w.WriteBool8At(entry + 0x84, st.EnableShadowColor);
+                w.WriteAt(entry + 0x88, new byte[] { st.ShadowColor.A, st.ShadowColor.R, st.ShadowColor.G, st.ShadowColor.B });
+
+                w.WriteBool8At(entry + 0x8C, st.EnableFog);
+                w.WriteF32At(entry + 0x90, st.FogStartDistance);
+                w.WriteF32At(entry + 0x94, st.FogEndDistance);
+                w.WriteF32At(entry + 0x98, st.FogStrength);
+                w.WriteAt(entry + 0x9C, new byte[] { st.FogColor.A, st.FogColor.R, st.FogColor.G, st.FogColor.B });
+
+                w.WriteBool8At(entry + 0xA0, st.EnableMonoColorFilter);
+                w.WriteF32At(entry + 0xA4, st.MonoBlueTone);
+                w.WriteF32At(entry + 0xA8, st.MonoRedTone);
+                w.WriteF32At(entry + 0xAC, st.MonoAlpha);
+
+                w.WriteBool8At(entry + 0xB0, st.EnableGlareEffect);
+                w.WriteF32At(entry + 0xB4, st.GlareLuminanceThreshold);
+                w.WriteF32At(entry + 0xB8, st.GlareSubtracted);
+                w.WriteF32At(entry + 0xBC, st.GlareCompositionStrength);
+
+                w.WriteBool8At(entry + 0xC4, st.EnableSoftFocus);
+                w.WriteF32At(entry + 0xC8, st.SoftFocusStrength);
+
+                w.WriteBool8At(entry + 0xCC, st.EnableDOFBlur);
+                w.WriteF32At(entry + 0xD0, st.DOFFocalLength);
+                w.WriteF32At(entry + 0xD4, st.DOFShortDistance);
+                w.WriteF32At(entry + 0xD8, st.DOFLongDistance);
+                w.WriteF32At(entry + 0xDC, st.DOFAlpha);
+
+                w.WriteBool8At(entry + 0xE0, st.EnableDOFEdgeBlur);
+                w.WriteBool8At(entry + 0xE4, st.EnableSunShaft);
+                w.WriteF32At(entry + 0xE8, st.SunShaftStartDistance);
+                w.WriteF32At(entry + 0xEC, st.SunShaftEndDistance);
+                w.WriteF32At(entry + 0xF0, st.SunShaftAlpha);
+                w.WriteAt(entry + 0xF4, new byte[] { st.SunShaftColor.A, st.SunShaftColor.R, st.SunShaftColor.G, st.SunShaftColor.B });
+
+                w.WriteF32At(entry + 0xF8, st.SunShaftDirectionX);
+                w.WriteF32At(entry + 0xFC, st.SunShaftDirectionY);
+                w.WriteF32At(entry + 0x100, st.SunShaftDirectionZ);
+                w.WriteF32At(entry + 0x104, st.SunShaftBlurWidth);
+                w.WriteF32At(entry + 0x108, st.SunShaftAttenuationCoefficient);
+                w.WriteAt(entry + 0x10C, new byte[] { st.RockColor.A, st.RockColor.R, st.RockColor.G, st.RockColor.B });
+
+                // FilePaths: pointer + string
+                for (int i = 0; i < st.FilePaths.Count; i++)
                 {
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[0x8]);
+                    int rel = w.Length - filePathBase[x] - (i * 0x08);
+                    w.WriteLE32At(filePathBase[x] + (i * 0x08), rel);
+                    w.WriteCStringUtf8(st.FilePaths[i].FilePath);
                 }
 
                 // Objects
-                ObjectEntry_pointer.Add(fileBytes36.Length);
-                for (int i = 0; i < StageInfoList[x].Objects.Count; i++)
+                for (int i = 0; i < st.Objects.Count; i++)
                 {
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[0xB0]);
-                }
+                    var o = st.Objects[i];
+                    int basePtr = objectBase[x] + (i * 0xB0);
 
-                byte[] stageEntry = new byte[0x130];
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageName_pointer[x] - startPtr - (0x130 * x)), 0);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageMessageID_pointer[x] - startPtr - (0x130 * x) - 0x08), 0x08);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageFilter_pointer[x] - startPtr - (0x130 * x) - 0x10), 0x10);
+                    w.WriteLE32At(basePtr + 0x00, w.Length - objectBase[x] - (i * 0xB0));
+                    w.WriteCStringUtf8(o.ObjectFilePath);
 
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].FilePaths.Count), 0x18);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(FilePathEntry_pointer[x] - startPtr - (0x130 * x) - 0x20), 0x20);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].Objects.Count), 0x28);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(ObjectEntry_pointer[x] - startPtr - (0x130 * x) - 0x30), 0x30);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].Weather), 0x38);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, new byte[4] { StageInfoList[x].PlayerAmbientColor.A, StageInfoList[x].PlayerAmbientColor.R, StageInfoList[x].PlayerAmbientColor.G, StageInfoList[x].PlayerAmbientColor.B }, 0x3C);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, new byte[4] { StageInfoList[x].RayCutOffShadeColor.A, StageInfoList[x].RayCutOffShadeColor.R, StageInfoList[x].RayCutOffShadeColor.G, StageInfoList[x].RayCutOffShadeColor.B }, 0x40);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, new byte[4] { StageInfoList[x].EffectAmbientColor.A, StageInfoList[x].EffectAmbientColor.R, StageInfoList[x].EffectAmbientColor.G, StageInfoList[x].EffectAmbientColor.B }, 0x44);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, new byte[4] { StageInfoList[x].UnknownColor.A, StageInfoList[x].UnknownColor.R, StageInfoList[x].UnknownColor.G, StageInfoList[x].UnknownColor.B }, 0x48);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].EnableBrightnessAdjustment), 0x4C);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].Brightness), 0x50);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].Contrast), 0x54);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].EnableLensFlare), 0x58);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].LensFlare), 0x5C);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].LensFlarePositionX), 0x60);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].LensFlarePositionY), 0x64);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].LensFlarePositionZ), 0x68);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].LensFlareAlpha), 0x6C);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, new byte[4] { StageInfoList[x].ParallelAmbientColor.A, StageInfoList[x].ParallelAmbientColor.R, StageInfoList[x].ParallelAmbientColor.G, StageInfoList[x].ParallelAmbientColor.B }, 0x70);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, new byte[4] { StageInfoList[x].RayCutOffNormalColor.A, StageInfoList[x].RayCutOffNormalColor.R, StageInfoList[x].RayCutOffNormalColor.G, StageInfoList[x].RayCutOffNormalColor.B }, 0x74);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].LightPointDirectionX), 0x78);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].LightPointDirectionY), 0x7C);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].LightPointDirectionZ), 0x80);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].EnableShadowColor), 0x84);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, new byte[4] { StageInfoList[x].ShadowColor.A, StageInfoList[x].ShadowColor.R, StageInfoList[x].ShadowColor.G, StageInfoList[x].ShadowColor.B }, 0x88);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].EnableFog), 0x8C);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].FogStartDistance), 0x90);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].FogEndDistance), 0x94);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].FogStrength), 0x98);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, new byte[4] { StageInfoList[x].FogColor.A, StageInfoList[x].FogColor.R, StageInfoList[x].FogColor.G, StageInfoList[x].FogColor.B }, 0x9C);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].EnableMonoColorFilter), 0xA0);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].MonoBlueTone), 0xA4);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].MonoRedTone), 0xA8);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].MonoAlpha), 0xAC);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].EnableGlareEffect), 0xB0);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].GlareLuminanceThreshold), 0xB4);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].GlareSubtracted), 0xB8);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].GlareCompositionStrength), 0xBC);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].EnableSoftFocus), 0xC4);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].SoftFocusStrength), 0xC8);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].EnableDOFBlur), 0xCC);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].DOFFocalLength), 0xD0);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].DOFShortDistance), 0xD4);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].DOFLongDistance), 0xD8);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].DOFAlpha), 0xDC);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].EnableDOFEdgeBlur), 0xE0);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].EnableSunShaft), 0xE4);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].SunShaftStartDistance), 0xE8);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].SunShaftEndDistance), 0xEC);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].SunShaftAlpha), 0xF0);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, new byte[4] { StageInfoList[x].SunShaftColor.A, StageInfoList[x].SunShaftColor.R, StageInfoList[x].SunShaftColor.G, StageInfoList[x].SunShaftColor.B }, 0xF4);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].SunShaftDirectionX), 0xF8);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].SunShaftDirectionY), 0xFC);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].SunShaftDirectionZ), 0x100);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].SunShaftBlurWidth), 0x104);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, BitConverter.GetBytes(StageInfoList[x].SunShaftAttenuationCoefficient), 0x108);
-                stageEntry = BinaryReader.b_ReplaceBytes(stageEntry, new byte[4] { StageInfoList[x].RockColor.A, StageInfoList[x].RockColor.R, StageInfoList[x].RockColor.G, StageInfoList[x].RockColor.B }, 0x10C);
-                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, stageEntry, startPtr + (x * 0x130));
+                    w.WriteLE32At(basePtr + 0x08, w.Length - objectBase[x] - (i * 0xB0) - 0x08);
+                    w.WriteCStringUtf8(o.ObjectName);
 
-                //Paths
-                for (int i = 0; i < StageInfoList[x].FilePaths.Count; i++)
-                {
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - FilePathEntry_pointer[x] - (i * 0x08)), FilePathEntry_pointer[x] + (i * 0x08));
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].FilePaths[i].FilePath);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+                    w.WriteLE32At(basePtr + 0x10, w.Length - objectBase[x] - (i * 0xB0) - 0x10);
+                    w.WriteCStringUtf8(o.PositionFilePath);
 
-                }
+                    w.WriteLE32At(basePtr + 0x18, w.Length - objectBase[x] - (i * 0xB0) - 0x18);
+                    w.WriteCStringUtf8(o.PositionBoneName);
 
-                //Objects
-                for (int i = 0; i < StageInfoList[x].Objects.Count; i++)
-                {
+                    w.WriteLE32At(basePtr + 0x20, o.EntryType);
+                    w.WriteF32At(basePtr + 0x24, o.AnimationSpeed);
+                    w.WriteBool8At(basePtr + 0x28, o.EnableCameraHideObject);
+                    w.WriteBool8At(basePtr + 0x2C, o.IsRigidBody);
 
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0)), ObjectEntry_pointer[x] + (i * 0xB0));
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].ObjectFilePath);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x08), ObjectEntry_pointer[x] + (i * 0xB0) + 0x08);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].ObjectName);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x10), ObjectEntry_pointer[x] + (i * 0xB0) + 0x10);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].PositionFilePath);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x18), ObjectEntry_pointer[x] + (i * 0xB0) + 0x18);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].PositionBoneName);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].EntryType), ObjectEntry_pointer[x] + (i * 0xB0) + 0x20);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].AnimationSpeed), ObjectEntry_pointer[x] + (i * 0xB0) + 0x24);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].EnableCameraHideObject), ObjectEntry_pointer[x] + (i * 0xB0) + 0x28);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].IsRigidBody), ObjectEntry_pointer[x] + (i * 0xB0) + 0x2C);
+                    // breakable object
+                    w.WriteLE32At(basePtr + 0x38, w.Length - objectBase[x] - (i * 0xB0) - 0x38);
+                    w.WriteCStringUtf8(o.BreakableObjectPath);
 
-                    //breakable object
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x38), ObjectEntry_pointer[x] + (i * 0xB0) + 0x38);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].BreakableObjectPath);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x40), ObjectEntry_pointer[x] + (i * 0xB0) + 0x40);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].BreakableObjectEffect01);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].BreakableObjectSpeed01), ObjectEntry_pointer[x] + (i * 0xB0) + 0x48);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x50), ObjectEntry_pointer[x] + (i * 0xB0) + 0x50);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].BreakableObjectEffect02);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].BreakableObjectSpeed02), ObjectEntry_pointer[x] + (i * 0xB0) + 0x58);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x60), ObjectEntry_pointer[x] + (i * 0xB0) + 0x60);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].BreakableObjectEffect03);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].BreakableObjectSpeed03), ObjectEntry_pointer[x] + (i * 0xB0) + 0x68);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(0x3C), ObjectEntry_pointer[x] + (i * 0xB0) + 0x70);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(0x78), ObjectEntry_pointer[x] + (i * 0xB0) + 0x74);
+                    w.WriteLE32At(basePtr + 0x40, w.Length - objectBase[x] - (i * 0xB0) - 0x40);
+                    w.WriteCStringUtf8(o.BreakableObjectEffect01);
 
-                    //breakable wall
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x78), ObjectEntry_pointer[x] + (i * 0xB0) + 0x78);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].BreakableWallEffect01);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].BreakableWallValue1), ObjectEntry_pointer[x] + (i * 0xB0) + 0x80);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].BreakableWallValue2), ObjectEntry_pointer[x] + (i * 0xB0) + 0x84);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x88), ObjectEntry_pointer[x] + (i * 0xB0) + 0x88);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].BreakableWallEffect02);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0x90), ObjectEntry_pointer[x] + (i * 0xB0) + 0x90);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].BreakableWallEffect03);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList[x].Objects[i].BreakableWallVolume), ObjectEntry_pointer[x] + (i * 0xB0) + 0x98);
-                    fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - ObjectEntry_pointer[x] - (i * 0xB0) - 0xA0), ObjectEntry_pointer[x] + (i * 0xB0) + 0xA0);
-                    fileBytes36 = BinaryReader.b_AddString(fileBytes36, StageInfoList[x].Objects[i].BreakableWallSound);
-                    fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[1]);
+                    w.WriteF32At(basePtr + 0x48, o.BreakableObjectSpeed01);
+
+                    w.WriteLE32At(basePtr + 0x50, w.Length - objectBase[x] - (i * 0xB0) - 0x50);
+                    w.WriteCStringUtf8(o.BreakableObjectEffect02);
+
+                    w.WriteF32At(basePtr + 0x58, o.BreakableObjectSpeed02);
+
+                    w.WriteLE32At(basePtr + 0x60, w.Length - objectBase[x] - (i * 0xB0) - 0x60);
+                    w.WriteCStringUtf8(o.BreakableObjectEffect03);
+
+                    w.WriteF32At(basePtr + 0x68, o.BreakableObjectSpeed03);
+
+                    w.WriteLE32At(basePtr + 0x70, 0x3C);
+                    w.WriteLE32At(basePtr + 0x74, 0x78);
+
+                    // breakable wall
+                    w.WriteLE32At(basePtr + 0x78, w.Length - objectBase[x] - (i * 0xB0) - 0x78);
+                    w.WriteCStringUtf8(o.BreakableWallEffect01);
+
+                    w.WriteLE32At(basePtr + 0x80, o.BreakableWallValue1);
+                    w.WriteLE32At(basePtr + 0x84, o.BreakableWallValue2);
+
+                    w.WriteLE32At(basePtr + 0x88, w.Length - objectBase[x] - (i * 0xB0) - 0x88);
+                    w.WriteCStringUtf8(o.BreakableWallEffect02);
+
+                    w.WriteLE32At(basePtr + 0x90, w.Length - objectBase[x] - (i * 0xB0) - 0x90);
+                    w.WriteCStringUtf8(o.BreakableWallEffect03);
+
+                    w.WriteF32At(basePtr + 0x98, o.BreakableWallVolume);
+
+                    w.WriteLE32At(basePtr + 0xA0, w.Length - objectBase[x] - (i * 0xB0) - 0xA0);
+                    w.WriteCStringUtf8(o.BreakableWallSound);
                 }
             }
 
+            // финальные патчи
+            w.WriteBE32At(size1_index, w.Length - startPtr + 0x14);
+            w.WriteBE32At(size2_index, w.Length - startPtr + 0x10);
+            w.WriteLE32At(count_index, stageCount);
 
+            w.Write(new byte[20] { 0, 0, 0, 8, 0, 0, 0, 2, 0, 0x79, 0xE9, 0x77, 0, 0, 0, 4, 0, 0, 0, 0 });
 
-
-
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - startPtr + 0x14), size1_index, 1);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(fileBytes36.Length - startPtr + 0x10), size2_index, 1);
-            fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(StageInfoList.Count), count_index);
-            fileBytes36 = BinaryReader.b_AddBytes(fileBytes36, new byte[20]
-            {
-                0,
-                0,
-                0,
-                8,
-                0,
-                0,
-                0,
-                2,
-                0,
-                0x79, 0xE9, 0x77,
-                0,
-                0,
-                0,
-                4,
-                0,
-                0,
-                0,
-                0
-            });
-            ConvertedFile = fileBytes36;
+            ConvertedFile = w.ToArray();
             LoadingStatePlay = Visibility.Hidden;
-
         }
 
         private RelayCommand _saveFileAsCommand;

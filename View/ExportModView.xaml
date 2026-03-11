@@ -60,6 +60,9 @@
                             <RowDefinition Height="5"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="35"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="35"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1.2*"/>
@@ -99,7 +102,7 @@
                             <Button Command="{Binding DeleteShaderCommand}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page1_shader_delete}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                             <Button Command="{Binding SelectShaderCommand}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page1_shader_select}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                         </Grid>
-                        <Grid Grid.Row="7" Grid.Column="3" >
+                        <Grid Grid.Row="10" Grid.Column="3" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="5"/>
@@ -129,8 +132,17 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <Label Grid.Row="6"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page1_datawin32}"  FontSize="16"/>
-                        <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding DataWin32Path_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                        <Label Grid.Row="6"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page1_game}"  FontSize="16"/>
+                        <ComboBox  Grid.Row="7"  Grid.Column="0" HorizontalContentAlignment="Left" SelectedIndex="{Binding SelectedGameIndex}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" >
+                            <ComboBoxItem>
+                                <TextBlock Text="{DynamicResource m_exportMod_page1_game_1}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock Text="{DynamicResource m_exportMod_page1_game_2}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                            </ComboBoxItem>
+                        </ComboBox>
+                        <Label Grid.Row="9"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page1_datawin32}"  FontSize="16"/>
+                        <TextBox Grid.Row="10" Grid.Column="0" Text="{Binding DataWin32Path_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
 
                     </Grid>
                 </xctk:WizardPage>
@@ -219,12 +231,14 @@
                                 <RowDefinition Height="5"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="40"/>
                                 <RowDefinition Height="5"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
@@ -256,19 +270,41 @@
                             <Button Command="{Binding SelectStageCommand}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_selectStageID}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                             <Button Command="{Binding DeleteStageCommand}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_deleteStageID}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_3}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
                             <Label Grid.Row="4"  Grid.Column="2"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_stagePreviewImageResolution}"  FontSize="16"/>
-                            <Image Grid.Row="5" Grid.Column="2" Grid.RowSpan="3" Source="{Binding StageImagePreview}" RenderOptions.BitmapScalingMode="HighQuality" MaxHeight="76" MaxWidth="314" Stretch="Fill" HorizontalAlignment="Left"/>
+                            <Image Grid.Row="5" Grid.Column="2" Grid.RowSpan="1" Source="{Binding StageImagePreview}" RenderOptions.BitmapScalingMode="HighQuality" MaxHeight="76" MaxWidth="314" Stretch="Fill" HorizontalAlignment="Left"/>
                             <Button Grid.Row="6" Grid.Column="2" Command="{Binding SelectStageImagePreviewCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_SelectStagePreview}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
 
                             <Label Grid.Row="4"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_stageIconResolution}"  FontSize="16"/>
-                            <TextBox Grid.Row="5" MaxHeight="30" Grid.Column="0" Text="{Binding StageIconPath}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
-                            <Button Grid.Row="6" Grid.Column="0" Command="{Binding SelectStageIconCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_SelectStageIcon}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                            <TextBox Grid.Row="5" MaxHeight="30" Grid.Column="0" Text="{Binding StageIconPathSC}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                            <Button Grid.Row="6" Grid.Column="0" Command="{Binding SelectStageIconSCCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_SelectStageIcon}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
 
-                            <Label Grid.Row="8"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_stageBGM}"  FontSize="16"/>
-                            <xctk:IntegerUpDown Grid.Row="9"  MinHeight="30" Value="{Binding StageBGM_ID}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="-1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                            <Label Grid.Row="8"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_stageIconResolution2}"  FontSize="16"/>
+                            <TextBox Grid.Row="9" MaxHeight="30" Grid.Column="0" Text="{Binding StageIconPathS4}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                            <Button Grid.Row="10" Grid.Column="0" Command="{Binding SelectStageIconS4Command}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_SelectStageIcon}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+
+
+                            
+                            <Grid Grid.Row="12" Grid.Column="0" Grid.RowSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="*"/>
+                                    
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0"  Grid.Column="0"  Grid.ColumnSpan="1" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_stageBGM}"  FontSize="16"/>
+                                <Label Grid.Row="0"  Grid.Column="2"  Grid.ColumnSpan="1" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_stageBGM_NS4}"  FontSize="16"/>
+                                <xctk:IntegerUpDown Grid.Row="1" Grid.Column="0" MinHeight="30" Value="{Binding StageBGM_ID}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="-1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+
+                                <xctk:IntegerUpDown Grid.Row="1" Grid.Column="2"  MinHeight="30" Value="{Binding StageBGM_ID_NS4}" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="-1" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                            </Grid>
+                            
                             <!--<Button Grid.Row="9" Grid.Column="2" Command="{Binding SaveBGMIDCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_saveBGM}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>-->
 
-                            <Label Grid.Row="8"  Grid.Column="2"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_StageMessageID}"  FontSize="16"/>
-                            <TextBox Grid.Row="9" MaxHeight="30" Grid.Column="2" Text="{Binding StageMessageID}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
+                            <Label Grid.Row="12"  Grid.Column="2"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page3_StageMessageID}"  FontSize="16"/>
+                            <TextBox Grid.Row="13" MaxHeight="30" Grid.Column="2" Text="{Binding StageMessageID}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
                             <!--<Button Grid.Row="13" Grid.Column="2" Command="{Binding SaveStageMessageIDCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page3_saveStageMessageID}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>-->
 
                         </Grid>
@@ -327,6 +363,8 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -345,10 +383,13 @@
                             <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModAuthor_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
                             <Label Grid.Row="9"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_ModVersion}"  FontSize="16"/>
                             <TextBox Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModVersion_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
-                            <Label Grid.Row="12"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modIcon}"  FontSize="16"/>
-                            <Label Grid.Row="12"  Grid.Column="2"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_ModIconWarning}"  FontSize="16"/>
-                            <Image Grid.Row="13" Grid.Column="2" Grid.RowSpan="3" Source="{Binding ImagePreview}" RenderOptions.BitmapScalingMode="HighQuality" MaxHeight="100" MaxWidth="100" Stretch="Fill" HorizontalAlignment="Left"/>
-                            <Grid Grid.Row="13" Grid.Column="0" >
+                            <Label Grid.Row="12"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_Screenshots}"  FontSize="16"/>
+                            <Button Grid.Row="13" Grid.Column="0" Command="{Binding SelectScreenshotsCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_page4_selectScreenshots}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+
+                            <Label Grid.Row="14"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modIcon}"  FontSize="16"/>
+                            <Label Grid.Row="14"  Grid.Column="2"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_ModIconWarning}"  FontSize="16"/>
+                            <Image Grid.Row="15" Grid.Column="2" Grid.RowSpan="3" Source="{Binding ImagePreview}" RenderOptions.BitmapScalingMode="HighQuality" MaxHeight="100" MaxWidth="100" Stretch="Fill" HorizontalAlignment="Left"/>
+                            <Grid Grid.Row="15" Grid.Column="0" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="5"/>
@@ -358,11 +399,11 @@
                                 <Button Grid.Row="2" Grid.Column="0" Command="{Binding SelectModIconCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page4_selectModIcon}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
 
                             </Grid>
-                            <CheckBox Grid.Row="17"  VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding EncryptFiles_field}">
+                            <CheckBox Grid.Row="19"  VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding EncryptFiles_field}">
                                 <TextBlock Text="{StaticResource m_option012}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="14"/>
                             </CheckBox>
 
-                            <Button IsEnabled="{Binding IsModReady}" Grid.Row="19" Grid.Column="0" Command="{Binding CompileModCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_pageFinish_compile}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+                            <Button IsEnabled="{Binding IsModReady}" Grid.Row="21" Grid.Column="0" Command="{Binding CompileModCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_pageFinish_compile}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
 
                         </Grid>
                         <Grid Visibility="{Binding PageModType_tuj_visibility}">
@@ -444,7 +485,10 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
@@ -454,17 +498,20 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modName}"  FontSize="16"/>
-                        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModName_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" local2:DisallowSpecialCharactersTextboxBehavior.DisallowSpecialCharacters="true"/>
+                        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModName_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" local2:DisallowSpecialCharactersTextboxBehavior.DisallowSpecialCharacters="true" />
                         <Label Grid.Row="3"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modDesc}"  FontSize="16"/>
                         <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModDesc_field}" TextWrapping="NoWrap" AcceptsReturn="true" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
                         <Label Grid.Row="6"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modAuthor}"  FontSize="16"/>
                         <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModAuthor_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
                         <Label Grid.Row="9"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_ModVersion}"  FontSize="16"/>
                         <TextBox Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ModVersion_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
-                        <Label Grid.Row="12"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modIcon}"  FontSize="16"/>
-                        <Label Grid.Row="12"  Grid.Column="2"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_ModIconWarning}"  FontSize="16"/>
-                        <Image Grid.Row="13" Grid.Column="2" Grid.RowSpan="3" Source="{Binding ImagePreview}" RenderOptions.BitmapScalingMode="HighQuality" MaxHeight="100" MaxWidth="100" Stretch="Fill" HorizontalAlignment="Left"/>
-                        <Grid Grid.Row="13" Grid.Column="0" >
+                        <Label Grid.Row="12"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_Screenshots}"  FontSize="16"/>
+                        <Button Grid.Row="13" Grid.Column="0" Command="{Binding SelectScreenshotsCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_page4_selectScreenshots}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+
+                        <Label Grid.Row="14"  Grid.Column="0"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_modIcon}"  FontSize="16"/>
+                        <Label Grid.Row="14"  Grid.Column="2"  Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" Content="{DynamicResource m_exportMod_page4_ModIconWarning}"  FontSize="16"/>
+                        <Image Grid.Row="15" Grid.Column="2" Grid.RowSpan="3" Source="{Binding ImagePreview}" RenderOptions.BitmapScalingMode="HighQuality" MaxHeight="100" MaxWidth="100" Stretch="Fill" HorizontalAlignment="Left"/>
+                        <Grid Grid.Row="15" Grid.Column="0" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="5"/>
@@ -472,11 +519,13 @@
                             </Grid.RowDefinitions>
                             <TextBox Grid.Row="0" MaxHeight="30" Grid.Column="0" Text="{Binding ModIconPath_field}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Top" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" />
                             <Button Grid.Row="2" Grid.Column="0" Command="{Binding SelectModIconCommand}" Grid.ColumnSpan="1" Content="{DynamicResource m_exportMod_page4_selectModIcon}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+
                         </Grid>
-                        <CheckBox Grid.Row="17"  VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding EncryptFiles_field}">
+                        <CheckBox Grid.Row="19"  VerticalContentAlignment="Center" HorizontalAlignment="Left"  IsChecked="{Binding EncryptFiles_field}">
                             <TextBlock Text="{StaticResource m_option012}"  Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Center"  HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" FontSize="14"/>
                         </CheckBox>
-                        <Button IsEnabled="{Binding IsModReady}"  Grid.Row="19" Grid.Column="0" Command="{Binding CompileModCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_pageFinish_compile}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
+
+                        <Button IsEnabled="{Binding IsModReady}"  Grid.Row="21" Grid.Column="0" Command="{Binding CompileModCommand}" Grid.ColumnSpan="3" Content="{DynamicResource m_exportMod_pageFinish_compile}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="16"/>
 
                     </Grid>
                     

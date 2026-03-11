@@ -305,6 +305,19 @@ namespace NSC_Toolbox.ViewModel
             }
         }
 
+        public void CopyNames()
+        {
+            string save = "";
+            for (int x = 0; x < ConditionList.Count; x++)
+            {
+
+
+                save += $"\"{ConditionList[x].ConditionName.ToString()}\",\n";
+
+            }
+
+            Clipboard.SetText(save);
+        }
 
         public void AddDupEntry()
         {
@@ -423,6 +436,18 @@ namespace NSC_Toolbox.ViewModel
                 return _openFileCommand ??
                   (_openFileCommand = new RelayCommand(obj => {
                       OpenFileAsync();
+                  }));
+            }
+        }
+
+        private RelayCommand _CopyNamesInClipboard;
+        public RelayCommand CopyNamesInClipboard
+        {
+            get
+            {
+                return _CopyNamesInClipboard ??
+                  (_CopyNamesInClipboard = new RelayCommand(obj => {
+                      CopyNames();
                   }));
             }
         }

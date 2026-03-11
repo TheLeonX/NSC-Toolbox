@@ -7,10 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -19,6 +21,8 @@ namespace NSC_Toolbox {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    
     public partial class MainWindow : Window {
 
         private TitleViewModel VM;
@@ -38,7 +42,7 @@ namespace NSC_Toolbox {
                 VM.KyurutoDialogTextLoader(text, 20);
             }
         }
-
+        
         private void CharacodeEditor_MouseEnter(object sender, MouseEventArgs e) => LoadLocalizedText("m_CharacodeEditor_Kyuruto");
         private void DuelPlayerParamEditor_MouseEnter(object sender, MouseEventArgs e) => LoadLocalizedText("m_DuelPlayerParamEditor_Kyuruto");
         private void PlayerSettingParamEditor_MouseEnter(object sender, MouseEventArgs e) => LoadLocalizedText("m_PlayerSettingParamEditor_Kyuruto");
@@ -69,5 +73,45 @@ namespace NSC_Toolbox {
         private void PairSpSkillEditor_MouseEnter(object sender, MouseEventArgs e) => LoadLocalizedText("m_PairSpSkillEditor_Kyuruto");
         private void SpecialInteraction_MouseEnter(object sender, MouseEventArgs e) => LoadLocalizedText("m_SpecialInteraction_Kyuruto");
         private void ConditionPrm_MouseEnter(object sender, MouseEventArgs e) => LoadLocalizedText("m_ConditionPrm_Kyuruto");
+
+
+        private void ToolboxLogoToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            StartStoryboardBlocking((ToggleButton)sender, "ToS4");
+        }
+
+        private void ToolboxLogoToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            StartStoryboardBlocking((ToggleButton)sender, "ToDefault");
+        }
+
+        private void StartStoryboardBlocking(ToggleButton button, string storyboardKey)
+        {
+            if (button == null) return;
+
+            // блокируем кнопку
+            button.IsEnabled = false;
+
+            // берём ресурс и клонируем, чтобы не мешать повторным вызовам
+            if (!(TryFindResource(storyboardKey) is Storyboard original))
+            {
+                button.IsEnabled = true;
+                return;
+            }
+
+            Storyboard sb = original.Clone();
+
+            EventHandler onCompleted = null;
+            onCompleted = (s, ev) =>
+            {
+                sb.Completed -= onCompleted;
+                button.IsEnabled = true;
+            };
+
+            sb.Completed += onCompleted;
+
+            // Запускаем сториборд в контексте ToggleButton, делаем controllable, чтобы Completed сработал.
+            sb.Begin(button, true);
+        }
     }
 }

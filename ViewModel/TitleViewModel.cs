@@ -3,17 +3,18 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using NSC_Toolbox.Properties;
 using NSC_Toolbox.View;
 using Octokit;
+using Octokit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Media;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
-using Octokit;
-using System.Media;
 using Application = System.Windows.Application;
 
 namespace NSC_Toolbox.ViewModel {
@@ -29,8 +30,26 @@ namespace NSC_Toolbox.ViewModel {
             }
         }
 
-
-
+        private Visibility _storm4ToolsVisibility;
+        public Visibility Storm4ToolsVisibility
+        {
+            get { return _storm4ToolsVisibility; }
+            set
+            {
+                _storm4ToolsVisibility = value;
+                OnPropertyChanged("Storm4ToolsVisibility");
+            }
+        }
+        private Visibility _stormCToolsVisibility;
+        public Visibility StormCToolsVisibility
+        {
+            get { return _stormCToolsVisibility; }
+            set
+            {
+                _stormCToolsVisibility = value;
+                OnPropertyChanged("StormCToolsVisibility");
+            }
+        }
         private Visibility _otherToolsVisibility;
         public Visibility OtherToolsVisibility {
             get { return _otherToolsVisibility; }
@@ -55,14 +74,68 @@ namespace NSC_Toolbox.ViewModel {
                 OnPropertyChanged("MainWindowVisibility");
             }
         }
+        private Visibility _creditsVisibility;
         private Visibility _credits2024Visibility;
-        public Visibility Credits2024Visibility {
+        private Visibility _credits2025Visibility;
+        private Visibility _credits2026Visibility;
+        private string _selectedYearLabel;
+
+        public Visibility CreditsVisibility
+        {
+            get { return _creditsVisibility; }
+            set { _creditsVisibility = value; OnPropertyChanged(); }
+        }
+        public Visibility Credits2024Visibility
+        {
             get { return _credits2024Visibility; }
-            set {
-                _credits2024Visibility = value;
-                OnPropertyChanged("Credits2024Visibility");
+            set { _credits2024Visibility = value; OnPropertyChanged(); }
+        }
+
+        public Visibility Credits2025Visibility
+        {
+            get { return _credits2025Visibility; }
+            set { _credits2025Visibility = value; OnPropertyChanged(); }
+        }
+
+        public Visibility Credits2026Visibility
+        {
+            get { return _credits2026Visibility; }
+            set { _credits2026Visibility = value; OnPropertyChanged(); }
+        }
+
+        public string SelectedYearLabel
+        {
+            get => _selectedYearLabel;
+            set { _selectedYearLabel = value; OnPropertyChanged(); }
+        }
+        public ICommand SetCreditsYearCommand { get; }
+
+        private int _gameVersion;
+        public int GameVersion
+        {
+            get { return _gameVersion; }
+            set
+            {
+                _gameVersion = value;
+                if (value > -1)
+                {
+                    switch (value)
+                    {
+                        case 1: //Storm Connections
+                            StormCToolsVisibility = Visibility.Visible;
+                            Storm4ToolsVisibility = Visibility.Hidden;
+                            break;
+                        case 2: //Storm 4
+                            StormCToolsVisibility = Visibility.Hidden;
+                            Storm4ToolsVisibility = Visibility.Visible;
+                            break;
+                    }
+                }
+                OnPropertyChanged("GameVersion");
             }
         }
+
+
         private int _toolTabState;
         public int ToolTabState {
             get { return _toolTabState; }
@@ -99,11 +172,11 @@ namespace NSC_Toolbox.ViewModel {
                     switch (value) {
                         case 1:
                             MainWindowVisibility = Visibility.Visible;
-                            Credits2024Visibility = Visibility.Hidden;
+                            CreditsVisibility = Visibility.Hidden;
                             break;
                         case 2:
                             MainWindowVisibility = Visibility.Hidden;
-                            Credits2024Visibility = Visibility.Visible;
+                            CreditsVisibility = Visibility.Visible;
                             break;
                     }
                 }
@@ -119,14 +192,6 @@ namespace NSC_Toolbox.ViewModel {
             }
         }
 
-        private int _meouchCounter;
-        public int MeouchCounter {
-            get { return _meouchCounter; }
-            set {
-                _meouchCounter = value;
-                OnPropertyChanged("MeouchCounter");
-            }
-        }
         private int _stretchMode_field;
         public int StretchMode_field {
             get { return _stretchMode_field; }
@@ -230,6 +295,20 @@ namespace NSC_Toolbox.ViewModel {
                 OnPropertyChanged("BackgroundImagePath_field");
             }
         }
+        private void SetYear(object parameter)
+        {
+            if (parameter == null) return;
+            if (!int.TryParse(parameter.ToString(), out int year)) return;
+            ShowOnlyYear(year);
+        }
+
+        private void ShowOnlyYear(int year)
+        {
+            Credits2024Visibility = (year == 2024) ? Visibility.Visible : Visibility.Collapsed;
+            Credits2025Visibility = (year == 2025) ? Visibility.Visible : Visibility.Collapsed;
+            Credits2026Visibility = (year == 2026) ? Visibility.Visible : Visibility.Collapsed;
+            SelectedYearLabel = year.ToString();
+        }
         public TitleViewModel() {
             if (Properties.Settings.Default.MustUpgrade)
             {
@@ -238,14 +317,17 @@ namespace NSC_Toolbox.ViewModel {
                 Properties.Settings.Default.Save();
             }
 
+            SetCreditsYearCommand = new RelayCommand(param => SetYear(param), _ => true);
+            ShowOnlyYear(2026); // по умолчанию 2024 видим
+            StormCToolsVisibility = Visibility.Visible;
+            Storm4ToolsVisibility = Visibility.Hidden;
+            GameVersion = 1;
             ToolTabState = 1;
             KuramaName = (string)System.Windows.Application.Current.Resources["m_kyuruto"];
-            MeouchCounter = 0;
-            MeouchVisibility = Visibility.Hidden;
             KyurutoVisibility = Visibility.Visible;
             LoadingStatePlay = Visibility.Hidden;
             MainWindowVisibility = Visibility.Visible;
-            Credits2024Visibility = Visibility.Hidden;
+            CreditsVisibility = Visibility.Hidden;
             MeouchEffectAutoPlay = false;
             MeouchEffectRepeat = RepeatBehavior.Forever;
             KyurutoDialogTextLoader((string)System.Windows.Application.Current.Resources["m_kyuruto_1"]  +" " + KuramaName + ".", 50);
@@ -420,7 +502,7 @@ namespace NSC_Toolbox.ViewModel {
         }
         public void VisitBoosty() {
             System.Diagnostics.Process.Start(new ProcessStartInfo {
-                FileName = "https://boosty.to/theleonx/single-payment/donation/383406?share=target_link",
+                FileName = "https://app.lava.top/theleonx?tabId=donate",
                 UseShellExecute = true
             });
 
@@ -432,59 +514,116 @@ namespace NSC_Toolbox.ViewModel {
             });
 
         }
-        public void InstallModdingAPI() {
-            var dialog = new CommonOpenFileDialog();
-            dialog.IsFolderPicker = true;
-            dialog.Title = "Select root folder of game";
-            CommonFileDialogResult result = dialog.ShowDialog();
-            if (result == CommonFileDialogResult.Ok) {
-                Program.CopyFilesRecursively(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\ModdingAPIFiles", dialog.FileName);
-                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_update_2"]);
-            } else {
-                return;
-            }
-        }
-        public void DeleteModdingAPI() {
+        public void InstallModdingAPI()
+        {
             var dialog = new CommonOpenFileDialog();
             dialog.IsFolderPicker = true;
             dialog.Title = "Select root folder of game";
             CommonFileDialogResult result = dialog.ShowDialog();
             if (result == CommonFileDialogResult.Ok)
-                if (Directory.Exists(dialog.FileName + "\\moddingapi")) {
+            {
+                string selectedFolder = dialog.FileName;
+                string sourceModdingApi = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ModdingAPIFiles");
+                Program.CopyFilesRecursively(sourceModdingApi, selectedFolder);
 
-                    MessageBoxResult warning = (MessageBoxResult)ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_10"], "Do you want to delete it?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (warning == MessageBoxResult.Yes) {
+                string exePath = Path.Combine(selectedFolder, "NSUNSC.exe");
+                if (File.Exists(exePath))
+                {
+                    string sourceFile = Path.Combine(Directory.GetCurrentDirectory(), "ParamFiles", "NSC", "charsel.gfx");
+                    string targetDir = Path.Combine(selectedFolder, "data", "ui", "flash", "OTHER", "charsel");
+                    string targetFile = Path.Combine(targetDir, "charsel.gfx");
 
-                        Directory.Delete(dialog.FileName + "\\moddingapi", true);
-                        if (File.Exists(dialog.FileName + "\\xinput9_1_0.dll"))
-                            File.Delete(dialog.FileName + "\\xinput9_1_0.dll");
-                        if (File.Exists(dialog.FileName + "\\xinput9_1_0_o.dll"))
-                            File.Delete(dialog.FileName + "\\xinput9_1_0_o.dll");
-                        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_update_3"]);
+                    try
+                    {
+                        Directory.CreateDirectory(targetDir);
+                        File.Copy(sourceFile, targetFile, true);
+                    } catch (Exception ex)
+                    {
+                        ModernWpf.MessageBox.Show("Error while copying file: " + ex.Message);
                     }
-                } else {
-                    return;
                 }
+
+                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_update_2"]);
+            } else
+            {
+                return;
+            }
+        }
+        public void DeleteModdingAPI()
+        {
+            var dialog = new CommonOpenFileDialog
+            {
+                IsFolderPicker = true,
+                Title = "Select root folder of game"
+            };
+
+            CommonFileDialogResult result = dialog.ShowDialog();
+            if (result != CommonFileDialogResult.Ok)
+                return;
+
+            string selectedFolder = dialog.FileName;
+            string moddingApiDir = Path.Combine(selectedFolder, "moddingapi");
+
+            if (!Directory.Exists(moddingApiDir))
+                return;
+
+            MessageBoxResult warning =
+                (MessageBoxResult)ModernWpf.MessageBox.Show(
+                    (string)System.Windows.Application.Current.Resources["m_error_10"],
+                    "Do you want to delete it?",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning);
+
+            if (warning != MessageBoxResult.Yes)
+                return;
+
+            try
+            {
+                Directory.Delete(moddingApiDir, true);
+
+                string d3d = Path.Combine(selectedFolder, "d3dcompiler_47.dll");
+                string d3dBackup = Path.Combine(selectedFolder, "d3dcompiler_47_o.dll");
+
+                if (File.Exists(d3d))
+                    File.Delete(d3d);
+
+                if (File.Exists(d3dBackup))
+                    File.Move(d3dBackup, d3d);
+
+                // Restore vanilla charsel.gfx if NSUNSC.exe exists
+                string exePath = Path.Combine(selectedFolder, "NSUNSC.exe");
+                if (File.Exists(exePath))
+                {
+                    string sourceFile =
+                        Path.Combine(Directory.GetCurrentDirectory(), "ParamFiles", "NSC", "charsel_vanilla.gfx");
+
+                    string targetDir =
+                        Path.Combine(selectedFolder, "data", "ui", "flash", "OTHER", "charsel");
+
+                    string targetFile =
+                        Path.Combine(targetDir, "charsel.gfx");
+
+                    Directory.CreateDirectory(targetDir);
+                    File.Copy(sourceFile, targetFile, true);
+                }
+
+                ModernWpf.MessageBox.Show(
+                    (string)System.Windows.Application.Current.Resources["m_update_3"]);
+            } catch (Exception ex)
+            {
+                ModernWpf.MessageBox.Show("Error while deleting ModdingAPI: " + ex.Message);
+            }
         }
         // команда добавления нового объекта
-        private RelayCommand addMeouch;
-        public RelayCommand AddMeouch {
+        private RelayCommand _changeGame;
+        public RelayCommand ChangeGame {
             get {
-                return addMeouch ??
-                  (addMeouch = new RelayCommand(obj => {
-                      if (MeouchCounter == 10) {
-                          MeouchVisibility = Visibility.Visible;
-                          KyurutoVisibility = Visibility.Hidden;
-                          MeouchEffectAutoPlay = true;
-                          KuramaName = "Meouch";
-                          MeouchEffectRepeat = new RepeatBehavior(1.0);
-                          KuramaDialog = "";
-                          KyurutoDialogTextLoader("Meow! You can call me " + KuramaName + ".", 50);
-                          MeouchCounter++;
-
-                      } else {
-                          MeouchCounter++;
-                      }
+                return _changeGame ??
+                  (_changeGame = new RelayCommand(obj => {
+                      if (GameVersion == 1)
+                          GameVersion = 2;
+                      else
+                          GameVersion = 1;
 
                   }));
             }
@@ -627,12 +766,39 @@ namespace NSC_Toolbox.ViewModel {
                   }));
             }
         }
+
+        private RelayCommand playerSettingParamS4RunButton;
+        public RelayCommand PlayerSettingParamS4RunButtonCommand
+        {
+            get
+            {
+                return playerSettingParamS4RunButton ??
+                  (playerSettingParamS4RunButton = new RelayCommand(obj => {
+                      PlayerSettingParamS4EditorView playerSettingParamEditor = new PlayerSettingParamS4EditorView();
+                      playerSettingParamEditor.Show();
+
+                  }));
+            }
+        }
         private RelayCommand characterSelectParamRunButton;
         public RelayCommand CharacterSelectParamRunButtonCommand {
             get {
                 return characterSelectParamRunButton ??
                   (characterSelectParamRunButton = new RelayCommand(obj => {
                       CharacterSelectParamEditorView characterSelectParamEditor = new CharacterSelectParamEditorView();
+                      characterSelectParamEditor.Show();
+
+                  }));
+            }
+        }
+        private RelayCommand characterSelectParamS4RunButton;
+        public RelayCommand CharacterSelectParamS4RunButtonCommand
+        {
+            get
+            {
+                return characterSelectParamS4RunButton ??
+                  (characterSelectParamS4RunButton = new RelayCommand(obj => {
+                      CharacterSelectParamS4EditorView characterSelectParamEditor = new CharacterSelectParamS4EditorView();
                       characterSelectParamEditor.Show();
 
                   }));
@@ -671,6 +837,19 @@ namespace NSC_Toolbox.ViewModel {
                   }));
             }
         }
+        private RelayCommand _skillCustomizeParamS4EditorRunButtonCommand;
+        public RelayCommand SkillCustomizeParamS4EditorRunButtonCommand
+        {
+            get
+            {
+                return _skillCustomizeParamS4EditorRunButtonCommand ??
+                  (_skillCustomizeParamS4EditorRunButtonCommand = new RelayCommand(obj => {
+                      SkillCustomizeParamS4EditorView SkillEditor = new SkillCustomizeParamS4EditorView();
+                      SkillEditor.Show();
+
+                  }));
+            }
+        }
         private RelayCommand _skillIndexSettingParamEditorRunButtonCommand;
         public RelayCommand SkillIndexSettingParamEditorRunButtonCommand {
             get {
@@ -699,6 +878,19 @@ namespace NSC_Toolbox.ViewModel {
                 return _messageInfoEditorRunButtonCommand ??
                   (_messageInfoEditorRunButtonCommand = new RelayCommand(obj => {
                       MessageInfoEditorView MessageInfoEditor = new MessageInfoEditorView();
+                      MessageInfoEditor.Show();
+
+                  }));
+            }
+        }
+        private RelayCommand _messageInfoS4EditorRunButtonCommand;
+        public RelayCommand MessageInfoS4EditorRunButtonCommand
+        {
+            get
+            {
+                return _messageInfoS4EditorRunButtonCommand ??
+                  (_messageInfoS4EditorRunButtonCommand = new RelayCommand(obj => {
+                      MessageInfoS4EditorView MessageInfoEditor = new MessageInfoS4EditorView();
                       MessageInfoEditor.Show();
 
                   }));
@@ -843,6 +1035,32 @@ namespace NSC_Toolbox.ViewModel {
                 return _costumeBreakColorParamRunButtonCommand ??
                   (_costumeBreakColorParamRunButtonCommand = new RelayCommand(obj => {
                       CostumeBreakColorParamEditorView CostumeBreakColorParamEditor = new CostumeBreakColorParamEditorView();
+                      CostumeBreakColorParamEditor.Show();
+
+                  }));
+            }
+        }
+        private RelayCommand _guardEffectParamRunButtonCommand;
+        public RelayCommand GuardEffectParamRunButtonCommand
+        {
+            get
+            {
+                return _guardEffectParamRunButtonCommand ??
+                  (_guardEffectParamRunButtonCommand = new RelayCommand(obj => {
+                      GuardEffectParamEditor GuardEffectParamEditor = new GuardEffectParamEditor();
+                      GuardEffectParamEditor.Show();
+
+                  }));
+            }
+        }
+        private RelayCommand _costumeBreakColorParamS4RunButtonCommand;
+        public RelayCommand CostumeBreakColorParamS4RunButtonCommand
+        {
+            get
+            {
+                return _costumeBreakColorParamS4RunButtonCommand ??
+                  (_costumeBreakColorParamS4RunButtonCommand = new RelayCommand(obj => {
+                      CostumeBreakColorParamS4EditorView CostumeBreakColorParamEditor = new CostumeBreakColorParamS4EditorView();
                       CostumeBreakColorParamEditor.Show();
 
                   }));
@@ -1005,6 +1223,20 @@ namespace NSC_Toolbox.ViewModel {
                 return _visitGitHubPage ??
                   (_visitGitHubPage = new RelayCommand(obj => {
                       VisitGitHubPage();
+
+                  }));
+            }
+        }
+
+        private RelayCommand _NUS3BANKEditorRunButtonCommand;
+        public RelayCommand NUS3BANKEditorRunButtonCommand
+        {
+            get
+            {
+                return _NUS3BANKEditorRunButtonCommand ??
+                  (_NUS3BANKEditorRunButtonCommand = new RelayCommand(obj => {
+                      NUS3BANKEditorView NUS3BANKEditor = new NUS3BANKEditorView();
+                      NUS3BANKEditor.Show();
 
                   }));
             }

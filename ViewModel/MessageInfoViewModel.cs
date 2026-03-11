@@ -438,6 +438,16 @@ namespace NSC_Toolbox.ViewModel
                 OnPropertyChanged("SearchEntry_field");
             }
         }
+        private string _CRC32Save_field;
+        public string CRC32Save_field
+        {
+            get { return _CRC32Save_field; }
+            set
+            {
+                _CRC32Save_field = value;
+                OnPropertyChanged("CRC32Save_field");
+            }
+        }
         public ObservableCollection<ObservableCollection<MessageInfoModel>> MessageInfo_List { get; set; }
 
         private int _selectedMessageIndex;
@@ -727,14 +737,14 @@ namespace NSC_Toolbox.ViewModel
         public void SaveEntries() {
             try {
                 if (MessageInfo_preview_List.Count > 0 && SelectedMessageIndex > -1) {
-                    if (SearchEntry_field is not null & SearchEntry_field != "") {
-                        byte[] CRC32Code = BinaryReader.crc32(SearchEntry_field);
-                        for (int i = 0; i < MessageInfo_preview_List.Count; i++) {
-                            if (BitConverter.ToString(MessageInfo_preview_List[i].CRC32Code) == BitConverter.ToString(CRC32Code)) {
-                                ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_42"]);
-                                return;
-                            }
-                        }
+                    if (CRC32Save_field is not null & CRC32Save_field != "") {
+                        byte[] CRC32Code = BinaryReader.crc32(CRC32Save_field);
+                        //for (int i = 0; i < MessageInfo_preview_List.Count; i++) {
+                        //    if (BitConverter.ToString(MessageInfo_preview_List[i].CRC32Code) == BitConverter.ToString(CRC32Code)) {
+                        //        ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_42"]);
+                        //        return;
+                        //    }
+                        //}
                         MessageInfo_List[0][SelectedMessageIndex].CRC32Code = CRC32Code;
                         MessageInfo_List[1][SelectedMessageIndex].CRC32Code = CRC32Code;
                         MessageInfo_List[2][SelectedMessageIndex].CRC32Code = CRC32Code;
@@ -750,7 +760,7 @@ namespace NSC_Toolbox.ViewModel
                         MessageInfo_List[12][SelectedMessageIndex].CRC32Code = CRC32Code;
                         MessageInfo_List[13][SelectedMessageIndex].CRC32Code = CRC32Code;
                         MessageInfo_List[14][SelectedMessageIndex].CRC32Code = CRC32Code;
-                        SearchEntry_field = "";
+                        //CRC32Save_field = "";
                     }
 
 

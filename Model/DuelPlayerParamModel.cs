@@ -102,7 +102,27 @@ namespace NSC_Toolbox.Model {
         }
 
 
+        private uint _evo1;
+        public uint Evo1
+        {
+            get { return _evo1; }
+            set
+            {
+                _evo1 = value;
+                OnPropertyChanged("Evo1");
+            }
+        }
 
+        private uint _evo2;
+        public uint Evo2
+        {
+            get { return _evo2; }
+            set
+            {
+                _evo2 = value;
+                OnPropertyChanged("Evo2");
+            }
+        }
         private uint _awaBodyPriority;
         public uint AwaBodyPriority {
             get { return _awaBodyPriority; }
@@ -489,6 +509,8 @@ namespace NSC_Toolbox.Model {
                 AwakeCostumes = newAwakeCostumes,
                 Partner = this.Partner,
                 ConditionFlag = this.ConditionFlag,
+                Evo1 = this.Evo1,
+                Evo2 = this.Evo2,
                 //ChakraDashCondition = this.ChakraDashCondition,
                 //AwakeningCondition1 = this.AwakeningCondition1,
                 //AwakeningCondition2 = this.AwakeningCondition2,

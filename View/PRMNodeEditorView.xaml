@@ -1,0 +1,167 @@
+﻿<Window x:Class="NSC_Toolbox.View.PRMNodeEditorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NSC_Toolbox.View"
+        mc:Ignorable="d" xmlns:vm="clr-namespace:NSC_Toolbox.ViewModel"
+        Title="PL_ANM Node Editor" Height="700" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="6" Grid.Row="0" VerticalAlignment="Center" >
+            <TextBlock Text="VER:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBlock Text="{Binding VerName}" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Button Content="Save back to model" Command="{Binding SaveCommand}" Foreground="Black" Margin="12,0,0,0"/>
+            <Button Content="Auto layout" Command="{Binding AutoLayoutCommand}" Foreground="Black" Margin="6,0,0,0"/>
+        </StackPanel>
+
+        <!-- ScrollViewer с именем для панорамирования -->
+        <ScrollViewer x:Name="MainScroll" Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                      PreviewMouseDown="MainScroll_PreviewMouseDown" PreviewMouseMove="MainScroll_PreviewMouseMove" PreviewMouseUp="MainScroll_PreviewMouseUp">
+            <Canvas x:Name="MainCanvas" Width="8000" Height="8000" Background="#0A000000">
+                <!-- задний слой ссылок (Prev) -->
+                <ItemsControl ItemsSource="{Binding LinksBehind}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Canvas.Left" Value="0"/>
+                            <Setter Property="Canvas.Top" Value="0"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Line Stroke="DarkOliveGreen" StrokeThickness="2" X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- Ноды -->
+                <ItemsControl ItemsSource="{Binding Nodes}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Canvas.Left" Value="{Binding X}" />
+                            <Setter Property="Canvas.Top" Value="{Binding Y}" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="6" Background="#FF222222"
+                                    Width="260" Height="170" >
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="28"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <DockPanel Grid.Row="0" Background="#FF111111"
+           MouseLeftButtonDown="NodeHeader_MouseDown"
+           MouseLeftButtonUp="NodeHeader_MouseUp"
+           MouseMove="NodeHeader_MouseMove">
+
+                                        <!-- Prev behind (сзади) -->
+                                        <Ellipse Width="12" Height="12" Stroke="Orange" Fill="Transparent" Margin="6,6,6,6"
+             MouseLeftButtonDown="ConnPrevBehind_MouseDown"
+             ToolTip="Drag Prev (behind)" Cursor="Hand"
+             DockPanel.Dock="Left"/>
+
+                                        <TextBlock Text="{Binding DisplayName}" Foreground="White" Margin="6,0" VerticalAlignment="Center" />
+
+                                        <!-- Front current handles (справа) -->
+                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Margin="6,0,6,0" VerticalAlignment="Center">
+                                            <Ellipse Width="10" Height="10" Stroke="LightGreen" Fill="Transparent" Margin="2,0"
+                 MouseLeftButtonDown="ConnCurrent_MouseDown" ToolTip="Drag Current" Cursor="Hand"/>
+                                            <Ellipse Width="10" Height="10" Stroke="LightGreen" Fill="Transparent" Margin="2,0"
+                 MouseLeftButtonDown="ConnCurrent_MouseDown" ToolTip="Drag Current" Cursor="Hand"/>
+                                            <Ellipse Width="10" Height="10" Stroke="LightGreen" Fill="Transparent" Margin="2,0"
+                 MouseLeftButtonDown="ConnCurrent_MouseDown" ToolTip="Drag Current" Cursor="Hand"/>
+                                        </StackPanel>
+                                    </DockPanel>
+
+                                    <StackPanel Grid.Row="1" Orientation="Vertical" Margin="6">
+                                        <TextBlock Text="Animation:" Foreground="LightGray" FontSize="11"/>
+                                        <TextBlock Text="{Binding Model.PL_ANM_animation}" Foreground="White" FontSize="12" TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="2" Margin="6" VerticalAlignment="Top">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="44"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="18"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Prev:" Grid.Column="0" Foreground="LightGray" VerticalAlignment="Center"/>
+                                            <TextBox Text="{Binding PrevText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" />
+                                            <!-- Prev connection handle -->
+                                            <Ellipse Grid.Column="2" Width="12" Height="12" Stroke="Orange" Fill="Transparent" Margin="2"
+                                                     MouseLeftButtonDown="ConnPrev_MouseDown"
+                                                     MouseMove="Conn_MouseMove"
+                                                     MouseLeftButtonUp="Conn_MouseUp"
+                                                     ToolTip="Drag to connect Prev" Cursor="Hand"/>
+                                        </Grid>
+
+                                        <Grid Margin="0,6,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="44"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="18"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Next:" Grid.Column="0" Foreground="LightGray" VerticalAlignment="Center"/>
+                                            <TextBox Text="{Binding NextText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" />
+                                            <!-- Next connection handle -->
+                                            <Ellipse Grid.Column="2" Width="12" Height="12" Stroke="LightBlue" Fill="Transparent" Margin="2"
+                                                     MouseLeftButtonDown="ConnNext_MouseDown"
+                                                     MouseMove="Conn_MouseMove"
+                                                     MouseLeftButtonUp="Conn_MouseUp"
+                                                     ToolTip="Drag to connect Next" Cursor="Hand"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- временная линия при перетаскивании -->
+                <Line x:Name="DragLine" Stroke="Yellow" StrokeThickness="3" Visibility="Collapsed" />
+
+                <!-- передний слой ссылок (Next + Current) -->
+                <ItemsControl ItemsSource="{Binding LinksFront}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Canvas.Left" Value="0"/>
+                            <Setter Property="Canvas.Top" Value="0"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Line Stroke="LightGreen" StrokeThickness="2" X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+            </Canvas>
+        </ScrollViewer>
+
+        <TextBlock Grid.Row="2" Text="{Binding Status}" Margin="6" Foreground="LightGray"/>
+    </Grid>
+</Window>

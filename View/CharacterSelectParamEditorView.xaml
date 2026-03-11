@@ -11,6 +11,8 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com" xmlns:Controls="clr-namespace:NSC_Toolbox.Controls"
         xmlns:properties="clr-namespace:NSC_Toolbox.Properties"
         xmlns:Globalization="clr-namespace:System.Globalization;assembly=System.Runtime" x:Class="NSC_Toolbox.View.CharacterSelectParamEditorView"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:linq="clr-namespace:System.Linq;assembly=System.Core"
         mc:Ignorable="d"
         Height="750" Width="900"
         ui:WindowHelper.UseModernWindowStyle="True"
@@ -18,9 +20,36 @@
     
     <Window.Background>
         <ImageBrush ImageSource="{DynamicResource ResourceKey=TitleBackground}" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox" Stretch="UniformToFill" />
+       
     </Window.Background>
     <Window.Resources>
-
+        <x:Array x:Key="SlotsArray" Type="{x:Type sys:Int32}">
+            <sys:Int32>1</sys:Int32>
+            <sys:Int32>2</sys:Int32>
+            <sys:Int32>3</sys:Int32>
+            <sys:Int32>4</sys:Int32>
+            <sys:Int32>5</sys:Int32>
+            <sys:Int32>6</sys:Int32>
+            <sys:Int32>7</sys:Int32>
+            <sys:Int32>8</sys:Int32>
+            <sys:Int32>9</sys:Int32>
+            <sys:Int32>10</sys:Int32>
+            <sys:Int32>11</sys:Int32>
+            <sys:Int32>12</sys:Int32>
+            <sys:Int32>13</sys:Int32>
+            <sys:Int32>14</sys:Int32>
+            <sys:Int32>15</sys:Int32>
+            <sys:Int32>16</sys:Int32>
+            <sys:Int32>17</sys:Int32>
+            <sys:Int32>18</sys:Int32>
+            <sys:Int32>19</sys:Int32>
+            <sys:Int32>20</sys:Int32>
+            <sys:Int32>21</sys:Int32>
+            <sys:Int32>22</sys:Int32>
+            <sys:Int32>23</sys:Int32>
+            <sys:Int32>24</sys:Int32>
+        </x:Array>
+        <converter:SlotToImageConverter x:Key="SlotToImageConverter"/>
         <converter:PageIndexConverter x:Key="PageIndexConverter" />
     </Window.Resources>
     <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}" >
@@ -31,7 +60,7 @@
                     <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5"/>
-                    <ColumnDefinition Width="210"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5"/>
@@ -55,321 +84,50 @@
                     <MenuItem Command="{Binding SortEntriesCommand}" Header="{DynamicResource m_CSP_SortEntries}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
 
                 </Menu>
-                <Grid Grid.Row="1" Grid.Column="3"   Background="{DynamicResource Toolbox_button_background_color_1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Border Grid.ColumnSpan="10" Grid.RowSpan="10"  BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1"/>
-                    <Image Grid.Row="0" Grid.Column="0" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="1">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="0" Grid.Column="1" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="2">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="0" Grid.Column="2" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="3">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="1" Grid.Column="0" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="4">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="1" Grid.Column="1" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="5">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="1" Grid.Column="2" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="6">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="2" Grid.Column="0" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="7">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="2" Grid.Column="1" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="8">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="2" Grid.Column="2" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="9">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="3" Grid.Column="0" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="10">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="3" Grid.Column="1" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="11">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="3" Grid.Column="2" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="12">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="4" Grid.Column="0" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="13">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="4" Grid.Column="1" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="14">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="4" Grid.Column="2" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="15">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="5" Grid.Column="0" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="16">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="5" Grid.Column="1" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="17">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="5" Grid.Column="2" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="18">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="6" Grid.Column="0" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="19">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="6" Grid.Column="1" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="20">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="6" Grid.Column="2" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="21">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="7" Grid.Column="0" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="22">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="7" Grid.Column="1" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="23">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image Grid.Row="7" Grid.Column="2" Panel.ZIndex="0">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Image.Source" Value="{DynamicResource charsel_empty_icon}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SlotIndex_field}" Value="24">
-                                        <Setter Property="Source" Value="{DynamicResource charsel_brt_icon}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Label Grid.ColumnSpan="3" Grid.RowSpan="10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-30">
+                <Grid Grid.Row="1" Grid.Column="3"
+          Background="{DynamicResource Toolbox_button_background_color_1}"
+          HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                    <Border Grid.ColumnSpan="3" Grid.RowSpan="8"
+                BorderBrush="{DynamicResource Toolbox_button_border_color_1}"
+                BorderThickness="1"/>
+
+                    <!-- Сетка 3x8 генерируемая автоматически -->
+                    <ItemsControl ItemsSource="{StaticResource SlotsArray}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="3" Rows="8"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Image Stretch="Uniform" Panel.ZIndex="0" Margin="2">
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource SlotToImageConverter}">
+                                            <Binding Path="DataContext.SlotIndex_field" RelativeSource="{RelativeSource AncestorType=Grid}"/>
+                                            <Binding />
+                                            <!-- текущий элемент (1..24) -->
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Снизу индекс страницы -->
+                    <Label Grid.ColumnSpan="3" Grid.RowSpan="8" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-30">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding PageIndex_field, Converter={StaticResource PageIndexConverter},StringFormat={}&lt;Page {0}>}"  FontFamily="{StaticResource NarutoFont}"  Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
+                            <TextBlock Text="{Binding PageIndex_field, Converter={StaticResource PageIndexConverter}, StringFormat={}&lt;Page {0}>}"
+                           FontFamily="{StaticResource NarutoFont}"
+                           Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                         </StackPanel>
                         <Label.Effect>
-                            <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" 
-                      Color="Orange"/>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" Color="Orange"/>
                         </Label.Effect>
                     </Label>
                 </Grid>
+
 
                 <ListBox  Grid.RowSpan="2"  IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView" ItemsSource="{Binding CharacterSelectParamList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCSP}" SelectedIndex="{Binding SelectedCSPIndex}" Grid.Row="1" Grid.Column="1" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewMouseMove="LBoxSort_OnPreviewMouseMove" Drop="LBoxSort_OnDrop" AllowDrop="True" xmlns:WpfExtensions="clr-namespace:NSC_Toolbox" WpfExtensions:DragDropExtension.ScrollOnDragDrop="True">
                     <ListBox.ItemTemplate>

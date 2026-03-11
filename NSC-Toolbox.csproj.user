@@ -46,6 +46,9 @@
     <Compile Update="View\CostumeBreakColorParamEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\CostumeBreakColorParamS4EditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\CostumeBreakParamEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,7 +67,13 @@
     <Compile Update="View\ExportModView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\GuardEffectParamEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\MessageInfoEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\NUS3BANKEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\PairSpSkillCombinationParamEditorView.xaml.cs">
@@ -79,6 +88,9 @@
     <Compile Update="View\PlayerSettingParamEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\PlayerSettingParamS4EditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\PrivateCameraEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,6 +98,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\PRMLoadEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\PRMNodeEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\SkillCustomizeParamEditorView.xaml.cs">

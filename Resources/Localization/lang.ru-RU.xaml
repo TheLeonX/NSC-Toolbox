@@ -186,14 +186,20 @@
     <v:String x:Key="m_strikeback_0B">Защита пролома</v:String>
     <v:String x:Key="m_strikeback_0C">Помощь при зарядке</v:String>
 
-    <!-- StageEntryTypeList entries -->
-    <v:String x:Key="m_stageEntryType_0">0 = Статический меш</v:String>
-    <v:String x:Key="m_stageEntryType_1">1 = Анимация</v:String>
-    <v:String x:Key="m_stageEntryType_4">4 = Объект дерева</v:String>
-    <v:String x:Key="m_stageEntryType_6">6 = Объект травы/листьев</v:String>
-    <v:String x:Key="m_stageEntryType_7">7 = Разрушаемая стена</v:String>
-    <v:String x:Key="m_stageEntryType_10">10 = Жёсткое тело</v:String>
-    <v:String x:Key="m_stageEntryType_11">11 = Анимация жёсткого тела</v:String>
+
+    <v:String x:Key="m_stageEntryType_0">0 = Static mesh</v:String>
+    <v:String x:Key="m_stageEntryType_1">1 = Animation</v:String>
+    <v:String x:Key="m_stageEntryType_2">2 = Static mesh</v:String>
+    <v:String x:Key="m_stageEntryType_3">3 = Animation</v:String>
+    <v:String x:Key="m_stageEntryType_4">4 = Tree Object</v:String>
+    <v:String x:Key="m_stageEntryType_5">5 = Grass Low Object</v:String>
+    <v:String x:Key="m_stageEntryType_6">6 = Grass High Object</v:String>
+    <v:String x:Key="m_stageEntryType_7">7 = Break Gimmick</v:String>
+    <v:String x:Key="m_stageEntryType_8">8 = Action Gimmick</v:String>
+    <v:String x:Key="m_stageEntryType_9">9 = Contact Gimmick</v:String>
+    <v:String x:Key="m_stageEntryType_10">10 = Rigid Body</v:String>
+    <v:String x:Key="m_stageEntryType_11">11 = Rigid Body Animation</v:String>
+
 
     <!-- DMGCOND entries -->
     <v:String x:Key="m_dmgcond_0">0 = Нет</v:String>
@@ -326,6 +332,7 @@
     <v:String x:Key="m_mainWindowTool_029">Менеджер особых взаимодействий (specialInteractionManager.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_030">Редактор состояний (conditionprm.bin.xfbin)</v:String>
     <v:String x:Key="m_mainWindowTool_031">Менеджер состояний (conditionprmManager.xfbin)</v:String>
+    <v:String x:Key="m_mainWindowTool_032">Редактор эффектов защиты (guardEffectParam.xfbin)</v:String>
 
 
     <v:String x:Key="m_option001">Режим растяжения</v:String>
@@ -660,6 +667,10 @@
     <v:String x:Key="m_exportMod_page1_shaderInfo">Шейдеры должны быть объединены так же, как в игровых файлах. Для дополнительной информации посетите форум помощи по моддингу.</v:String>
     <v:String x:Key="m_exportMod_page1_shader_select">Выбрать шейдер</v:String>
     <v:String x:Key="m_exportMod_page1_shader_delete">Удалить шейдер</v:String>
+
+    <v:String x:Key="m_exportMod_page1_game">Выберите игру</v:String>
+    <v:String x:Key="m_exportMod_page1_game_1">Storm Connections</v:String>
+    <v:String x:Key="m_exportMod_page1_game_2">Storm 4</v:String>
     <v:String x:Key="m_exportMod_page1_datawin32">Путь к моду (data__win32)</v:String>
     <v:String x:Key="m_exportMod_page1_datawin32_select">Выбрать папку мода</v:String>
     <v:String x:Key="m_exportMod_page1_datawin32_save">Сохранить папку мода</v:String>
@@ -675,7 +686,8 @@
     <v:String x:Key="m_exportMod_page3_SelectStagePreview">Выбрать предпросмотр арены</v:String>
     <v:String x:Key="m_exportMod_page3_stageIconResolution">Иконка арены - разрешение 184x104</v:String>
     <v:String x:Key="m_exportMod_page3_SelectStageIcon">Выбрать иконку арены</v:String>
-    <v:String x:Key="m_exportMod_page3_stageBGM">ID фоновой музыки</v:String>
+    <v:String x:Key="m_exportMod_page3_stageBGM">BGM ID Storm C</v:String>
+    <v:String x:Key="m_exportMod_page3_stageBGM_NS4">BGM ID Storm 4</v:String>
     <v:String x:Key="m_exportMod_page3_saveBGM">Сохранить ID фоновой музыки для арены</v:String>
     <v:String x:Key="m_exportMod_page3_StageMessageID">Название арены</v:String>
     <v:String x:Key="m_exportMod_page3_saveStageMessageID">Сохранить название арены</v:String>
@@ -702,6 +714,8 @@
     <v:String x:Key="m_exportMod_page4_ModVersion">Версия мода</v:String>
     <v:String x:Key="m_exportMod_pageFinish_desc">Теперь вам нужно скомпилировать мод, после чего можно закрыть это окно!</v:String>
     <v:String x:Key="m_exportMod_pageFinish_compile">Скомпилировать мод</v:String>
+    <v:String x:Key="m_exportMod_page4_Screenshots">Скриншоты</v:String>
+    <v:String x:Key="m_exportMod_page4_selectScreenshots">Выбрать скриншоты</v:String>
 
     <!--credits-->
     <v:String x:Key="m_credits_001">Спасибо всем за поддержку и помощь!</v:String>
@@ -1413,4 +1427,47 @@
     <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_Y">P2 СВЕТ КАСТОМИЗАЦИЯ - Y</v:String>
     <v:String x:Key="m_csp_P2_LIGHT_CUSTOMIZATION_Z">P2 СВЕТ КАСТОМИЗАЦИЯ - Z</v:String>
 
+    <v:String x:Key="m_unk">???</v:String>
+    <v:String x:Key="m_nus3bankEditor">NUS3BANK Редактор</v:String>
+    <v:String x:Key="m_nus3bankEditor_tools">Инструменты</v:String>
+    <v:String x:Key="m_nus3bankEditor_extract_raw">Извлечь всё (raw)</v:String>
+    <v:String x:Key="m_nus3bankEditor_extract_wav">Извлечь всё (wav)</v:String>
+    <v:String x:Key="m_nus3bankEditor_extract_raw2">Извлечь всё с индексом (raw)</v:String>
+    <v:String x:Key="m_nus3bankEditor_extract_wav2">Извлечь всё с индексом  (wav)</v:String>
+    <v:String x:Key="m_nus3bankEditor_fileid">ID Файла </v:String>
+    <v:String x:Key="m_nus3bankEditor_filename">Имя файла</v:String>
+    <v:String x:Key="m_nus3bankEditor_addSoundData">Добавить сырую звуковую дорожку</v:String>
+    <v:String x:Key="m_nus3bankEditor_replaceSoundData">Добавить BNSF звуковую дорожку</v:String>
+    <v:String x:Key="m_nus3bankEditor_deleteSoundData">Удалить звуковую дорожку</v:String>
+    
+    <v:String x:Key="m_nus3bankEditor_soundType">Тип записи</v:String>
+    <v:String x:Key="m_nus3bankEditor_soundType_1">Пустой слот</v:String>
+    <v:String x:Key="m_nus3bankEditor_soundType_2">Рандомайзер</v:String>
+    <v:String x:Key="m_nus3bankEditor_soundType_3">Обычный слот</v:String>
+    <v:String x:Key="m_nus3bankEditor_error_1">Неверный формат nuccChunkNub. Чанк должен содержать NUS3BANK.</v:String>
+    <v:String x:Key="m_nus3bankEditor_group_name">Имя</v:String>
+    <v:String x:Key="m_nus3bankEditor_enable">Включить</v:String>
+    <v:String x:Key="m_nus3bankEditor_enable_sample_rate">Включить частоту дискретизации</v:String>
+    <v:String x:Key="m_nus3bankEditor_enable_total_samples_1">Включить общее количество образцов 1</v:String>
+    <v:String x:Key="m_nus3bankEditor_enable_total_samples_2">Включить общее количество образцов 2</v:String>
+    <v:String x:Key="m_nus3bankEditor_enable_channel_type">Включить тип канала</v:String>
+    <v:String x:Key="m_nus3bankEditor_import_raw">Пакетный импорт (Raw)</v:String>
+    <v:String x:Key="m_nus3bankEditor_import_bnsf">Пакетный импорт (BNSF)</v:String>
+    <v:String x:Key="m_nus3bankEditor_warning">Открой сначала NUS3BANK звуковой XFBIN файл!</v:String>
+
+
+    <v:String x:Key="m_nus3bankEditor_copy">Копировать настройки</v:String>
+    <v:String x:Key="m_nus3bankEditor_paste">Вставить настройки</v:String>
+
+    <v:String x:Key="m_guardEffectParamEditor">Редактор эффектов защиты</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_characodeID">ID персонажа</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_state">Состояние</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_state_1">Обычное состояние</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_state_2">Пробужденное состояние</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_state_3">Все состояния</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_effectPath">Путь к эффекту</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_startEffect">Начальный эффект</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_loopEffect">Цикличный эффект</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_endEffect">Конечный эффект</v:String>
+    <v:String x:Key="m_guardEffectParamEditor_attachBone">Прикрепить к кости</v:String>
 </ResourceDictionary>

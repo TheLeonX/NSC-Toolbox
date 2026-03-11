@@ -4,12 +4,14 @@
              xmlns:local="clr-namespace:NSC_Toolbox"
              xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
-             xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+             xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid" xmlns:local1="clr-namespace:NSC_Toolbox.Converter"
              StartupUri="View/TitleView.xaml"  Startup="App_Startup">
     <Application.Resources>
         <ResourceDictionary>
             <FontFamily x:Key="NarutoFont">Resources/Fonts/#CC2 RocknRoll Latin DB</FontFamily>
+            <FontFamily x:Key="NarutoFont2">Resources/Fonts/#FOT-マティス ProN EB</FontFamily>
 
+            <local1:BoolToExclaimConverter x:Key="BoolToExclaimConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemeResources RequestedTheme="Dark"/>
                 <ui:XamlControlsResources />

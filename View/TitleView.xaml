@@ -12,6 +12,7 @@
         ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
         xmlns:converter="clr-namespace:NSC_Toolbox.Converter"
+        xmlns:test="clr-namespace:NSC_Toolbox.View"
         
         Title="{DynamicResource m_Title}"  Height="800" Width="1300">
     <Window.Background>
@@ -19,6 +20,7 @@
     </Window.Background>
     <Window.Resources>
         <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Foreground" Value="Transparent"/>
@@ -51,10 +53,152 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="NoChromeToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}"
+                                      RecognizesAccessKey="True"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                        Storyboard.TargetName="Chrome"
+                                        Storyboard.TargetProperty="MinWidth"
+                                        From="330"
+                                        To="340"
+                                        Duration="0:0:0.1"
+                                        AutoReverse="True"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="S4ButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource Toolbox_button_background_color_2}"/>
+        <Setter Property="FontFamily" Value="{StaticResource NarutoFont}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Toolbox_button_text_color_1}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinHeight" Value="50"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="Orange"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="Orange"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="Red"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#FFFFE0B2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        </Style>
+        <Style x:Key="CreditsHeaderLabel" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource NarutoFont}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Toolbox_button_text_color_1}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="CreditsTitleLarge" TargetType="Label" BasedOn="{StaticResource CreditsHeaderLabel}">
+            <Setter Property="FontSize" Value="45"/>
+        </Style>
+
+        <Style x:Key="CreditsTitleMedium" TargetType="Label" BasedOn="{StaticResource CreditsHeaderLabel}">
+            <Setter Property="FontSize" Value="40"/>
+        </Style>
+
+        <Style x:Key="CreditsItemText" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource NarutoFont}"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="CreditsButton" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource Toolbox_button_background_color_2}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource Toolbox_button_border_color_2}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Toolbox_button_text_color_1}"/>
+            <Setter Property="FontFamily" Value="{StaticResource NarutoFont}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="MinHeight" Value="50"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="ToggleButton" BasedOn="{StaticResource NoChromeButton}"/>
+        <Storyboard x:Key="ToS4">
+            <DoubleAnimation Storyboard.TargetName="ToolboxLogoGrid"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                             From="1" To="0.92" Duration="0:0:0.12" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ToolboxLogoGrid"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                             From="1" To="0.92" Duration="0:0:0.12" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ToolboxLogoImage"
+                             Storyboard.TargetProperty="Opacity"
+                             To="0" Duration="0:0:0.12"/>
+            <DoubleAnimation Storyboard.TargetName="ToolboxLogoS4Image"
+                             Storyboard.TargetProperty="Opacity"
+                             To="1" Duration="0:0:0.12"/>
+        </Storyboard>
+
+        <Storyboard x:Key="ToDefault">
+            <DoubleAnimation Storyboard.TargetName="ToolboxLogoGrid"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                             From="1" To="0.92" Duration="0:0:0.12" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ToolboxLogoGrid"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                             From="1" To="0.92" Duration="0:0:0.12" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ToolboxLogoImage"
+                             Storyboard.TargetProperty="Opacity"
+                             To="1" Duration="0:0:0.12"/>
+            <DoubleAnimation Storyboard.TargetName="ToolboxLogoS4Image"
+                             Storyboard.TargetProperty="Opacity"
+                             To="0" Duration="0:0:0.12"/>
+        </Storyboard>
     </Window.Resources>
     <Viewbox Stretch="{Binding Source={x:Static properties:Settings.Default}, Path=StretchMode}">
         <Grid>
-            <Grid ShowGridLines="False" Height="1000" Width="1400"  Visibility="{Binding MainWindowVisibility}" >
+            <Grid ShowGridLines="False" Height="1000" Width="1400"  local:AnimatedVisibility.TargetVisibility="{Binding MainWindowVisibility}" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2*"/>
@@ -89,20 +233,31 @@
                         <MenuItem Header="{DynamicResource m_mainWindow_008}" Command="{Binding CreditsCommand}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                         <MenuItem Header="{DynamicResource m_mainWindow_005}" Command="{Binding OptionsCommand}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     </Menu>
-                    <Grid Grid.Row="1" Margin="20" Background="{DynamicResource Toolbox_button_background_color_1}" Visibility="{Binding CharacterManagementVisibility}">
+                    <Grid Grid.Row="1" Margin="20" Background="{DynamicResource Toolbox_button_background_color_1}" local:AnimatedVisibility.TargetVisibility="{Binding CharacterManagementVisibility}">
                         <Button MouseEnter="CharacodeEditor_MouseEnter" Command="{Binding CharacodeRunButtonCommand}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_001}"/>
                         </Button>
                         <Button MouseEnter="DuelPlayerParamEditor_MouseEnter" Command="{Binding DuelPlayerParamEditorRunButtonCommand}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_002}"/>
                         </Button>
-                        <Button MouseEnter="PlayerSettingParamEditor_MouseEnter" Command="{Binding PlayerSettingParamRunButtonCommand}" Grid.Column="1" Grid.Row="5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"  MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                        <Button MouseEnter="PlayerSettingParamEditor_MouseEnter" local:AnimatedVisibility.TargetVisibility="{Binding StormCToolsVisibility}" Command="{Binding PlayerSettingParamRunButtonCommand}" Grid.Column="1" Grid.Row="5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"  MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_003}"/>
                         </Button>
-                        <Button MouseEnter="CharacterSelectParamEditor_MouseEnter" Command="{Binding CharacterSelectParamRunButtonCommand}"  Grid.Column="1" Grid.Row="7" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                        <Button MouseEnter="PlayerSettingParamEditor_MouseEnter" local:AnimatedVisibility.TargetVisibility="{Binding Storm4ToolsVisibility}" Command="{Binding PlayerSettingParamS4RunButtonCommand}"
+                                Style="{StaticResource S4ButtonStyle}" Grid.Column="1" Grid.Row="5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                            <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_003}"/>
+                        </Button>
+                        <Button MouseEnter="CharacterSelectParamEditor_MouseEnter" local:AnimatedVisibility.TargetVisibility="{Binding StormCToolsVisibility}" Command="{Binding CharacterSelectParamRunButtonCommand}"  Grid.Column="1" Grid.Row="7" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_004}"/>
                         </Button>
-                        <Button MouseEnter="SkillCustomizeParamEditor_MouseEnter" Command="{Binding SkillCustomizeParamEditorRunButtonCommand}"  Grid.Column="1" Grid.Row="9" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                        <Button MouseEnter="CharacterSelectParamEditor_MouseEnter" local:AnimatedVisibility.TargetVisibility="{Binding Storm4ToolsVisibility}"  Command="{Binding CharacterSelectParamS4RunButtonCommand}"
+                                Style="{StaticResource S4ButtonStyle}" Grid.Column="1" Grid.Row="7" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                            <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_004}"/>
+                        </Button>
+                        <Button MouseEnter="SkillCustomizeParamEditor_MouseEnter" local:AnimatedVisibility.TargetVisibility="{Binding StormCToolsVisibility}"  Command="{Binding SkillCustomizeParamEditorRunButtonCommand}"  Grid.Column="1" Grid.Row="9" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                            <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_005}"/>
+                        </Button>
+                        <Button MouseEnter="SkillCustomizeParamEditor_MouseEnter" Style="{StaticResource S4ButtonStyle}" local:AnimatedVisibility.TargetVisibility="{Binding Storm4ToolsVisibility}"  Command="{Binding SkillCustomizeParamS4EditorRunButtonCommand}"  Grid.Column="1" Grid.Row="9" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_005}"/>
                         </Button>
                         <Button MouseEnter="AfterAttachObjectEditor_MouseEnter" Command="{Binding AfterAttachObjectRunButtonCommand}"  Grid.Column="1" Grid.Row="11" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
@@ -111,7 +266,7 @@
                         <Button MouseEnter="PRMEditor_MouseEnter" Command="{Binding PRMEditorRunButtonCommand}" Grid.Column="1" Grid.Row="13" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_007}"/>
                         </Button>
-                        <Button MouseEnter="CostumeParamEditor_MouseEnter" Command="{Binding CostumeParamRunButtonCommand}"  Grid.Column="1" Grid.Row="15" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                        <Button MouseEnter="CostumeParamEditor_MouseEnter" local:AnimatedVisibility.TargetVisibility="{Binding StormCToolsVisibility}"  Command="{Binding CostumeParamRunButtonCommand}"  Grid.Column="1" Grid.Row="21" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_008}"/>
                         </Button>
                         <Button MouseEnter="PlayerDoubleEffectParamEditor_MouseEnter" Command="{Binding PlayerDoubleEffectParamRunButtonCommand}"  Grid.Column="1" Grid.Row="17" VerticalAlignment="Stretch"   HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
@@ -120,7 +275,7 @@
                         <Button MouseEnter="CmnParamEditor_MouseEnter" Command="{Binding cmnparamEditorRunButtonCommand}" Grid.Column="1" Grid.Row="19" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_017}"/>
                         </Button>
-                        <Button MouseEnter="SupportActionParamEditor_MouseEnter" Command="{Binding SupportActionParamRunButtonCommand}" Grid.Column="1" Grid.Row="21" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                        <Button MouseEnter="SupportActionParamEditor_MouseEnter" Command="{Binding SupportActionParamRunButtonCommand}" Grid.Column="1" Grid.Row="15" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_025}"/>
                         </Button>
                         <Button MouseEnter="PlayerIconEditor_MouseEnter" Command="{Binding PlayerIconRunButtonCommand}" Grid.Column="3" Grid.Row="1" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
@@ -135,7 +290,7 @@
                         <Button MouseEnter="SpSkillCustomizeParamEditor_MouseEnter" Command="{Binding SpSkillCustomizeParamRunButtonCommand}"  Grid.Column="3" Grid.Row="7" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_012}"/>
                         </Button>
-                        <Button MouseEnter="SkillIndexSettingParamEditor_MouseEnter"  Command="{Binding SkillIndexSettingParamEditorRunButtonCommand}" Grid.Column="3" Grid.Row="9" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                        <Button MouseEnter="SkillIndexSettingParamEditor_MouseEnter" local:AnimatedVisibility.TargetVisibility="{Binding StormCToolsVisibility}"  Command="{Binding SkillIndexSettingParamEditorRunButtonCommand}" Grid.Column="3" Grid.Row="19" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_011}"/>
                         </Button>
                         <Button MouseEnter="PRMLoadEditor_MouseEnter" Command="{Binding PRMLoadEditorRunButtonCommand}" Grid.Column="3" Grid.Row="11" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
@@ -150,10 +305,14 @@
                         <Button MouseEnter="CostumeBreakParamEditor_MouseEnter" Command="{Binding CostumeBreakParamRunButtonCommand}"  Grid.Column="3" Grid.Row="17" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_019}"/>
                         </Button>
-                        <Button MouseEnter="CostumeBreakColorParamEditor_MouseEnter" Command="{Binding CostumeBreakColorParamRunButtonCommand}"  Grid.Column="3" Grid.Row="19" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                        <Button MouseEnter="CostumeBreakColorParamEditor_MouseEnter" Command="{Binding CostumeBreakColorParamRunButtonCommand}" local:AnimatedVisibility.TargetVisibility="{Binding StormCToolsVisibility}" Grid.Column="3" Grid.Row="9" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_020}"/>
                         </Button>
-                        <Button MouseEnter="SupportSkillRecoverySpeedParamEditor_MouseEnter" Command="{Binding SupportSkillRecoverySpeedParamRunButtonCommand}"  Grid.Column="3" Grid.Row="21" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="13">
+
+                        <Button MouseEnter="CostumeBreakColorParamEditor_MouseEnter" Command="{Binding CostumeBreakColorParamS4RunButtonCommand}"  Style="{StaticResource S4ButtonStyle}"  local:AnimatedVisibility.TargetVisibility="{Binding Storm4ToolsVisibility}" Grid.Column="3" Grid.Row="9" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                            <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_020}"/>
+                        </Button>
+                        <Button MouseEnter="SupportSkillRecoverySpeedParamEditor_MouseEnter" local:AnimatedVisibility.TargetVisibility="{Binding StormCToolsVisibility}" Command="{Binding SupportSkillRecoverySpeedParamRunButtonCommand}"  Grid.Column="3" Grid.Row="21" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="13">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_026}"/>
                         </Button>
                         <Border Grid.ColumnSpan="20" Grid.RowSpan="50" BorderBrush="White" BorderThickness="2,2,2,2"/>
@@ -191,7 +350,7 @@
                         </Grid.RowDefinitions>
 
                     </Grid>
-                    <Grid Grid.Row="1" Margin="20" Background="{DynamicResource Toolbox_button_background_color_1}" Visibility="{Binding OtherToolsVisibility}">
+                    <Grid Grid.Row="1" Margin="20" Background="{DynamicResource Toolbox_button_background_color_1}" local:AnimatedVisibility.TargetVisibility="{Binding OtherToolsVisibility}">
                         <Button MouseEnter="StageInfoEditor_MouseEnter" Command="{Binding StageInfoEditorRunButtonCommand}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_022}"/>
                         </Button>
@@ -201,7 +360,10 @@
                         <Button Visibility="Visible" MouseEnter="SkillFileEditor_MouseEnter" Command="{Binding SkillEditorRunButtonCommand}" Grid.Column="1" Grid.Row="5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_027}"/>
                         </Button>
-                        <Button MouseEnter="MessageInfoEditor_MouseEnter" Command="{Binding MessageInfoEditorRunButtonCommand}" Grid.Column="3" Grid.Row="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                        <Button MouseEnter="MessageInfoEditor_MouseEnter" Command="{Binding MessageInfoEditorRunButtonCommand}" local:AnimatedVisibility.TargetVisibility="{Binding StormCToolsVisibility}" Grid.Column="3" Grid.Row="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                            <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_023}"/>
+                        </Button>
+                        <Button MouseEnter="MessageInfoEditor_MouseEnter" Command="{Binding MessageInfoS4EditorRunButtonCommand}" Style="{StaticResource S4ButtonStyle}"  local:AnimatedVisibility.TargetVisibility="{Binding Storm4ToolsVisibility}" Grid.Column="3" Grid.Row="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_023}"/>
                         </Button>
                         <Button MouseEnter="EffectPrmEditor_MouseEnter" Command="{Binding EffectPrmRunButtonCommand}" Grid.Column="3" Grid.Row="3" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
@@ -218,6 +380,12 @@
                         </Button>
                         <Button MouseEnter="ConditionPrm_MouseEnter" Command="{Binding ConditionprmManagerEditorRunButtonCommand}" Grid.Column="1" Grid.Row="9" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
                             <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_031}"/>
+                        </Button>
+                        <Button MouseEnter="ConditionPrm_MouseEnter" Command="{Binding GuardEffectParamRunButtonCommand}" Grid.Column="3" Grid.Row="9" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                            <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_mainWindowTool_032}"/>
+                        </Button>
+                        <Button MouseEnter="ConditionPrm_MouseEnter" Command="{Binding NUS3BANKEditorRunButtonCommand}" Style="{StaticResource S4ButtonStyle}"  local:AnimatedVisibility.TargetVisibility="{Binding Storm4ToolsVisibility}"  Grid.Column="1" Grid.Row="11" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14">
+                            <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_nus3bankEditor}"/>
                         </Button>
                         <Border Grid.ColumnSpan="20" Grid.RowSpan="50" BorderBrush="White" BorderThickness="2,2,2,2"/>
                         <Grid.ColumnDefinitions>
@@ -254,7 +422,7 @@
                         </Grid.RowDefinitions>
 
                     </Grid>
-                    <Grid Grid.Row="1" Margin="20" Background="{DynamicResource Toolbox_button_background_color_1}" Visibility="{Binding OptionsVisibility}">
+                    <Grid Grid.Row="1" Margin="20" Background="{DynamicResource Toolbox_button_background_color_1}" local:AnimatedVisibility.TargetVisibility="{Binding OptionsVisibility}">
                         <Label Grid.Column="1"  Grid.Row="1" Grid.ColumnSpan="1" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_option001}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14"/>
                         <ComboBox Grid.Column="1"  Grid.Row="2" Grid.ColumnSpan="1" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" SelectedIndex="{Binding StretchMode_field}">
                             <ComboBoxItem>
@@ -344,9 +512,34 @@
                 </Grid>
                 <Border Grid.Column="1" BorderBrush="White" BorderThickness="1,0,0,1" Grid.RowSpan="1"/>
                 <StackPanel Panel.ZIndex="5" >
-                    <Button MinWidth="330" Style="{StaticResource NoChromeButton}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"> <!--Command="{Binding AddMeouch}-->
-                        <Image Source="{DynamicResource ResourceKey=ToolboxLogo}" Margin="20" RenderOptions.BitmapScalingMode="HighQuality"/>
-                    </Button>
+                    <ToggleButton x:Name="ToolboxLogoToggle"
+                      MinWidth="330"
+                      Command="{Binding ChangeGame}"
+                      Style="{StaticResource NoChromeToggleButton}"
+                      IsChecked="False"
+                      RenderTransformOrigin="0.5,0.5"
+                      Checked="ToolboxLogoToggle_Checked"
+                      Unchecked="ToolboxLogoToggle_Unchecked">
+
+                        <ToggleButton.Content>
+                            <Grid x:Name="ToolboxLogoGrid" RenderTransformOrigin="0.5,0.5" Margin="20">
+                                <Grid.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Grid.RenderTransform>
+
+                                <Image x:Name="ToolboxLogoImage"
+                           Source="{DynamicResource ToolboxLogo}"
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           Opacity="1"/>
+
+                                <Image x:Name="ToolboxLogoS4Image"
+                           Source="{DynamicResource ToolboxLogoS4}"
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           Opacity="0"/>
+                            </Grid>
+                        </ToggleButton.Content>
+                    </ToggleButton>
+
                     <Button Command="{Binding CharacterManagementCommand}"  Panel.ZIndex="5" Margin="10" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_mainWindow_001}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="23"/>
                     <Button Command="{Binding OtherToolsCommand}" Panel.ZIndex="5" Margin="10" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_mainWindow_004}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="23"/>
                     <Button Command="{Binding AddCostumeCommand}" Panel.ZIndex="5" Margin="10" HorizontalAlignment="Stretch" MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_addCostume_title}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="23"/>
@@ -366,8 +559,8 @@
 
                 </Grid>
             </Grid>
-            
-           <Grid ShowGridLines="False" Height="1000" Width="1000" Visibility="{Binding Credits2024Visibility}"  Grid.RowSpan="3" Background="{DynamicResource Toolbox_button_background_color_1}">
+
+            <Grid Height="1000" Width="1000" ShowGridLines="False" Background="{DynamicResource Toolbox_button_background_color_1}" local:AnimatedVisibility.TargetVisibility="{Binding CreditsVisibility}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.3*"/>
                     <RowDefinition Height="1*"/>
@@ -388,71 +581,182 @@
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="10"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="1"  Grid.Row="1" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_credits_001}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="45"/>
-                <Label Grid.Column="1"  Grid.Row="2" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_credits_002}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="40"/>
-                <StackPanel Grid.Column="1" Grid.Row="3">
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Carrington Bennett" Foreground="Red" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="justcamtro" Foreground="Red" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="EliteAce" Foreground="Orange" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Chakra Warrior" Foreground="Orange" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Halucygeno" Foreground="Orange" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="little Damien" Foreground="Orange" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="HydraBladeZ" Foreground="Orange" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Jonathan Nefores" Foreground="Orange" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Anime Knight" Foreground="Yellow" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Alex Olney" Foreground="Yellow" FontSize="25"/>
-                </StackPanel>
-                <StackPanel Grid.Column="3" Grid.Row="3">
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Nate Roberts" Foreground="Yellow" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Shoii" Foreground="Yellow" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Steinixos" Foreground="Yellow" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="UltimateOmbuStorm" Foreground="Yellow" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Amritz kenzy" Foreground="Yellow" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Naggingclub5" Foreground="Yellow" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Jonas Martinez" Foreground="Yellow" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="N&amp;D Productions" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="The Brothers" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Shoyo" Foreground="White" FontSize="25"/>
-                </StackPanel>
-                <StackPanel Grid.Column="5" Grid.Row="3">
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="G3ku" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Hunter Yang" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Aleksa Nikolić" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Ceaz Azce" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Клим Сапранков" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="dark94" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="许誉骞" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Fearless Intelligent" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Erik Petrosyan" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Moeru Storm" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Bully" Foreground="White" FontSize="25"/>
-                </StackPanel>
-                <Label Grid.Column="1"  Grid.Row="4" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_credits_003}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="40"/>
 
-                <StackPanel Grid.Column="1" Grid.Row="5">
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="HydraBladeZ" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="SutandoTsukai" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="ZealotTormunds" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="dei" Foreground="White" FontSize="25"/>
+                <!-- Заголовки -->
+                <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center"
+           FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_credits_001}"
+           Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="45"/>
+                <Label Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center"
+           FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_credits_002}"
+           Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="40"/>
+
+                <!-- Блок для 2024 -->
+                <Grid Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" local:AnimatedVisibility.TargetVisibility="{Binding Credits2024Visibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <!-- Список имён 2024 (скопирован из вашего оригинала) -->
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Carrington Bennett" Foreground="Red" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="justcamtro" Foreground="Red" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="EliteAce" Foreground="Orange" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Chakra Warrior" Foreground="Orange" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Halucygeno" Foreground="Orange" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="little Damien" Foreground="Orange" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="HydraBladeZ" Foreground="Orange" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Jonathan Nefores" Foreground="Orange" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Anime Knight" Foreground="Yellow" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Alex Olney" Foreground="Yellow" FontSize="25"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Nate Roberts" Foreground="Yellow" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Shoii" Foreground="Yellow" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Steinixos" Foreground="Yellow" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="UltimateOmbuStorm" Foreground="Yellow" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Amritz kenzy" Foreground="Yellow" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Naggingclub5" Foreground="Yellow" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Jonas Martinez" Foreground="Yellow" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="N&amp;D Productions" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="The Brothers" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Shoyo" Foreground="White" FontSize="25"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="G3ku" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Hunter Yang" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Aleksa Nikolić" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Ceaz Azce" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Клим Сапранков" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="dark94" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="许誉骞" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Fearless Intelligent" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Erik Petrosyan" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Moeru Storm" Foreground="White" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Bully" Foreground="White" FontSize="25"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Блок для 2025 -->
+                <Grid Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" local:AnimatedVisibility.TargetVisibility="{Binding Credits2025Visibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Geegeboy" Foreground="Red" FontSize="25"/>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="HallucinatingGenius" Foreground="Orange" FontSize="25"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Jackwans" Foreground="White" FontSize="25"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Synrosion" Foreground="White" FontSize="25"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Блок для 2026 -->
+                <Grid Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" local:AnimatedVisibility.TargetVisibility="{Binding Credits2026Visibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Synrosion" Foreground="White" FontSize="25"/>
+                    </StackPanel>
+
+                    <!--<StackPanel Grid.Column="1">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="2026 — Contributor Z" Foreground="White" FontSize="25"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="2026 — Contributor W" Foreground="White" FontSize="25"/>
+                    </StackPanel>-->
+                </Grid>
+
+                <Label Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center"
+           FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_credits_003}"
+           Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="40"/>
+                <StackPanel Grid.Column="1" Grid.Row="5" Visibility="{Binding Credits2024Visibility}">
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="HydraBladeZ" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="SutandoTsukai" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="ZealotTormunds" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="dei" Foreground="White" FontSize="25"/>
                 </StackPanel>
-                <StackPanel Grid.Column="3" Grid.Row="5">
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="justcamtro" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Chakra Warrior" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Xact" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Portable Productions" Foreground="White" FontSize="27"/>
+
+                <StackPanel Grid.Column="3" Grid.Row="5" Visibility="{Binding Credits2024Visibility}">
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="justcamtro" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Chakra Warrior" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Xact" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Portable Productions" Foreground="White" FontSize="27"/>
                 </StackPanel>
-                <StackPanel Grid.Column="5" Grid.Row="5">
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="exavadeathwitch" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Xuân Thái" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="Dark Madara" Foreground="White" FontSize="25"/>
-                    <Label Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="EliteAce" Foreground="White" FontSize="25"/>
+
+                <StackPanel Grid.Column="5" Grid.Row="5" Visibility="{Binding Credits2024Visibility}">
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="exavadeathwitch" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Xuân Thái" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Dark Madara" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="EliteAce" Foreground="White" FontSize="25"/>
                 </StackPanel>
-                <Label Grid.Column="3"  Grid.Row="7" Grid.ColumnSpan="1" HorizontalAlignment="Right" VerticalAlignment="Center"  FontFamily="{StaticResource NarutoFont}" Content="2024" Foreground="White" FontSize="27"/>
-                <Button Grid.Column="5" Grid.Row="7" Command="{Binding MainMenuCommand}" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"  MinHeight="50" Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}" FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="20">
+
+                <!-- при необходимости: аналогичные блоки для 2025 -->
+                <StackPanel Grid.Column="1" Grid.Row="5" Visibility="{Binding Credits2025Visibility}">
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="HydraBladeZ" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Xact" Foreground="White" FontSize="25"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="3" Grid.Row="5" Visibility="{Binding Credits2025Visibility}">
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Rozami" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="justcamtro" Foreground="White" FontSize="25"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="5" Grid.Row="5" Visibility="{Binding Credits2025Visibility}">
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="EliteAce" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Lunar" Foreground="White" FontSize="25"/>
+                </StackPanel>
+                <!-- при необходимости: аналогичные блоки для 2026 -->
+                <StackPanel Grid.Column="1" Grid.Row="5" Visibility="{Binding Credits2026Visibility}">
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="HydraBladeZ" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Xact" Foreground="White" FontSize="25"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="3" Grid.Row="5" Visibility="{Binding Credits2026Visibility}">
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Rozami" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="justcamtro" Foreground="White" FontSize="25"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="5" Grid.Row="5" Visibility="{Binding Credits2026Visibility}">
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="EliteAce" Foreground="White" FontSize="25"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource NarutoFont}" Content="Lunar" Foreground="White" FontSize="25"/>
+                </StackPanel>
+
+                <!-- Навигация по годам: кнопки слева от метки "2024" -->
+                <StackPanel Grid.Column="3" Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,10,0">
+                    <Button Command="{Binding SetCreditsYearCommand}" CommandParameter="2024" MinWidth="60" MinHeight="30" Margin="2" FontFamily="{StaticResource NarutoFont}" Content="2024"/>
+                    <Button Command="{Binding SetCreditsYearCommand}" CommandParameter="2025" MinWidth="60" MinHeight="30" Margin="2" FontFamily="{StaticResource NarutoFont}" Content="2025"/>
+                    <Button Command="{Binding SetCreditsYearCommand}" CommandParameter="2026" MinWidth="60" MinHeight="30" Margin="2" FontFamily="{StaticResource NarutoFont}" Content="2026"/>
+                </StackPanel>
+
+                <!-- Старая метка года -->
+                <Label Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+       FontFamily="{StaticResource NarutoFont}" Content="{Binding SelectedYearLabel}" Foreground="White" FontSize="27"/>
+
+                <!-- Кнопка "Back to menu" -->
+                <Button Grid.Column="5" Grid.Row="7" Command="{Binding MainMenuCommand}" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" MinHeight="50"
+            Background="{DynamicResource Toolbox_button_background_color_2}" BorderBrush="{DynamicResource Toolbox_button_border_color_2}"
+            FontFamily="{StaticResource NarutoFont}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="20">
                     <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" Text="{DynamicResource m_credits_004}"/>
                 </Button>
 
-                <Border Grid.Column="1" Grid.Row="1"  BorderBrush="White" BorderThickness="1,1,1,1" Grid.RowSpan="7" Grid.ColumnSpan="5"/>
+                <Border Grid.Column="1" Grid.Row="1" BorderBrush="White" BorderThickness="1,1,1,1" Grid.RowSpan="7" Grid.ColumnSpan="5"/>
             </Grid>
 
         </Grid>

@@ -83,6 +83,18 @@
                         <ComboBoxItem>
                             <TextBlock Text="{StaticResource m_spTypeSupportParamState_3}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
                         </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Text="{StaticResource m_spTypeSupportParamState_4}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Text="{StaticResource m_spTypeSupportParamState_5}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Text="{StaticResource m_spTypeSupportParamState_6}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Text="{StaticResource m_spTypeSupportParamState_7}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                        </ComboBoxItem>
                     </ComboBox>
                     <Label HorizontalAlignment="Left" FontSize="16" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_spTypeSupportParamMode}" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>
                     <ComboBox SelectedIndex="{Binding Direction_field}" HorizontalContentAlignment="Left" Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="1" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}" Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1">

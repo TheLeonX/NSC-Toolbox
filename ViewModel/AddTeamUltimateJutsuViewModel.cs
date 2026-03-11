@@ -27,6 +27,19 @@ namespace NSC_Toolbox.ViewModel
                 OnPropertyChanged("LoadingStatePlay");
             }
         }
+
+        // Game selector: 0 = StormConnections (NSC), 1 = Storm4 (NS4)
+        private int _selectedGameIndex = 0;
+        public int SelectedGameIndex
+        {
+            get => _selectedGameIndex;
+            set
+            {
+                _selectedGameIndex = value;
+                OnPropertyChanged(nameof(SelectedGameIndex));
+            }
+        }
+
         private ObservableCollection<CharacodeEditorModel> _importCharacterList = new();
         public ObservableCollection<CharacodeEditorModel> ImportCharacterList
         {
@@ -58,22 +71,47 @@ namespace NSC_Toolbox.ViewModel
                 if (value != null)
                 {
                     MissingFiles_field = "";
-                    if (File.Exists(Path.Combine(value, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin")) &&
-                        File.Exists(Path.Combine(value, "data_win32", "sound", "cmnparam.xfbin")) &&
-                        File.Exists(Path.Combine(value, "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin"))
-                        )
-                        IsRootFolderExist = Directory.Exists(value);
 
-                    if (!File.Exists(Path.Combine(value, "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin")))
+                    bool isStorm4 = SelectedGameIndex == 1;
+
+                    // compute paths depending on game
+                    string pairCombinePath = isStorm4
+                        ? Path.Combine(value, "data_win32", "spc", "WIN64", "pairSpSkillCombinationParam.xfbin")
+                        : Path.Combine(value, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin");
+
+                    string cmnparamPath = Path.Combine(value, "data_win32", "sound", "cmnparam.xfbin");
+
+                    // prefer param path under moddingapi\param\NS4 or NSC; fallback to old location moddingapi\mods\base_game
+                    string pairManagerParamPath = isStorm4
+                        ? Path.Combine(value, "moddingapi", "param", "NS4", "pairSpSkillManagerParam.xfbin")
+                        : Path.Combine(value, "moddingapi", "param", "NSC", "pairSpSkillManagerParam.xfbin");
+
+                    string pairManagerFallback = Path.Combine(value, "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin");
+
+                    // check existence
+                    bool pairCombineExists = File.Exists(pairCombinePath);
+                    bool cmnExists = File.Exists(cmnparamPath);
+                    bool pairManagerExists = File.Exists(pairManagerParamPath) || File.Exists(pairManagerFallback);
+
+                    if (pairCombineExists && cmnExists && pairManagerExists)
+                        IsRootFolderExist = Directory.Exists(value);
+                    else
+                        IsRootFolderExist = false;
+
+                    // ensure pairManager exists message: prefer param path, if neither exists show message
+                    if (!File.Exists(pairManagerParamPath) && !File.Exists(pairManagerFallback))
                     {
-                        ModernWpf.MessageBox.Show(Path.Combine(value, "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin") + " doesn't exist. Install new version of ModdingAPI before using this tool.");
+                        ModernWpf.MessageBox.Show(pairManagerParamPath + " or " + pairManagerFallback + " doesn't exist. Install new version of ModdingAPI before using this tool.");
                         return;
                     }
-                    string characodePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", "characode.bin.xfbin");
-                    if (File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc", "characode.bin.xfbin")))
-                    {
-                        characodePath = Path.Combine(RootFolderPath_field, "data_win32", "spc", "characode.bin.xfbin");
-                    }
+
+                    // characode path: prefer data_win32\spc\WIN64\... for S4
+                    string characodePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", SelectedGameIndex == 1 ? "NS4" : "NSC", "characode.bin.xfbin");
+                    string dataCharacode = Path.Combine(RootFolderPath_field ?? string.Empty, "data_win32", "spc", "characode.bin.xfbin");
+
+                    if (File.Exists(dataCharacode))
+                        characodePath = dataCharacode;
+
                     CharacodeEditorViewModel charEditor = new CharacodeEditorViewModel();
                     charEditor.OpenFile(characodePath);
                     ImportCharacterList = charEditor.CharacodeList;
@@ -83,22 +121,37 @@ namespace NSC_Toolbox.ViewModel
                         MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_12"], "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (result == MessageBoxResult.Yes)
                         {
-
                             IsRootFolderExist = Directory.Exists(RootFolderPath_field);
                             if (IsRootFolderExist)
                             {
-
-                                if (!Directory.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc")))
-                                    Directory.CreateDirectory(Path.Combine(RootFolderPath_field, "data_win32", "spc"));
+                                // create folders and copy defaults from ParamFiles/{NSC|NS4}
+                                if (!Directory.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc", "WIN64")))
+                                    Directory.CreateDirectory(Path.Combine(RootFolderPath_field, "data_win32", "spc", "WIN64"));
                                 if (!Directory.Exists(Path.Combine(RootFolderPath_field, "data_win32", "sound")))
                                     Directory.CreateDirectory(Path.Combine(RootFolderPath_field, "data_win32", "sound"));
 
+                                // choose source folder
+                                string paramFilesFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", SelectedGameIndex == 1 ? "NS4" : "NSC");
 
-                                if (!File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin")))
-                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", "pairSpSkillCombinationParam.xfbin"), Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin"));
+                                // copy pair combine
+                                string srcPairCombine = Path.Combine(paramFilesFolder, "pairSpSkillCombinationParam.xfbin");
+                                string dstPairCombine = pairCombinePath;
+                                if (!File.Exists(dstPairCombine) && File.Exists(srcPairCombine))
+                                    File.Copy(srcPairCombine, dstPairCombine);
 
-                                if (!File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin")))
-                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", "cmnparam.xfbin"), Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin"));
+                                // copy cmnparam
+                                string srcCmn = Path.Combine(paramFilesFolder, "cmnparam.xfbin");
+                                string dstCmn = cmnparamPath;
+                                if (!File.Exists(dstCmn) && File.Exists(srcCmn))
+                                    File.Copy(srcCmn, dstCmn);
+
+                                // copy pair manager (try param location then fallback)
+                                string srcPairManager = Path.Combine(paramFilesFolder, "pairSpSkillManagerParam.xfbin");
+                                if (!File.Exists(pairManagerParamPath) && File.Exists(srcPairManager))
+                                {
+                                    Directory.CreateDirectory(Path.GetDirectoryName(pairManagerParamPath) ?? Path.Combine(value, "moddingapi", "param", SelectedGameIndex == 1 ? "NS4" : "NSC"));
+                                    File.Copy(srcPairManager, pairManagerParamPath);
+                                }
                             } else
                             {
                                 ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_11"]);
@@ -106,10 +159,12 @@ namespace NSC_Toolbox.ViewModel
                         } else
                         {
                             MissingFiles_field = "Missing files:\n\n";
-                            if (!File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin")))
-                                MissingFiles_field += Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin") + "\n";
-                            if (!File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin")))
-                                MissingFiles_field += Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin") + "\n";
+                            if (!File.Exists(pairCombinePath))
+                                MissingFiles_field += pairCombinePath + "\n";
+                            if (!File.Exists(cmnparamPath))
+                                MissingFiles_field += cmnparamPath + "\n";
+                            if (!File.Exists(pairManagerParamPath) && !File.Exists(pairManagerFallback))
+                                MissingFiles_field += pairManagerParamPath + "\n";
                         }
                     }
                 } else
@@ -124,7 +179,6 @@ namespace NSC_Toolbox.ViewModel
             set
             {
                 _isRootFolderExist = value;
-
                 OnPropertyChanged("IsRootFolderExist");
             }
         }
@@ -264,22 +318,35 @@ namespace NSC_Toolbox.ViewModel
             if (RootFolderPath_field != null)
             {
                 MissingFiles_field = "";
-                if (File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin")) &&
-                    File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin")) &&
-                    File.Exists(Path.Combine(RootFolderPath_field, "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin"))
-                    )
-                    IsRootFolderExist = Directory.Exists(RootFolderPath_field);
 
-                if (!File.Exists(Path.Combine(RootFolderPath_field, "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin")))
-                {
-                    ModernWpf.MessageBox.Show(Path.Combine(RootFolderPath_field, "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin") + " doesn't exist. Install new version of ModdingAPI before using this tool.");
-                    return;
-                }
-                string characodePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", "characode.bin.xfbin");
-                if (File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc", "characode.bin.xfbin")))
-                {
-                    characodePath = Path.Combine(RootFolderPath_field, "data_win32", "spc", "characode.bin.xfbin");
-                }
+                bool isStorm4 = SelectedGameIndex == 1;
+
+                string pairCombinePath = isStorm4
+                    ? Path.Combine(RootFolderPath_field, "data_win32", "spc", "WIN64", "pairSpSkillCombinationParam.xfbin")
+                    : Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin");
+
+                string cmnparamPath = Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin");
+
+                string pairManagerParamPath = isStorm4
+                    ? Path.Combine(RootFolderPath_field, "moddingapi", "param", "NS4", "pairSpSkillManagerParam.xfbin")
+                    : Path.Combine(RootFolderPath_field, "moddingapi", "param", "NSC", "pairSpSkillManagerParam.xfbin");
+
+
+                bool pairCombineExists = File.Exists(pairCombinePath);
+                bool cmnExists = File.Exists(cmnparamPath);
+                bool pairManagerExists = File.Exists(pairManagerParamPath);
+
+                if (pairCombineExists && cmnExists && pairManagerExists)
+                    IsRootFolderExist = Directory.Exists(RootFolderPath_field);
+                else
+                    IsRootFolderExist = false;
+
+                string characodePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", SelectedGameIndex == 1 ? "NS4" : "NSC", "characode.bin.xfbin");
+                string dataCharacode = Path.Combine(RootFolderPath_field ?? string.Empty, "data_win32", "spc", "characode.bin.xfbin");
+
+                if (File.Exists(dataCharacode))
+                    characodePath = dataCharacode;
+
                 CharacodeEditorViewModel charEditor = new CharacodeEditorViewModel();
                 charEditor.OpenFile(characodePath);
                 ImportCharacterList = charEditor.CharacodeList;
@@ -289,22 +356,32 @@ namespace NSC_Toolbox.ViewModel
                     MessageBoxResult result = (MessageBoxResult)ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_12"], "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                     {
-
                         IsRootFolderExist = Directory.Exists(RootFolderPath_field);
                         if (IsRootFolderExist)
                         {
-
-                            if (!Directory.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc")))
-                                Directory.CreateDirectory(Path.Combine(RootFolderPath_field, "data_win32", "spc"));
+                            if (!Directory.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc", "WIN64")))
+                                Directory.CreateDirectory(Path.Combine(RootFolderPath_field, "data_win32", "spc", "WIN64"));
                             if (!Directory.Exists(Path.Combine(RootFolderPath_field, "data_win32", "sound")))
                                 Directory.CreateDirectory(Path.Combine(RootFolderPath_field, "data_win32", "sound"));
 
+                            string paramFilesFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", SelectedGameIndex == 1 ? "NS4" : "NSC");
 
-                            if (!File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin")))
-                                File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", "pairSpSkillCombinationParam.xfbin"), Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin"));
+                            string srcPairCombine = Path.Combine(paramFilesFolder, "pairSpSkillCombinationParam.xfbin");
+                            string dstPairCombine = pairCombinePath;
+                            if (!File.Exists(dstPairCombine) && File.Exists(srcPairCombine))
+                                File.Copy(srcPairCombine, dstPairCombine);
 
-                            if (!File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin")))
-                                File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "ParamFiles", "cmnparam.xfbin"), Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin"));
+                            string srcCmn = Path.Combine(paramFilesFolder, "cmnparam.xfbin");
+                            string dstCmn = cmnparamPath;
+                            if (!File.Exists(dstCmn) && File.Exists(srcCmn))
+                                File.Copy(srcCmn, dstCmn);
+
+                            string srcPairManager = Path.Combine(paramFilesFolder, "pairSpSkillManagerParam.xfbin");
+                            if (!File.Exists(pairManagerParamPath) && File.Exists(srcPairManager))
+                            {
+                                Directory.CreateDirectory(Path.GetDirectoryName(pairManagerParamPath) ?? Path.Combine(RootFolderPath_field, "moddingapi", "param", SelectedGameIndex == 1 ? "NS4" : "NSC"));
+                                File.Copy(srcPairManager, pairManagerParamPath);
+                            }
                         } else
                         {
                             ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_11"]);
@@ -312,10 +389,10 @@ namespace NSC_Toolbox.ViewModel
                     } else
                     {
                         MissingFiles_field = "Missing files:\n\n";
-                        if (!File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin")))
-                            MissingFiles_field += Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin") + "\n";
-                        if (!File.Exists(Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin")))
-                            MissingFiles_field += Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin") + "\n";
+                        if (!File.Exists(pairCombinePath))
+                            MissingFiles_field += pairCombinePath + "\n";
+                        if (!File.Exists(cmnparamPath))
+                            MissingFiles_field += cmnparamPath + "\n";
                     }
                 }
             } else
@@ -332,13 +409,20 @@ namespace NSC_Toolbox.ViewModel
                     !string.IsNullOrEmpty(TUJ_label_field) &&
                     !string.IsNullOrEmpty(TUJ_Name_field))
                 {
-                    string pairCombineParamPath = Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin");
+                    bool isStorm4 = SelectedGameIndex == 1;
+
+                    string pairCombineParamPath = isStorm4
+                        ? Path.Combine(RootFolderPath_field, "data_win32", "spc", "WIN64", "pairSpSkillCombinationParam.xfbin")
+                        : Path.Combine(RootFolderPath_field, "data_win32", "spc", "pairSpSkillCombinationParam.xfbin");
+
                     string cmnparamPath = Path.Combine(RootFolderPath_field, "data_win32", "sound", "cmnparam.xfbin");
-                    string pairManagerParamPath = Path.Combine(RootFolderPath_field, "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin");
+
+                    string pairManagerParamPath = isStorm4
+                        ? Path.Combine(RootFolderPath_field, "moddingapi", "param", "NS4", "pairSpSkillManagerParam.xfbin")
+                        : Path.Combine(RootFolderPath_field, "moddingapi", "param", "NSC", "pairSpSkillManagerParam.xfbin");
 
                     PairSpSkillCombinationParamViewModel pairSpSkillCombinationExport = new PairSpSkillCombinationParamViewModel();
                     cmnparamViewModel cmnparamExport = new cmnparamViewModel();
-
 
                     pairSpSkillCombinationExport.OpenFile(pairCombineParamPath);
                     cmnparamExport.OpenFile(cmnparamPath);
@@ -346,11 +430,9 @@ namespace NSC_Toolbox.ViewModel
 
                     // ---------------------------------------- Pair Sp Skill Manager Param ---------------------------------------------------------------
 
-                    // Read all bytes from the file.
                     int entryLength = 0x18; // Each entry is 24 bytes.
                     bool exists = false;
 
-                    // Check if any entry already has TUJ_label_field as its name.
                     int entryCount = pairManagerParamExport.Length / entryLength;
                     for (int i = 0; i < entryCount; i++)
                     {
@@ -358,7 +440,6 @@ namespace NSC_Toolbox.ViewModel
                         byte[] nameBytes = new byte[0x10]; // 16 bytes for the name.
                         Array.Copy(pairManagerParamExport, offset, nameBytes, 0, 0x10);
 
-                        // Convert the 16-byte string (assumed ASCII) and trim null terminators.
                         string entryName = Encoding.ASCII.GetString(nameBytes).TrimEnd('\0');
 
                         if (entryName.Equals(TUJ_label_field, StringComparison.Ordinal))
@@ -371,36 +452,27 @@ namespace NSC_Toolbox.ViewModel
                     if (exists)
                     {
                         ModernWpf.MessageBox.Show(TUJ_label_field + " entry already exist in file. Change label for TUJ.");
-                        return; // Entry already exists.
+                        return;
                     }
 
                     byte[] newPairManagerEntry = new byte[entryLength];
-                    // Calculate the number of entries already in the export.
                     int pairManagerCount = pairManagerParamExport.Length / entryLength;
 
-                    // Add placeholder entries only if the current count is in SkipEntriesList.
                     while (SkipEntriesList.Contains(pairManagerCount))
                     {
                         newPairManagerEntry = new byte[entryLength];
-                        // Replace name with "placeholder"
                         newPairManagerEntry = BinaryReader.b_ReplaceString(newPairManagerEntry, "placeholder", 0x00);
-                        // Replace Unlock Value with -1
                         newPairManagerEntry = BinaryReader.b_ReplaceBytes(newPairManagerEntry, BitConverter.GetBytes(-1), 0x10);
-                        // Append the placeholder entry
                         pairManagerParamExport = BinaryReader.b_AddBytes(pairManagerParamExport, newPairManagerEntry);
-
-                        // Update the count after appending the entry.
                         pairManagerCount = pairManagerParamExport.Length / entryLength;
                     }
 
-                    // Now add the new entry with TUJ_label_field as its name.
                     {
                         newPairManagerEntry = new byte[entryLength];
                         newPairManagerEntry = BinaryReader.b_ReplaceString(newPairManagerEntry, TUJ_label_field, 0x00);
                         newPairManagerEntry = BinaryReader.b_ReplaceBytes(newPairManagerEntry, BitConverter.GetBytes(-1), 0x10);
                         pairManagerParamExport = BinaryReader.b_AddBytes(pairManagerParamExport, newPairManagerEntry);
                     }
-
 
                     // ---------------------------------------- Pair Sp Skill Combination Param ---------------------------------------------------------------
 
@@ -416,9 +488,8 @@ namespace NSC_Toolbox.ViewModel
                         pairSpSkillCombEntry.Condition1 = true;
                         pairSpSkillCombEntry.Condition2 = false;
                         pairSpSkillCombinationExport.pairSpSkillList.Add(pairSpSkillCombEntry);
-                        entryPairComb = pairSpSkillCombinationExport.pairSpSkillList.Count; 
+                        entryPairComb = pairSpSkillCombinationExport.pairSpSkillList.Count;
                         pairSpSkillCombEntry = new PairSpSkillCombinationParamModel();
-
                     }
                     {
                         pairSpSkillCombEntry.TUJ_ID = entryPairComb;
@@ -431,7 +502,6 @@ namespace NSC_Toolbox.ViewModel
                         pairSpSkillCombEntry.Condition2 = Condition2_field;
                         pairSpSkillCombinationExport.pairSpSkillList.Add(pairSpSkillCombEntry);
                     }
-                    
 
                     //---------------------------------- Cmn Param ---------------------------------------------------------------------------------------------
 
@@ -444,7 +514,6 @@ namespace NSC_Toolbox.ViewModel
                         cmnparamExport.PairSplList.Add(tuj_cmnparam_entry);
                         tuj_cmnparam_entry = new pair_spl_sndModel();
                         entrycmnParam = cmnparamExport.PairSplList.Count;
-
                     }
                     {
                         tuj_cmnparam_entry.PairSplID = entrycmnParam;
@@ -455,7 +524,6 @@ namespace NSC_Toolbox.ViewModel
                         tuj_cmnparam_entry.PairAtkChunkName = TUJ_label_field + "_spl1_atk_snd";
                         cmnparamExport.PairSplList.Add(tuj_cmnparam_entry);
                     }
-                    
 
                     //----------------------------- SAVE FILES -------------------------------------------------------------------------------------------------------
                     pairSpSkillCombinationExport.SaveFileAs(pairCombineParamPath);
@@ -471,8 +539,6 @@ namespace NSC_Toolbox.ViewModel
                     Unk2_field = 30;
                     MemberCount_field = 2;
                     CharacodeIDList.Clear();
-
-
                 }
             } catch (Exception ex)
             {
@@ -490,7 +556,6 @@ namespace NSC_Toolbox.ViewModel
                 ModernWpf.MessageBox.Show((string)System.Windows.Application.Current.Resources["m_error_2"]);
             }
         }
-
 
         public void AddCharacodeEntry()
         {

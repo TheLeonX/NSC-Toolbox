@@ -176,24 +176,24 @@ namespace NSC_Toolbox.Model {
                 OnPropertyChanged("BoneName");
             }
         }
-        private UInt16 _hurtboxRadius;
-        public UInt16 HurtboxRadius {
+        private uint _hurtboxRadius;
+        public uint HurtboxRadius {
             get { return _hurtboxRadius; }
             set {
                 _hurtboxRadius = value;
                 OnPropertyChanged("HurtboxRadius");
             }
         }
-        private Int16 _hurtbox_Y_Pos;
-        public Int16 Hurtbox_Y_Pos {
+        private int _hurtbox_Y_Pos;
+        public int Hurtbox_Y_Pos {
             get { return _hurtbox_Y_Pos; }
             set {
                 _hurtbox_Y_Pos = value;
                 OnPropertyChanged("Hurtbox_Y_Pos");
             }
         }
-        private Int16 _hurtbox_Z_Pos;
-        public Int16 Hurtbox_Z_Pos {
+        private int _hurtbox_Z_Pos;
+        public int Hurtbox_Z_Pos {
             get { return _hurtbox_Z_Pos; }
             set {
                 _hurtbox_Z_Pos = value;

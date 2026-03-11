@@ -963,6 +963,8 @@ namespace NSC_Toolbox.ViewModel {
                         //DuelPlayerParamList[x].AwakeningCondition1 = FileBytes[_ptr + 337];
                         //DuelPlayerParamList[x].AwakeningCondition2 = FileBytes[_ptr + 338];
                         //DuelPlayerParamList[x].AwakeningJutsuController = FileBytes[_ptr + 339];
+                        DuelPlayerParamList[x].Evo1 = (uint)BinaryReader.b_ReadInt(FileBytes, _ptr + 0x154);
+                        DuelPlayerParamList[x].Evo2 = (uint)BinaryReader.b_ReadInt(FileBytes, _ptr + 0x158);
                         DuelPlayerParamList[x].AwaBodyPriority = (uint)BinaryReader.b_ReadInt(FileBytes, _ptr + 352);
                         DuelPlayerParamList[x].DefaultAwaSkillIndex = BinaryReader.b_ReadInt(FileBytes, _ptr + 356);
 
@@ -1267,6 +1269,8 @@ namespace NSC_Toolbox.ViewModel {
                 DPP_entry.AirDashSpeed = 1;
                 DPP_entry.Attack = 1;
                 DPP_entry.Defense = 1;
+                DPP_entry.Evo1 = 0;
+                DPP_entry.Evo2 = 0;
                 DPP_entry.AssistDamage = 1;
                 DPP_entry.ItemBuffDuration = 1;
                 DPP_entry.ChakraChargeSpeed = 1;
@@ -1593,6 +1597,8 @@ namespace NSC_Toolbox.ViewModel {
                 //fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].AwakeningCondition1 }, _ptr + 0x151);
                 //fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].AwakeningCondition2 }, _ptr + 0x152);
                 //fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, new byte[1] { DuelPlayerParamList[x].AwakeningJutsuController }, _ptr + 0x153);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].Evo1), _ptr + 0x154);
+                fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].Evo2), _ptr + 0x158);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].AwaBodyPriority), _ptr + 0x160);
                 fileBytes36 = BinaryReader.b_ReplaceBytes(fileBytes36, BitConverter.GetBytes(DuelPlayerParamList[x].DefaultAwaSkillIndex), _ptr + 0x164);
 
