@@ -82,7 +82,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V2.0.0.1;component/view/messageinfos4editorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V2.0.0.2;component/view/messageinfos4editorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\MessageInfoS4EditorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

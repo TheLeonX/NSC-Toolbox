@@ -86,12 +86,12 @@ namespace NSC_Toolbox.ViewModel
                         ? Path.Combine(value, "moddingapi", "param", "NS4", "pairSpSkillManagerParam.xfbin")
                         : Path.Combine(value, "moddingapi", "param", "NSC", "pairSpSkillManagerParam.xfbin");
 
-                    string pairManagerFallback = Path.Combine(value, "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin");
+                    //string pairManagerFallback = Path.Combine(value, "moddingapi", "mods", "base_game", "pairSpSkillManagerParam.xfbin");
 
                     // check existence
                     bool pairCombineExists = File.Exists(pairCombinePath);
                     bool cmnExists = File.Exists(cmnparamPath);
-                    bool pairManagerExists = File.Exists(pairManagerParamPath) || File.Exists(pairManagerFallback);
+                    bool pairManagerExists = File.Exists(pairManagerParamPath);
 
                     if (pairCombineExists && cmnExists && pairManagerExists)
                         IsRootFolderExist = Directory.Exists(value);
@@ -99,9 +99,9 @@ namespace NSC_Toolbox.ViewModel
                         IsRootFolderExist = false;
 
                     // ensure pairManager exists message: prefer param path, if neither exists show message
-                    if (!File.Exists(pairManagerParamPath) && !File.Exists(pairManagerFallback))
+                    if (!File.Exists(pairManagerParamPath))
                     {
-                        ModernWpf.MessageBox.Show(pairManagerParamPath + " or " + pairManagerFallback + " doesn't exist. Install new version of ModdingAPI before using this tool.");
+                        ModernWpf.MessageBox.Show(pairManagerParamPath + " doesn't exist. Install new version of ModdingAPI before using this tool.");
                         return;
                     }
 
@@ -163,7 +163,7 @@ namespace NSC_Toolbox.ViewModel
                                 MissingFiles_field += pairCombinePath + "\n";
                             if (!File.Exists(cmnparamPath))
                                 MissingFiles_field += cmnparamPath + "\n";
-                            if (!File.Exists(pairManagerParamPath) && !File.Exists(pairManagerFallback))
+                            if (!File.Exists(pairManagerParamPath))
                                 MissingFiles_field += pairManagerParamPath + "\n";
                         }
                     }
@@ -399,7 +399,7 @@ namespace NSC_Toolbox.ViewModel
                 IsRootFolderExist = false;
         }
 
-        List<int> SkipEntriesList = new List<int> { 55, 56, 58 };
+        List<int> SkipEntriesList = new List<int> {};
 
         public void AddTeamUltimateJutsu()
         {
