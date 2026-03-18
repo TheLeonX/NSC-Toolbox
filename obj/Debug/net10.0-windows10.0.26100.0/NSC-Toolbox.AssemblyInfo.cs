@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TheLeonX")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("2.0.0.2")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.60+c09bc8308b2509c6ec37f0c4bcf0425345fcb06b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.60+941e01778687df552e4b2d64b507bbd1382ca79a")]
 [assembly: System.Reflection.AssemblyProductAttribute("NSC-Toolbox")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NSC-Toolbox")]
 [assembly: System.Reflection.AssemblyVersionAttribute("2.0.0.2")]

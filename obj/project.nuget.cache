@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lpv2D1XBs7s=",
+  "dgSpecHash": "Y16jls7+VQw=",
   "success": true,
   "projectFilePath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
   "expectedPackageFiles": [
@@ -57,7 +57,7 @@
       "filePath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
       "libraryId": "JonSkeet.MiscUtil",
       "targetGraphs": [
-        "net10.0-windows10.0.26100.0"
+        "net10.0-windows10.0.26100"
       ]
     },
     {
@@ -69,7 +69,7 @@
       "filePath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
       "libraryId": "WindowsAPICodePack-Core",
       "targetGraphs": [
-        "net10.0-windows10.0.26100.0"
+        "net10.0-windows10.0.26100"
       ]
     },
     {
@@ -81,7 +81,7 @@
       "filePath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
       "libraryId": "WindowsAPICodePack-Shell",
       "targetGraphs": [
-        "net10.0-windows10.0.26100.0"
+        "net10.0-windows10.0.26100"
       ]
     }
   ]

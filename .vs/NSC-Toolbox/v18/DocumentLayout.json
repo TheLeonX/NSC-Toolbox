@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\titleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\titleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\nsc-toolbox.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:nsc-toolbox.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -37,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\fileencryptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:fileencryptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\titleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:viewmodel\\titleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\viewmodel\\nus3bankviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -104,7 +104,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
@@ -136,7 +136,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AddTeamUltimateJutsuViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\AddTeamUltimateJutsuViewModel.cs",
               "RelativeDocumentMoniker": "ViewModel\\AddTeamUltimateJutsuViewModel.cs",
@@ -144,12 +144,11 @@
               "RelativeToolTip": "ViewModel\\AddTeamUltimateJutsuViewModel.cs",
               "ViewState": "AgIAAE4AAAAAAAAAAAAAAGUAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-12T07:53:54.964Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-12T07:53:54.964Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AddTeamUltimateJutsuView.xaml.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\AddTeamUltimateJutsuView.xaml.cs",
               "RelativeDocumentMoniker": "View\\AddTeamUltimateJutsuView.xaml.cs",
@@ -157,12 +156,11 @@
               "RelativeToolTip": "View\\AddTeamUltimateJutsuView.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-12T07:53:50.894Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-12T07:53:50.894Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ConditionManagerViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\ConditionManagerViewModel.cs",
               "RelativeDocumentMoniker": "ViewModel\\ConditionManagerViewModel.cs",
@@ -174,7 +172,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "ConditionManagerEditorView.xaml",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\ConditionManagerEditorView.xaml",
               "RelativeDocumentMoniker": "View\\ConditionManagerEditorView.xaml",
@@ -185,7 +183,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "NSC-Toolbox.csproj",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeDocumentMoniker": "NSC-Toolbox.csproj",
@@ -193,12 +191,11 @@
               "RelativeToolTip": "NSC-Toolbox.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-03-10T20:40:50.005Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-10T20:40:50.005Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "FileEncryptor.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\FileEncryptor.cs",
               "RelativeDocumentMoniker": "FileEncryptor.cs",
@@ -210,7 +207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ExportModViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\ExportModViewModel.cs",
               "RelativeDocumentMoniker": "ViewModel\\ExportModViewModel.cs",
@@ -222,15 +219,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "TitleViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\TitleViewModel.cs",
               "RelativeDocumentMoniker": "ViewModel\\TitleViewModel.cs",
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\TitleViewModel.cs",
               "RelativeToolTip": "ViewModel\\TitleViewModel.cs",
-              "ViewState": "AgIAAAICAAAAAAAAAAAewBgCAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAUCAAAAAAAAAAAewBECAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T19:19:33.407Z"
+              "WhenOpened": "2026-03-09T19:19:33.407Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -317,7 +315,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "MessageInfoViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\MessageInfoViewModel.cs",
               "RelativeDocumentMoniker": "ViewModel\\MessageInfoViewModel.cs",
@@ -370,8 +368,7 @@
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeToolTip": "NSC-Toolbox.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-11T11:30:45.855Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-11T11:30:45.855Z"
             },
             {
               "$type": "Document",
@@ -388,7 +385,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "PRMEditorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\ViewModel\\PRMEditorViewModel.cs",
               "RelativeDocumentMoniker": "ViewModel\\PRMEditorViewModel.cs",
