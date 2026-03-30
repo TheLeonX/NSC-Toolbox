@@ -527,6 +527,8 @@ namespace NSC_Toolbox.ViewModel {
                 Program.CopyFilesRecursively(sourceModdingApi, selectedFolder);
 
                 string exePath = Path.Combine(selectedFolder, "NSUNSC.exe");
+                Program.RemoveZoneIdentifier(Path.Combine(selectedFolder, "d3dcompiler_47.dll"));
+                Program.RemoveZoneIdentifier(Path.Combine(selectedFolder, "d3dcompiler_47_o.dll"));
                 if (File.Exists(exePath))
                 {
                     string sourceFile = Path.Combine(Directory.GetCurrentDirectory(), "ParamFiles", "NSC", "charsel.gfx");

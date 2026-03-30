@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,7 +12,7 @@ using System.Windows;
 
 namespace NSC_Toolbox.Properties
 {
-
+    
     public class IniFile   // revision 11
     {
         string Path;
@@ -111,8 +112,45 @@ namespace NSC_Toolbox.Properties
                     )
                     File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
             }
-        }
 
+        }
+        public static void RemoveZoneIdentifier(string path)
+        {
+            if (string.IsNullOrEmpty(path) || !File.Exists(path))
+                return;
+
+            // Попытка удалить ADS напрямую
+            try
+            {
+                File.Delete(path + ":Zone.Identifier");
+                return;
+            } catch
+            {
+                // игнорируем и пробуем PowerShell-фоллбек
+            }
+
+            // Фоллбек: PowerShell Unblock-File (экран вывода подавлён)
+            try
+            {
+                string psPath = path.Replace("'", "''");
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "powershell",
+                    Arguments = $"-NoProfile -Command \"Unblock-File -LiteralPath '{psPath}'\"",
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+                using (var p = Process.Start(psi))
+                {
+                    p.WaitForExit();
+                }
+            } catch
+            {
+                // окончательно молча игнорируем ошибки
+            }
+        }
         public static string[] langS4List =
         {
             "arae",
