@@ -173,7 +173,7 @@
                         </Label>
 
                         <xctk:IntegerUpDown Grid.Column="0" Grid.Row="10" Value="{Binding AltColorCount_field, UpdateSourceTrigger=PropertyChanged}"
-                   Grid.ColumnSpan="1" Increment="1" Minimum="1" Maximum="4" VerticalContentAlignment="Center"
+                   Grid.ColumnSpan="1" Increment="1" Minimum="1" Maximum="8" VerticalContentAlignment="Center"
                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"
                    Foreground="{DynamicResource Toolbox_button_text_color_1}"
                    Background="{DynamicResource Toolbox_button_background_color_1}"

@@ -72,7 +72,7 @@ namespace NSC_Toolbox {
         /// InitializeComponent
         /// </summary>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "10.0.5.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "10.0.11.0")]
         public void InitializeComponent() {
             if (_contentLoaded) {
                 return;
@@ -90,7 +90,7 @@ namespace NSC_Toolbox {
             
             #line default
             #line hidden
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V2.0.1.1;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V2.1.0.0;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
@@ -104,7 +104,7 @@ namespace NSC_Toolbox {
         /// </summary>
         [System.STAThreadAttribute()]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "10.0.5.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "10.0.11.0")]
         public static void Main() {
             NSC_Toolbox.App app = new NSC_Toolbox.App();
             app.InitializeComponent();

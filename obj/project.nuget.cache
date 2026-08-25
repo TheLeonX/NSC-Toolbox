@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tikJOsnTo2k=",
+  "dgSpecHash": "3wop5CVn42Y=",
   "success": true,
   "projectFilePath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
   "expectedPackageFiles": [
@@ -39,13 +39,25 @@
     {
       "code": "NU1510",
       "level": "Warning",
-      "message": "PackageReference System.Text.Encoding.CodePages не будет урезано. Рассмотрите возможность удаления этого пакета из зависимостей, так как он, вероятно, не требуется.",
+      "message": "PackageReference System.Text.Encoding.CodePages не будет урезано. Этот пакет доступен автоматически, и на него не нужно явно ссылаться. Удалите элемент PackageReference.",
       "projectPath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
       "libraryId": "System.Text.Encoding.CodePages",
       "targetGraphs": [
         "net10.0-windows10.0.26100"
+      ]
+    },
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "message": "У пакета \"log4net\" 2.0.12 есть известная уязвимость https://github.com/advisories/GHSA-4f7c-pmjv-c25w (уровень серьезности: средний уровень)",
+      "projectPath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
+      "libraryId": "log4net",
+      "targetGraphs": [
+        "net10.0-windows10.0.26100.0"
       ]
     },
     {
@@ -57,7 +69,7 @@
       "filePath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
       "libraryId": "JonSkeet.MiscUtil",
       "targetGraphs": [
-        "net10.0-windows10.0.26100"
+        "net10.0-windows10.0.26100.0"
       ]
     },
     {
@@ -69,7 +81,7 @@
       "filePath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
       "libraryId": "WindowsAPICodePack-Core",
       "targetGraphs": [
-        "net10.0-windows10.0.26100"
+        "net10.0-windows10.0.26100.0"
       ]
     },
     {
@@ -81,7 +93,7 @@
       "filePath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
       "libraryId": "WindowsAPICodePack-Shell",
       "targetGraphs": [
-        "net10.0-windows10.0.26100"
+        "net10.0-windows10.0.26100.0"
       ]
     }
   ]
