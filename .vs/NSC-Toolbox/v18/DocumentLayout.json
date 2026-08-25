@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\addcostumeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:view\\addcostumeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\nsc-toolbox.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:nsc-toolbox.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\addcostumeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|solutionrelative:view\\addcostumeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7BEEC72A-C3EF-4C1F-9445-3882AEA67A2D}|NSC-Toolbox.csproj|c:\\users\\ardor\\desktop\\c# projects\\nsc-toolbox\\view\\titleview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -112,7 +112,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
@@ -145,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AddCostumeView.xaml",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\AddCostumeView.xaml",
               "RelativeDocumentMoniker": "View\\AddCostumeView.xaml",
@@ -215,15 +215,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "NSC-Toolbox.csproj",
               "DocumentMoniker": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeDocumentMoniker": "NSC-Toolbox.csproj",
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeToolTip": "NSC-Toolbox.csproj",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-03-10T20:40:50.005Z"
+              "WhenOpened": "2026-03-10T20:40:50.005Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -399,7 +400,8 @@
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeToolTip": "NSC-Toolbox.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-11T11:30:45.855Z"
+              "WhenOpened": "2026-02-11T11:30:45.855Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

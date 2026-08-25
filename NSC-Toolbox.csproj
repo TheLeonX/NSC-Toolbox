@@ -9,8 +9,8 @@
     <PlatformTarget>x86</PlatformTarget>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>white_TB.ico</ApplicationIcon>
-    <AssemblyVersion>2.1.0.0</AssemblyVersion>
-    <FileVersion>2.1.0.0</FileVersion>
+    <AssemblyVersion>2.1.0.1</AssemblyVersion>
+    <FileVersion>2.1.0.1</FileVersion>
     <Authors>TheLeonX</Authors>
     <Version>1.70</Version>
     <SupportedOSPlatformVersion>10.0.26100.0</SupportedOSPlatformVersion>
