@@ -120,6 +120,18 @@
                         <ComboBoxItem>
                             <TextBlock Text="{StaticResource m_costumeParamEditorEntryType_7}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
                         </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Text="{StaticResource m_costumeParamEditorEntryType_8}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Text="{StaticResource m_costumeParamEditorEntryType_9}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Text="{StaticResource m_costumeParamEditorEntryType_10}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Text="{StaticResource m_costumeParamEditorEntryType_11}" Foreground="{DynamicResource Toolbox_button_text_color_1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource NarutoFont}"/>
+                        </ComboBoxItem>
                     </ComboBox>
                     <Label Grid.Row="15" HorizontalAlignment="Left" FontFamily="{StaticResource NarutoFont}" Content="{DynamicResource m_costumeParamEditorEntryUnlockCondition}" Foreground="{DynamicResource Toolbox_button_text_color_1}" FontSize="14"/>
                     <xctk:IntegerUpDown Grid.Row="16" MinHeight="30" Value="{Binding UnlockCondition_field}" FontFamily="{StaticResource NarutoFont}"  Background="{DynamicResource Toolbox_button_background_color_1}" BorderBrush="{DynamicResource Toolbox_button_border_color_1}" BorderThickness="1" Increment="1" Maximum="65535" Minimum="0" Foreground="{DynamicResource Toolbox_button_text_color_1}"/>

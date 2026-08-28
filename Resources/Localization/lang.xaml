@@ -802,9 +802,13 @@ This issue may be fixed in a future update.
     <v:String x:Key="m_costumeParamEditorEntryType_2">Color 2</v:String>
     <v:String x:Key="m_costumeParamEditorEntryType_3">Color 3</v:String>
     <v:String x:Key="m_costumeParamEditorEntryType_4">Color 4</v:String>
-    <v:String x:Key="m_costumeParamEditorEntryType_5">Pose 1</v:String>
-    <v:String x:Key="m_costumeParamEditorEntryType_6">Pose 2</v:String>
-    <v:String x:Key="m_costumeParamEditorEntryType_7">Pose 3</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_5">Color 5</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_6">Pose 1</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_7">Pose 2</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_8">Pose 3</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_9">Color 6</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_10">Color 7</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_11">Color 8</v:String>
     <v:String x:Key="m_costumeParamEditorEntryUnlockCost">Unlock Cost</v:String>
     <v:String x:Key="m_costumeParamEditorEntryUnlockCondition">Unlock Condition</v:String>
     

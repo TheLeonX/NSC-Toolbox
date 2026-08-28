@@ -613,7 +613,9 @@ namespace NSC_Toolbox.ViewModel
                         {
                             EntryIndex = 0,
                             PlayerSettingParamID = psp_entry.PSP_ID,
-                            EntryType = i,
+                            // NSC 1.70 reserves entry types 5..7 for Pose 1..3.
+                            // Colors 6..8 therefore use entry types 8..10.
+                            EntryType = i < 5 ? i : i + 3,
                             EntryString = costumeParamEditor.LastCostume(),
                             UnlockCondition = 1,
                             UnlockCost = 0

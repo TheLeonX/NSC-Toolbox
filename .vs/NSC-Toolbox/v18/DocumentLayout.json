@@ -124,8 +124,7 @@
               "RelativeToolTip": "Resources\\Localization\\lang.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-12-09T13:01:57.385Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -152,8 +151,7 @@
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\View\\AddCostumeView.xaml",
               "RelativeToolTip": "View\\AddCostumeView.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-08-25T16:33:03.625Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-25T16:33:03.625Z"
             },
             {
               "$type": "Document",
@@ -221,7 +219,7 @@
               "RelativeDocumentMoniker": "NSC-Toolbox.csproj",
               "ToolTip": "C:\\Users\\ARDOR\\Desktop\\C# Projects\\NSC-Toolbox\\NSC-Toolbox.csproj",
               "RelativeToolTip": "NSC-Toolbox.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2026-03-10T20:40:50.005Z",
               "EditorCaption": ""

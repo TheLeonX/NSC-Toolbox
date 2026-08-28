@@ -786,9 +786,13 @@
     <v:String x:Key="m_costumeParamEditorEntryType_2">Цвет 2</v:String>
     <v:String x:Key="m_costumeParamEditorEntryType_3">Цвет 3</v:String>
     <v:String x:Key="m_costumeParamEditorEntryType_4">Цвет 4</v:String>
-    <v:String x:Key="m_costumeParamEditorEntryType_5">Поза 1</v:String>
-    <v:String x:Key="m_costumeParamEditorEntryType_6">Поза 2</v:String>
-    <v:String x:Key="m_costumeParamEditorEntryType_7">Поза 3</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_5">Цвет 5</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_6">Поза 1</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_7">Поза 2</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_8">Поза 3</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_9">Цвет 6</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_10">Цвет 7</v:String>
+    <v:String x:Key="m_costumeParamEditorEntryType_11">Цвет 8</v:String>
     <v:String x:Key="m_costumeParamEditorEntryUnlockCost">Стоимость разблокировки</v:String>
     <v:String x:Key="m_costumeParamEditorEntryUnlockCondition">Условие разблокировки</v:String>
 
