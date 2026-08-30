@@ -106,7 +106,7 @@ namespace NSC_Toolbox.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V2.1.2.0;component/view/addteamultimatejutsuview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/NSC-Toolbox;V2.1.2.1;component/view/addteamultimatejutsuview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\AddTeamUltimateJutsuView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
